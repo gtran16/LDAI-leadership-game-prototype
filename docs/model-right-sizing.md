@@ -1,6 +1,6 @@
 # Model right-sizing (Nov 27)
 
-Status: recommendation, waiting on Giselle's OK. Prices come from a live fetch of Anthropic's pricing page on Nov 27. Token counts are estimates from reading each prompt and its output spec, not measured.
+Status: approved by Giselle, Nov 27. Prices come from a live fetch of Anthropic's pricing page on Nov 27. Token counts are estimates from reading each prompt and its output spec, not measured.
 
 ## Recommendation: keep the current tier map
 
