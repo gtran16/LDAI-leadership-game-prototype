@@ -277,9 +277,23 @@ const LG = {
   /* Every AI call in the game and the practice round goes through LG.sample(). On claude.ai it uses the artifact's built-in AI.
      For GitHub Pages, replace this one function with a call to the Worker. Nothing else changes. */
   _s: null,
+  /* Off claude.ai (GitHub Pages), calls go to the Cloudflare Worker in worker/. Empty means no live AI. */
+  WORKER_URL: '',
   sample() {
-    if (!LG._s) LG._s = (async () => { try { return window.claude && window.claude.use ? await window.claude.use('sample') : null; } catch (e) { return null; } })();
+    if (!LG._s) LG._s = (async () => {
+      try { if (window.claude && window.claude.use) return await window.claude.use('sample'); } catch (e) { /* fall through to the Worker */ }
+      return LG.WORKER_URL ? LG.workerSample : null;
+    })();
     return LG._s;
+  },
+  /* Same contract as claude.ai's sample(): (prompt, { modelTier }) -> { text, truncated }. Streaming onText is not used here. */
+  async workerSample(prompt, opts) {
+    const res = await fetch(LG.WORKER_URL, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ prompt, modelTier: (opts && opts.modelTier) || 'default' }) });
+    const out = await res.json().catch(() => ({}));
+    if (res.ok) return { text: String(out.text || ''), truncated: !!out.truncated };
+    const err = new Error(out.message || 'The AI service returned an error (' + res.status + ').');
+    if (res.status === 429) err.code = out.error === 'daily_cap' ? 'daily_cap' : 'rate_limited';
+    throw err;
   }
 };
 window.addEventListener('error', function (e) { var m = document.getElementById('main') || document.getElementById('stage'); if (m) m.insertAdjacentHTML('afterbegin', '<div class="err" style="margin:12px;padding:10px 14px;border:2px solid #B42318;border-radius:12px;background:#FEE4E2">Page error: ' + String(e.message).replace(/</g, '&lt;') + '</div>'); });
