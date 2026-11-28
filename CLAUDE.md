@@ -103,7 +103,6 @@ It runs unit, then smoke, then QA. Run it after every change; it must pass befor
 - **Budget:** $10 prepaid in the Anthropic Console with auto-reload **off**, so the game can't spend more.
 
 ## After freeze (don't start before the tag)
-- A prompt-wide review for redundancy, consistency and length.
 - The practice minigames (5 rounds per skill: 2 fixed, 3 written) on the Skills page.
 - The mobile layout: the left panel sits above the scene at phone width.
 - A second repo for the real game: split the prompts and world into files, RunPod hosting with open-weight models.
