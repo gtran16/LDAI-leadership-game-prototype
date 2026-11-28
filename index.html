@@ -339,6 +339,9 @@ body{background-color:var(--desk) !important;background-image:radial-gradient(rg
 .app-game .mrow,.app-game .sawcard,.app-game .whocard,.app-game .person{border-color:var(--rule) !important;border-radius:3px !important;background:var(--paper)}
 /* The benchmark form */
 .app-game .checkframe{border-top:8px solid #0F766E !important}
+.app-game .mlist{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px;font-size:15px;line-height:1.5}
+.app-game .mlist li{display:flex;gap:8px;align-items:flex-start}.app-game .mlist .mdot{flex:none;margin-top:6px}
+.app-game .cardsep{border:0;border-top:1px dashed var(--rule);margin:6px 0;width:100%}
 .app-game .pager{display:flex;justify-content:space-between;align-items:center;gap:12px}.app-game .pager .ghost{align-self:center}
 .app-game .checkscene{border-radius:2px !important;background:var(--paper-2) !important;border:0 !important;box-shadow:inset 4px 0 0 #0F766E}
 /* Static pages: sheets on the same desk, folder tabs for Skills */
@@ -752,7 +755,7 @@ const G = { pc: newPC(), phase: 'pre', help: { open: false, tab: 'why', auto: {}
 
 const esc = (t) => String(t == null ? '' : t).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const $ = (id) => document.getElementById(id);
-const band = (n) => n <= 2 ? 'options' : n <= 4 ? 'mix' : 'text';
+const band = (n) => n <= 2 ? 'options' : n === 3 ? 'mix' : 'text';
 const chapterOf = (n) => n <= 3 ? 1 : n <= 6 ? 2 : 3;
 const stepOf = (v) => v <= 2 ? 0 : v <= 4 ? 1 : v <= 6 ? 2 : v <= 8 ? 3 : 4;
 const word = (k, v) => { const m = METERS.find(x => x.key === k); return m.words[v <= 2 ? 0 : v <= 4 ? 1 : v <= 6 ? 2 : v <= 8 ? 3 : 4]; };
@@ -848,10 +851,10 @@ function fillShared(t, n) {
 }
 function fillP2A(n) { return SHARED + '\n\n' + fillShared(P2A, n); }
 function fillP2B(n, sceneRaw) { return SHARED + '\n\n' + fillShared(P2B, n).replace('[SCENE JSON]', JSON.stringify(sceneRaw)); }
-/* V4 support fade (Nov 27, six decisions): 1 and 2 pick everything; 3 writes the tradeoff; 4 writes tradeoff and first words; 5 and 6 write all three. The player does not choose the mode. */
+/* V4 support fade (Nov 27, 2-1-3): 1 and 2 pick everything; 3 picks the plan and writes the tradeoff and first words; 4 to 6 write all three. The player does not choose the mode. */
 function modes(c, b) {
   if (b === 'options') return { planPick: true, tradePick: true, openPick: true };
-  if (b === 'mix') return { planPick: true, tradePick: false, openPick: G.n === 3 };
+  if (b === 'mix') return { planPick: true, tradePick: false, openPick: false };
   return { planPick: false, tradePick: false, openPick: false };
 }
 function answerOf(D, c) {
@@ -920,7 +923,7 @@ function afterOptions() {
 
 function freshCur() { return { asked: [], pick: null, opening: null, conf: null, tp: '', tc: '', tw: '', tt: '', plan: '', open: '', advT: false, advO: false, advP: false, mPlan: 'pick', mTrade: 'pick', mOpen: 'pick', result: null }; }
 async function startDecision(n) {
-  G.n = n; G.cur = freshCur(); G.tab = 'team'; G.help.tab = { 3: 'tradeoff', 4: 'delivery' }[n] || 'plan'; /* open on the part that is new this decision */ G.err = ''; G.errCalls = null;
+  G.n = n; G.cur = freshCur(); G.tab = 'team'; G.help.tab = { 3: 'tradeoff', 4: 'plan' }[n] || 'plan'; /* open on the part that is new this decision */ G.err = ''; G.errCalls = null;
   if (!live) { G.phase = 'nolive'; render(); return; }
   G.phase = 'loading'; G.busy = 'Writing your next scene…'; render();
   let slot = G.dec[n];
@@ -1034,7 +1037,9 @@ function verdictOf() {
   const end = H.length ? H[H.length - 1].meters : G.meters;
   const noneLeft = keys.filter(k => end[k] <= 4).length <= 1;
   const n = (noRed ? 1 : 0) + (noneLeft ? 1 : 0);
-  return n === 2 ? 'ready' : n === 1 ? 'support' : 'keep_building';
+  const C = G.cal || [], tot = C.reduce((a, x) => a + x.named + x.partly + x.missing, 0), named = C.reduce((a, x) => a + x.named, 0);
+  const writing = !tot || named / tot >= 0.5; /* Nov 27: meters keep it from being harsh; the writing keeps it honest */
+  return n === 2 ? (writing ? 'ready' : 'support') : n === 1 ? 'support' : 'keep_building';
 }
 const VERDICT = { ready: 'Ready now', support: 'Ready with support', keep_building: 'Practice more at this level' };
 function fillP7() {
@@ -1118,7 +1123,13 @@ function reviewScreen() {
   if (!needPost) steps.push(['Your record', '<details><summary style="cursor:pointer;font-weight:900;font-size:17px">Review your answers</summary>' + (A.length ? A.map(a => '<div style="display:flex;flex-direction:column;gap:4px;padding-top:10px;border-top:1px solid #E5DCC4;font-size:15px"><b>Decision ' + a.n + '</b><div><span class="lab">Plan</span> ' + esc(a.plan) + '</div>' + (a.trade ? '<div><span class="lab">Trade-off</span> ' + esc(a.trade) + '</div>' : '') + (a.opening ? '<div><span class="lab">First words</span> “' + esc(a.opening) + '”</div>' : '') + '<div class="muted">' + (a.conf ? 'You rated it: ' + esc(a.conf) + ' · ' : '') + METERS.map(m => m.label + ' ' + dw(a.moves[m.key] || 0).toLowerCase()).join(', ') + '</div></div>').join('') : '<p class="muted" style="margin:0">No answers recorded.</p>') + '</details>' +
     '<details><summary style="cursor:pointer;font-weight:900;font-size:17px">Read the full story</summary>' + (G.log || []).map(e => '<div style="padding-top:8px;border-top:1px solid #E5DCC4"><div class="lab">' + esc(e.label) + '</div><p style="margin:2px 0 0;white-space:pre-line">' + esc(e.text) + '</p></div>').join('') + '</details>' +
     '<h3 style="margin:0;font-size:17px">What next?</h3><div style="display:flex;flex-wrap:wrap;gap:10px"><button class="btn" data-act="playAgain">Play again</button><a class="btn2" href="#home">Home</a><button class="btn2" data-act="snapCopy">' + (G.snapDone ? 'Copied' : 'Copy a snapshot') + '</button></div><p class="muted" style="margin:0;font-size:14px">The snapshot copies your story, Noor’s read and your answers as text, ready to paste anywhere.</p>']);
-  if (G.rvJump) { const j = steps.findIndex(x => x[0] === G.rvJump); if (j >= 0) G.rvI = j; G.rvJump = ''; }
+  /* Nov 27: five cards, each a group of things that go together (Giselle: eight was too many) */
+  const GROUPS = [['What happened next', ['What happened next', 'Where you stand']], ['Noor\u2019s read', ['Noor\u2019s read', 'What others saw']], ['Your next steps', ['What to practice next']], ['Check your own read', ['How complete your answers were', 'One last check', 'Before and after']], ['Your record', ['Your record']]];
+  const byTitle = {}; steps.forEach(x => { byTitle[x[0]] = x[1]; });
+  const own = { 'What happened next': 1, 'Noor\u2019s read': 1, 'What others saw': 1, 'What to practice next': 1, 'Your record': 1 };
+  steps.length = 0;
+  GROUPS.forEach(g => { const parts = g[1].filter(t => byTitle[t]); if (!parts.length) return; steps.push([g[0], parts.map((t, k) => (k ? '<hr class="cardsep">' : '') + (own[t] && (k === 0 || t === 'What others saw') ? '' : '<h3 style="margin:0;font-size:18px">' + t + '</h3>') + byTitle[t]).join(''), parts]); });
+  if (G.rvJump) { const j = steps.findIndex(x => x[0] === G.rvJump || (x[2] || []).includes(G.rvJump)); if (j >= 0) G.rvI = j; G.rvJump = ''; }
   const i = Math.max(0, Math.min(steps.length - 1, G.rvI || 0)), st = steps[i];
   h += '<section class="card" style="gap:14px"><h2 style="margin:0">' + st[0] + '</h2>' + st[1] + '</section>';
   h += '<div class="pager"><button class="ghost" data-act="rvBack"' + (i ? '' : ' disabled') + '>Back</button><span class="muted">' + (i + 1) + ' of ' + steps.length + '</span>' + (i < steps.length - 1 && !(needPost && i === steps.length - 1) ? '<button class="btn" data-act="rvNext">Next: ' + steps[i + 1][0] + '</button>' : '<span></span>') + '</div>';
@@ -1249,8 +1260,8 @@ function stepPips() {
 
 /* ---------- V4: stages, task card, help drawer ---------- */
 const STG = {
-  1: ['You pick', ''], 2: ['You pick', ''], 3: ['You write the tradeoff', ''], 4: ['You write the tradeoff and first words', ''], 5: ['You write it all', ''], 6: ['You write it all', ''] };
-const stageWrites = (n) => n <= 2 ? [] : n === 3 ? ['tradeoff'] : n === 4 ? ['tradeoff', 'delivery'] : ['plan', 'tradeoff', 'delivery'];
+  1: ['You pick', ''], 2: ['You pick', ''], 3: ['You write the tradeoff and first words', ''], 4: ['You write it all', ''], 5: ['You write it all', ''], 6: ['You write it all', ''] };
+const stageWrites = (n) => n <= 2 ? [] : n === 3 ? ['tradeoff', 'delivery'] : ['plan', 'tradeoff', 'delivery'];
 const helpDefault = (n) => n === 2 ? 'tradeoff' : n === 3 ? 'delivery' : n >= 4 ? 'plan' : 'why';
 const HELP = {
   why: { paras: [
@@ -1291,8 +1302,8 @@ function debriefLines(D, c, N, o) {
   let h = '<h2 style="margin:6px 0 0;font-size:19px">How your approach worked</h2>';
   if (!rows.some(r => r[1])) return h + '<p style="margin:0">' + esc(N.reasoning_note || '') + '</p>';
   const split = (t) => { const x = String(t || ''), i = x.search(/another (way|option|approach)\s*:/i); return i < 0 ? [x.trim(), ''] : [x.slice(0, i).trim(), x.slice(i).replace(/^another (way|option|approach)\s*:\s*/i, '').trim()]; };
-  h += '<ul class="didlist">' + rows.filter(r => r[1]).map(r => { const pr = split(r[1]); return '<li><b>' + r[0] + ':</b> ' + esc(pr[0]) + (pr[1] ? '<ul><li><i>Another way:</i> ' + esc(pr[1]) + '</li></ul>' : '') + '</li>'; }).join('') + '</ul>';
-  if (M.planPick && !M.tradePick && o) h += '<div class="compare"><b>For comparison, the written option’s trade-off:</b><ul><li><b>Protects:</b> ' + esc(o.tp) + '</li><li><b>Costs:</b> ' + esc(o.tc) + '</li><li><b>Who pays:</b> ' + esc(o.tw) + '</li></ul></div>';
+  const cmp = M.planPick && !M.tradePick && o ? '<li><i>The written option said:</i> <b>Protects</b> ' + esc(o.tp) + ' <b>Costs</b> ' + esc(o.tc) + ' <b>Who pays</b> ' + esc(o.tw) + '</li>' : '';
+  h += '<ul class="didlist">' + rows.filter(r => r[1]).map(r => { const pr = split(r[1]); const sub = (pr[1] ? '<li><i>Another way:</i> ' + esc(pr[1]) + '</li>' : '') + (r[0] === 'Tradeoff' ? cmp : ''); return '<li><b>' + r[0] + ':</b> ' + esc(pr[0]) + (sub ? '<ul>' + sub + '</ul>' : '') + '</li>'; }).join('') + '</ul>';
   return h;
 }
 function header() {
@@ -1386,9 +1397,9 @@ function main() {
     const tpv = A.tradeoff;
     let x = '<section class="ai" style="gap:12px"><div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><span class="chip ai">Written by AI</span><span class="muted" style="font-size:13px">Live \u00b7 saved to your story log</span></div>';
     x += head('What happened') + '<p style="margin:0;font-size:17px;line-height:1.65;white-space:pre-wrap">' + esc(N.story_entry) + '</p>';
-    x += head('What changed, and why') + (c.breather ? '<div class="tag" style="align-self:flex-start;background:#CCFBF1">Breathing room: three decisions without taking the work on yourself. Wellbeing up one step.</div>' : '') +
-      '<div class="mgrid">' + METERS.map((m, i) => { const d = R.moves[m.key], red = G.meters[m.key] <= 4; return '<div class="mrow"><div class="mhead"><span class="mdot" style="background:' + m.color + '"></span><b>' + m.label + '</b><span class="tag" style="background:' + (d > 0 ? '#E6F5EC' : d < 0 ? '#FDECEA' : '#EFE6CC') + '">' + dw(d) + '</span></div><div class="mwhy"><b' + (red ? ' style="color:#B42318"' : '') + '>Now ' + word(m.key, G.meters[m.key]) + '.</b> ' + esc(cleanReason((N.reasons || [])[i] || '')) + '</div></div>'; }).join('') + '</div>';
     x += debriefLines(D, c, N, o);
+    x += head('What changed, and why') + (c.breather ? '<div class="tag" style="align-self:flex-start;background:#CCFBF1">Breathing room: three decisions without taking the work on yourself. Wellbeing up one step.</div>' : '') +
+      '<ul class="mlist">' + METERS.map((m, i) => { const d = R.moves[m.key], red = G.meters[m.key] <= 4; return '<li><span class="mdot" style="background:' + m.color + '"></span><span><b>' + m.label + '</b> <span class="tag" style="background:' + (d > 0 ? '#E6F5EC' : d < 0 ? '#FDECEA' : '#EFE6CC') + '">' + dw(d) + '</span> <b' + (red ? ' style="color:#B42318"' : '') + '>Now ' + word(m.key, G.meters[m.key]) + '.</b> ' + esc(cleanReason((N.reasons || [])[i] || '')) + '</span></li>'; }).join('') + '</ul>';
     x += '<details class="review"><summary>Review your choices</summary><div style="display:flex;flex-direction:column;gap:6px;font-size:15px;margin-top:8px"><div><b>Plan:</b> ' + esc(o ? o.text : c.plan) + '</div><div><b>Trade-off:</b> ' + esc(tpv) + '</div><div><b>How you shared it:</b> \u201c' + esc(A.opening) + '\u201d</div>' +
       (R.judge.opening ? '<div class="muted">' + (R.judge.opening === 'lands' ? 'This opening was a strong start. ' : 'This opening is a common trap. ') + esc((R.judge.checks.delivery_check || {}).note || '') + '</div>' : '') + (c.conf !== null ? '<div><b>How complete you said it was:</b> ' + CONF[c.conf] + '</div>' : '') + (G.designer ? '<div class="muted">Designer: wellbeing ' + (R.judge.shifts && R.judge.shifts.wellbeing ? R.judge.shifts.wellbeing.delta + ' (' + esc(R.judge.shifts.wellbeing.reason) + '; source: ' + esc(R.judge.shifts.wellbeing.source || '?') + ')' : 'n/a') + '; events: ' + esc(JSON.stringify(R.judge.events || [])) + '</div>' : '') + '</div></details>';
     x += callsFold(G.dec[G.n].calls.concat(R.calls).filter(Boolean)) + '</section>';
@@ -2254,7 +2265,7 @@ function meterExample() {
 function howPage() {
   const row = (a, b) => '<li><b>' + a + ':</b> ' + b + '</li>';
   return '<div class="col" style="gap:22px"><div style="display:flex;flex-direction:column;gap:10px"><h1 class="h1">How the game works</h1><p style="margin:0;font-size:18px;line-height:1.6">Six decisions, four meters, and no score. If you are in the middle of a game, your place is kept: go back with Play.</p></div>' +
-    '<div class="card" style="gap:10px"><h2 style="margin:0">The six decisions</h2><ul style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px">' + row('Decisions 1 and 2', 'you pick a plan and your first words. Each plan shows what it protects, what it costs and who pays.') + row('Decision 3', 'you pick a plan, then write the tradeoff.') + row('Decision 4', 'you pick a plan, then write the tradeoff and your first words.') + row('Decisions 5 and 6', 'you write all three: the plan, the tradeoff and your first words.') + '</ul><p style="margin:0">Each decision starts with two questions, so you know more before you choose.</p></div>' +
+    '<div class="card" style="gap:10px"><h2 style="margin:0">The six decisions</h2><ul style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px">' + row('Decisions 1 and 2', 'you pick a plan and your first words. Each plan shows what it protects, what it costs and who pays.') + row('Decision 3', 'you pick a plan, then write the tradeoff and your first words.') + row('Decisions 4 to 6', 'you write all three: the plan, the tradeoff and your first words.') + '</ul><p style="margin:0">Each decision starts with two questions, so you know more before you choose.</p></div>' +
     '<div class="card" style="gap:12px"><h2 style="margin:0">The four meters</h2><p style="margin:0">Every choice moves the four meters. You cannot keep all four at the top; you spend one to protect another. Keep every meter out of the red, and go back for the one you spent.</p>' + meterExample() + '</div>' +
     '<p style="margin:0;font-size:17px">The three parts you practice in every decision are on the <a href="#skills">Skills</a> page.</p></div>';
 }

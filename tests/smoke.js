@@ -69,7 +69,7 @@ async function play(width) {
     if (await page.locator('#meters .meterwrap').count()) throw new Error('meters still shown on the check-in');
     const seen = [];
     for (let k = 0; k < 12; k++) { seen.push(await page.locator('#main section.card h2').first().textContent()); const nx = page.locator('[data-act="rvNext"]:visible'); if (!(await nx.count())) break; await nx.click(); }
-    const want = ['What happened next', 'Where you stand', 'Noor’s read', 'What others saw', 'What to practice next', 'How complete your answers were', 'One last check'];
+    const want = ['What happened next', 'Noor’s read', 'Your next steps', 'Check your own read'];
     if (JSON.stringify(seen) !== JSON.stringify(want)) throw new Error('check-in steps: ' + seen.join(' / '));
     if (await page.getByText(/overconfident|underconfident/i).count()) throw new Error('person label shown');
   });
@@ -78,6 +78,7 @@ async function play(width) {
     await page.fill('[data-pc="post"]', 'I would give the fix to two people on Friday and ask my boss to present a shorter report, so nobody works the weekend.');
     await act('postDone').click();
     await page.getByRole('heading', { name: 'Before and after' }).waitFor();
+    if (!(await page.getByRole('heading', { name: 'How complete your answers were' }).count())) throw new Error('completeness missing from Check your own read');
     await act('rvNext').click();
     await act('playAgain').waitFor();
   });

@@ -112,7 +112,7 @@ async function answer(g, text) {
   await g.page.locator('[data-rvcall]').nth(0).click(); await g.act('runReview').click();
   await g.page.getByText('In the weeks after the check-in').first().waitFor();
   const steps = []; for (let k = 0; k < 10; k++) { steps.push(await g.page.locator('#main section.card h2').first().textContent()); const nx = g.page.locator('[data-act="rvNext"]:visible'); if (!(await nx.count())) break; await nx.click(); }
-  check('Skipped benchmark: no last check or before-and-after', !steps.includes('One last check') && !steps.includes('Before and after') && steps[steps.length - 1] === 'Your record', steps.join(' / '));
+  check('Skipped benchmark: no last check or before-and-after', JSON.stringify(steps) === JSON.stringify(['What happened next', 'Noor’s read', 'Your next steps', 'Check your own read', 'Your record']) && !(await g.page.locator('[data-act="toPost"]').count()), steps.join(' / '));
   await g.page.close();
 
   // 10. No live AI: clear message, no crash

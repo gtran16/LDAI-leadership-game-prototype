@@ -45,12 +45,12 @@ This replaces `how-its-made-changes.md`, which only patched the old page. Nothin
 - **AI, live in every game.** Each memo and its questions, the options, the debrief after each decision, your story, the readiness check-in, and the marks on your benchmark. Each carries a "Written by AI" label. The designer does not see each one you get.
 
 ### 4. Why does the game work this way?
-- **Support fades across six decisions.** In decisions 1 and 2 you pick everything. In decision 3 you write the trade-off. In decision 4 you also write your first words. In decisions 5 and 6 you write all three. *Martin et al. (2025); Kirschner & Hendrick (2024), ch. 6*
+- **Support fades across six decisions.** In decisions 1 and 2 you pick everything. In decision 3 you pick a plan and write the trade-off and your first words. In decisions 4 to 6 you write all three. *Martin et al. (2025); Kirschner & Hendrick (2024), ch. 6*
 - **Ask before you decide.** Real decisions come with missing information, so every scene hides a fact you can find by asking. *Herrington & Herrington (2008)*
 - **Rate your own answer.** Before you commit a written answer, you rate how complete it is. At the end you see your ratings next to what the checks found, which helps you judge your own work. *Grolnick et al. (2024), ch. 7*
 - **The skill guide stays beside you.** What good looks like, sentence frames and two worked examples sit next to every decision, so you never leave your place. *Mayer & Moreno (2003); CAST, UDL Guidelines*
 - **Feedback starts with what worked.** Every debrief says how your approach worked before the one gap. *Ocumpaugh et al. (2024)* It then shows another way you could have handled each part, and what that would have cost. ⚑ The "another way" sentence has no citation. Keep it uncited, add a source you trust, or cut the sentence.
-- **Practice the part, then the whole.** The game adds one written part at a time: the trade-off, then your first words, then the plan. *Grossman & Salas (2011)*
+- **Practice the part, then the whole.** The game adds written parts in steps: first the trade-off and your first words, then the plan. *Grossman & Salas (2011)*
 - **You do the thinking first.** You write and reflect before the AI responds, so it supports your reasoning instead of replacing it. *Melisa et al. (2025)*
 - **Moves, not ability.** The check-in talks about moves you made and can change, never about who you are. *Kirschner & Hendrick (2024), ch. 15; Linnenbrink-Garcia et al. (2016)*
 - **A benchmark, before and after.** You answer the same short scenario before the story and after it, so you can compare your own two answers. ⚑ No citation. Keep it uncited, add one, or cut it.
@@ -60,8 +60,8 @@ This replaces `how-its-made-changes.md`, which only patched the old page. Nothin
 - **The AI can misread you.** The check-in is told to use only your own words and the story, but read it with that in mind.
 - **The meters are a simplification.** Real teams don't move one step at a time.
 - **The benchmark is the same scenario both times.** Some change may come from seeing it twice.
-- **The readiness verdict comes from your meters.** It doesn't grade your writing.
-- **Six decisions is a short practice.** You write the plan twice, your first words three times and the trade-off four times.
+- **The readiness verdict is a rough read, not a grade.** It comes from your meters, plus whether about half of the checks on your written answers were fully named.
+- **Six decisions is a short practice.** You write the plan three times, and the trade-off and your first words four times each.
 - **A small test group.** The game was tested with a small number of players, in plain English.
 
 ### 6. Where do the leadership ideas come from?
