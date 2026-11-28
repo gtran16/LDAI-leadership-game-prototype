@@ -35,9 +35,9 @@ async function play(width) {
   await step('quick check before', async () => { await page.fill('[data-pc="pre"]', 'I would fix the customer issue first, so the report waits and my boss presents a shorter version.'); await act('preDone').click(); });
   await step('intro', async () => { await act('skipIntro').click(); await act('beginGame').click(); });
 
-  for (let n = 1; n <= 5; n++) {
+  for (let n = 1; n <= 6; n++) {
     await step('decision ' + n + ' scene', async () => {
-      await page.getByRole('heading', { name: 'Decision ' + n + ' of 5' }).waitFor();
+      await page.getByRole('heading', { name: 'Decision ' + n + ' of 6' }).waitFor();
       await closeHelp();
       const asks = page.locator('[data-ask]:visible');
       await asks.nth(0).click(); await asks.nth(1).click();
@@ -52,26 +52,28 @@ async function play(width) {
       if (await opening.count()) await opening.first().click();
       const fields = page.locator('[data-f]:visible');
       for (let i = 0; i < await fields.count(); i++) await fields.nth(i).fill(ANSWER);
-      await page.locator('[data-conf]:visible').nth(3).click();
+      const conf = page.locator('[data-conf]:visible');
+      if (n <= 2 && await conf.count()) throw new Error('confidence asked on a pick-only decision');
+      if (n > 2) await conf.nth(3).click();
       await act('commit').click();
     });
     await step('decision ' + n + ' debrief', async () => { await act('next').click({ timeout: 15000 }); });
   }
 
+  await step('quick check after', async () => {
+    await page.fill('[data-pc="post"]', 'I would give the customer fix to two people on Friday and ask my boss to present a shorter report, so nobody works the weekend.');
+    await act('postDone').click();
+  });
   await step('check-in', async () => {
     const t = page.locator('[data-rv]:visible');
     for (let i = 0; i < await t.count(); i++) await t.nth(i).fill('I asked before assigning work.');
+    await page.getByText('What was hard?').waitFor();
     await page.locator('[data-rvcall]:visible').nth(1).click();
     await act('runReview').click();
     await page.getByText('In the weeks after the check-in').first().waitFor({ timeout: 15000 });
+    for (const t2 of ['Where you stand', 'Noor’s read', 'What to practice next', 'Your confidence', 'Before and after']) await page.getByRole('heading', { name: t2 }).or(page.getByText(t2, { exact: true })).first().waitFor();
+    if (await page.getByText(/trade-off trail|How sure you were/i).count()) throw new Error('removed sections still shown');
   });
-  await step('quick check after', async () => {
-    await page.locator('[data-pc="post"]').scrollIntoViewIfNeeded();
-    await page.fill('[data-pc="post"]', 'I would give the teammate the quiet time and ask my boss for one temporary helper, so the launch queue is covered.');
-    await act('postDone').click();
-  });
-  await step('trade-off trail', async () => { await page.getByText(/trade-off trail/i).first().waitFor(); });
-
   await page.screenshot({ path: path.join(__dirname, 'out', 'end-' + width + '.png'), fullPage: true });
   await browser.close();
 }

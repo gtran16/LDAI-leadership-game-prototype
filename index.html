@@ -247,11 +247,29 @@ button,textarea,input,select{font-family:inherit}
 </style>
 <style>
 /* ===== V4: help drawer, option tradeoff lines ===== */
+.app-game .tradebox{margin:-2px 0 4px 14px;padding:8px 14px 8px 30px;border-radius:12px;background:#FFFDF6;border:2px dashed #CFC3A5;font-size:14px;line-height:1.45;color:#3B3760;display:flex;flex-direction:column;gap:2px}
+.app-game .didlist{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:8px;font-size:16px;line-height:1.55}
+.app-game .didlist ul{margin:4px 0 0;padding-left:18px;color:#3B3760}
+.app-game .compare{font-size:15px;padding:10px 14px;border-radius:10px;background:#F7F1DF}
+.app-game .compare ul{margin:4px 0 0;padding-left:20px}
+.app-game .helpp{gap:10px}
+.app-game .helptabs{display:flex;gap:6px;flex-wrap:nowrap}
+.app-game .helpp .pill2{min-height:36px;padding:0 12px;font-size:14px}
+.app-game .tabs{display:flex;gap:6px;flex-wrap:nowrap}
+.app-game .tabs .tabb{min-height:38px;padding:0 10px;font-size:14px}
+.app-game .checkframe{display:flex;flex-direction:column;gap:16px;max-width:760px;padding:24px;border:3px solid #0F766E;border-radius:20px;background:#F0FBF8;box-shadow:0 6px 0 #0F766E}
+.app-game .checktop{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;align-items:center}
+.app-game .checkbadge{padding:4px 12px;border-radius:999px;background:#0F766E;color:#fff;font-size:13px;font-weight:900;letter-spacing:.02em}
+.app-game .checknote{font-size:13px;font-weight:800;color:#0F766E}
+.app-game .checkscene{padding:14px 16px;border-radius:14px;background:#fff;border:2px solid #0F766E;display:flex;flex-direction:column;gap:6px}
+.app-game .twocol{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (max-width:700px){.app-game .twocol{grid-template-columns:minmax(0,1fr)}}
+.app-game .endmeters{position:static;grid-template-columns:repeat(2,minmax(0,1fr));padding:0;border:0;background:none}
+.app-game .calrow{display:grid;grid-template-columns:110px minmax(0,1fr) minmax(0,1.4fr);gap:8px;font-size:15px;padding-top:8px;border-top:1px solid #E5DCC4}
 .app-game .trd{display:block;font-size:14px;font-weight:600;color:#3B3760;margin-top:4px;line-height:1.4}
 .app-game .helpfab{position:fixed;right:18px;bottom:18px;z-index:15;min-height:52px;padding:0 22px;border:2px solid #1E1B3A;border-radius:999px;background:#FFC93C;color:#1E1B3A;font-size:17px;font-weight:900;cursor:pointer;box-shadow:0 4px 0 #1E1B3A}
 .app-game .helpd{position:fixed;z-index:16;top:0;right:0;bottom:0;width:min(400px,100vw);background:#fff;border-left:3px solid #1E1B3A;box-shadow:-6px 0 0 rgba(30,27,58,.15);display:flex;flex-direction:column}
 .app-game .helpd header{padding:14px 16px;border-bottom:2px solid #1E1B3A;display:flex;justify-content:space-between;align-items:center;gap:8px;background:#F1ECFF}
-.app-game .helptabs{display:flex;gap:6px;flex-wrap:wrap;padding:10px 16px;border-bottom:1px solid #E5DCC4}
 .app-game .helpbody{padding:14px 16px 28px;overflow:auto;display:flex;flex-direction:column;gap:12px;font-size:15.5px;line-height:1.55}
 .app-game .helpbody summary{cursor:pointer;font-weight:800;color:#5B3DF5}
 .app-game .exbox{margin:0;padding:10px 12px;border-radius:12px;background:#F7F1DF;border:2px solid #E5DCC4;font-size:15px}
@@ -264,7 +282,7 @@ button,textarea,input,select{font-family:inherit}
 <header class="lgbar"><div class="lgbarin">
 <a class="lgbrand" href="#home"><span class="lgmark"></span>The Leadership Game <span style="font-size:12px;font-weight:900;background:#FFC93C;color:#1E1B3A;border-radius:999px;padding:1px 9px;margin-left:2px">V4</span></a>
 <nav class="lgnav" aria-label="Main">
-<a href="#play" data-nav="play home">Play</a><a href="#about" data-nav="about">How it’s made</a>
+<a href="#play" data-nav="play home">Play</a><a href="#guide" data-nav="guide">Guide</a><a href="#about" data-nav="about">How it’s made</a>
 </nav>
 <div class="lgtools" id="tools"><span class="status" id="status">Checking for live AI…</span></div>
 </div></header>
@@ -308,19 +326,19 @@ const WORLD_DATA = {"world":{"company":{"name":"Tidewell","industry":"clinic sch
 "cast":{"reports":[{"name":"Remi","role":"Senior support specialist; handles escalated tickets and calendar bugs that need to go to engineering","strength":"Knows the product more deeply than anyone on the team and can diagnose a strange calendar error in minutes.","growth_edge":"Fixes hard problems quietly themselves instead of writing down the fix or teaching it, so the rest of the team stays dependent on them and they become the bottleneck whenever they are out or overloaded."},{"name":"Jan","role":"Support specialist; owns the team's saved replies, routing rules and weekly ticket reports","strength":"Builds clever tools and spots patterns in ticket data that nobody else sees, like which clinic settings cause the most calls.","growth_edge":"When stuck, goes quiet and keeps trying alone for days instead of asking for help, so deadlines slip without warning and the people waiting on their work find out late."},{"name":"Ravi","role":"Support specialist; works the phone queue and most calls with upset clinic managers","strength":"Calm and warm with frustrated callers; has the team's highest customer satisfaction score at 96 percent.","growth_edge":"Avoids disagreeing in the moment and agrees to timelines they cannot meet, then misses them, and teammates quietly pick up the follow-ups they dropped."}],
 "boss":{"name":"Noor","role":"Director of Customer Experience; manages Cleo and the Customer Success manager","strength":"Keeps the focus on what clinics actually experience and defends the support team in leadership meetings.","visible_to_player":"Clear and decisive, answers chat messages within minutes, praises in public. In busy weeks hands down goals in a single line and expects Cleo to fill in the details without checking back.","growth_edge_hidden":"Agrees to dates with senior leadership before checking with the teams who will do the work, then passes the pressure down as if the date were fixed."},
 "peer":{"name":"Teo","role":"Manager of Customer Success; their team of account managers owns the relationships with the largest clinic groups and hospital networks","strength":"Knows the big customers personally and is trusted by them; excellent at keeping relationships warm through a bad week.","visible_to_player":"Friendly, generous with credit, often asks for favors in a quick hallway or chat message rather than a planned request.","growth_edge_hidden":"Promises customers extra help or faster timelines before checking whether support has the capacity to deliver it."}},
-"pressures":{"company_priorities":[{"priority":"Win and launch hospital networks as customers","lands_on_team":"Set up and staff a dedicated support lane for Brightwell Health, a new customer with 40 clinics, before its launch in month 4, and keep its first-reply time under 1 hour."},{"priority":"Move every customer-facing team onto one new help desk system","lands_on_team":"Move the team's 300 saved replies, routing rules and weekly reports into the new help desk by month 8 without letting reply times slip."}],"constraint":{"type":"headcount","detail":"Headcount is frozen at 6 for the first year; no new hires or contractors, even as ticket volume grows about 25 percent."},"outside_event":{"event":"A new state rule takes effect requiring clinics to send appointment reminder texts with a plain-language way to opt out; clinics will call support asking how to change their reminder settings.","month":10},"year_two_scope_growth":{"month":12,"detail":"Front-desk training calls for newly signed clinics move from Customer Success to Cleo's team permanently, about 15 one-hour calls a week."}},
-"watching":{"boss":"That the Brightwell launch goes smoothly, first-reply time stays under 2 hours, the help desk move lands on time, and they never hear about a problem from someone other than Cleo first.","team":"Whether Cleo still treats them as people rather than a queue, whether the workload is split fairly, and whether anyone has a real path to grow on this team.","peer":"That Brightwell renews in month 24 and that their biggest customers never wait on support or hear 'we can't' from Cleo's team."}},
+"pressures":{"company_priorities":[{"priority":"Win and launch hospital networks as customers","lands_on_team":"Set up and staff a dedicated support lane for Northfield Health, a new customer with 40 clinics, before its launch in month 4, and keep its first-reply time under 1 hour."},{"priority":"Move every customer-facing team onto one new help desk system","lands_on_team":"Move the team's 300 saved replies, routing rules and weekly reports into the new help desk by month 8 without letting reply times slip."}],"constraint":{"type":"headcount","detail":"Headcount is frozen at 6 for the first year; no new hires or contractors, even as ticket volume grows about 25 percent."},"outside_event":{"event":"A new state rule takes effect requiring clinics to send appointment reminder texts with a plain-language way to opt out; clinics will call support asking how to change their reminder settings.","month":10},"year_two_scope_growth":{"month":12,"detail":"Front-desk training calls for newly signed clinics move from Customer Success to Cleo's team permanently, about 15 one-hour calls a week."}},
+"watching":{"boss":"That the Northfield launch goes smoothly, first-reply time stays under 2 hours, the help desk move lands on time, and they never hear about a problem from someone other than Cleo first.","team":"Whether Cleo still treats them as people rather than a queue, whether the workload is split fairly, and whether anyone has a real path to grow on this team.","peer":"That Northfield renews in month 24 and that their biggest customers never wait on support or hear 'we can't' from Cleo's team."}},
 "decisions":[
-{"n": 1, "month": 1, "type": "Triage", "pattern": "Capacity squeeze", "lead_skill": "Prioritization", "support_skill": "Business communication and influence", "subskills": ["Sort", "Read capacity", "Give a clear update"], "cast": ["Noor", "Remi"], "recovery": false, "threads": null, "tension": "Saying yes to the Brightwell lane Noor is counting on versus protecting a team that is already at full capacity."},
-{"n": 2, "month": 2, "type": "Handoff", "pattern": "Fuzzy handoff", "lead_skill": "Delegation and accountability", "support_skill": "Coaching and development", "subskills": ["Define the handoff", "Match task to person", "Check in"], "cast": ["Remi", "Noor"], "recovery": false, "threads": {"echoes": 1, "carries_forward": "Cleo still carries their old escalation queue from before the promotion, and the Brightwell lane needs that time. Whether Cleo keeps the queue, splits it, or hands it to Remi with a written playbook comes back later."}, "tension": "Keeping the escalation queue yourself, because you know it best and it feels faster, versus handing it to Remi and building a team where more than one person can handle escalations."},
-{"n": 3, "month": 3, "type": "Growth", "pattern": "Stuck and quiet", "lead_skill": "Coaching and development", "support_skill": "Prioritization", "subskills": ["Explore reality", "Generate options", "Agree the next step"], "cast": ["Jan", "Noor"], "recovery": false, "threads": {"echoes": 1, "carries_forward": "The Brightwell routing rules Jan is building are a week from due and they have not mentioned being stuck; how Cleo handles it shapes whether Jan asks for help next time."}, "tension": "Hitting the Brightwell launch date by stepping in versus giving Jan the time and coaching to solve it themselves."},
-{"n": 4, "month": 4, "type": "Stakeholder", "pattern": "Competing ask", "lead_skill": "Business communication and influence", "support_skill": "Prioritization", "subskills": ["Make a case", "Read the audience", "Renegotiate"], "cast": ["Teo", "Ravi"], "recovery": true, "threads": {"echoes": 1, "carries_forward": "Teo asks to put Ravi on Brightwell launch calls for two weeks because clinics love them; the answer sets the pattern for how Teo asks for Cleo's people."}, "tension": "Giving the launch Ravi's real strength with upset callers versus keeping the phone queue covered for the other 3,000 clinics.", "recovery_intro": "New: you can step away. Sometimes the best move is to pause, gather facts or sleep on it before you decide.", "designer_note": "Designer note, never story text: Teo is a peer, so their ask is a request, and Ravi's time is the player's call. The scene ends before the player has talked to anyone; the likely first conversation is with Ravi."},
-{"n": 5, "month": 5, "type": "Handoff", "pattern": "Missed again", "lead_skill": "Delegation and accountability", "support_skill": "Hard conversations", "subskills": ["Follow up on a miss", "Take it back or not", "Describe without blame"], "cast": ["Ravi", "Remi"], "recovery": true, "threads": {"echoes": 4, "carries_forward": "Ravi agreed to follow up with 12 Brightwell clinics by Friday and missed it, the second missed follow-up this quarter; Remi quietly picked up the calls both times."}, "tension": "Keeping Ravi's confidence and goodwill after a stretch on launch calls versus holding a clear line on commitments so Remi stops absorbing their work."},
-{"n": 6, "month": 7, "type": "Hard talk", "pattern": "The avoided miss", "lead_skill": "Hard conversations", "support_skill": "Delegation and accountability", "subskills": ["Choose timing and setting", "Describe without blame", "Agree what changes"], "cast": ["Remi", "Jan"], "recovery": true, "threads": {"echoes": 2, "carries_forward": "The escalation playbook from the handoff was never written. Remi has fixed every escalation themselves, including the hardest Brightwell tickets since launch, and Jan cannot move the escalation rules into the new company help desk, due in month 8, without it."}, "tension": "Honoring Remi's huge effort during the bug versus naming that the team still depends on them alone."},
+{"n": 1, "month": 1, "type": "Triage", "pattern": "Capacity squeeze", "lead_skill": "Prioritization", "support_skill": "Business communication and influence", "subskills": ["Sort", "Read capacity", "Give a clear update"], "cast": ["Noor", "Remi"], "recovery": false, "threads": null, "tension": "Saying yes to the Northfield lane Noor is counting on versus protecting a team that is already at full capacity."},
+{"n": 2, "month": 2, "type": "Handoff", "pattern": "Fuzzy handoff", "lead_skill": "Delegation and accountability", "support_skill": "Coaching and development", "subskills": ["Define the handoff", "Match task to person", "Check in"], "cast": ["Remi", "Noor"], "recovery": false, "threads": {"echoes": 1, "carries_forward": "Cleo still carries their old escalation queue from before the promotion, and the Northfield lane needs that time. Whether Cleo keeps the queue, splits it, or hands it to Remi with a written playbook comes back later."}, "tension": "Keeping the escalation queue yourself, because you know it best and it feels faster, versus handing it to Remi and building a team where more than one person can handle escalations."},
+{"n": 3, "month": 3, "type": "Growth", "pattern": "Stuck and quiet", "lead_skill": "Coaching and development", "support_skill": "Prioritization", "subskills": ["Explore reality", "Generate options", "Agree the next step"], "cast": ["Jan", "Noor"], "recovery": false, "threads": {"echoes": 1, "carries_forward": "The Northfield routing rules Jan is building are a week from due and they have not mentioned being stuck; how Cleo handles it shapes whether Jan asks for help next time."}, "tension": "Hitting the Northfield launch date by stepping in versus giving Jan the time and coaching to solve it themselves."},
+{"n": 4, "month": 4, "type": "Stakeholder", "pattern": "Competing ask", "lead_skill": "Business communication and influence", "support_skill": "Prioritization", "subskills": ["Make a case", "Read the audience", "Renegotiate"], "cast": ["Teo", "Ravi"], "recovery": true, "threads": {"echoes": 1, "carries_forward": "Teo asks to put Ravi on Northfield launch calls for two weeks because clinics love them; the answer sets the pattern for how Teo asks for Cleo's people."}, "tension": "Giving the launch Ravi's real strength with upset callers versus keeping the phone queue covered for the other 3,000 clinics.", "recovery_intro": "New: you can step away. Sometimes the best move is to pause, gather facts or sleep on it before you decide.", "designer_note": "Designer note, never story text: Teo is a peer, so their ask is a request, and Ravi's time is the player's call. The scene ends before the player has talked to anyone; the likely first conversation is with Ravi."},
+{"n": 5, "month": 5, "type": "Handoff", "pattern": "Missed again", "lead_skill": "Delegation and accountability", "support_skill": "Hard conversations", "subskills": ["Follow up on a miss", "Take it back or not", "Describe without blame"], "cast": ["Ravi", "Remi"], "recovery": true, "threads": {"echoes": 4, "carries_forward": "Ravi agreed to follow up with 12 Northfield clinics by Friday and missed it, the second missed follow-up this quarter; Remi quietly picked up the calls both times."}, "tension": "Keeping Ravi's confidence and goodwill after a stretch on launch calls versus holding a clear line on commitments so Remi stops absorbing their work."},
+{"n": 6, "month": 7, "type": "Hard talk", "pattern": "The avoided miss", "lead_skill": "Hard conversations", "support_skill": "Delegation and accountability", "subskills": ["Choose timing and setting", "Describe without blame", "Agree what changes"], "cast": ["Remi", "Jan"], "recovery": true, "threads": {"echoes": 2, "carries_forward": "The escalation playbook from the handoff was never written. Remi has fixed every escalation themselves, including the hardest Northfield tickets since launch, and Jan cannot move the escalation rules into the new company help desk, due in month 8, without it."}, "tension": "Honoring Remi's huge effort during the bug versus naming that the team still depends on them alone."},
 {"n": 7, "month": 13, "type": "Repeat", "pattern": "Third time this month", "lead_skill": "Systems and leverage", "support_skill": "Delegation and accountability", "subskills": ["Spot the pattern", "Choose the mechanism", "Name an owner"], "cast": ["Remi", "Jan"], "recovery": true, "threads": {"echoes": 6, "carries_forward": "For the third time this month a reminder-setting ticket is misrouted and lands on Remi, who fixes it quietly; Jan's ticket data shows the same 4 clinic settings behind all of them."}, "tension": "Clearing the tickets fast the way Remi always has versus slowing down to build a fix that stops them coming back."},
-{"n": 8, "month": 14, "type": "Handoff", "pattern": "Fuzzy handoff", "lead_skill": "Delegation and accountability", "support_skill": "Setting direction", "subskills": ["Define the handoff", "Match task to person", "Check in"], "cast": ["Teo", "Ravi", "Noor"], "recovery": true, "threads": {"echoes": 5, "carries_forward": "Front-desk training calls for new clinics move from Teo's team to Cleo's for good, with no written outcome; Ravi is the natural fit, and the last time they took on extra calls (the Brightwell launch) their follow-ups slipped and Remi covered."}, "tension": "Giving the new training work to the person whose warmth suits it best versus spreading it so no one repeats last year's overload."},
+{"n": 8, "month": 14, "type": "Handoff", "pattern": "Fuzzy handoff", "lead_skill": "Delegation and accountability", "support_skill": "Setting direction", "subskills": ["Define the handoff", "Match task to person", "Check in"], "cast": ["Teo", "Ravi", "Noor"], "recovery": true, "threads": {"echoes": 5, "carries_forward": "Front-desk training calls for new clinics move from Teo's team to Cleo's for good, with no written outcome; Ravi is the natural fit, and the last time they took on extra calls (the Northfield launch) their follow-ups slipped and Remi covered."}, "tension": "Giving the new training work to the person whose warmth suits it best versus spreading it so no one repeats last year's overload."},
 {"n": 9, "month": 19, "type": "Hard talk", "pattern": "Pushback", "lead_skill": "Hard conversations", "support_skill": "Coaching and development", "subskills": ["Ask for their view", "Stay in it", "Agree what changes"], "cast": ["Ravi", "Teo"], "recovery": true, "threads": {"echoes": 8, "carries_forward": "Ravi's training calls run 90 minutes instead of 60 and they promise clinics custom follow-ups; Teo's customers love it; Ravi pushes back on the feedback, saying it is why clinics stay."}, "tension": "Respecting a customer bond that is genuinely Ravi's strength versus a schedule and set of promises the team cannot keep."},
-{"n": 10, "month": 22, "type": "Stakeholder", "pattern": "Bad news", "lead_skill": "Business communication and influence", "support_skill": "Prioritization", "subskills": ["Say bad news early", "Escalate with judgment", "Read the audience"], "cast": ["Noor", "Teo", "Remi"], "recovery": true, "threads": {"echoes": 1, "carries_forward": "Two months before Brightwell's renewal, training for its 8 new clinics has slipped two weeks; Teo promised them done by month 23 and Noor has not heard; the Brightwell relationship from decision 1, Teo's habit from decision 4 and the training load from decision 8 all meet here."}, "tension": "Telling Noor now and risking the team's reputation versus a few days to recover the date quietly with Remi's help."}],
+{"n": 10, "month": 22, "type": "Stakeholder", "pattern": "Bad news", "lead_skill": "Business communication and influence", "support_skill": "Prioritization", "subskills": ["Say bad news early", "Escalate with judgment", "Read the audience"], "cast": ["Noor", "Teo", "Remi"], "recovery": true, "threads": {"echoes": 1, "carries_forward": "Two months before Northfield's renewal, training for its 8 new clinics has slipped two weeks; Teo promised them done by month 23 and Noor has not heard; the Northfield relationship from decision 1, Teo's habit from decision 4 and the training load from decision 8 all meet here."}, "tension": "Telling Noor now and risking the team's reputation versus a few days to recover the date quietly with Remi's help."}],
 "patterns":{
 "Capacity squeeze":"Pays off: the cost is named upward, the team's plate is checked before it changes, a check-in is set. Drags: a yes with no cost named means quality slips in two months; a report's known growth edge bites; carried work builds fatigue and the boss later asks why the team is not developing.",
 "Fire in the quarter":"Pays off: the fix is scoped and the slip in the plan is named upward before anyone sees it. Drags: the plan slips unannounced and the boss hears late; swarming burns the team; a solo fix hides the real cost and builds fatigue. The slip arrives as a late delivery one to two months on.",
@@ -337,15 +355,14 @@ const WORLD_DATA = {"world":{"company":{"name":"Tidewell","industry":"clinic sch
 "Bad news":"Pays off: the boss hears early, with the cause, a plan and what you need. Drags: a quiet recovery attempt that fails means the boss hears late from someone else."}}
 ;
 /* Prompts for the live game. Source of truth: claude/game-prompts.md (Nov 18, after Gate 0). Do not edit here without editing the doc. */
-/* V4: five decisions, taken from the ten played in test 1 (old 1, 3, 4, 5, 10) and renumbered. Plan text is adjusted so nothing points at a decision that is no longer there. */
+/* V4 (Nov 27): six decisions, taken from the ten played in test 1 (old 1, 2, 3, 4, 5, 10) and renumbered. Old 5 already echoes old 4 (now decision 4); old 10's thread is rewritten to point at decision 1. */
 (function () {
-  const old = WORLD_DATA.decisions, pickN = [1, 3, 4, 5, 10];
+  const old = WORLD_DATA.decisions, pickN = [1, 2, 3, 4, 5, 10];
   WORLD_DATA.decisions = pickN.map((k, i) => { const d = Object.assign({}, old.find(x => x.n === k)); d.n = i + 1; delete d.month; return d; });
   const D = WORLD_DATA.decisions;
-  D[3].threads = Object.assign({}, D[3].threads, { echoes: 3 });
-  D[4].threads = { echoes: 1, carries_forward: "Two months before Brightwell's renewal, training for its 8 new clinics has slipped two weeks; Teo promised them it would be done by the end of next week and Noor has not heard yet. The Brightwell relationship from the first decision and Teo's habit of promising on the team's behalf both meet here." };
+  D[5].threads = { echoes: 1, carries_forward: "Two months before Northfield's renewal, training for its 8 new clinics has slipped two weeks; Teo promised them it would be done by the end of next week and Noor has not heard yet. The Northfield relationship from the first decision and Teo's habit of promising on the team's behalf both meet here." };
 })();
-const NDEC = 5;
+const NDEC = 6;
 const PROMPTS_APPROVED = false; /* V4 prompt batch of Nov 20 is awaiting the designer's review; remove this flag when approved */
 const PLAN_CHECK = 'A strong plan says who does what and by when, uses a fact learned from the questions, and says what waits or stays out.';
 const DELIVERY_CHECK = 'Strong first words say what was decided, say what it means for this person, and ask or check in. An opening is a start, not the whole conversation.';
@@ -374,7 +391,7 @@ WHERE THE PLAYER STANDS (meter words; for tone only, never mention them)
 
 WRITE
 1. brief: a short scene in three short paragraphs, about 100 words in total, second person, present tense. Start with what just happened, never with the day, the month or where the player is sitting. For every decision after the first, the first sentence says what happened because of the player's last plan, using one concrete detail from it (a person, a promise, a date). Keep to one tension, no more than three numbers, and nothing that reads like a word problem: the player should know what is being asked after one read. Say who is involved and one concrete detail worth noticing. Include one sentence on who on the team usually handles this kind of work and why, so the player can see the obvious choice and what it would cost. The first time each person appears in this scene, give a short role tag ("Noor, your boss"); after that, first names only. Do not say what anyone is watching or which skill this tests.
-2. questions: four questions the player could ask, each to one cast member, labeled with their role. Each answer is 1 to 2 sentences of spoken dialogue, in plain connected sentences (shared rule 6), the way a calm colleague talks (example: "I noticed it a few days ago. They seemed to be having trouble with the part that splits Brightwell's 40 clinics by who can answer, but they didn't ask me anything, so I assumed they were working on it."), using only facts in this brief, the world and the hidden facts. One question leads toward the hidden fact; its answer is partial.
+2. questions: four questions the player could ask, each to one cast member, labeled with their role. Each answer is 1 to 2 sentences of spoken dialogue, in plain connected sentences (shared rule 6), the way a calm colleague talks (example: "I noticed it a few days ago. They seemed to be having trouble with the part that splits Northfield's 40 clinics by who can answer, but they didn't ask me anything, so I assumed they were working on it."), using only facts in this brief, the world and the hidden facts. One question leads toward the hidden fact; its answer is partial.
 3. hidden_fact: what one cast member is really dealing with, and a tell: a passing remark in the brief or an answer that hints at it, never explained.
 4. send: the opening step, which happens right now, before anything in the outcomes. Give "to" (the one person the plan most likely starts with, with their role, for example "Noor, your boss") and "prompt" (one line in the game's voice that places the player in the moment, for example "You've decided. How do you share it with Noor? Write the first words you say or send."). It is never a recap or a summary after the fact.
 5. key_points: four short bullets for the side panel, each under 15 words, that capture the essence of the scene: what just landed, who wants what, what is at stake, and the tension as two things worth protecting. Plain words; no hidden facts, no minor details.
@@ -438,13 +455,13 @@ WRITE
    - openings: two first lines the player could say or send to opening_to to start this option, each 1 to 2 sentences in a manager's own voice. One is strong (it fits the plan, names the trade-off for this person, and asks or checks in where it should). The other is a common pitfall (announcing instead of asking, burying the cost, over-apologizing). Mark which is which in a field the player never sees ("strong" or "pitfall", with a one-line why). For the pitfall, add pitfall_shift: the meter changes (at most 1 each) that the opening adds on top of the option's delta, and a one-line story note.
    - you_take_on_work: true when this option has the player personally do work that someone on their team, a peer, or their boss could do (writing the fix, covering a task, taking over a deliverable). Talking, asking, deciding, delegating, and checking in are false.
    Band "text" (lean options, hidden from the player): give only slot, text, delta, tradeoff and you_take_on_work for each option.
-3. peer_advice (bands "mix" and "text" only): what a manager the player trusts would say if asked, once for the plan, once for the trade-off and once for the opening. For each, one question to think about and the first half of a sentence that stops before the answer. Never a complete plan, trade-off or opening.
+3. peer_advice (bands "mix" and "text" only): what a manager the player trusts would say if asked, once for the plan, once for the trade-off and once for the opening. For each, one question about this scene that names a person, a date or a piece of work from it, never a general truth such as "every choice costs something". Then the first few words of an answer the player could finish, written as the player would write them in that box: for the plan, a first step ("First I will ask Jan to"); for the trade-off, the start of what it costs ("Jan's routing work will"); for the opening, the first words to this person by name ("Jan, I looked at"). The words stop mid-sentence, with no closing punctuation and no ellipsis. Never a complete plan, trade-off or opening.
 
 RULES
 1. No option is better on every meter. At least one option moves a meter the player would not expect, and its reason says why.
 2. The ask option is never free: asking costs time or patience somewhere.
 3. Outcomes follow the pattern notes: what the choice addressed pays off; what it left open drags. The hidden fact shapes the outcomes of options that ignore it.
-4. Stay consistent with the scene: use only the people, facts and numbers the scene and its answers set. Never contradict an answer.
+4. Stay consistent with the scene: use only the people, facts, numbers and work the scene and its answers set. Never contradict an answer. An option never brings in a project, a pause, a tool or a resource the player has not seen in the brief or the answers; if an option needs one, the brief must already name it.
 5. Use only the cast in the world. First names only. Never attribute behavior to background or identity. No villains.
 6. Plain language. No framework names, no scores, no "the right answer."
 7. Hidden growth edges and the hidden fact show only through what people do and say. Never state them in options, trade-offs or openings.
@@ -483,13 +500,13 @@ Opening: [OPENING]
 Peer advice shown: [ADVICE]
 
 REPORT
-1. checks: for each of the four checks, "named", "partly" or "missing", with the exact words that show it. "Partly" means named without saying who or what specifically.
+1. checks: for each of the four checks, "named", "partly" or "missing", with the exact words that show it. "Named" means a specific person, piece of work or date ("Remi's two calendar tickets wait a week", "Noor hears about the delay today"). "Partly" means the answer points at the right area but stays general: a group, a meter or an abstraction instead of a person, work item or date ("the team", "the business", "business time", "me and the team", "time"). When the answer sits between named and partly, mark it partly.
 2. hidden_fact: "surfaced", "hinted", "missed" or "not_reachable", with evidence. A question the player asked counts only if it was about that topic. Use "missed" only when the player heard the fact or its tell AND had a way to act on it. When the player never heard it, use "not_reachable".
 3. events: which counter events the answer contains (commitment made, work absorbed, visibility given, recovery chosen, repeat issue named), each with the words that show it. "Recovery chosen" counts only when the player takes a real break (the same test as you_step_away); planning together, asking for time or fixing a process is not recovery. Each event needs the player's own words as evidence; if the evidence needs a "though" or a "but", leave the event out.
 4. unknowns: up to two facts the answer assumed or ignored that would change the result.
 5. style: the closest style slot for open text, or the chosen option's slot.
 6. missing_from_task: only what the three trade-off checks and the skill check asked for and the answer left out. Gaps that belong to other skills go in unknowns as story consequences, never here.
-7. shifts: proposed meter shifts within the limits, each with a one-line reason tied to the outcome notes. Start from the chosen option's deltas (for open text, the closest option's); then adjust at most one meter by 1 for what the plan and opening added or left out, including facts gathered from the questions. A cost left unnamed, or a person who pays left out, moves that meter down; good wording alone never moves a meter up. Parts the player picked from written options are judged as the option's own. Give a reason for every meter, including ones that do not move. If the plan leaves a specific person or group paying (covering work, waiting, carrying a hard conversation), the meter for that person's side moves down by at least 1 unless the plan names how they are supported. Team standing never rises in a decision where someone on the team is absorbing a teammate's work. Raising a risk early never lowers boss standing. A peer's reaction never moves boss standing.
+7. shifts: proposed meter shifts within the limits, each with a one-line reason tied to the outcome notes. Start from the chosen option's deltas (for open text, the closest option's); then adjust at most one meter by 1 for what the plan and opening added or left out, including facts gathered from the questions. A cost left unnamed, or a person who pays left out, moves that meter down; good wording alone never moves a meter up. Parts the player picked from written options are judged as the option's own. Give a reason for every meter, including ones that do not move. If the plan leaves a specific person or group paying (covering work, waiting, carrying a hard conversation), the meter for that person's side moves down by at least 1 unless the plan names how they are supported. A plan that has someone on the team stay late, work extra, or take on more without support moves team standing down by at least 1, even when the business gains. Every real plan spends something: return all three of team, boss and business at 0 only when nothing in the plan costs anyone anything they would notice, and say why in the reasons. Team standing never rises in a decision where someone on the team is absorbing a teammate's work. Raising a risk early never lowers boss standing. A peer's reaction never moves boss standing.
 8. you_take_on_work: true when the player's answer has them personally do or take over work someone else could do. Talking, asking, deciding, and delegating are false. If the answer is vague about who does the work, false.
 9. you_step_away: true only when the player takes a real break, for themselves or the team (a pause before deciding, time off, sending people home). Asking someone else to cover is not stepping away.
 10. plan_opening_match: whether the opening starts the plan the player chose: "yes" or "no", with one line.
@@ -499,7 +516,8 @@ RULES
 2. Credit loosely worded reasoning when its meaning is clear from the scenario. If a phrase could mean two things, say so in the note instead of marking it missing.
 3. If the player asked a peer for advice, credit only what they added in their own words; text copied from the advice is not evidence. Judge what was said, not how polished it is. Short and plain can be complete.
 4. Never judge the player's character, ability or potential.
-5. JSON only. Use exactly these keys: checks {protects, cost, who_pays, skill_check} each with status, evidence, note; tradeoff_gap {gap, note}; hidden_fact {status, evidence}; events [{event, evidence}]; unknowns []; style; missing_from_task []; shifts {team, boss, business, wellbeing} each with delta and reason; you_take_on_work; you_step_away; plan_opening_match {match, note}.`;
+5. JSON only. Use exactly these keys: checks {protects, cost, who_pays, skill_check} each with status, evidence, note; tradeoff_gap {gap, note}; hidden_fact {status, evidence}; events [{event, evidence}]; unknowns []; style; missing_from_task []; shifts {team, boss, business, wellbeing} each with delta and reason; you_take_on_work; you_step_away; plan_opening_match {match, note}.
+6. The opening is the player's first words only, before anyone replies. Judge whether these words say what was decided, what it means for this person, and ask or check in. Never mark something missing because it would come later in the conversation, such as a follow-up question or an agreement.`;
 
 const P4 = `You write what the player reads after a decision. Be direct and kind. No scores, no flattery, no moralizing.
 
@@ -511,31 +529,30 @@ Judge report: [JUDGE JSON]
 Decision: [DECISION JSON]
 The player's choice and words: [ANSWER]
 Game state: [METERS, COUNTERS, STORY LOG SO FAR]
-Confidence: [CONFIDENCE]
 
 WRITE
 1. reasons: one line for each of the four meters (team, boss, business, wellbeing, in that order), saying who saw what. For a meter that held steady, say why it held. Use the judge's shifts. Each reason is one plain sentence about people and events: no meter name, no numbers, and no "up", "down" or "held" (the screen shows those).
-2. story_entry: a short scene of 3 to 5 sentences in 2 or 3 short paragraphs, second person, past tense, starting with what you did. Name a person's role with them when they have not appeared for a while. What happened, what each person saw, what the choice protected and cost, and what is building. Follow the outcome notes and the judge's report; two different answers must lead to noticeably different stories. If an earlier entry's thread is in play, let a concrete detail from it return (a person, a habit, an earlier call), at most once every few decisions and changed since it last appeared (done, worse, or handed off), without explaining the connection. Never bring back something the player's plan already dealt with as if it were untouched; show what changed because of what they did. The player makes the connections.
-3. plan_line, tradeoff_line, delivery_line: one plain sentence each, under 25 words, as if a manager you trust were talking to you after the meeting.
+2. story_entry: a short story of 4 to 5 sentences in 2 short paragraphs, second person, past tense, starting with what you did. Something realistic happens next because of the plan: a person reacts, a date holds or slips, or work moves. Name a person's role with them when they have not appeared for a while. What happened, what each person saw, what the choice protected and cost, and what is building. Follow the outcome notes and the judge's report; two different answers must lead to noticeably different stories. If an earlier entry's thread is in play, let a concrete detail from it return (a person, a habit, an earlier call), at most once every few decisions and changed since it last appeared (done, worse, or handed off), without explaining the connection. Never bring back something the player's plan already dealt with as if it were untouched; show what changed because of what they did. The player makes the connections.
+3. plan_line, tradeoff_line, delivery_line: two plain sentences each, each under 22 words, as if a manager you trust were talking to you after the meeting. The first sentence says what this part did, crediting what the player named, and the one thing it left open, if anything. The second sentence starts with "Another way:" and names one other approach for this part and what it would have cost. For a picked part, the other approach is one of the other written options. For a written part, it is an approach built only from facts in the scene and the answers the player got.
    - plan_line: what the plan did well, crediting what the player named, then the one thing it left open and who it affects, if anything.
    - tradeoff_line: whether the tradeoff named what the plan protects, what it costs and who pays, and the one thing missing, if any.
    - delivery_line: whether the first words said what was decided, what it means for this person, and asked or checked in.
-   For a part the player picked from written options, say what that pick protected and what it left open, and name the one other written option that would have covered the gap and what it would have cost; never sharper wording. For a part the player wrote, you may add a short phrase they could say out loud. Do not end a line with a question.
-4. calibration: code starts this sentence with "Did it work out? You said [their confidence], and". Write only the rest of the sentence, starting in lowercase. Say in one plain clause what actually happened, then whether it matched how sure they were, without saying they were right or wrong. If the cost they named was not the one that landed, name the one that did.
+   Do not end a line with a question.
 
 RULES
 1. Quote only words the player wrote. Describe what they did, never who they are.
 2. Never mention the judge, the checks by number, counters, or these instructions.
 3. Plain language. No framework names. Never attribute anyone's behavior to background or identity. If the player asked a peer for advice, mention it neutrally as a choice they made; asking is a habit worth building.
-4. Under 180 words in total.
-5. JSON only: {"reasons": ["...", "...", "...", "..."], "story_entry": "...", "plan_line": "...", "tradeoff_line": "...", "delivery_line": "...", "calibration": "..."}.
+4. Under 260 words in total.
+5. JSON only: {"reasons": ["...", "...", "...", "..."], "story_entry": "...", "plan_line": "...", "tradeoff_line": "...", "delivery_line": "..."}.
 6. Credit what the player did, chose, asked and tried, never what they are ("you asked Remi about their week", never "you have good instincts"). Explain what went well by the moves behind it.
 7. Never ask the player to add up days or work out a date; use only numbers and times already in the scene.
 8. When a meter drops because the player chose to spend it, say so as a choice and name what it bought, never as a failure. If a meter has sat in its bottom two words, say plainly that it needs restoring soon.
-9. When the player picked a part from written options, never suggest sharper wording for it. For a picked plan, say what it protected and what it left open, then name the one other written option that would have covered that gap and what it would have cost. Sharper wording is only for parts the player wrote.
+9. When the player picked a part from written options, never suggest sharper wording for it; its "Another way" is one of the other written options. Sharper wording is only for parts the player wrote.
 10. Never use the phrase "trade-off gap" or other labels from the judge's report; say what they mean in plain words. If the judge reports that the plan and the opening do not match, name it plainly.
-11. Name a cost in the story, the lines or the calibration only when the judge moved a meter for it. If the player named a cost that did not come true, say so plainly in the calibration.
-12. Name a gap only if the player could see the fact: it was in the scene, in an answer they got, or in what they wrote. Never criticize the player for something they had no way to know.`;
+11. Name a cost in the story or the lines only when the judge moved a meter for it. If the player named a cost that did not come true, say so plainly in tradeoff_line.
+12. Name a gap only if the player could see the fact: it was in the scene, in an answer they got, or in what they wrote. Never criticize the player for something they had no way to know.
+13. The opening is the player's first words, before anyone replies. The story may show how the person reacted, but delivery_line judges only those first words and never faults the player for what would come later in the conversation.`;
 
 /* The Leadership Game, live. Level 2, Tidewell. */
 const PREMISE = "You're Cleo, three months into managing the customer support team at Tidewell, a 650-person company that makes clinic scheduling software. Six people report to you, and until recently you sat beside them. This year Tidewell is signing its first hospital networks and moving every team onto a new help desk, and nobody is hiring.";
@@ -567,7 +584,7 @@ RULES
 3. Wording quality does not matter; whether each mark is present does.
 4. Saying that something waits names a cost only if it says what the waiting costs.
 5. JSON only: {"protects": {"status": "...", "evidence": "..."}, "cost": {"status": "...", "evidence": "..."}, "who_pays": {"status": "...", "evidence": "..."}}.`;
-function newPC() { const o = Math.random() < 0.5 ? [0, 1] : [1, 0]; return { order: o, pre: { text: '', out: null, call: null, busy: false, err: '', done: false }, post: { text: '', out: null, call: null, busy: false, err: '', done: false }, skipped: false }; }
+function newPC() { const o = [0, 0]; /* Nov 27: the same scenario before and after */ return { order: o, pre: { text: '', out: null, call: null, busy: false, err: '', done: false }, post: { text: '', out: null, call: null, busy: false, err: '', done: false }, skipped: false }; }
 const P7 = `You are writing the end-of-level readiness check-in for a leadership decision game. The player has just finished level [LEVEL] as a [CURRENT ROLE]. The check-in answers one question: are they ready to step into the next role, [NEXT ROLE]? Write in the voice of the player's boss, [BOSS NAME AND ROLE from the world seed], speaking to the player as "you": direct, warm, specific. This is one written report, not a chat. A learning designer reviews sample runs before players see this.
 
 WORLD
@@ -579,11 +596,12 @@ WHAT THE NEXT LEVEL ASKS
 THE LEVEL
 Story log, every entry in order: [STORY LOG]
 Meter words at each decision and at the end: [METER HISTORY]
-For each decision: number, lead skill, the judge's checks (named, partly, missing), hidden fact status, events, the player's confidence and how it turned out, and the player's own written words where there were any: [DECISION SUMMARIES]
+For each decision: number, lead skill, the judge's checks (named, partly, missing), hidden fact status, events, how complete the player said their answer was, and the player's own written words where there were any: [DECISION SUMMARIES]
+Confidence read (set by code from how complete the player said their answers were, against the judge's checks): [CONFIDENCE READ]
 
 THE PLAYER'S OWN READ (written before seeing this check-in; may be blank)
 What went best: [SELF 1]
-What kept coming back: [SELF 2]
+What was hard: [SELF 2]
 Their readiness call: [SELF VERDICT]
 
 THE VERDICT (set by code; never change it, soften it into another, or argue with it)
@@ -591,7 +609,7 @@ THE VERDICT (set by code; never change it, soften it into another, or argue with
 
 AI TRANSPARENCY NOTE (fixed text)
 Begin with exactly this italic note, word for word, on its own line:
-*This check-in was written by AI from your five decisions in the game. It can misread what you meant or miss context, so treat it as one reading. Your own judgment, and real work with real people, decide what you take from it.*
+*This check-in was written by AI from your six decisions in the game. It can misread what you meant or miss context, so treat it as one reading. Your own judgment, and real work with real people, decide what you take from it.*
 
 THEN WRITE
 1. note: the boss's note, addressed to the player by name, in five short parts, under 220 words in total.
@@ -602,7 +620,7 @@ THEN WRITE
    - add: one move to add to your toolkit for the next role, written as something the player could say or do, in plain words.
 2. watching: for the boss, the team and the peer, one line on what they watched for (from the world) and one line on what they saw from the player (from the story log). Name a moment, not a trait.
 3. grow: the one or two parts to practice next, chosen from plan, tradeoff and delivery. For each, one line that ties it to decisions by number and says what to try. Put the part's name in the skill field.
-4. calibration: one sentence that sets the player's own readiness call against the verdict, without saying they were right or wrong. If the player's "what kept coming back" names the same pattern as work_on, say so. If their reflection is blank, leave it out.
+4. calibration: one sentence that sets the player's own readiness call against the verdict, without saying they were right or wrong, and one sentence on the confidence read: when the player rated their answers more complete than the checks found, or less, say so plainly as something to notice, never as a flaw; when it matched, say their read of their own work was accurate. If the player's "what was hard" names the same pattern as work_on, say so. If their reflection is blank, leave it out.
 5. story: a short story that ends the check-in. 3 to 5 sentences, second person, past tense, starting with "In the weeks after the check-in,". What the boss did with the verdict, what the player did next, one person from the cast who reacted, and one small concrete detail that carries a thread from the level forward (a person, a habit, an earlier call). It fits the verdict: Ready now opens the next role; Ready with support sets up the stretch or the support; Practice more at this level shows the next decisions starting, with the thread still open. Realistic, not dramatic. Never state what the player was feeling or planning; show only what they did and what followed.
    Style example (different world; do not reuse its phrasing): "In the weeks after the check-in, Dana put your name on the list for the new regional team and asked you to sit in on their Monday staffing call. You started bringing the reorder report to that call instead of fixing it the night before. Marco, who had covered your Saturday shifts for a year, asked if they could run the report next month. You said yes and put a reminder in for the first Friday."
 
@@ -634,13 +652,16 @@ const SKILLS = {
   'Business communication and influence': [['Give a clear update', 'Report wins, progress and risks'], ['Make a case', 'Ask for something with options and cost'], ['Say bad news early', 'Escalate at the right time'], ['Align with peers', 'Build agreement when interests conflict'], ['Advocate without crying wolf', 'Ask for what your team needs and protect your credibility']],
   'Systems and leverage': [['Spot the pattern', 'Notice when the same issue lands for the third time'], ['Choose the mechanism', 'Pick a rule, tool or habit that stops the repeat'], ['Write the guardrail', 'Say what the fix must not break'], ['Name an owner', 'Give the fix a person who keeps it running'], ['Connect people', 'Link teams that solve the same problem']] };
 const PRACTICE_URL = '#practice';
-const CONF = ['Long shot', 'Maybe', 'Coin flip', 'Likely', 'Confident'];
+const CONF = ['Missing a lot', 'Missing some', 'About half there', 'Mostly complete', 'Complete']; /* Nov 27: how complete the player says their answer is; compared in code with the judge's checks */
 const ROLE = { you: ['#CCFBF1', '#0F766E', 'You'], team: ['#DBEAFE', '#2563EB', 'Your team'], boss: ['#FDE7C7', '#B45309', 'Your boss'], peer: ['#FCE7F3', '#BE185D', 'Your peer'] };
 const WHO = { Remi: 'team', Jan: 'team', Ravi: 'team', Noor: 'boss', Teo: 'peer', Cleo: 'you', You: 'you' };
 const INTRO = [
-  { e: 'Tidewell', t: 'You manage the support team', p: ['Tidewell makes scheduling software for clinics. When a front desk has a problem, your team helps them.', 'You are Cleo. Three months ago you were one of the specialists. Now you are their manager, and you still sit in the same row.'] },
-  { e: 'Your people', t: 'Three on your team, and two beside and above you', p: ['Six people report to you, and you will work with three of them most. Each one is good at something real, and each has a habit that costs something.'], people: [['Remi', 'Senior specialist, escalations', 'Knows the product best; fixes odd bugs fast.', 'Watch: fixes things alone and becomes the bottleneck.'], ['Jan', 'Specialist, routing rules and reports', 'Builds tools and spots patterns in ticket data.', 'Watch: goes quiet when stuck, so dates slip late.'], ['Ravi', 'Specialist, phone queue', 'Calm with upset callers; best satisfaction score.', 'Watch: agrees to dates they cannot meet.'], ['Noor', 'Your boss, Director of Customer Experience', 'Decisive and quick to reply.', 'Sends one-line goals in busy weeks.'], ['Teo', 'Your peer, Customer Success manager', 'Friendly and generous with credit.', 'Asks for favors in passing.']] },
-  { e: 'This year', t: 'More work, the same team', p: ['Tidewell is signing its first hospital networks, and every team is moving to new help desk software. Nobody is hiring.', 'You will make five decisions. Each one protects something and costs something. Your job is to see both.'], foot: 'It is Monday morning. A message from your boss is about to arrive.' }];
+  { e: 'Tidewell', t: 'Small clinics, busy front desks', p: ['Tidewell makes scheduling software for clinics. 650 people work there, and every one of them has heard a front desk say the same thing: the phones are ringing, the waiting room is full, and the calendar just did something strange.', 'When that happens, they call your team.'] },
+  { e: 'You', t: 'Three months ago, you were one of them', p: ['You are Cleo. For four years you took the hardest tickets on the support team, and you were the best at them.', 'Three months ago you became the team’s manager. You still sit in the same row.'], foot: 'You are still the person everyone asks when a ticket gets hard, and you are still in the group chat where people complain about management.' },
+  { e: 'Your team', t: 'Customer Support', p: ['Your team answers chat, email and phone for clinic front desks, with a promise: a first reply within 2 hours.', 'Six people report to you. You’ll get to know three of them well.'] },
+  { e: 'Your people', t: 'Your team', p: ['Each one is good at something real. Each one has a habit that costs something, the way everyone does.'], people: [['Remi', 'Senior specialist, escalations', 'Knows the product best; fixes odd bugs fast.', 'Watch: fixes things alone and becomes the bottleneck.'], ['Jan', 'Specialist, routing rules and reports', 'Builds tools and spots patterns in ticket data.', 'Watch: goes quiet when stuck, so dates slip late.'], ['Ravi', 'Specialist, phone queue', 'Calm with upset callers; best satisfaction score.', 'Watch: agrees to dates they cannot meet.']] },
+  { e: 'Above and beside you', t: 'Your boss and your peer', p: ['Pressure also comes from outside your team, especially from your boss and another manager.'], people: [['Noor', 'Your boss, Director of Customer Experience', 'Decisive and quick to reply.', 'Sends one-line goals in busy weeks.'], ['Teo', 'Your peer, Customer Success manager', 'Friendly and generous with credit.', 'Asks for favors in passing.']] },
+  { e: 'This year', t: 'More work, the same team', p: ['Tidewell is signing its first hospital networks, and every team is moving to new help desk software. Nobody is hiring.', 'You will make six decisions. Each one protects something and costs something. Your job is to see both, choose on purpose, and say so.'], foot: 'It is Monday morning. A message from your boss is about to arrive.' }];
 const CHAPTERS = {
   1: { title: 'First calls', range: '1 to 3', lead: 'In this chapter you choose from written plans. Each one shows what it protects, what it costs and who pays, and two ways to share it.', changes: [['Spend and restore.', 'You can\u2019t keep all four meters at the top. Keep every one out of the red, and go back for the one you spent.'], ['Ask two questions first.', 'Every scene starts with what you find out.'], ['Pick a plan.', 'Each option shows its trade-off.'], ['Share your choice.', 'Two ways to say it. One tends to land; one is a common trap.']] },
   2: { title: 'Your words', range: '4 to 6', lead: 'From here, you choose which parts to write yourself. Each part can use the written option or your own words.', changes: [['Mix and match.', 'For the plan, the trade-off and how you share it, pick the option or write your own.'], ['You can take a break.', 'Stepping away is now one of your options.'], ['You can ask for advice.', 'See what other managers would ask: a question and half a sentence.']] },
@@ -656,7 +677,7 @@ const G = { pc: newPC(), phase: 'how', help: { open: false, tab: 'why', auto: {}
 
 const esc = (t) => String(t == null ? '' : t).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const $ = (id) => document.getElementById(id);
-const band = (n) => n === 1 ? 'options' : n <= 3 ? 'mix' : 'text';
+const band = (n) => n <= 2 ? 'options' : n <= 4 ? 'mix' : 'text';
 const chapterOf = (n) => n <= 3 ? 1 : n <= 6 ? 2 : 3;
 const stepOf = (v) => v <= 2 ? 0 : v <= 4 ? 1 : v <= 6 ? 2 : v <= 8 ? 3 : 4;
 const word = (k, v) => { const m = METERS.find(x => x.key === k); return m.words[v <= 2 ? 0 : v <= 4 ? 1 : v <= 6 ? 2 : v <= 8 ? 3 : 4]; };
@@ -752,10 +773,10 @@ function fillShared(t, n) {
 }
 function fillP2A(n) { return SHARED + '\n\n' + fillShared(P2A, n); }
 function fillP2B(n, sceneRaw) { return SHARED + '\n\n' + fillShared(P2B, n).replace('[SCENE JSON]', JSON.stringify(sceneRaw)); }
-/* V4 support fade: decision 1 picks everything; 2 writes the tradeoff; 3 writes tradeoff and first words; 4 and 5 write all three. The player does not choose the mode. */
+/* V4 support fade (Nov 27, six decisions): 1 and 2 pick everything; 3 writes the tradeoff; 4 writes tradeoff and first words; 5 and 6 write all three. The player does not choose the mode. */
 function modes(c, b) {
   if (b === 'options') return { planPick: true, tradePick: true, openPick: true };
-  if (b === 'mix') return { planPick: true, tradePick: false, openPick: G.n === 2 };
+  if (b === 'mix') return { planPick: true, tradePick: false, openPick: G.n === 3 };
   return { planPick: false, tradePick: false, openPick: false };
 }
 function answerOf(D, c) {
@@ -824,7 +845,7 @@ function afterOptions() {
 
 function freshCur() { return { asked: [], pick: null, opening: null, conf: null, tp: '', tc: '', tw: '', tt: '', plan: '', open: '', advT: false, advO: false, advP: false, mPlan: 'pick', mTrade: 'pick', mOpen: 'pick', result: null }; }
 async function startDecision(n) {
-  G.n = n; G.cur = freshCur(); G.err = ''; G.errCalls = null;
+  G.n = n; G.cur = freshCur(); G.tab = 'team'; G.help.tab = stageWrites(n)[0] || 'plan'; G.err = ''; G.errCalls = null;
   if (!live) { G.phase = 'nolive'; render(); return; }
   G.phase = 'loading'; G.busy = 'Writing your next scene…'; render();
   let slot = G.dec[n];
@@ -890,8 +911,8 @@ function applyResult(D, c, judge, N, calls) {
   const before = Object.assign({}, G.meters), moves = movesFrom(judge);
   METERS.forEach(m => { G.meters[m.key] = clamp(G.meters[m.key] + moves[m.key], 0, 10); });
   (G.hist = G.hist || []).push({ n: G.n, meters: Object.assign({}, G.meters) });
-  try { const A = answerOf(D, c), ch = judge.checks || {}, wrote = !A.picked.includes('trade-off'), st = k => String((ch[k] || {}).status || 'missing').toLowerCase(); (G.trail = G.trail || []).push({ n: G.n, skill: W.decisions[G.n - 1].lead_skill, wrote, protects: wrote ? st('protects') : '', cost: wrote ? st('cost') : '', who_pays: wrote ? st('who_pays') : '', conf: c.conf !== null ? CONF[c.conf] : '', net: Object.values(moves || {}).reduce((a, b) => a + (+b || 0), 0) }); } catch (e) {}
-  try { const A = answerOf(D, c), ch = judge.checks || {}; (G.sum = G.sum || []).push({ n: G.n, skill: W.decisions[G.n - 1].lead_skill, checks: Object.keys(ch).map(k => k + ': ' + ((ch[k] || {}).status || '')).join(', '), hidden_fact: (judge.hidden_fact || {}).status || '', events: (judge.events || []).map(e => e.event || e).join(', '), confidence: CONF[c.conf], how_it_turned_out: calLine(c, N.calibration), own_words: { plan: A.picked.includes('plan') ? '(picked an option)' : A.plan, trade_off: A.picked.includes('trade-off') ? '(picked)' : A.tradeoff, shared: A.picked.includes('how they shared it') ? '(picked)' : A.opening } }); } catch (e) {}
+  try { const A = answerOf(D, c), ch = judge.checks || {}, wrote = !A.picked.includes('trade-off'), st = k => String((ch[k] || {}).status || 'missing').toLowerCase(); (G.trail = G.trail || []).push({ n: G.n, skill: W.decisions[G.n - 1].lead_skill, wrote, protects: wrote ? st('protects') : '', cost: wrote ? st('cost') : '', who_pays: wrote ? st('who_pays') : '', net: Object.values(moves || {}).reduce((a, b) => a + (+b || 0), 0) }); } catch (e) {}
+  try { const A = answerOf(D, c), ch = judge.checks || {}; (G.sum = G.sum || []).push({ n: G.n, skill: W.decisions[G.n - 1].lead_skill, checks: Object.keys(ch).map(k => k + ': ' + ((ch[k] || {}).status || '')).join(', '), hidden_fact: (judge.hidden_fact || {}).status || '', events: (judge.events || []).map(e => e.event || e).join(', '), complete_said: c.conf !== null ? CONF[c.conf] : 'not asked (picked from written options)', own_words: { plan: A.picked.includes('plan') ? '(picked an option)' : A.plan, trade_off: A.picked.includes('trade-off') ? '(picked)' : A.tradeoff, shared: A.picked.includes('how they shared it') ? '(picked)' : A.opening } }); } catch (e) {}
   (judge.events || []).forEach(e => { const k = String(e.event || e).toLowerCase().replace(/\s+/g, '_'); G.counters[k] = (G.counters[k] || 0) + 1; });
   const o = c.pick !== null ? D.options[c.pick] : null;
   if (o && o.carries) G.carries.push('(decision ' + G.n + ') ' + o.carries);
@@ -904,11 +925,21 @@ function applyResult(D, c, judge, N, calls) {
       plan: o ? o.text + (c.plan ? ' / written: ' + c.plan : '') : c.plan, opening: c.opening !== null && o && o.openings && o.openings[c.opening] ? o.openings[c.opening].text + ' (' + (o.openings[c.opening].lands ? 'lands' : 'pitfall') + ')' : (c.open || ''),
       trade: [c.tp, c.tc, c.tw, c.tt].filter(Boolean).join(' | '), conf: c.conf !== null ? CONF[c.conf] : '',
       meters: METERS.map(m => m.key + ' ' + before[m.key] + '\u2192' + G.meters[m.key]).join(', '), wb: (wb.delta || 0) + ' (' + (wb.source || '?') + ') ' + (wb.reason || ''),
-      events: JSON.stringify(judge.events || []), story: String(N.story_entry || ''), note: [N.plan_line, N.tradeoff_line, N.delivery_line].filter(Boolean).join(' | ') || String(N.reasoning_note || ''), secs: Math.round((Date.now() - (G.t0 || Date.now())) / 1000), cal: calLine(c, N.calibration) });
+      events: JSON.stringify(judge.events || []), story: String(N.story_entry || ''), note: [N.plan_line, N.tradeoff_line, N.delivery_line].filter(Boolean).join(' | ') || String(N.reasoning_note || ''), secs: Math.round((Date.now() - (G.t0 || Date.now())) / 1000), cal: c.conf !== null && !judge.built_by ? 'said ' + CONF[c.conf] + '; checks scored ' + checkScore(judge) + ' of 8' : 'not asked' });
   } catch (e) {}
   try { const op = c.opening !== null && o && o.openings && o.openings[c.opening] ? o.openings[c.opening].text : (c.open || ''); (G.ans = G.ans || []).push({ n: G.n, skill: d.lead_skill, plan: [o ? o.text : '', c.plan || ''].filter(Boolean).join(' / Your words: '), trade: [c.tp, c.tc, c.tw, c.tt].filter(Boolean).join(' · ') || (o ? [o.tp, o.tc, o.tw].filter(Boolean).join(' · ') : ''), opening: op, conf: c.conf !== null ? CONF[c.conf] : '', moves: Object.assign({}, moves) }); } catch (e) {}
+  if (c.conf !== null && !judge.built_by) { const ch = judge.checks || {}, sts = CHECK_KEYS.map(k => String((ch[k] || {}).status || 'missing').toLowerCase()); (G.cal = G.cal || []).push({ n: G.n, said: c.conf, score: checkScore(judge), named: sts.filter(x => x === 'named').length, partly: sts.filter(x => x === 'partly').length, missing: sts.filter(x => x !== 'named' && x !== 'partly').length }); }
   (G.recap = G.recap || []).push({ n: G.n, skill: d.lead_skill, pp: o && o.pp ? o.pp : String(N.story_entry).split(/(?<=\.)\s/)[0] });
 }
+/* ---------- confidence read (code, not AI): how complete the player said each written answer was, against the judge's four checks ---------- */
+const CHECK_KEYS = ['protects', 'cost', 'who_pays', 'skill_check'], PTS = { named: 2, partly: 1, missing: 0 };
+function checkScore(judge) { const ch = judge.checks || {}; return CHECK_KEYS.reduce((a, k) => a + (PTS[String((ch[k] || {}).status || 'missing').toLowerCase()] || 0), 0); }
+function calRead() {
+  const C = G.cal || []; if (C.length < 2) return 'not_enough';
+  const gap = C.reduce((a, x) => a + (x.said - x.score / 2), 0) / C.length;
+  return gap >= 1 ? 'over' : gap <= -1 ? 'under' : 'calibrated';
+}
+const CALREAD = { over: 'overconfident: rated their answers more complete than the checks found', under: 'underconfident: rated their answers less complete than the checks found', calibrated: 'calibrated: their rating matched the checks', not_enough: 'not enough written answers to tell' };
 /* ---------- readiness review (P7) ---------- */
 function verdictOf() {
   const H = G.hist || [], keys = ['team', 'boss', 'business', 'wellbeing'];
@@ -925,7 +956,7 @@ function fillP7() {
     .replace('[BOSS NAME AND ROLE from the world seed]', 'Noor, Director of Customer Experience').replace('[WORLD SEED, including what each audience watched]', JSON.stringify(W.world))
     .replace('[NEXT LEVEL ASKS]', "Results come through other people's teams: choose and grow managers, split time and people across teams, let go of the work you were best at.")
     .replace('[STORY LOG]', storySoFar()).replace('[METER HISTORY]', (G.hist || []).map(h => 'Decision ' + h.n + ': ' + METERS.map(m => m.label + ' ' + word(m.key, h.meters[m.key])).join(', ')).join('\n'))
-    .replace('[DECISION SUMMARIES]', JSON.stringify(G.sum || [])).replace('[SELF 1]', rv.best.trim() || '(blank)').replace('[SELF 2]', rv.back.trim() || '(blank)')
+    .replace('[DECISION SUMMARIES]', JSON.stringify(G.sum || [])).replace('[CONFIDENCE READ]', CALREAD[calRead()]).replace('[SELF 1]', rv.best.trim() || '(blank)').replace('[SELF 2]', rv.back.trim() || '(blank)')
     .replace('[SELF VERDICT]', rv.call ? VERDICT[rv.call] : '(blank)').replace('[VERDICT: ready | support | keep_building]', v);
 }
 async function runReview() {
@@ -938,12 +969,14 @@ const MARKS = [['protects', 'Protects'], ['cost', 'Cost'], ['who_pays', 'Who pay
 const MARKC = { named: ['#D1FAE5', '#065F46', 'Named'], partly: ['#FEF3C7', '#92400E', 'Partly'], missing: ['#EEEEF2', '#4B5563', 'Missing'] };
 function markChip(label, status) { const m = MARKC[status] || MARKC.missing; return '<span style="display:inline-flex;align-items:center;gap:4px;padding:2px 10px;border-radius:999px;font-size:13px;font-weight:800;background:' + m[0] + ';color:' + m[1] + ';border:2px solid ' + m[1] + '">' + label + ' · ' + m[2] + '</span>'; }
 function checkScreen(stage) {
-  const S = CHECKS[G.pc.order[stage === 'pre' ? 0 : 1]], st = G.pc[stage], ok = st.text.trim().length >= 20;
-  return '<div class="eyebrow">' + (stage === 'pre' ? 'Warm-up \u00b7 not part of the story' : 'One last question \u00b7 not part of the story') + '</div><h1 style="margin:0;font-size:36px;font-weight:900">A quick check</h1>' +
-    '<p class="para">' + (stage === 'pre' ? 'One short scenario before the story begins. It is a different workplace from the game, and there is no right answer and no score. At the end you get a similar one, and your two answers sit side by side.' : 'This is not part of the story. It is a short scenario like the one you answered at the start, in a different workplace, so you can see your two answers side by side.') + '</p>' +
-    '<section class="card"><div class="lab">' + esc(S.title) + '</div><p class="para" style="font-size:17px">' + esc(S.text) + '</p><label class="lab" for="pc_' + stage + '">' + esc(CHECK_ASK) + '</label><textarea id="pc_' + stage + '" class="ta grow" rows="4" data-pc="' + stage + '">' + esc(st.text) + '</textarea>' +
-    '<p class="muted" style="margin:0;font-size:14px">Your answer goes to the AI so it can be compared with your other one. Leave out real names.</p></section>' +
-    '<div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center"><button class="btn" data-act="' + (stage === 'pre' ? 'preDone' : 'postDone') + '"' + (ok ? '' : ' disabled') + '>' + (stage === 'pre' ? 'Start the story' : 'Show my two answers') + '</button><button class="ghost" data-act="pcSkip">Skip the check</button></div>';
+  const S = CHECKS[0], st = G.pc[stage], ok = st.text.trim().length >= 20, pre = stage === 'pre';
+  return '<div class="checkframe"><div class="checktop"><span class="checkbadge">' + (pre ? 'Check 1 of 2 · before you start' : 'Check 2 of 2 · after six decisions') + '</span><span class="checknote">Not part of the story · no score</span></div>' +
+    '<h1 style="margin:0;font-size:32px;font-weight:900">' + (pre ? 'Before you start: one scenario' : 'The same scenario, one more time') + '</h1>' +
+    '<p class="para">' + (pre ? 'Answer one short scenario from a different workplace. There is no right answer. At the end you answer the same scenario again and see your two answers side by side.' : 'This is the scenario you answered before the story. Answer it again without looking back, then see both answers side by side in your check-in.') + '</p>' +
+    '<div class="checkscene"><div class="lab">' + esc(S.title) + '</div><p style="margin:0;font-size:18px;line-height:1.6">' + esc(S.text) + '</p></div>' +
+    '<label class="lab" for="pc_' + stage + '">' + esc(CHECK_ASK) + '</label><textarea id="pc_' + stage + '" class="ta grow" rows="4" data-pc="' + stage + '">' + esc(st.text) + '</textarea>' +
+    '<p class="muted" style="margin:0;font-size:14px">Your answer goes to the AI so your two answers can be compared. Leave out real names.</p>' +
+    '<div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center"><button class="btn" data-act="' + (pre ? 'preDone' : 'postDone') + '"' + (ok ? '' : ' disabled') + '>' + (pre ? 'Start the story' : 'Go to your check-in') + '</button><button class="ghost" data-act="pcSkip">Skip the check</button></div></div>';
 }
 async function runCheck(stage) {
   const st = G.pc[stage]; if (!live || !P8_APPROVED || !st.text.trim()) return;
@@ -957,42 +990,44 @@ function compareSection() {
   const col = (stage, label) => { const st = pc[stage], S = CHECKS[pc.order[stage === 'pre' ? 0 : 1]];
     const marks = st.out ? MARKS.map(m => markChip(m[1], String((st.out[m[0]] || {}).status || 'missing').toLowerCase())).join(' ') : '<span class="muted" style="font-size:13px">' + (st.busy ? 'Reading your answer…' : st.err ? 'Could not be read. ' : P8_APPROVED ? '' : 'Marks appear once the designer approves the check.') + '</span>';
     return '<div style="display:flex;flex-direction:column;gap:6px;padding:12px 14px;border:2px solid #1E1B3A;border-radius:14px;background:#fff"><div class="lab">' + label + ' · ' + esc(S.title) + '</div><p style="margin:0;font-style:italic">“' + esc(st.text.trim() || '(no answer)') + '”</p><div style="display:flex;flex-wrap:wrap;gap:6px">' + marks + '</div></div>'; };
-  return '<section class="card" style="gap:12px"><h2 style="margin:0">Day one and now</h2><p class="muted" style="margin:0;font-size:15px">Two similar scenarios, before and after the level. Did your answer name what it protects, what it costs and who pays?</p>' + col('pre', 'Before you started') + col('post', 'After five decisions') + '</section>';
+  return '<section class="card" style="gap:12px"><h2 style="margin:0">Before and after</h2><p class="muted" style="margin:0;font-size:15px">The same scenario, before the story and after it. Did your answer name what it protects, what it costs and who pays?</p><div class="twocol">' + col('pre', 'Before') + col('post', 'After six decisions') + '</div></section>';
 }
-function trailSection() {
-  const T = (G.trail || []), W2 = T.filter(t => t.wrote), picked = T.length - W2.length;
-  if (!W2.length) return '';
-  const cell = s => { const m = MARKC[s] || MARKC.missing; return '<span title="' + m[2] + '" style="display:block;height:16px;border-radius:5px;border:2px solid #1E1B3A;background:' + ({ named: '#10B981', partly: '#FBBF24', missing: '#E5E7EB' }[s] || '#E5E7EB') + '"></span>'; };
-  const tally = k => W2.filter(t => t[k] === 'named').length;
-  return '<section class="card" style="gap:12px"><h2 style="margin:0">Your trade-off trail</h2><p class="muted" style="margin:0;font-size:15px">Only the trade-offs you wrote in your own words' + (picked ? '; ' + picked + ' decision' + (picked > 1 ? 's' : '') + ' where you picked a written option are left out' : '') + '.</p>' +
-    '<div role="table" aria-label="Trade-off trail" style="display:grid;grid-template-columns:110px repeat(3,minmax(0,1fr)) minmax(0,1.3fr);gap:6px 10px;align-items:center;font-size:14px">' +
-    '<span class="lab" role="columnheader">Decision</span>' + MARKS.map(m => '<span class="lab" role="columnheader">' + m[1] + '</span>').join('') + '<span class="lab" role="columnheader">How sure · how it went</span>' +
-    W2.map(t => '<b role="cell">Decision ' + t.n + '</b>' + MARKS.map(m => '<span role="cell" aria-label="' + m[1] + ': ' + (MARKC[t[m[0]]] || MARKC.missing)[2] + '">' + cell(t[m[0]]) + '</span>').join('') + '<span role="cell" class="muted">' + esc(t.conf || '—') + ' · ' + (t.net > 0 ? 'went up' : t.net < 0 ? 'went down' : 'held') + '</span>').join('') + '</div>' +
-    '<div style="display:flex;flex-wrap:wrap;gap:14px;font-size:13px" class="muted"><span><span style="display:inline-block;width:12px;height:12px;border-radius:3px;border:2px solid #1E1B3A;background:#10B981;vertical-align:-1px;margin-right:4px"></span>Named</span><span><span style="display:inline-block;width:12px;height:12px;border-radius:3px;border:2px solid #1E1B3A;background:#FBBF24;vertical-align:-1px;margin-right:4px"></span>Partly</span><span><span style="display:inline-block;width:12px;height:12px;border-radius:3px;border:2px solid #1E1B3A;background:#E5E7EB;vertical-align:-1px;margin-right:4px"></span>Missing</span></div>' +
-    '<p style="margin:0">Across ' + W2.length + ' written trade-off' + (W2.length > 1 ? 's' : '') + ', you named what it protects ' + tally('protects') + ' times, the cost ' + tally('cost') + ' times, and who pays ' + tally('who_pays') + ' times.</p></section>';
+function standingSection() {
+  const start = { team: 6, boss: 6, business: 5, wellbeing: 7 };
+  return '<section class="card" style="gap:12px"><h2 style="margin:0">Where you stand</h2><p class="muted" style="margin:0;font-size:15px">Your four meters after six decisions, and where each one started.</p>' + meterStrip(null).replace('class="meterwrap"', 'class="meterwrap endmeters"') +
+    '<ul style="margin:0;padding-left:20px;font-size:15px">' + METERS.map(m => '<li><b>' + m.label + ':</b> started ' + word(m.key, start[m.key]) + ', now ' + word(m.key, G.meters[m.key]) + '</li>').join('') + '</ul></section>';
+}
+function calSection() {
+  const C = G.cal || []; if (!C.length) return '';
+  const r = calRead();
+  const msg = { over: 'You rated your answers as more complete than they were. Before you send a plan, check that it names what it protects, what it costs and who pays, with a person, a piece of work or a date in each.', under: 'Your answers were more complete than you said. You can trust your read of your own work a little more.', calibrated: 'How complete you said your answers were matched what you wrote. Your read of your own work is accurate.', not_enough: 'Write at least two of your own answers to see how your read compares.' }[r];
+  return '<section class="card" style="gap:10px"><h2 style="margin:0">Your confidence</h2><p class="muted" style="margin:0;font-size:15px">For each answer you wrote: how complete you said it was, and what the checks found.</p>' +
+    C.map(x => '<div class="calrow"><b>Decision ' + x.n + '</b><span><span class="lab">You said</span><br>' + esc(CONF[x.said]) + '</span><span><span class="lab">Checks found</span><br>' + esc(CONF[Math.min(4, Math.floor(x.score / 2))]) + ' <span class="muted">(' + x.named + ' named, ' + x.partly + ' partly, ' + x.missing + ' missing)</span></span></div>').join('') +
+    '<p style="margin:0;font-weight:700">' + msg + '</p></section>';
 }
 function reviewScreen() {
   const rv = G.rv;
-  let h = '<div class="eyebrow">Your five decisions \u00b7 about ' + (function (m) { return m + (m === 1 ? ' minute' : ' minutes'); })(Math.max(1, Math.round(((G.endAt || Date.now()) - (G.runStart || G.endAt || Date.now())) / 60000))) + '</div><h1 style="margin:0;font-size:36px;font-weight:900">Readiness check-in</h1>';
+  let h = '<div class="eyebrow">Your six decisions · about ' + (function (m) { return m + (m === 1 ? ' minute' : ' minutes'); })(Math.max(1, Math.round(((G.endAt || Date.now()) - (G.runStart || G.endAt || Date.now())) / 60000))) + '</div><h1 style="margin:0;font-size:36px;font-weight:900">Readiness check-in</h1>';
   if (!rv.out) {
-    h += '<p class="para">Before Noor\u2019s read, give your own. Short and plain is enough.</p><section class="card"><label class="lab" for="rvbest">What went best?</label><textarea id="rvbest" class="ta grow" rows="2" data-rv="best">' + esc(rv.best) + '</textarea><label class="lab" for="rvback">What kept coming back?</label><textarea id="rvback" class="ta grow" rows="2" data-rv="back">' + esc(rv.back) + '</textarea><div class="lab">Are you ready for the next role, manager of managers?</div><div style="display:flex;gap:8px;flex-wrap:wrap">' + Object.keys(VERDICT).map(k => '<button class="pill2" aria-pressed="' + (rv.call === k) + '" data-rvcall="' + k + '" style="background:' + (rv.call === k ? '#FFE9A8' : '#fff') + '">' + VERDICT[k] + '</button>').join('') + '</div></section>';
+    h += '<p class="para">Before Noor’s read, give your own. Short and plain is enough.</p><section class="card"><label class="lab" for="rvbest">What went best?</label><textarea id="rvbest" class="ta grow" rows="2" data-rv="best">' + esc(rv.best) + '</textarea><label class="lab" for="rvback">What was hard?</label><textarea id="rvback" class="ta grow" rows="2" data-rv="back">' + esc(rv.back) + '</textarea><div class="lab">Are you ready for the next role, manager of managers?</div><div style="display:flex;gap:8px;flex-wrap:wrap">' + Object.keys(VERDICT).map(k => '<button class="pill2" aria-pressed="' + (rv.call === k) + '" data-rvcall="' + k + '" style="background:' + (rv.call === k ? '#FFE9A8' : '#fff') + '">' + VERDICT[k] + '</button>').join('') + '</div></section>';
     if (rv.err) h += '<div class="err">' + esc(rv.err) + callsFold(rv.call7 ? [rv.call7] : null) + '</div>';
-    h += rv.busy ? '<section class="card"><p style="margin:0;font-size:18px;font-weight:800"><span class="spin"></span>Noor is writing your check-in\u2026</p></section>' : '<button class="btn" data-act="runReview" style="align-self:flex-start"' + (rv.call ? '' : ' disabled') + '>See Noor\u2019s check-in</button>';
+    h += rv.busy ? '<section class="card"><p style="margin:0;font-size:18px;font-weight:800"><span class="spin"></span>Noor is writing your check-in…</p></section>' : '<button class="btn" data-act="runReview" style="align-self:flex-start"' + (rv.call ? '' : ' disabled') + '>See Noor’s check-in</button>';
     return h;
   }
   const o = rv.out, sec = (t, b) => b ? '<div style="display:flex;flex-direction:column;gap:2px"><h3 style="margin:0;font-size:17px">' + t + '</h3><p style="margin:0">' + esc(b) + '</p></div>' : '';
-  /* Nov 19 (C2-C6): lead with what happened next, then the verdict and Noor's note, then the details, then what to do next */
+  /* Nov 27 order (Giselle): what happened next, where you stand, Noor's read, what to practice next; then confidence, before and after, and the record */
   h += '<section class="card" style="gap:10px"><span class="chip ai" style="align-self:flex-start">Written by AI</span><h2 style="margin:0">What happened next</h2><p class="para">' + esc(o.story || '') + '</p></section>';
+  h += standingSection();
   h += '<section class="ai" style="gap:14px"><div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center"><span class="lab">Noor’s read</span><span class="tag" style="font-size:16px;background:#FFE9A8">' + VERDICT[rv.verdict] + '</span></div>' +
     '<p class="muted" style="margin:0;font-style:italic;font-size:14px">' + esc(String(o.note_header || '').replace(/\*/g, '')) + '</p>' +
-    sec('What worked', o.worked) + sec('What to work on', o.work_on) + sec('Keep in your toolkit', o.keep) + sec('What you spent', o.spend) + sec('Add to your toolkit', o.add) + sec('Your read and Noor’s', o.calibration) + '</section>';
-  h += trailSection() + sureSection();
-  if ((o.watching || []).length) h += '<section class="card" style="gap:12px"><h2 style="margin:0">What they saw</h2>' + o.watching.map(w => { const who = String(w.who || ''), nm = who.split(/[\s,]/)[0], k = WHO[nm] || (/team/i.test(who) ? 'team' : 'peer'); return '<div style="display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 12px;align-items:start;padding-top:10px;border-top:1px solid #E5DCC4"><div style="grid-row:span 2">' + (WHO[nm] ? av(nm) : '<span class="av" style="background:' + ROLE[k][0] + '">' + esc(who.charAt(0)) + '</span>') + '</div><div><b>' + esc(who) + '</b> <span class="rolechip" style="color:' + ROLE[k][1] + ';border-color:' + ROLE[k][1] + ';background:' + ROLE[k][0] + '">' + ROLE[k][2] + '</span></div><div style="display:flex;flex-direction:column;gap:2px;font-size:15px"><div><span class="lab">Watched for</span> ' + esc(w.cared || '') + '</div><div><span class="lab">Saw</span> ' + esc(w.saw || '') + '</div></div></div>'; }).join('') + '</section>';
-  if ((o.grow || []).length) h += '<section class="card" style="gap:8px"><h2 style="margin:0">What to practice next</h2>' + o.grow.map(g => '<div><b>' + esc(g.skill || '') + '.</b> ' + esc(g.why || '') + '</div>').join('') + '</section>';
+    sec('What worked', o.worked) + sec('What to work on', o.work_on) + sec('Keep in your toolkit', o.keep) + sec('What you spent', o.spend) + sec('Add to your toolkit', o.add) + sec('Your read and Noor’s', o.calibration);
+  if ((o.watching || []).length) h += '<h3 style="margin:0;font-size:17px">What they saw</h3><ul style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px">' + o.watching.map(w => '<li><b>' + esc(w.who || '') + '</b> watched for ' + esc(String(w.cared || '').replace(/^./, ch => ch.toLowerCase()).replace(/\.$/, '')) + '. <span class="muted">Saw:</span> ' + esc(w.saw || '') + '</li>').join('') + '</ul>';
+  h += '</section>';
+  if ((o.grow || []).length) h += '<section class="card" style="gap:8px"><h2 style="margin:0">What to practice next</h2><ul style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px">' + o.grow.map(g => '<li><b>' + esc(String(g.skill || '').replace(/^./, ch => ch.toUpperCase())) + ':</b> ' + esc(g.why || '') + '</li>').join('') + '</ul></section>';
+  h += calSection() + compareSection();
   const A = G.ans || [];
-  h += '<details class="card"><summary style="cursor:pointer;font-weight:900;font-size:18px">Review your answers</summary>' + (A.length ? A.map(a => '<div style="display:flex;flex-direction:column;gap:4px;padding-top:10px;border-top:1px solid #E5DCC4;font-size:15px"><b>Decision ' + a.n + ' · ' + esc(a.skill) + '</b><div><span class="lab">Plan</span> ' + esc(a.plan) + '</div>' + (a.trade ? '<div><span class="lab">Trade-off</span> ' + esc(a.trade) + '</div>' : '') + (a.opening ? '<div><span class="lab">First words</span> “' + esc(a.opening) + '”</div>' : '') + '<div class="muted">How sure: ' + esc(a.conf) + ' · ' + METERS.map(m => m.label + ' ' + dw(a.moves[m.key] || 0).toLowerCase()).join(', ') + '</div></div>').join('') : '<p class="muted" style="margin:0">No answers recorded.</p>') + '</details>';
+  h += '<details class="card"><summary style="cursor:pointer;font-weight:900;font-size:18px">Review your answers</summary>' + (A.length ? A.map(a => '<div style="display:flex;flex-direction:column;gap:4px;padding-top:10px;border-top:1px solid #E5DCC4;font-size:15px"><b>Decision ' + a.n + '</b><div><span class="lab">Plan</span> ' + esc(a.plan) + '</div>' + (a.trade ? '<div><span class="lab">Trade-off</span> ' + esc(a.trade) + '</div>' : '') + (a.opening ? '<div><span class="lab">First words</span> “' + esc(a.opening) + '”</div>' : '') + '<div class="muted">' + (a.conf ? 'You said: ' + esc(a.conf) + ' · ' : '') + METERS.map(m => m.label + ' ' + dw(a.moves[m.key] || 0).toLowerCase()).join(', ') + '</div></div>').join('') : '<p class="muted" style="margin:0">No answers recorded.</p>') + '</details>';
   h += '<details class="card"><summary style="cursor:pointer;font-weight:900;font-size:18px">Read the full story</summary>' + (G.log || []).map(e => '<div style="padding-top:8px;border-top:1px solid #E5DCC4"><div class="lab">' + esc(e.label) + '</div><p style="margin:2px 0 0;white-space:pre-line">' + esc(e.text) + '</p></div>').join('') + '</details>';
-  h += postBlock();
   h += '<section class="card" style="gap:12px"><h2 style="margin:0">What next?</h2><div style="display:flex;flex-wrap:wrap;gap:10px"><button class="btn" data-act="playAgain">Play again</button><a class="btn2" href="#home">Home</a><button class="btn2" data-act="snapCopy">' + (G.snapDone ? 'Copied' : 'Copy a snapshot') + '</button></div><p class="muted" style="margin:0;font-size:14px">The snapshot copies your story, Noor’s read and your answers as text, ready to paste anywhere.</p></section>';
   h += callsFold(rv.call7 ? [rv.call7] : null);
   return h;
@@ -1000,15 +1035,10 @@ function reviewScreen() {
 function snapshotText() {
   const o = (G.rv && G.rv.out) || {}, A = G.ans || [];
   return ['The Leadership Game V4 · Readiness check-in', 'Noor’s read: ' + VERDICT[G.rv.verdict], '', 'What happened next', o.story || '', '', 'What worked: ' + (o.worked || ''), 'What to work on: ' + (o.work_on || ''), 'Keep: ' + (o.keep || ''), 'Add: ' + (o.add || ''), '', 'Your answers']
-    .concat(A.map(a => 'Decision ' + a.n + ' (' + a.skill + '): ' + a.plan + (a.trade ? ' | Trade-off: ' + a.trade : '') + (a.opening ? ' | First words: ' + a.opening : '') + ' | How sure: ' + a.conf))
+    .concat(A.map(a => 'Decision ' + a.n + ' (' + a.skill + '): ' + a.plan + (a.trade ? ' | Trade-off: ' + a.trade : '') + (a.opening ? ' | First words: ' + a.opening : '') + (a.conf ? ' | You said: ' + a.conf : '')))
     .concat(G.pc.skipped ? [] : ['', 'Quick check, before: ' + G.pc.pre.text.trim(), 'Quick check, after: ' + G.pc.post.text.trim()])
-    .concat(['', 'Trade-off trail (written by you): ' + (G.trail || []).filter(t => t.wrote).map(t => 'D' + t.n + ' protects ' + t.protects + ', cost ' + t.cost + ', who pays ' + t.who_pays).join('; ')])
+    .concat(['', 'Confidence: ' + CALREAD[calRead()]])
     .concat(['', 'The full story']).concat((G.log || []).map(e => e.label + ': ' + e.text)).join('\n');
-}
-function calLine(c, t) {
-  let r = String(t || '').trim().replace(/^did it work out\?\s*/i, '').replace(/^you said [^,]*,\s*(and\s*)?/i, '');
-  r = r.replace(/^./, ch => ch.toLowerCase());
-  return 'Did it work out? You said ' + CONF[c.conf].toLowerCase() + ', and ' + r;
 }
 const toTop = () => { try { window.scrollTo(0, 0); } catch (e) {} };
 
@@ -1040,12 +1070,18 @@ function callsFold(calls, label) {
 function leftPanel() {
   const slot = G.dec[G.n], D = slot && slot.D;
   let h = '';
-  h += '<div class="tabs" role="tablist">' + [['team', 'Team'], ['story', 'Story']].map(t => '<button class="tabb" role="tab" aria-selected="' + (G.tab === t[0]) + '" data-tab="' + t[0] + '" style="background:' + (G.tab === t[0] ? '#FFE9A8' : '#fff') + '">' + t[1] + '</button>').join('') + '</div>';
+  h += '<div class="tabs" role="tablist">' + [['team', 'Team'], ['scene', 'Scene'], ['asked', 'Questions'], ['story', 'Story']].map(t => '<button class="tabb" role="tab" aria-selected="' + (G.tab === t[0]) + '" data-tab="' + t[0] + '" style="background:' + (G.tab === t[0] ? '#FFE9A8' : '#fff') + '">' + t[1] + '</button>').join('') + '</div>';
   if (G.tab === 'team') {
     const C = W.world.cast;
     const line = (n, k, label, role) => '<div style="display:flex;gap:8px;align-items:center">' + av(n) + '<b>' + esc(n) + '</b>' + (label ? '<span class="rolechip" style="color:' + ROLE[k][1] + ';border-color:' + ROLE[k][1] + ';background:' + ROLE[k][0] + '">' + label + '</span>' : '') + '<span class="muted" style="font-size:12px">' + esc(role) + '</span></div>';
     h += '<div class="panel teamp"><div><b>Tidewell</b> <span class="muted">\u00b7 you run Customer Support</span></div>' + line('Noor', 'boss', 'Boss', 'Director, CX') + line('Teo', 'peer', 'Peer', 'Customer Success') + line('Cleo', 'you', 'You', 'Support manager') + '<div class="lab" style="color:' + ROLE.team[1] + ';margin-top:4px">Your team</div>' + ['Remi', 'Jan', 'Ravi'].map(n => '<div class="who">' + line(n, 'team', '', WHO_T[n][0]) + '<div><b>Strength:</b> ' + esc(WHO_T[n][1]) + '</div><div><b>Watch:</b> ' + esc(WHO_T[n][2]) + '</div></div>').join('') +
       '<button class="btn2" data-act="whoModal" style="min-height:40px;font-size:14px;margin-top:4px">Who\u2019s who</button></div>';
+  } else if (G.tab === 'scene') {
+    if (!D) h += '<div class="panel"><p style="margin:0;font-size:14px">' + esc(PREMISE) + '</p></div>';
+    else { const kp = Array.isArray(D.raw.key_points) ? D.raw.key_points.map(String).filter(Boolean).slice(0, 4) : []; h += '<div class="panel scrollp">' + (kp.length ? '<div class="lab">The scene, in short</div><ul style="margin:0;padding-left:18px;display:flex;flex-direction:column;gap:4px;font-size:14px">' + kp.map(x => '<li>' + esc(x) + '</li>').join('') + '</ul>' : '') + '<div class="lab">The full scene</div>' + D.brief.map(x => '<p style="margin:0;font-size:14px">' + esc(x) + '</p>').join('') + '</div>'; }
+  } else if (G.tab === 'asked') {
+    const c = G.cur;
+    h += '<div class="panel scrollp">' + (D && c && c.asked.length ? c.asked.map(i => '<div style="display:flex;gap:8px">' + av(D.questions[i].to) + '<div><span class="lab" style="font-size:11px">' + esc(D.questions[i].to) + '</span><div style="font-size:14px;font-weight:700">' + esc(D.questions[i].q) + '</div><p style="margin:2px 0 0;font-size:14px">“' + esc(D.questions[i].a) + '”</p></div></div>').join('') : '<p class="muted" style="margin:0">The answers to your two questions collect here.</p>') + '</div>';
   } else if (G.tab === 'story') {
     h += '<div class="panel scrollp"><div><span class="lab" style="font-size:11px">The premise</span><p style="margin:2px 0 0;font-size:14px">' + esc(PREMISE) + '</p></div>' + G.log.map(l => '<div style="border-top:1px solid #CFC3A5;padding-top:6px"><span class="lab" style="font-size:11px">' + esc(l.label) + '</span><p style="margin:2px 0 0;font-size:14px;white-space:pre-wrap">' + esc(l.text) + '</p></div>').join('') + '</div>';
   } else {
@@ -1097,12 +1133,18 @@ function skillModal() {
     '<a href="#skills" data-goskill="' + sid + '" style="font-weight:800;color:#5B3DF5">See the full skill card</a></div></div>';
 }
 function rightPanel() {
-  const slot = G.dec[G.n], D = slot && slot.D, c = G.cur;
-  if (!D || !c) return '<div class="panel"><div class="lab">Where you are</div><p style="margin:0;font-size:14px">' + esc(PREMISE) + '</p></div>';
-  let h = '';
-  if (G.phase !== 'scene') { const kp = Array.isArray(D.raw.key_points) ? D.raw.key_points.map(String).filter(Boolean).slice(0, 4) : []; const pts = kp.length ? kp : D.brief.map(p => (String(p).match(/^[^.!?]*[.!?]/) || [p])[0].trim()); h += '<div class="panel"><div class="lab">The scene, in short</div><ul style="margin:0;padding-left:18px;display:flex;flex-direction:column;gap:4px">' + pts.map(p => '<li>' + esc(p) + '</li>').join('') + '</ul><details' + (G.n >= 2 && G.phase === 'decide' ? ' open' : '') + '><summary>Read the full scene</summary>' + D.brief.map(p => '<p style="margin:6px 0 0">' + esc(p) + '</p>').join('') + '</details></div>'; }
-  h += '<div class="panel"><div class="lab">What you asked about</div>' + (c.asked.length ? c.asked.map(i => '<div style="display:flex;gap:8px">' + av(D.questions[i].to) + '<div><span class="lab" style="font-size:11px">' + esc(D.questions[i].to) + '</span><p style="margin:2px 0 0">“' + esc(D.questions[i].a) + '”</p></div></div>').join('') : '<p class="muted" style="margin:0">Answers to your questions will collect here.</p>') + '</div>';
-  return h;
+  const slot = G.dec[G.n], D = slot && slot.D, c = G.cur, wr = stageWrites(G.n);
+  const tab = ['plan', 'tradeoff', 'delivery'].includes(G.help.tab) ? G.help.tab : (wr[0] || 'plan'), t = HELP[tab];
+  const list = (a) => '<ul style="margin:0;padding-left:18px;display:flex;flex-direction:column;gap:4px;font-size:14px">' + a.map(x => '<li>' + esc(x) + '</li>').join('') + '</ul>';
+  const writes = wr.includes(tab), advKey = { plan: 'advP', tradeoff: 'advT', delivery: 'advO' }[tab];
+  const A = D && c && G.phase === 'decide' && writes ? { plan: D.adviceP, tradeoff: D.adviceT, delivery: D.adviceO }[tab] : null;
+  if (A && c) c[advKey] = true; /* the judge is told which advice the player could see */
+  const start = A && A.start ? String(A.start).replace(/[\s.…]+$/, '') : '';
+  return '<div class="panel helpp" aria-label="Help"><div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><div class="lab">Help</div><a href="#guide" style="font-size:13px;font-weight:800;color:#5B3DF5">Full guide</a></div>' +
+    '<div class="helptabs" role="tablist">' + [['plan', 'Plan'], ['tradeoff', 'Tradeoff'], ['delivery', 'Delivery']].map(x => '<button class="pill2" role="tab" aria-selected="' + (tab === x[0]) + '" data-htab="' + x[0] + '" style="background:' + (tab === x[0] ? '#FFE9A8' : '#fff') + '">' + x[1] + '</button>').join('') + '</div>' +
+    (writes ? '<span class="tag" style="align-self:flex-start;background:#CCFBF1">You write this part</span>' : '') +
+    '<div class="lab">What good looks like</div>' + list(t.good) + '<div class="lab">Sentence frames</div>' + list(t.frames) +
+    (A ? '<div class="advice"><span class="lab">A manager you trust would ask</span><b>' + esc(A.question || '') + '</b>' + (start ? '<span>“' + esc(start) + '…”</span>' : '') + '</div>' : '') + '</div>';
 }
 function stepPips() {
   const order = ['scene', 'decide', 'debrief'], idx = G.phase === 'committing' ? 2 : (G.phase === 'optwait' || G.phase === 'opterr') ? 1 : order.indexOf(G.phase);
@@ -1111,26 +1153,9 @@ function stepPips() {
 
 /* ---------- V4: stages, task card, help drawer ---------- */
 const STG = {
-  1: ['You pick', 'Pick a plan and how to say it. Each plan shows what it protects and what it costs.'],
-  2: ['New: you write the tradeoff', 'Pick a plan, then say in your own words what it protects, what it costs and who pays.'],
-  3: ['New: you write your first words too', 'Pick a plan, write the tradeoff, then write what you would say to the person.'],
-  4: ['New: you write it all', 'Write your plan, the tradeoff and your first words. Help has examples when you want them.'],
-  5: ['You write it all', 'Same as the last decision. Help is there if you want it.'] };
-const stageWrites = (n) => n === 1 ? [] : n === 2 ? ['tradeoff'] : n === 3 ? ['tradeoff', 'delivery'] : ['plan', 'tradeoff', 'delivery'];
+  1: ['You pick', ''], 2: ['You pick', ''], 3: ['You write the tradeoff', ''], 4: ['You write the tradeoff and first words', ''], 5: ['You write it all', ''], 6: ['You write it all', ''] };
+const stageWrites = (n) => n <= 2 ? [] : n === 3 ? ['tradeoff'] : n === 4 ? ['tradeoff', 'delivery'] : ['plan', 'tradeoff', 'delivery'];
 const helpDefault = (n) => n === 2 ? 'tradeoff' : n === 3 ? 'delivery' : n >= 4 ? 'plan' : 'why';
-function stageBanner() {
-  const t = STG[G.n]; if (!t) return '';
-  return '<div class="card" style="background:#FFE9A8;gap:4px"><div class="lab">' + esc(t[0]) + '</div><div>' + esc(t[1]) + '</div></div>';
-}
-function taskCard() {
-  const n = G.n;
-  const L = n === 1 ? ['Pick a plan. Each one shows what it protects, what it costs and who pays.', 'Say how sure you are.', 'Pick how to say it.']
-    : n === 2 ? ['Pick a plan.', 'Write the tradeoff: what it protects, what it costs and who pays.', 'Say how sure you are, then pick how to say it.']
-    : n === 3 ? ['Pick a plan.', 'Write the tradeoff: what it protects, what it costs and who pays.', 'Say how sure you are, then write your first words.']
-    : ['Write your plan: what you will do, who does it and by when.', 'Write the tradeoff: what it protects, what it costs and who pays.', 'Say how sure you are, then write your first words.'];
-  return '<section class="card" style="background:#F1ECFF;gap:6px"><div class="lab" style="color:#3A24B8">Your task</div><ol style="margin:0;padding-left:22px;display:flex;flex-direction:column;gap:2px">' + L.map(x => '<li>' + esc(x) + '</li>').join('') + '</ol></section>';
-}
-const helpBtn = (tab) => '<button class="ghost" data-help="' + tab + '">See what good looks like</button>';
 const HELP = {
   why: { paras: [
     'There is no right choice. There are only tradeoffs. Every choice protects something and costs something.',
@@ -1151,50 +1176,13 @@ const HELP = {
     donts: ['Announce the decision without asking anything.', 'Put the cost at the end, where it is easy to miss.', 'Apologize so much that the decision sounds unsure.'],
     frames: ['I decided ___.', 'This means ___ for you.', 'What do you need from me? I will check in on ___.'],
     ex: { scene: 'The same bakery. You are talking to Ana.', text: 'Ana, I decided that you and Luis will make the wedding order, and we will pause the café specials until Saturday. That means longer days for you this week. What do you need from me to make it work? I will check in on Thursday.' } } };
-function helpHTML() {
-  const hp = G.help, n = G.n, wr = stageWrites(n);
-  if (!hp.open) return '<button class="helpfab" data-hopen="1" aria-label="Open help with plan, tradeoff and delivery">Help</button>';
-  const tabs = [['why', 'Why'], ['plan', 'Plan'], ['tradeoff', 'Tradeoff'], ['delivery', 'Delivery']];
-  const t = HELP[hp.tab] || HELP.why;
-  const list = (a) => '<ul style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px">' + a.map(x => '<li>' + esc(x) + '</li>').join('') + '</ul>';
-  let b;
-  if (hp.tab === 'why') b = t.paras.map(p => '<p style="margin:0">' + esc(p) + '</p>').join('');
-  else {
-    const open = wr.includes(hp.tab) && n <= 3;
-    b = '<div class="lab">What good looks like</div>' + list(t.good) +
-      '<div class="lab" style="color:#0E7A4D">Do</div>' + list(t.dos) + '<div class="lab" style="color:#B42318">Don’t</div>' + list(t.donts) +
-      '<details' + (open ? ' open' : '') + '><summary>Sentence frames</summary>' + list(t.frames) + '</details>' +
-      '<details' + (open ? ' open' : '') + '><summary>A worked example, in a different workplace</summary><p style="margin:6px 0 4px">' + esc(t.ex.scene) + '</p><p class="exbox">' + esc(t.ex.text) + '</p></details>' +
-      (n >= 4 ? '<p class="muted" style="margin:0;font-size:14px">Frames and the example are closed now. Open them if you need them.</p>' : '');
-  }
-  return '<aside class="helpd" role="dialog" aria-label="Help"><header><b style="font-size:18px">Help</b><button class="ghost" data-hclose="1">Close</button></header><div class="helptabs" role="tablist">' +
-    tabs.map(x => '<button class="pill2" role="tab" aria-selected="' + (hp.tab === x[0]) + '" aria-pressed="' + (hp.tab === x[0]) + '" data-htab="' + x[0] + '" style="background:' + (hp.tab === x[0] ? '#FFE9A8' : '#fff') + '">' + x[1] + '</button>').join('') +
-    '</div><div class="helpbody">' + (hp.tab !== 'why' && wr.includes(hp.tab) ? '<div class="tag" style="align-self:flex-start;background:#CCFBF1">You write this part now</div>' : '') + b +
-    '<p class="muted" style="margin:0;font-size:13px">Your answers stay where they are. Press Escape or Close to go back.</p></div></aside>';
-}
-function renderHelp() {
-  const el = $('help'); if (!el) return;
-  const showing = !!W && ['scene', 'optwait', 'decide', 'debrief'].includes(G.phase);
-  el.innerHTML = showing ? helpHTML() : '';
-  try { document.body.classList.toggle('helpopen', showing && !!G.help.open); } catch (e) {}
-  el.querySelectorAll('[data-hopen]').forEach(b => b.onclick = () => { G.help.open = true; if (!G.help.tab) G.help.tab = helpDefault(G.n); renderHelp(); });
-  el.querySelectorAll('[data-hclose]').forEach(b => b.onclick = () => { G.help.open = false; renderHelp(); });
-  el.querySelectorAll('[data-htab]').forEach(b => b.onclick = () => { G.help.tab = b.dataset.htab; renderHelp(); });
-}
-function openHelp(tab) { G.help.open = true; G.help.tab = tab || helpDefault(G.n); renderHelp(); }
-function autoHelp() {
-  if (G.phase !== 'decide') return;
-  const n = G.n; if (n < 2 || n > 4 || G.help.auto[n]) return;
-  G.help.auto[n] = 1; G.help.open = true; G.help.tab = helpDefault(n);
-}
+function openHelp(tab) { G.help.tab = tab; render(); }
 function howScreen() {
   const row = (a, b) => '<div style="display:flex;gap:12px;align-items:baseline"><b style="flex:none;min-width:64px">' + a + '</b><span>' + b + '</span></div>';
   return '<div class="story"><div class="eyebrow">The Leadership Game V4</div><h1 style="margin:0;font-size:36px;font-weight:900">Practice the tradeoff</h1>' +
-    '<p class="para">You are a first-time manager. In five decisions, you choose what to do, say what it protects and what it costs, and practice how to say it to the person. It takes about 40 minutes.</p>' +
+    '<p class="para">You are a first-time manager. In six decisions, you choose what to do, say what it protects and what it costs, and practice how to say it to the person. It takes about 45 minutes.</p>' +
     (PROMPTS_APPROVED ? '' : '<div class="since" role="note" style="border-left-color:#B45309"><span class="ico" aria-hidden="true" style="background:#B45309">!</span><div><b>Designer note</b> · The V4 prompt batch is waiting for your review. Read it before you play.</div></div>') +
     '<section class="card" style="background:#F1ECFF"><div class="lab" style="color:#3A24B8">There is no right choice</div><p style="margin:0">Every choice protects something and costs something. The game helps you see both, choose on purpose, and say so.</p></section>' +
-    '<section class="card"><div class="lab">How the five decisions work</div>' + row('1', 'You pick a plan and how to say it.') + row('2', 'You pick a plan, then write the tradeoff.') + row('3', 'You write the tradeoff and your first words.') + row('4 and 5', 'You write all three: the plan, the tradeoff and your first words.') +
-    '<p class="muted" style="margin:0;font-size:15px">Each decision starts with two questions, so you know more before you choose. Help opens on top of your decision at any time, so you never lose your place.</p></section>' +
     '<div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center"><button class="btn" data-act="howDone">Start with a 2-minute warm-up</button></div>' +
     '<p class="muted" style="margin:0;font-size:14px">What you type is sent to an AI so it can respond to you. Leave out real names.</p></div>';
 }
@@ -1203,18 +1191,10 @@ function debriefLines(D, c, N, o) {
   const rows = [['Plan', N.plan_line], ['Tradeoff', N.tradeoff_line], ['Delivery', N.delivery_line]];
   let h = '<h2 style="margin:6px 0 0;font-size:19px">What you did</h2>';
   if (!rows.some(r => r[1])) return h + '<p style="margin:0">' + esc(N.reasoning_note || '') + '</p>';
-  h += rows.map(r => r[1] ? '<div><span class="lab">' + r[0] + '</span><p style="margin:2px 0 0">' + esc(r[1]) + '</p></div>' : '').join('');
-  if (M.planPick && !M.tradePick && o) h += '<div class="muted" style="font-size:14px;padding:8px 12px;border-radius:10px;background:#F7F1DF"><b>For comparison, the written option said:</b> protects ' + esc(o.tp) + ' Costs ' + esc(o.tc) + ' Who pays: ' + esc(o.tw) + '</div>';
+  const split = (t) => { const x = String(t || ''), i = x.search(/another way:/i); return i < 0 ? [x.trim(), ''] : [x.slice(0, i).trim(), x.slice(i).replace(/^another way:\s*/i, '').trim()]; };
+  h += '<ul class="didlist">' + rows.filter(r => r[1]).map(r => { const pr = split(r[1]); return '<li><b>' + r[0] + ':</b> ' + esc(pr[0]) + (pr[1] ? '<ul><li><i>Another way:</i> ' + esc(pr[1]) + '</li></ul>' : '') + '</li>'; }).join('') + '</ul>';
+  if (M.planPick && !M.tradePick && o) h += '<div class="compare"><b>For comparison, the written option’s trade-off:</b><ul><li><b>Protects:</b> ' + esc(o.tp) + '</li><li><b>Costs:</b> ' + esc(o.tc) + '</li><li><b>Who pays:</b> ' + esc(o.tw) + '</li></ul></div>';
   return h;
-}
-function sureSection() {
-  const T = G.sum || []; if (!T.length) return '';
-  return '<section class="card" style="gap:10px"><h2 style="margin:0">How sure you were</h2><p class="muted" style="margin:0;font-size:15px">How sure you said you were, and what happened.</p>' + T.map(t => '<div style="font-size:15px;padding-top:8px;border-top:1px solid #E5DCC4"><b>Decision ' + t.n + '</b> · ' + esc(t.how_it_turned_out) + '</div>').join('') + '</section>';
-}
-function postBlock() {
-  if (G.pc.skipped) return '';
-  if (G.pc.post.done) return compareSection();
-  return '<div style="border-top:3px dashed #1E1B3A;padding-top:18px;display:flex;flex-direction:column;gap:14px">' + checkScreen('post') + '</div>';
 }
 function header() {
   const st = STG[G.n] ? STG[G.n][0].replace('New: ', '') : '';
@@ -1224,6 +1204,7 @@ function main() {
   const p = G.phase;
   if (p === 'how') return howScreen();
   if (p === 'pre') return checkScreen('pre');
+  if (p === 'post') return checkScreen('post');
   if (p === 'intro') {
     const c = INTRO[G.introI];
     return '<div class="story"><div class="eyebrow">' + esc(c.e) + '</div><h1 style="margin:0;font-size:34px;font-weight:900">' + esc(c.t) + '</h1>' + c.p.map(x => '<p class="para">' + esc(x) + '</p>').join('') +
@@ -1245,17 +1226,16 @@ function main() {
   if (p === 'loading') return header() + '<div class="card"><p style="margin:0"><span class="spin"></span>' + esc(G.busy) + '</p><p class="muted" style="margin:0;font-size:14px">The scenario builder is writing decision ' + G.n + ' from your story so far.</p><p class="muted" style="margin:0;font-size:13px" id="prog"></p></div>';
   if (p === 'loaderr') return header() + '<div class="err">' + esc(G.err) + ' <button class="ghost" data-act="retryLoad">Try again</button>' + callsFold(G.errCalls) + '</div>';
   if (p === 'review') return reviewScreen();
-  if (p === 'end') return '<div class="eyebrow">Your five decisions</div><h1 style="margin:0;font-size:36px;font-weight:900">Five decisions</h1><p class="para">Your story log is in the left panel. The readiness check-in is next; in this build it is a design mock on the canvas.</p>';
+  if (p === 'end') return '<div class="eyebrow">Your six decisions</div><h1 style="margin:0;font-size:36px;font-weight:900">Six decisions</h1><p class="para">Your story log is in the left panel. The readiness check-in is next; in this build it is a design mock on the canvas.</p>';
   const D = G.dec[G.n].D, c = G.cur, b = band(G.n);
   let h = header();
   if (p === 'scene') {
     if (D.sinceLast && D.sinceLast.applied) { const sl = D.sinceLast, m = METERS.find(x => x.key === sl.key); h += '<div class="since" role="note" style="border-left-color:' + m.color + '"><span class="ico" aria-hidden="true" style="background:' + m.color + '">!</span><div><b>Since last time</b> \u00b7 ' + m.label + ' ' + dw(sl.applied).toLowerCase() + ', now ' + word(sl.key, G.meters[sl.key]) + '. ' + esc(sl.reason) + '</div></div>'; }
-    h += stageBanner();
     h += D.brief.map(x => '<p class="para">' + esc(x) + '</p>').join('');
-    h += '<section class="card"><h2>Ask two questions' + info('ask') + '</h2>' + newNote('ask') + '<p class="muted" style="margin:0;font-size:15px">Pick two questions before you decide. ' + (c.asked.length < 2 ? 'Pick ' + (2 - c.asked.length) + ' more.' : 'You have your answers.') + '</p>';
+    h += '<section class="card"><h2>Ask two questions</h2><p class="muted" style="margin:0;font-size:15px">Pick two questions before you decide. ' + (c.asked.length < 2 ? 'Pick ' + (2 - c.asked.length) + ' more.' : 'You have your answers.') + '</p>';
     D.questions.forEach((q, i) => { const on = c.asked.includes(i), dim = c.asked.length >= 2 && !on;
       h += '<button class="opt' + (on ? ' on' : '') + (dim ? ' dim' : '') + '" data-ask="' + i + '"' + (on || dim ? ' disabled' : '') + '>' + av(q.to) + '<span><span class="lab" style="font-size:12px">' + esc(q.to) + '</span><br>' + esc(q.q) + '</span></button>' + (on ? '<p class="answer">“' + esc(q.a) + '”</p>' : ''); });
-    h += '</section><button class="btn" data-act="toDecide"' + (c.asked.length < 2 ? ' disabled' : '') + ' style="align-self:flex-start">Ready to decide</button>';
+    h += '</section><button class="btn" data-act="toDecide"' + (c.asked.length < 2 ? ' disabled' : '') + ' style="align-self:flex-start">Next: form your decision</button>';
     return h;
   }
   if (p === 'optwait') return h + '<section class="card"><p style="margin:0;font-size:18px;font-weight:800"><span class="spin"></span>Writing your choices…</p><p class="muted" style="margin:0;font-size:15px">The decision builder is writing your options from this scene and what you asked.</p><p class="muted" style="margin:0;font-size:13px" id="prog"></p></section>';
@@ -1268,39 +1248,36 @@ function main() {
     let sec = 1;
     const mix = false, M = modes(c, b);
     const tog = (k, label) => '<div class="modes" role="group" aria-label="' + label + '"><button class="pill2" aria-pressed="' + (c[k] === 'pick') + '" data-mode="' + k + ':pick"' + lock + '>Use an option</button><button class="pill2" aria-pressed="' + (c[k] === 'write') + '" data-mode="' + k + ':write"' + lock + '>Write my own</button></div>';
-    const adv = (key, A) => A ? '<button class="ghost" data-act="' + key + '">' + (c[key] ? 'Hide the advice' : 'Stuck? See what other managers would ask') + '</button>' + (c[key] ? '<div class="advice"><b>' + esc(A.question || '') + '</b><span>“' + esc(A.start || '') + '…”</span></div>' : '') : '';
-    h += taskCard() + '<section class="card"><h2>' + (sec++) + '. Your plan' + info('plan') + '</h2>';
+    h += '<section class="card"><h2>' + (sec++) + '. Your plan</h2>';
     if (M.planPick) {
       h += '<div role="radiogroup" aria-label="Plans" style="display:flex;flex-direction:column;gap:8px">';
-      D.options.forEach((o, i) => { h += '<button class="opt' + (c.pick === i ? ' on' : '') + '" role="radio" aria-checked="' + (c.pick === i) + '" data-pick="' + i + '"' + lock + '><span class="letter">' + 'ABCDEF'[i] + '</span><span>' + esc(o.text) + (b === 'options' ? '<span class="trd"><b>Protects:</b> ' + esc(o.tp) + '</span><span class="trd"><b>Costs:</b> ' + esc(o.tc) + '</span><span class="trd"><b>Who pays:</b> ' + esc(o.tw) + '</span>' : '') + '</span></button>'; });
+      D.options.forEach((o, i) => { h += '<button class="opt' + (c.pick === i ? ' on' : '') + '" role="radio" aria-checked="' + (c.pick === i) + '" data-pick="' + i + '"' + lock + '><span class="letter">' + 'ABCDEF'[i] + '</span><span>' + esc(o.text) + '</span></button>' + (b === 'options' ? '<ul class="tradebox" aria-label="Trade-off for option ' + 'ABCDEF'[i] + '"><li><b>Protects:</b> ' + esc(o.tp) + '</li><li><b>Costs:</b> ' + esc(o.tc) + '</li><li><b>Who pays:</b> ' + esc(o.tw) + '</li></ul>' : ''); });
       h += '</div>';
     } else {
-      h += '<label class="lab" for="plan">What you will do</label><textarea id="plan" class="ta grow" rows="3" data-f="plan"' + lock + '>' + esc(c.plan) + '</textarea>' + adv('advP', D.adviceP) + helpBtn('plan');
+      h += '<label class="lab" for="plan">What you will do</label><textarea id="plan" class="ta grow" rows="3" data-f="plan"' + lock + '>' + esc(c.plan) + '</textarea>';
     }
     h += '</section>';
     const po = M.planPick && c.pick !== null ? D.options[c.pick] : null;
-    h += '<section class="card"><h2>' + (sec++) + '. The trade-off' + info('trade') + '</h2>';
-    if (M.tradePick) {
-      h += po ? '<div style="display:flex;flex-direction:column;gap:6px;font-size:16px"><div><b>What it protects:</b> ' + esc(po.tp) + '</div><div><b>What it costs:</b> ' + esc(po.tc) + '</div><div><b>Who pays:</b> ' + esc(po.tw) + '</div></div>' : '<p class="muted" style="margin:0">Pick a plan to see what it protects, what it costs and who pays.</p>';
-    } else {
+    if (!M.tradePick) {
+      h += '<section class="card"><h2>' + (sec++) + '. The trade-off</h2>';
       if (mix && !M.planPick) h += '<p class="muted" style="margin:0;font-size:14px">You wrote your own plan, so the trade-off and how you share it are yours too.</p>';
       if (b === 'text') h += '<label class="lab" for="tt">What it protects, what it costs, and who pays</label><textarea id="tt" class="ta grow" rows="2" data-f="tt"' + lock + '>' + esc(c.tt) + '</textarea>';
       else [['tp', 'What it protects', 'This plan protects…'], ['tc', 'What it costs', 'It costs…'], ['tw', 'Who pays', '… pays for it.']].forEach(f => { h += '<label class="lab" for="' + f[0] + '">' + f[1] + '</label><textarea id="' + f[0] + '" class="field grow" rows="1" data-f="' + f[0] + '" placeholder="' + f[2] + '"' + lock + '>' + esc(c[f[0]]) + '</textarea>'; });
-      h += adv('advT', D.adviceT) + helpBtn('tradeoff');
+      h += '</section>';
     }
-    h += '</section>';
-    h += '<section class="card"><h2>' + (sec++) + '. How likely is it to work?' + info('conf') + '</h2><div style="display:flex;flex-wrap:wrap;gap:8px">' + CONF.map((l, i) => '<button class="pill2" aria-pressed="' + (c.conf === i) + '" data-conf="' + i + '" style="background:' + (c.conf === i ? '#FFE9A8' : '#fff') + '"' + lock + '>' + l + '</button>').join('') + '</div></section>';
-    h += '<section class="card"><h2>' + (sec++) + '. Share your choice' + info('open') + '</h2><p style="margin:0">' + esc(toWho(D, c) && toWho(D, c) !== D.send.to ? 'You’ve decided. What do you say or send to ' + toWho(D, c) + '?' : (D.send.prompt || ('You’ve decided. What do you say or send to ' + (D.send.to || 'them') + '?'))) + '</p>';
+    const who = toWho(D, c) || D.send.to || 'the person you start with';
+    h += '<section class="card"><h2>' + (sec++) + '. Share your choice</h2><p style="margin:0">Practice how you’ll deliver your choice to ' + esc(who) + '. ' + (M.openPick ? 'Pick the first words you would say or send.' : 'Write the first words you would say or send.') + '</p>';
     if (M.openPick) {
       if (!po) h += '<p class="muted" style="margin:0">Pick a plan first.</p>';
       else { const order = G.n % 2 ? [1, 0] : [0, 1]; order.forEach(i => { const x = po.openings[i]; if (!x) return; h += '<button class="opt' + (c.opening === i ? ' on' : '') + '" data-opening="' + i + '"' + lock + '><span>“' + esc(x.text) + '”</span></button>'; }); h += '<p class="muted" style="margin:0;font-size:13px">To ' + esc(po.openingTo || D.send.to || '') + '</p>'; }
     } else {
-      h += '<label class="lab" for="open">What you say or send to ' + esc(toWho(D, c)) + '</label><textarea id="open" class="ta grow" rows="3" data-f="open"' + (G.n === 3 ? ' placeholder="I decided… This means… What do you need from me?"' : '') + lock + '>' + esc(c.open) + '</textarea>' + adv('advO', D.adviceO) + helpBtn('delivery');
+      h += '<label class="lab" for="open">What you say or send to ' + esc(toWho(D, c)) + '</label><textarea id="open" class="ta grow" rows="3" data-f="open"' + (G.n === 3 ? ' placeholder="I decided… This means… What do you need from me?"' : '') + lock + '>' + esc(c.open) + '</textarea>';
     }
     h += '</section>';
+    if (asksConf(M)) h += '<section class="card"><h2>' + (sec++) + '. How complete is your answer?</h2><p class="muted" style="margin:0;font-size:15px">Before you commit: does what you wrote name what it protects, what it costs and who pays, and do your first words say what you decided and ask or check in? Be honest; this is for you.</p><div style="display:flex;flex-wrap:wrap;gap:8px">' + CONF.map((l, i) => '<button class="pill2" aria-pressed="' + (c.conf === i) + '" data-conf="' + i + '" style="background:' + (c.conf === i ? '#FFE9A8' : '#fff') + '"' + lock + '>' + l + '</button>').join('') + '</div></section>';
     if (G.err) h += '<div class="err">' + esc(G.err) + callsFold(G.errCalls, 'What the AI returned') + '</div>';
     if (p === 'committing') h += '<div class="card"><p style="margin:0"><span class="spin"></span>' + esc(G.busy) + '</p></div>';
-    else h += '<div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap"><button class="btn" data-act="commit"' + (ready() ? '' : ' disabled') + '>Commit</button><button class="ghost" data-act="toScene">Back to the scene</button><span class="muted" style="font-size:14px">' + (ready() ? '' : readyHelp()) + '</span></div>';
+    else h += '<div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap"><button class="btn" data-act="commit"' + (ready() ? '' : ' disabled') + '>Commit your decision</button><button class="ghost" data-act="toScene">Back to the scene</button><span class="muted" style="font-size:14px">' + (ready() ? '' : readyHelp()) + '</span></div>';
     return h;
   }
   if (p === 'debrief') {
@@ -1308,36 +1285,37 @@ function main() {
     const A = answerOf(D, c), head = (t) => '<h2 style="margin:6px 0 0;font-size:19px">' + t + '</h2>';
     const tpv = A.tradeoff;
     let x = '<section class="ai" style="gap:12px"><div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><span class="chip ai">Written by AI</span><span class="muted" style="font-size:13px">Live \u00b7 saved to your story log</span></div>';
-    x += head('What happened') + '<p style="margin:0;font-size:17px;line-height:1.65;white-space:pre-wrap">' + esc(N.story_entry) + '</p>' + (o && o.pp ? '<p style="margin:0;font-weight:800">' + esc(o.pp) + '</p>' : '');
-    x += head('What changed, and why' + info('meters')) + (c.breather ? '<div class="tag" style="align-self:flex-start;background:#CCFBF1">Breathing room: three decisions without taking the work on yourself. Wellbeing up one step.</div>' : '') +
+    x += head('What happened') + '<p style="margin:0;font-size:17px;line-height:1.65;white-space:pre-wrap">' + esc(N.story_entry) + '</p>';
+    x += head('What changed, and why') + (c.breather ? '<div class="tag" style="align-self:flex-start;background:#CCFBF1">Breathing room: three decisions without taking the work on yourself. Wellbeing up one step.</div>' : '') +
       '<div class="mgrid">' + METERS.map((m, i) => { const d = R.moves[m.key], red = G.meters[m.key] <= 4; return '<div class="mrow"><div class="mhead"><span class="mdot" style="background:' + m.color + '"></span><b>' + m.label + '</b><span class="tag" style="background:' + (d > 0 ? '#E6F5EC' : d < 0 ? '#FDECEA' : '#EFE6CC') + '">' + dw(d) + '</span></div><div class="mwhy"><b' + (red ? ' style="color:#B42318"' : '') + '>Now ' + word(m.key, G.meters[m.key]) + '.</b> ' + esc(cleanReason((N.reasons || [])[i] || '')) + '</div></div>'; }).join('') + '</div>';
     x += debriefLines(D, c, N, o);
     x += '<details class="review"><summary>Review your choices</summary><div style="display:flex;flex-direction:column;gap:6px;font-size:15px;margin-top:8px"><div><b>Plan:</b> ' + esc(o ? o.text : c.plan) + '</div><div><b>Trade-off:</b> ' + esc(tpv) + '</div><div><b>How you shared it:</b> \u201c' + esc(A.opening) + '\u201d</div>' +
-      (R.judge.opening ? '<div class="muted">' + (R.judge.opening === 'lands' ? 'This opening was a strong start. ' : 'This opening is a common trap. ') + esc(R.judge.checks.skill_check.note || '') + '</div>' : '') + '<div><b>How sure you were:</b> ' + CONF[c.conf] + '</div>' + (G.designer ? '<div class="muted">Designer: wellbeing ' + (R.judge.shifts && R.judge.shifts.wellbeing ? R.judge.shifts.wellbeing.delta + ' (' + esc(R.judge.shifts.wellbeing.reason) + '; source: ' + esc(R.judge.shifts.wellbeing.source || '?') + ')' : 'n/a') + '; events: ' + esc(JSON.stringify(R.judge.events || [])) + '</div>' : '') + '</div></details>';
+      (R.judge.opening ? '<div class="muted">' + (R.judge.opening === 'lands' ? 'This opening was a strong start. ' : 'This opening is a common trap. ') + esc(R.judge.checks.skill_check.note || '') + '</div>' : '') + (c.conf !== null ? '<div><b>How complete you said it was:</b> ' + CONF[c.conf] + '</div>' : '') + (G.designer ? '<div class="muted">Designer: wellbeing ' + (R.judge.shifts && R.judge.shifts.wellbeing ? R.judge.shifts.wellbeing.delta + ' (' + esc(R.judge.shifts.wellbeing.reason) + '; source: ' + esc(R.judge.shifts.wellbeing.source || '?') + ')' : 'n/a') + '; events: ' + esc(JSON.stringify(R.judge.events || [])) + '</div>' : '') + '</div></details>';
     x += callsFold(G.dec[G.n].calls.concat(R.calls).filter(Boolean)) + '</section>';
     h += x;
-    h += '<div style="display:flex;gap:12px;flex-wrap:wrap"><button class="btn" data-act="next">' + (G.n === NDEC ? 'See your check-in' : 'Next decision') + '</button></div>';
+    h += '<div style="display:flex;gap:12px;flex-wrap:wrap"><button class="btn" data-act="next">' + (G.n === NDEC ? (G.pc.skipped || !G.pc.pre.done ? 'See your check-in' : 'Go to the last check') : 'Next decision') + '</button></div>';
     return h;
   }
   return '';
 }
+const asksConf = (M) => !(M.planPick && M.tradePick && M.openPick); /* only when the player wrote part of the answer */
 function ready() {
   const c = G.cur, b = band(G.n), M = modes(c, b), f = (x) => x && x.trim();
-  if (c.conf === null) return false;
+  if (asksConf(M) && c.conf === null) return false;
   const planOk = M.planPick ? c.pick !== null : f(c.plan);
   const tradeOk = M.tradePick ? c.pick !== null : b === 'text' ? f(c.tt) : f(c.tp) && f(c.tc) && f(c.tw);
   const openOk = M.openPick ? c.opening !== null : f(c.open);
   return !!(planOk && tradeOk && openOk);
 }
-function readyHelp() { return 'Finish your plan, the trade-off, how likely it is, and how you share it.'; }
+function readyHelp() { return asksConf(modes(G.cur, band(G.n))) ? 'Finish each part, then say how complete your answer is.' : 'Pick a plan and your first words.'; }
 function render() { if (LG.active !== 'game') return; render_(); }
 function render_() {
   const early = ['how', 'pre'].includes(G.phase);
   $('meters').innerHTML = W && !early ? meterStrip(G.phase === 'debrief' && G.cur && G.cur.result ? G.cur.result.moves : null) : '';
   $('main').innerHTML = (W ? main() : '<p>Loading Tidewell…</p>') + (W ? whoModal() + runlogModal() : '');
-  $('left').innerHTML = W && !['intro', 'pre', 'how'].includes(G.phase) ? leftPanel() : '';
-  $('right').innerHTML = W && !['intro', 'pre', 'how', 'chapter', 'review'].includes(G.phase) ? rightPanel() : '';
-  bind(); autoHelp(); renderHelp();
+  $('left').innerHTML = W && !['intro', 'pre', 'how', 'post', 'review'].includes(G.phase) ? leftPanel() : '';
+  $('right').innerHTML = W && !['intro', 'pre', 'how', 'post', 'chapter', 'review'].includes(G.phase) ? rightPanel() : '';
+  bind();
 }
 function grow(el) { el.style.height = 'auto'; el.style.height = (el.scrollHeight + 4) + 'px'; }
 function bind() {
@@ -1354,6 +1332,7 @@ function bind() {
   document.querySelectorAll('[data-mode]').forEach(b => b.onclick = () => { const [k, v] = b.dataset.mode.split(':'); G.cur[k] = v; if (k === 'mPlan' && v === 'write') { G.cur.pick = null; G.cur.opening = null; } render(); });
   document.querySelectorAll('[data-conf]').forEach(b => b.onclick = () => { G.cur.conf = +b.dataset.conf; render(); });
   document.querySelectorAll('[data-tab]').forEach(b => b.onclick = () => { G.tab = b.dataset.tab; render(); });
+  document.querySelectorAll('[data-htab]').forEach(b => b.onclick = () => { G.help.tab = b.dataset.htab; render(); });
   document.querySelectorAll('[data-tip]').forEach(b => b.onclick = () => { G.seenTips[b.dataset.tip] = 1; render(); });
   document.querySelectorAll('[data-f]').forEach(t => { grow(t); t.oninput = () => { G.cur[t.dataset.f] = t.value; grow(t); const cb = document.querySelector('[data-act="commit"]'); if (cb) cb.disabled = !ready(); }; });
 }
@@ -1375,21 +1354,21 @@ function act(a) {
   else if (a === 'rlLast') { G.rlWhich = 'last'; render(); }
   else if (a === 'rlFull') { G.rlFull = !G.rlFull; render(); }
   else if (a === 'rlCopy') { const t = document.getElementById('rltext'); if (t) { t.select(); try { navigator.clipboard.writeText(t.value).catch(() => document.execCommand('copy')); } catch (e) { try { document.execCommand('copy'); } catch (e2) {} } } }
-  else if (a === 'toDecide') { const sl = G.dec[G.n]; if (sl.optReady) { G.phase = 'decide'; render(); toTop(); } else { G.phase = 'optwait'; render(); toTop(); if (!sl.optPending) loadOptions(G.n); } }
+  else if (a === 'toDecide') { G.tab = 'scene'; const sl = G.dec[G.n]; if (sl.optReady) { G.phase = 'decide'; render(); toTop(); } else { G.phase = 'optwait'; render(); toTop(); if (!sl.optPending) loadOptions(G.n); } }
   else if (a === 'retryOptions') { G.phase = 'optwait'; render(); loadOptions(G.n); }
   else if (a === 'toScene') { G.phase = 'scene'; render(); }
   else if (a === 'advT') { G.cur.advT = !G.cur.advT; render(); }
   else if (a === 'advO') { G.cur.advO = !G.cur.advO; render(); }
   else if (a === 'advP') { G.cur.advP = !G.cur.advP; render(); }
   else if (a === 'preDone') { G.pc.pre.done = true; runCheck('pre'); G.phase = 'intro'; render(); toTop(); }
-  else if (a === 'postDone') { G.pc.post.done = true; runCheck('post'); render(); toTop(); }
-  else if (a === 'pcSkip') { G.pc.skipped = true; if (G.phase === 'pre') G.phase = 'intro'; render(); toTop(); }
+  else if (a === 'postDone') { G.pc.post.done = true; runCheck('post'); G.phase = 'review'; render(); toTop(); }
+  else if (a === 'pcSkip') { G.pc.skipped = true; if (G.phase === 'pre') G.phase = 'intro'; else if (G.phase === 'post') G.phase = 'review'; render(); toTop(); }
   else if (a === 'playAgain') { const r = document.getElementById('restart'); if (r) r.click(); toTop(); }
   else if (a === 'snapCopy') { const t = snapshotText(); const done = () => { G.snapDone = true; render(); }; try { navigator.clipboard.writeText(t).then(done, () => { const ta = document.createElement('textarea'); ta.value = t; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); } catch (e) {} ta.remove(); done(); }); } catch (e) { done(); } }
   else if (a === 'runReview') { if (G.rv && G.rv.call && !G.rv.busy) runReview(); }
   else if (a === 'commit') { if (ready()) commit(); }
   else if (a === 'next') {
-    if (G.n === NDEC) { G.endAt = Date.now(); G.phase = 'review'; G.rv = { best: '', back: '', call: null, out: null, busy: false, err: '' }; render(); toTop(); return; }
+    if (G.n === NDEC) { G.endAt = Date.now(); G.phase = G.pc.skipped || !G.pc.pre.done ? 'review' : 'post'; G.rv = { best: '', back: '', call: null, out: null, busy: false, err: '' }; render(); toTop(); return; }
     const nx = G.n + 1;
     startDecision(nx);
   }
@@ -1402,7 +1381,7 @@ function attachTools() {
   t.insertAdjacentHTML('afterbegin', "<button data-apptool=\"1\" id=\"designer\" class=\"status\" style=\"cursor:pointer;background:#fff\" aria-pressed=\"false\">Designer view: off</button><button data-apptool=\"1\" id=\"runlog\" class=\"status\" style=\"cursor:pointer;background:#fff;display:none\">Run log</button><button data-apptool=\"1\" id=\"restart\" class=\"status\" style=\"cursor:pointer;background:#fff\">Start a new run</button>");
   document.getElementById('runlog').onclick = () => { G.rlModal = true; G.rlWhich = 'cur'; render(); };
   document.getElementById('designer').onclick = (e) => { G.designer = !G.designer; document.getElementById('runlog').style.display = G.designer ? '' : 'none'; e.currentTarget.textContent = 'Designer view: ' + (G.designer ? 'on' : 'off'); e.currentTarget.setAttribute('aria-pressed', String(!!G.designer)); render(); };
-  document.getElementById('restart').onclick = () => { rlArchive(); Object.assign(G, { pc: newPC(), trail: [], ans: [], phase: 'how', help: { open: false, tab: 'why', auto: {} }, endAt: 0, introI: 0, n: 1, meters: { team: 6, boss: 6, business: 5, wellbeing: 7 }, log: [], promises: [], carries: [], counters: {}, dec: {}, cur: null, busy: '', err: '', errCalls: null, tab: 'team', seenTips: {}, recap: [], modal: false, clean: 0, lastAbsorb: 0, chStep: 0, hist: [], sum: [], rv: null, preview: null }); render(); toTop(); if (live) loadDecision(1); };
+  document.getElementById('restart').onclick = () => { rlArchive(); Object.assign(G, { pc: newPC(), trail: [], ans: [], cal: [], phase: 'how', help: { open: false, tab: 'why', auto: {} }, endAt: 0, introI: 0, n: 1, meters: { team: 6, boss: 6, business: 5, wellbeing: 7 }, log: [], promises: [], carries: [], counters: {}, dec: {}, cur: null, busy: '', err: '', errCalls: null, tab: 'team', seenTips: {}, recap: [], modal: false, clean: 0, lastAbsorb: 0, chStep: 0, hist: [], sum: [], rv: null, preview: null }); render(); toTop(); if (live) loadDecision(1); };
   const d = $('designer'); d.textContent = 'Designer view: ' + (G.designer ? 'on' : 'off'); d.setAttribute('aria-pressed', String(!!G.designer));
   $('runlog').style.display = G.designer ? '' : 'none';
 }
@@ -1419,11 +1398,11 @@ async function boot() {
 return {
   mount(stage) {
     LG.active = 'game';
-    if (!window.__helpEsc) { window.__helpEsc = 1; document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && LG.active === 'game' && G.help && G.help.open) { G.help.open = false; renderHelp(); } }); }
     stage.innerHTML = '<div class="app-game">' + "<div id=\"meters\"></div>\n<div class=\"layout\">\n<aside class=\"side\" id=\"left\" aria-label=\"Focus, team and story\"></aside>\n<main class=\"main\" id=\"main\" aria-live=\"polite\"></main>\n<aside class=\"side\" id=\"right\" aria-label=\"The scene and what you asked\"></aside>\n</div><div id=\"help\"></div>" + '</div>';
     attachTools();
     if (!booted) { booted = true; W = WORLD_DATA; boot(); } else { setLiveStatus(); render(); }
   },
+  help: HELP,
   unmount() { LG.active = ''; try { document.body.classList.remove('helpopen'); } catch (e) {} $('tools').querySelectorAll('[data-apptool]').forEach((b) => b.remove()); }
 };
 })();
@@ -1923,9 +1902,13 @@ function home() {
   '<div style="display:flex;flex-direction:column;gap:16px">' +
   '<div class="eyebrow">A decision game for first-time managers</div>' +
   '<h1 style="margin:0;font-size:50px;line-height:1.05;font-weight:900;letter-spacing:-0.03em">Make the call. Say what it costs.</h1>' +
-  '<p style="margin:0;font-size:20px;line-height:1.6;color:#3B3760">You are a first-time manager. In five decisions, you choose what to do, name what it protects and what it costs, and practice how to say it to the person. It takes about 40 minutes.</p>' +
+  '<p style="margin:0;font-size:20px;line-height:1.6;color:#3B3760">You are a first-time manager. In six decisions, you choose what to do, name what it protects and what it costs, and practice how to say it to the person. It takes about 45 minutes.</p>' +
   '<div style="display:flex;flex-wrap:wrap;gap:12px;padding-top:6px"><a class="btn" href="#play">Start playing</a></div></div>' +
-  '<div class="card" style="gap:14px"><div class="eyebrow">Three parts, one skill</div>' +
+  '<div class="card" style="gap:10px"><div class="eyebrow">Why this game</div>' +
+  '<p style="margin:0;font-size:17px;line-height:1.6">There is no right choice. There are only tradeoffs. Every choice protects something and costs something.</p>' +
+  '<p style="margin:0;font-size:17px;line-height:1.6">Managing is not about winning. It is about making hard decisions again and again, and keeping your team, your boss, the work and yourself in balance.</p></div>' +
+  '<div class="card" style="gap:14px"><div class="eyebrow">What you’ll learn</div>' +
+  '<p style="margin:0;font-size:17px;line-height:1.6">Three parts of one skill: see both sides of a choice, choose on purpose, and say so.</p>' +
   '<div class="row"><span class="num">1</span><p><b>Make a plan:</b> what you will do, who does it, and by when.</p></div>' +
   '<div class="row"><span class="num">2</span><p><b>Name the tradeoff:</b> what it protects, what it costs, and who pays.</p></div>' +
   '<div class="row"><span class="num">3</span><p><b>Deliver it:</b> your first words to the person.</p></div></div>' +
@@ -2152,6 +2135,15 @@ const SECS = [
   ['Learning research', ['CAST. (2024). Universal Design for Learning Guidelines.', 'Grolnick et al. (2024). We need help accurately assessing our abilities (ch. 7).', 'Grossman, R., & Salas, E. (2011). The transfer of training: What really matters.', 'Herrington, A., & Herrington, J. (2008). What is an authentic learning environment?', 'Kirschner, P. A., & Hendrick, C. (2024). A novice is not a little expert (ch. 6).', 'Kirschner, P. A., & Hendrick, C. (2024). How you think about achievement is more important than the achievement itself (ch. 15).', 'Krathwohl, D. R. (2002). A revision of Bloom’s taxonomy: An overview.', 'Li et al. (2025). ARCHED: A human-centered framework for transparent, responsible, and collaborative AI-assisted instructional design.', 'Linnenbrink-Garcia et al. (2016). Adaptive motivation and emotion in education: Research and principles for instructional design.', 'Martin et al. (2025). Integrating generative AI and load reduction instruction to individualize and optimize students’ learning.', 'Mayer, R. E., & Moreno, R. (2003). Nine ways to reduce cognitive load in multimedia learning.', 'Melisa et al. (2025). Critical thinking in the age of AI: A systematic review of AI’s effects on higher education.', 'Ocumpaugh et al. (2024). Toward asset-based instruction and assessment in artificial intelligence in education.']],
   ['AI used to build this game', ['Anthropic. (2026). Claude Opus 5.5 [Large language model].', 'Anthropic. (2026). Claude Sonnet 5.5 [Large language model].'], 'Draft entries. Full APA 7th references are in the proposal.']] }
 ];
+function guide() {
+  const H = (GAME && GAME.help) || {}, list = (a) => '<ul style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px">' + (a || []).map(x => '<li>' + esc(x) + '</li>').join('') + '</ul>';
+  const row = (a, b) => '<li><b>' + a + ':</b> ' + b + '</li>';
+  const part = (k, title) => { const t = H[k]; if (!t) return ''; return '<div class="card" style="gap:10px"><h2 style="margin:0">' + title + '</h2><div class="eyebrow">What good looks like</div>' + list(t.good) + '<div class="eyebrow" style="color:#0E7A4D">Do</div>' + list(t.dos) + '<div class="eyebrow" style="color:#B42318">Don’t</div>' + list(t.donts) + '<div class="eyebrow">Sentence frames</div>' + list(t.frames) + '<div class="eyebrow">A worked example, in a different workplace</div><p style="margin:0">' + esc(t.ex.scene) + '</p><p style="margin:0;padding:12px 14px;border-radius:12px;background:#F7F1DF;border:2px solid #E5DCC4">' + esc(t.ex.text) + '</p></div>'; };
+  return '<div class="col" style="gap:22px"><div style="display:flex;flex-direction:column;gap:10px"><h1 class="h1">Guide</h1><p style="margin:0;font-size:18px;line-height:1.6">The full version of the help in the game. If you are in the middle of a game, your place is kept: go back with Play.</p></div>' +
+    '<div class="card" style="gap:10px"><h2 style="margin:0">How the six decisions work</h2><ul style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px">' + row('Decisions 1 and 2', 'you pick a plan and your first words. Each plan shows what it protects, what it costs and who pays.') + row('Decision 3', 'you pick a plan, then write the tradeoff.') + row('Decision 4', 'you pick a plan, then write the tradeoff and your first words.') + row('Decisions 5 and 6', 'you write all three: the plan, the tradeoff and your first words.') + '</ul><p style="margin:0">Each decision starts with two questions, so you know more before you choose.</p></div>' +
+    '<div class="card" style="gap:8px"><h2 style="margin:0">The four meters</h2><p style="margin:0">Every choice moves the four meters: team standing, boss standing, business impact and your wellbeing. You cannot keep all four at the top; you spend one to protect another. Keep every meter out of the red, and go back for the one you spent.</p></div>' +
+    part('plan', 'Plan') + part('tradeoff', 'Tradeoff') + part('delivery', 'Delivery') + '</div>';
+}
 function about() {
   return '<div class="col"><div style="display:flex;flex-direction:column;gap:10px"><div class="eyebrow">How it’s made</div><h1 class="h1" style="font-size:34px">Who made what, and how AI is used</h1>' +
   '<p style="margin:0;font-size:18px;line-height:1.6">This game draws on practitioner experience, learning science, and a belief that practicing leadership can be fun.</p>' +
@@ -2164,8 +2156,8 @@ function about() {
 }
 
 /* ---------- Router ---------- */
-const PAGES = { home, about };
-const TITLES = { home: 'The Leadership Game V4', about: 'How it’s made', play: 'Play', practice: 'Practice round' };
+const PAGES = { home, about, guide };
+const TITLES = { home: 'The Leadership Game V4', guide: 'Guide', about: 'How it’s made', play: 'Play', practice: 'Practice round' };
 const APPS = { play: GAME, practice: PRACTICE };
 let cur = '';
 function route() {
