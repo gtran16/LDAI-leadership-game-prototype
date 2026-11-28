@@ -37,6 +37,6 @@ const { ROUTES } = require('./stub');
   for (const t of await page.locator('[data-rv]:visible').all()) await t.fill('Asking first.');
   await page.locator('[data-rvcall]:visible').nth(1).click(); await act('runReview').click();
   await page.getByText('In the weeks after the check-in').first().waitFor(); await page.waitForTimeout(500); await shot('checkin');
-  await page.goto(file + '#guide'); await shot('guide');
+  await page.goto(file + '#how-it-works'); await shot('howworks'); await page.goto(file + '#skills'); await shot('skills'); await page.locator('[data-gsk=tradeoff]').click(); await shot('skills-tradeoff');
   await browser.close();
 })();

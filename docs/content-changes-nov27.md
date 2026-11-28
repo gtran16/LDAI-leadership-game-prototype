@@ -95,3 +95,23 @@ Prompt changes are in `prompt-changes-nov27.md`.
   - −1 or less: underconfident.
   - Otherwise: calibrated.
 - **Needs** at least 2 written decisions.
+
+## Guide split (added Nov 27, later)
+The Guide is now two top-nav pages: **How the game works** and **Skills**.
+- **How the game works:**
+  - Intro: "Six decisions, four meters, and no score. If you are in the middle of a game, your place is kept: go back with Play."
+  - Then the six-decisions list, the four meters, and a link: "The three parts you practice in every decision are on the Skills page."
+- **Skills:**
+  - Intro: "Three parts of one skill: see both sides of a choice, choose on purpose, and say so."
+  - Tabs: Plan / Tradeoff / Delivery.
+  - Each tab has the full guide plus a practice card. The practice minigames are UX only: the button says "Practice coming soon" and is disabled.
+  - **New one-line summaries:**
+    - Plan: "What you will do, who does it, and by when."
+    - Tradeoff: "What your plan protects, what it costs, and who pays."
+    - Delivery: "Your first words to the person: what you decided, what it means for them, and a question or check-in."
+  - **Practice card text** (each ends with "You get feedback after each one, and you can try again."):
+    - Plan: "Five short decisions in a new workplace. In the first two you pick a plan; in the last three you write your own."
+    - Tradeoff: "Five short decisions in a new workplace. In the first two you pick the tradeoff; in the last three you write what it protects, what it costs and who pays."
+    - Delivery: "Five short decisions in a new workplace. In the first two you pick your first words; in the last three you write them."
+- **In-game Help panel:** the link now reads "Full skill guide" and opens Skills.
+- **Open:** the Tradeoff and Delivery worked examples begin "The same bakery, the same plan." / "The same bakery. You are talking to Ana." That points back to the Plan example, which isn't on screen when each tab stands alone. Suggest repeating the one-line bakery setup in each.

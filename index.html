@@ -282,7 +282,7 @@ button,textarea,input,select{font-family:inherit}
 <header class="lgbar"><div class="lgbarin">
 <a class="lgbrand" href="#home"><span class="lgmark"></span>The Leadership Game <span style="font-size:12px;font-weight:900;background:#FFC93C;color:#1E1B3A;border-radius:999px;padding:1px 9px;margin-left:2px">V4</span></a>
 <nav class="lgnav" aria-label="Main">
-<a href="#play" data-nav="play home">Play</a><a href="#guide" data-nav="guide">Guide</a><a href="#about" data-nav="about">How it’s made</a>
+<a href="#play" data-nav="play home">Play</a><a href="#how-it-works" data-nav="how-it-works">How the game works</a><a href="#skills" data-nav="skills">Skills</a><a href="#about" data-nav="about">How it’s made</a>
 </nav>
 <div class="lgtools" id="tools"><span class="status" id="status">Checking for live AI…</span></div>
 </div></header>
@@ -1142,7 +1142,7 @@ function rightPanel() {
   const A = D && c && G.phase === 'decide' && writes ? { plan: D.adviceP, tradeoff: D.adviceT, delivery: D.adviceO }[tab] : null;
   if (A && c) c[advKey] = true; /* the judge is told which advice the player could see */
   const start = A && A.start ? String(A.start).replace(/[\s.…]+$/, '') : '';
-  return '<div class="panel helpp" aria-label="Help"><div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><div class="lab">Help</div><a href="#guide" style="font-size:13px;font-weight:800;color:#5B3DF5">Full guide</a></div>' +
+  return '<div class="panel helpp" aria-label="Help"><div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><div class="lab">Help</div><a href="#skills" style="font-size:13px;font-weight:800;color:#5B3DF5">Full skill guide</a></div>' +
     '<div class="helptabs" role="tablist">' + [['plan', 'Plan'], ['tradeoff', 'Tradeoff'], ['delivery', 'Delivery']].map(x => '<button class="pill2" role="tab" aria-selected="' + (tab === x[0]) + '" data-htab="' + x[0] + '" style="background:' + (tab === x[0] ? '#FFE9A8' : '#fff') + '">' + x[1] + '</button>').join('') + '</div>' +
     (writes ? '<span class="tag" style="align-self:flex-start;background:#CCFBF1">You write this part</span>' : '') +
     '<div class="lab">What good looks like</div>' + list(t.good) + '<div class="lab">Sentence frames</div>' + list(t.frames) +
@@ -2139,14 +2139,24 @@ const SECS = [
   ['Learning research', ['CAST. (2024). Universal Design for Learning Guidelines.', 'Grolnick et al. (2024). We need help accurately assessing our abilities (ch. 7).', 'Grossman, R., & Salas, E. (2011). The transfer of training: What really matters.', 'Herrington, A., & Herrington, J. (2008). What is an authentic learning environment?', 'Kirschner, P. A., & Hendrick, C. (2024). A novice is not a little expert (ch. 6).', 'Kirschner, P. A., & Hendrick, C. (2024). How you think about achievement is more important than the achievement itself (ch. 15).', 'Krathwohl, D. R. (2002). A revision of Bloom’s taxonomy: An overview.', 'Li et al. (2025). ARCHED: A human-centered framework for transparent, responsible, and collaborative AI-assisted instructional design.', 'Linnenbrink-Garcia et al. (2016). Adaptive motivation and emotion in education: Research and principles for instructional design.', 'Martin et al. (2025). Integrating generative AI and load reduction instruction to individualize and optimize students’ learning.', 'Mayer, R. E., & Moreno, R. (2003). Nine ways to reduce cognitive load in multimedia learning.', 'Melisa et al. (2025). Critical thinking in the age of AI: A systematic review of AI’s effects on higher education.', 'Ocumpaugh et al. (2024). Toward asset-based instruction and assessment in artificial intelligence in education.']],
   ['AI used to build this game', ['Anthropic. (2026). Claude Opus 5.5 [Large language model].', 'Anthropic. (2026). Claude Sonnet 5.5 [Large language model].'], 'Draft entries. Full APA 7th references are in the proposal.']] }
 ];
-function guide() {
-  const H = (GAME && GAME.help) || {}, list = (a) => '<ul style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px">' + (a || []).map(x => '<li>' + esc(x) + '</li>').join('') + '</ul>';
+/* ---------- How the game works, and Skills (Nov 27: the Guide split in two) ---------- */
+const gList = (a) => '<ul style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px">' + (a || []).map(x => '<li>' + esc(x) + '</li>').join('') + '</ul>';
+function howPage() {
   const row = (a, b) => '<li><b>' + a + ':</b> ' + b + '</li>';
-  const part = (k, title) => { const t = H[k]; if (!t) return ''; return '<div class="card" style="gap:10px"><h2 style="margin:0">' + title + '</h2><div class="eyebrow">What good looks like</div>' + list(t.good) + '<div class="eyebrow" style="color:#0E7A4D">Do</div>' + list(t.dos) + '<div class="eyebrow" style="color:#B42318">Don’t</div>' + list(t.donts) + '<div class="eyebrow">Sentence frames</div>' + list(t.frames) + '<div class="eyebrow">A worked example, in a different workplace</div><p style="margin:0">' + esc(t.ex.scene) + '</p><p style="margin:0;padding:12px 14px;border-radius:12px;background:#F7F1DF;border:2px solid #E5DCC4">' + esc(t.ex.text) + '</p></div>'; };
-  return '<div class="col" style="gap:22px"><div style="display:flex;flex-direction:column;gap:10px"><h1 class="h1">Guide</h1><p style="margin:0;font-size:18px;line-height:1.6">The full version of the help in the game. If you are in the middle of a game, your place is kept: go back with Play.</p></div>' +
-    '<div class="card" style="gap:10px"><h2 style="margin:0">How the six decisions work</h2><ul style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px">' + row('Decisions 1 and 2', 'you pick a plan and your first words. Each plan shows what it protects, what it costs and who pays.') + row('Decision 3', 'you pick a plan, then write the tradeoff.') + row('Decision 4', 'you pick a plan, then write the tradeoff and your first words.') + row('Decisions 5 and 6', 'you write all three: the plan, the tradeoff and your first words.') + '</ul><p style="margin:0">Each decision starts with two questions, so you know more before you choose.</p></div>' +
+  return '<div class="col" style="gap:22px"><div style="display:flex;flex-direction:column;gap:10px"><h1 class="h1">How the game works</h1><p style="margin:0;font-size:18px;line-height:1.6">Six decisions, four meters, and no score. If you are in the middle of a game, your place is kept: go back with Play.</p></div>' +
+    '<div class="card" style="gap:10px"><h2 style="margin:0">The six decisions</h2><ul style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px">' + row('Decisions 1 and 2', 'you pick a plan and your first words. Each plan shows what it protects, what it costs and who pays.') + row('Decision 3', 'you pick a plan, then write the tradeoff.') + row('Decision 4', 'you pick a plan, then write the tradeoff and your first words.') + row('Decisions 5 and 6', 'you write all three: the plan, the tradeoff and your first words.') + '</ul><p style="margin:0">Each decision starts with two questions, so you know more before you choose.</p></div>' +
     '<div class="card" style="gap:8px"><h2 style="margin:0">The four meters</h2><p style="margin:0">Every choice moves the four meters: team standing, boss standing, business impact and your wellbeing. You cannot keep all four at the top; you spend one to protect another. Keep every meter out of the red, and go back for the one you spent.</p></div>' +
-    part('plan', 'Plan') + part('tradeoff', 'Tradeoff') + part('delivery', 'Delivery') + '</div>';
+    '<p style="margin:0;font-size:17px">The three parts you practice in every decision are on the <a href="#skills">Skills</a> page.</p></div>';
+}
+function skillsPage() {
+  const H = (GAME && GAME.help) || {}, k = ['plan', 'tradeoff', 'delivery'].includes(P.gsk) ? P.gsk : 'plan', t = H[k];
+  const NAMES = { plan: 'Plan', tradeoff: 'Tradeoff', delivery: 'Delivery' };
+  const LEAD = { plan: 'What you will do, who does it, and by when.', tradeoff: 'What your plan protects, what it costs, and who pays.', delivery: 'Your first words to the person: what you decided, what it means for them, and a question or check-in.' };
+  const PRACTICE = { plan: 'Five short decisions in a new workplace. In the first two you pick a plan; in the last three you write your own.', tradeoff: 'Five short decisions in a new workplace. In the first two you pick the tradeoff; in the last three you write what it protects, what it costs and who pays.', delivery: 'Five short decisions in a new workplace. In the first two you pick your first words; in the last three you write them.' };
+  return '<div class="col" style="gap:22px"><div style="display:flex;flex-direction:column;gap:10px"><h1 class="h1">Skills</h1><p style="margin:0;font-size:18px;line-height:1.6">Three parts of one skill: see both sides of a choice, choose on purpose, and say so. If you are in the middle of a game, your place is kept: go back with Play.</p></div>' +
+    '<div role="tablist" aria-label="Skills" style="display:flex;flex-wrap:wrap;gap:8px">' + Object.keys(NAMES).map(x => '<button class="tab" role="tab" data-gsk="' + x + '" aria-selected="' + (x === k) + '">' + NAMES[x] + '</button>').join('') + '</div>' +
+    (t ? '<div class="card" style="gap:10px"><h2 style="margin:0">' + NAMES[k] + '</h2><p style="margin:0;font-size:17px">' + LEAD[k] + '</p><div class="eyebrow">What good looks like</div>' + gList(t.good) + '<div class="eyebrow" style="color:#0E7A4D">Do</div>' + gList(t.dos) + '<div class="eyebrow" style="color:#B42318">Don’t</div>' + gList(t.donts) + '<div class="eyebrow">Sentence frames</div>' + gList(t.frames) + '<div class="eyebrow">A worked example, in a different workplace</div><p style="margin:0">' + esc(t.ex.scene) + '</p><p style="margin:0;padding:12px 14px;border-radius:12px;background:#F7F1DF;border:2px solid #E5DCC4">' + esc(t.ex.text) + '</p></div>' : '') +
+    '<div class="card" style="gap:10px;background:#F1ECFF"><div class="eyebrow" style="color:#3A24B8">Practice ' + NAMES[k].toLowerCase() + ' on its own</div><p style="margin:0">' + PRACTICE[k] + ' You get feedback after each one, and you can try again.</p><button class="btn" disabled style="align-self:flex-start;opacity:.5;cursor:not-allowed;box-shadow:none">Practice coming soon</button></div></div>';
 }
 function about() {
   return '<div class="col"><div style="display:flex;flex-direction:column;gap:10px"><div class="eyebrow">How it’s made</div><h1 class="h1" style="font-size:34px">Who made what, and how AI is used</h1>' +
@@ -2160,8 +2170,8 @@ function about() {
 }
 
 /* ---------- Router ---------- */
-const PAGES = { home, about, guide };
-const TITLES = { home: 'The Leadership Game V4', guide: 'Guide', about: 'How it’s made', play: 'Play', practice: 'Practice round' };
+const PAGES = { home, about, 'how-it-works': howPage, skills: skillsPage };
+const TITLES = { home: 'The Leadership Game V4', 'how-it-works': 'How the game works', skills: 'Skills', about: 'How it’s made', play: 'Play', practice: 'Practice round' };
 const APPS = { play: GAME, practice: PRACTICE };
 let cur = '';
 function route() {
@@ -2181,8 +2191,9 @@ function route() {
 function rerender() { if (PAGES[cur]) $('stage').innerHTML = PAGES[cur](); }
 document.addEventListener('click', (e) => {
   if (LG.active !== 'page') return;
-  const t = e.target.closest('[data-skill],[data-sk],[data-pg],[data-pane],[data-sec]');
+  const t = e.target.closest('[data-skill],[data-sk],[data-pg],[data-pane],[data-sec],[data-gsk]');
   if (!t) return;
+  if (t.dataset.gsk) { P.gsk = t.dataset.gsk; rerender(); return; }
   if (t.dataset.skill) { P.skill = t.dataset.skill; P.pane = 0; if (cur === 'skills') rerender(); else location.hash = 'skills'; return; }
   if (t.dataset.sk) { P.sk = t.dataset.sk; rerender(); return; }
   if (t.dataset.pane) { P.pane = +t.dataset.pane; rerender(); return; }
