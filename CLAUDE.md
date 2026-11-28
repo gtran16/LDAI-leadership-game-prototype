@@ -1,18 +1,14 @@
 # The Leadership Game: project guide for Claude Code
 
-Read this before touching code. Updated Fri Nov 27, 2026, at the end of the freeze session.
+Read this before touching code. Updated Fri Nov 27, 2026, at release.
 
 ## Where things stand
 
-The class version is built, hosted and in its final playtest.
+**Released and frozen.** The class version is tagged `v1.0-class-submission` (V4.10). The class repo doesn't change after the tag; new work goes to the after-freeze list or a second repo.
 - **The project:** EDUC 565A final (Dr. Hyde), due **Thu Dec 3**. Only the written proposal is graded. The game is extra credit, demoed live to a small group.
 - **Who writes what:** Giselle writes the proposal and presentation herself. Nothing in this repo writes submission language.
 
-**Freeze steps left:**
-1. Final playtest on the hosted link (Giselle).
-2. Fix blockers only. Anything else goes to "After freeze".
-3. Add the live-run notes to `docs/build-log.md`.
-4. Tag `v1.0-class-submission` and stop. The class repo doesn't change after the tag.
+**Next for Giselle (no code):** write the proposal Wednesday; present and submit Thursday Dec 3. Demo screenshots come from `tests/out/slides/` (regenerate with `node tests/demo.js`; `tests/out/` is not committed).
 
 **Links**
 - Hosted game: https://gtran16.github.io/LDAI-leadership-game-prototype/
@@ -42,7 +38,7 @@ The class version is built, hosted and in its final playtest.
 |---|---|
 | `index.html` | The whole game, one file, no build step. Shell (the `LG` object and the AI seam), the game (`GAME` closure), then the pages and the router. |
 | `worker/` | Cloudflare Worker. `src/index.js` holds the origin check, the KV daily cap (125), the tier-to-model map (default capped at 8192 tokens), thinking off and the workspace header. `wrangler.toml` holds the vars and the KV id. The secret `ANTHROPIC_API_KEY` lives in Cloudflare only. |
-| `tests/` | `unit.js` (pure logic via `GAME.__test`), `smoke.js` (a full game at 1280 and 375 px; also checks the 1:1 sheet fits one page and holds no game names), `qa.js` (failure modes, navigation, the Worker path, overflow), `screens.js`, `stub.js` (canned replies matched on each prompt's opening line). |
+| `tests/` | `unit.js` (pure logic via `GAME.__test`), `smoke.js` (a full game at 1280 and 375 px; also checks the 1:1 sheet fits one page and holds no game names), `qa.js` (failure modes, navigation, the Worker path, overflow), `a11y.js` (contrast, labels, headings, keyboard focus, reflow at 320 and 640 px, reduced motion), `screens.js`, `stub.js` (canned replies matched on each prompt's opening line). |
 | `docs/` | `system-diagrams.md` and `diagrams/` (SVG plus `make_diagrams.py`), `model-right-sizing.md`, `citations-to-verify.md`, `build-log.md`, `close-out.md`. |
 
 **Run:**
@@ -51,7 +47,9 @@ The class version is built, hosted and in its final playtest.
 npm test
 ```
 
-It runs unit, then smoke, then QA. Run it after every change; it must pass before a push.
+It runs unit, smoke, QA, then the accessibility audit, all with canned AI replies (no API calls). Run it after every change; it must pass before a push.
+
+**Testing prompts without the API key:** fill a prompt from a canned game, then run it through a Claude Code subagent (Sonnet or Haiku) or `claude -p` on the Claude Code plan. Don't spend the Worker's budget on prompt tests. (`claude -p` needs `claude /login` on this Mac; the login had expired at release.)
 
 ## How the code works
 - **One AI seam.** `LG.sample()` returns claude.ai's `window.claude.use('sample')` when present. Otherwise it returns `LG.workerSample`, which posts `{ prompt, modelTier }` to `LG.WORKER_URL`. Callers use `sample(prompt, { modelTier })` and expect `{ text, truncated }`.
@@ -107,7 +105,7 @@ It runs unit, then smoke, then QA. Run it after every change; it must pass befor
 - The mobile layout: the left panel sits above the scene at phone width.
 - A second repo for the real game: split the prompts and world into files, RunPod hosting with open-weight models.
 - Meters versus decision skill: players may play the meters instead of practicing the decision. Explore making the three skill checks the main feedback and the meters the consequence (mockups first).
-- An accessibility review: low vision (contrast, zoom, screen reader), hearing, physical (keyboard only), cognitive (reading load, time pressure).
+- Accessibility, past the automated audit: a real screen reader pass (VoiceOver), a full keyboard-only game, phone layout, and testers with disabilities. Cognitive load: AI text reads at about grade 4–9 with sentences near 20 words; the decision builder wait is 30–40 seconds; no time limits. No audio, so hearing needs nothing extra.
 - A facilitator-view mockup, Giselle's spot-check of P8 marks, a retrospective.
 - **After class:** delete the Worker or revoke the key.
 

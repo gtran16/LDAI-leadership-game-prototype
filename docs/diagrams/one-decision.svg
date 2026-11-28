@@ -46,8 +46,9 @@
 <text x="640" y="140" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:14.5px;font-weight:700" fill="#0B3B36">5. Decide</text>
 <text x="640" y="160" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#0B3B36">Pick or write the</text>
 <text x="640" y="176" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#0B3B36">plan, trade-off and</text>
-<text x="640" y="192" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#0B3B36">first words. Rate how</text>
-<text x="640" y="208" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#0B3B36">complete it is (D3-6).</text>
+<text x="640" y="192" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#0B3B36">first words. Tick the</text>
+<text x="640" y="208" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#0B3B36">checklist (D3-6).</text>
+<text x="640" y="224" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#0B3B36">Frames in D4-5.</text>
 <rect x="814" y="514" width="168" height="140" rx="10" fill="#EEEEF2" stroke="#4B5563" stroke-width="2"/>
 <text x="824" y="536" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:14.5px;font-weight:700" fill="#1F2937">6a. Code judges</text>
 <text x="824" y="554" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:14.5px;font-weight:700" fill="#1F2937">(D1-2)</text>
@@ -66,10 +67,11 @@
 <rect x="998" y="514" width="168" height="140" rx="10" fill="#EEEEF2" stroke="#4B5563" stroke-width="2"/>
 <text x="1008" y="536" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:14.5px;font-weight:700" fill="#1F2937">7. Rules</text>
 <text x="1008" y="556" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#1F2937">Caps each move at 2,</text>
-<text x="1008" y="572" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#1F2937">falls back if the</text>
-<text x="1008" y="588" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#1F2937">judge moves nothing,</text>
-<text x="1008" y="604" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#1F2937">sets wellbeing, logs</text>
-<text x="1008" y="620" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#1F2937">completeness.</text>
+<text x="1008" y="572" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#1F2937">sets wellbeing,</text>
+<text x="1008" y="588" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#1F2937">drops a doubled</text>
+<text x="1008" y="604" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#1F2937">&quot;since last time&quot;,</text>
+<text x="1008" y="620" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#1F2937">compares ticks with</text>
+<text x="1008" y="636" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#1F2937">checks.</text>
 <rect x="998" y="316" width="168" height="140" rx="10" fill="#EFE9FF" stroke="#5B3DF5" stroke-width="2"/>
 <text x="1008" y="338" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:14.5px;font-weight:700" fill="#2A1A7A">8. Narrator</text>
 <text x="1008" y="358" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#2A1A7A">What happened, why</text>
@@ -79,9 +81,9 @@
 <rect x="1132" y="118" width="160" height="130" rx="10" fill="#CCFBF1" stroke="#0F766E" stroke-width="2"/>
 <text x="1142" y="140" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:14.5px;font-weight:700" fill="#0B3B36">9. Read the</text>
 <text x="1142" y="158" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:14.5px;font-weight:700" fill="#0B3B36">debrief</text>
-<text x="1142" y="178" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#0B3B36">Then the next</text>
-<text x="1142" y="194" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#0B3B36">decision, or the</text>
-<text x="1142" y="210" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#0B3B36">check-in after six.</text>
+<text x="1142" y="178" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#0B3B36">Your ticks next to</text>
+<text x="1142" y="194" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#0B3B36">the checks, then</text>
+<text x="1142" y="210" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#0B3B36">the next decision.</text>
 <line x1="248" y1="554" x2="262" y2="380" stroke="#1E1B3A" stroke-width="2" marker-end="url(#ah)"/>
 <line x1="430" y1="375" x2="446" y2="375" stroke="#1E1B3A" stroke-width="2" marker-end="url(#ah)"/>
 <line x1="530.0" y1="316" x2="530.0" y2="248" stroke="#1E1B3A" stroke-width="2" marker-end="url(#ah)"/>

@@ -40,6 +40,9 @@ One full game on GitHub Pages with live AI, answers written by Claude Code to ea
 ## Prompt review (Nov 27)
 All six prompts were reviewed as one unit (6,205 → 5,804 words). The review cut outputs nothing reads anymore (P7 spend, watching, grow and add; P2B protected_and_paid; P2A send.prompt). It made wellbeing code-only in P2B and P3, dropped the "up to 3" meter move, matched P2B's boss rule and event names to P3, moved repeated rules into SHARED, and moved P7's citation note into a code comment. Giselle approved every edit word for word. Checked by running each prompt, old and new, once through Claude Code subagents (Sonnet; Haiku for P8). All replies were valid JSON; P2B kept to its meter rules; P7's output was about half as long.
 
-## Still to log after the final playtest
-- The rest of the live run, and any other blocker fixes.
-- The tag `v1.0-class-submission`.
+## Release (Nov 27)
+| Area | What Claude Code produced | What Giselle decided or changed | How it was checked |
+|---|---|---|---|
+| Accessibility | A headless audit (`tests/a11y.js`) covering contrast, labels, headings, focus rings, reflow at 320 and 640 px, live regions and reduced motion, plus a reading-level estimate of AI text (grade 4–9). Fixed a low-contrast tag, the missing h1 on the 1:1 sheet, and reduced motion. | Raised that no accessibility testing had been done; asked for it before release. | Audit: no findings. A screen reader pass and testers with disabilities are still open. |
+| Docs and diagrams | How it's made (models, cost, frames), diagrams, README, CLAUDE.md and close-out updated to V4.10; demo screenshots regenerated. | Asked that everything depending on the changes be updated. | Diagrams rendered and checked; full test suite. |
+| Release | Tag `v1.0-class-submission`. | Called the release. | `npm test` green at the tag. |

@@ -30,15 +30,15 @@
 <line x1="440" y1="150.0" x2="450" y2="150.0" stroke="#1E1B3A" stroke-width="2" marker-end="url(#ah)"/>
 <rect x="450" y="84" width="132" height="132" rx="10" fill="#CCFBF1" stroke="#0F766E" stroke-width="2"/>
 <text x="460" y="106" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:14.5px;font-weight:700" fill="#0B3B36">Decisions 4-6</text>
-<text x="460" y="126" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#0B3B36">Write all three.</text>
-<text x="460" y="142" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#0B3B36">The judge marks</text>
-<text x="460" y="158" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#0B3B36">five checks.</text>
+<text x="460" y="126" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#0B3B36">Write all three:</text>
+<text x="460" y="142" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#0B3B36">frames in 4-5,</text>
+<text x="460" y="158" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#0B3B36">none in 6.</text>
 <line x1="582" y1="150.0" x2="592" y2="150.0" stroke="#1E1B3A" stroke-width="2" marker-end="url(#ah)"/>
 <rect x="592" y="84" width="132" height="132" rx="10" fill="#CCFBF1" stroke="#0F766E" stroke-width="2"/>
-<text x="602" y="106" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:14.5px;font-weight:700" fill="#0B3B36">Your own read</text>
+<text x="602" y="106" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:14.5px;font-weight:700" fill="#0B3B36">Your read</text>
 <text x="602" y="126" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#0B3B36">What went best,</text>
 <text x="602" y="142" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#0B3B36">what was hard,</text>
-<text x="602" y="158" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#0B3B36">your readiness</text>
+<text x="602" y="158" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#0B3B36">one change, your</text>
 <text x="602" y="174" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#0B3B36">call.</text>
 <line x1="724" y1="150.0" x2="734" y2="150.0" stroke="#1E1B3A" stroke-width="2" marker-end="url(#ah)"/>
 <rect x="734" y="84" width="132" height="132" rx="10" fill="#EEEEF2" stroke="#4B5563" stroke-width="2"/>
@@ -57,16 +57,18 @@
 <line x1="1008" y1="150.0" x2="1018" y2="150.0" stroke="#1E1B3A" stroke-width="2" marker-end="url(#ah)"/>
 <rect x="1018" y="84" width="132" height="132" rx="10" fill="#CCFBF1" stroke="#0F766E" stroke-width="2"/>
 <text x="1028" y="106" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:14.5px;font-weight:700" fill="#0B3B36">Last check</text>
-<text x="1028" y="126" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#0B3B36">The same scenario</text>
-<text x="1028" y="142" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#0B3B36">again, then</text>
-<text x="1028" y="158" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#0B3B36">before and after.</text>
+<text x="1028" y="126" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#0B3B36">After the story</text>
+<text x="1028" y="142" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#0B3B36">ends: the same</text>
+<text x="1028" y="158" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#0B3B36">scenario, then</text>
+<text x="1028" y="174" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#0B3B36">before and after.</text>
 <line x1="1150" y1="150.0" x2="1160" y2="150.0" stroke="#1E1B3A" stroke-width="2" marker-end="url(#ah)"/>
 <rect x="1160" y="84" width="132" height="132" rx="10" fill="#EEEEF2" stroke="#4B5563" stroke-width="2"/>
 <text x="1170" y="106" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:14.5px;font-weight:700" fill="#1F2937">1:1 sheet</text>
 <text x="1170" y="126" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#1F2937">Questions,</text>
 <text x="1170" y="142" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#1F2937">manager support,</text>
-<text x="1170" y="158" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#1F2937">reminders. No</text>
-<text x="1170" y="174" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#1F2937">game details.</text>
+<text x="1170" y="158" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#1F2937">reminders in your</text>
+<text x="1170" y="174" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#1F2937">words. No game</text>
+<text x="1170" y="190" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#1F2937">names.</text>
 <text x="24" y="246" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px;font-style:italic" fill="#5A5675">Support fades: you pick, then you write one part, then all three. A Skill guide with frames and worked examples sits beside every decision.</text>
 <text x="24" y="292" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:14px;font-weight:800;letter-spacing:1px" fill="#5A5675">WHERE IT RUNS (THE HOSTED LINK)</text>
 <rect x="24" y="306" width="300" height="170" rx="10" fill="#FFFFFF" stroke="#1E1B3A" stroke-width="2"/>
@@ -86,8 +88,8 @@
 <rect x="840" y="306" width="290" height="170" rx="10" fill="#FFFFFF" stroke="#1E1B3A" stroke-width="2"/>
 <text x="850" y="328" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:14.5px;font-weight:700" fill="#1E1B3A">Anthropic API</text>
 <text x="850" y="348" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#1E1B3A">Claude Sonnet 5.5: scene, options,</text>
-<text x="850" y="364" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#1E1B3A">judge, check-in. Claude Haiku 5.5:</text>
-<text x="850" y="380" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#1E1B3A">debrief and benchmark marks. Prepaid $10</text>
+<text x="850" y="364" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#1E1B3A">judge, debrief, check-in. Claude Haiku</text>
+<text x="850" y="380" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#1E1B3A">5.5: benchmark marks. Prepaid $10</text>
 <text x="850" y="396" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#1E1B3A">budget, no auto-reload.</text>
 <line x1="324" y1="370" x2="440" y2="370" stroke="#1E1B3A" stroke-width="2" marker-end="url(#ah)"/>
 <text x="382" y="360" text-anchor="middle" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12px;font-style:italic" fill="#5A5675">your text</text>
@@ -114,9 +116,9 @@
 <rect x="460" y="536" width="420" height="100" rx="10" fill="#EEEEF2" stroke="#4B5563" stroke-width="2"/>
 <text x="470" y="558" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:14.5px;font-weight:700" fill="#1F2937">Code keeps the score</text>
 <text x="470" y="578" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#1F2937">Meter limits, wellbeing, the verdict, decisions 1-2, the</text>
-<text x="470" y="594" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#1F2937">completeness read, the 1:1 sheet, the daily cap.</text>
+<text x="470" y="594" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#1F2937">checklist read, the 1:1 sheet, the daily cap.</text>
 <rect x="896" y="536" width="400" height="100" rx="10" fill="#CCFBF1" stroke="#0F766E" stroke-width="2"/>
 <text x="906" y="558" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:14.5px;font-weight:700" fill="#0B3B36">You decide</text>
 <text x="906" y="578" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#0B3B36">What to ask, what to do, what it costs, what to say,</text>
-<text x="906" y="594" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#0B3B36">and how complete you think it is.</text>
+<text x="906" y="594" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#0B3B36">and which parts you think you named.</text>
 </svg>

@@ -11,9 +11,9 @@ Colors: **teal is you**, **purple is AI**, **gray is code**.
 ![Nine steps across three lanes: code builds the prompt, AI writes the scene and options, you ask and decide, code or AI judges, code applies the rules, AI narrates, you read the debrief, and the loop repeats](diagrams/one-decision.svg)
 
 **Reading it**
-- **Every decision runs the same loop.** What changes is how much you write: decisions 1–2 you pick, decision 3 you write the trade-off and first words, decisions 4–6 you write all three.
+- **Every decision runs the same loop.** What changes is how much you write: decisions 1–2 you pick, decision 3 you write the trade-off and first words, decisions 4–6 you write all three (with optional frames in 4–5, none in 6).
 - **When you only pick (decisions 1–2), code judges** from the option itself. When you write anything, the AI judge marks five checks: protects, cost, who pays, plan, delivery.
-- **AI proposes and code decides.** The judge suggests meter moves; code caps them, sets wellbeing, and keeps the completeness read that feeds the verdict and the 1:1 sheet.
+- **AI proposes and code decides.** The judge suggests meter moves; code caps them, sets wellbeing, and compares your checklist ticks with the checks, which feeds the verdict and the 1:1 sheet.
 - **The loop carries forward.** The story log and meters go into the next scene, so it starts from what your last plan caused.
 
 Diagram source: `docs/diagrams/make_diagrams.py`.

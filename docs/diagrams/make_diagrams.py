@@ -67,16 +67,16 @@ b.append(box(X[1], L['ai'] + 26, bw, bh, 'ai', '2. Scenario builder', 'A memo, f
 b.append(box(X[2], L['ai'] + 26, bw, bh, 'ai', '3. Decision builder', 'Five options with meter moves and trade-offs, two first-line openings, a manager\'s advice.'))
 # you: ask + decide
 b.append(box(X[2], L['you'] + 22, bw, bh - 10, 'you', '4. Ask two questions', 'Each answer may reveal the hidden fact.'))
-b.append(box(X[3], L['you'] + 22, bw + 10, bh - 10, 'you', '5. Decide', 'Pick or write the plan, trade-off and first words. Rate how complete it is (D3-6).'))
+b.append(box(X[3], L['you'] + 22, bw + 10, bh - 10, 'you', '5. Decide', 'Pick or write the plan, trade-off and first words. Tick the checklist (D3-6). Frames in D4-5.'))
 # branch: code judge D1-2 / AI judge D3-6
 b.append(box(X[4], L['code'] + 30, bw, bh, 'code', '6a. Code judges (D1-2)', 'You picked everything, so the option\'s own moves and the opening\'s verdict apply.'))
 b.append(box(X[4], L['ai'] + 26, bw, bh, 'ai', '6b. Judge (D3-6)', 'Marks five checks, notes what you surfaced, proposes meter moves with reasons.'))
 # code: rules
-b.append(box(X[5], L['code'] + 30, bw, bh, 'code', '7. Rules', 'Caps each move at 2, falls back if the judge moves nothing, sets wellbeing, logs completeness.'))
+b.append(box(X[5], L['code'] + 30, bw, bh, 'code', '7. Rules', 'Caps each move at 2, sets wellbeing, drops a doubled "since last time", compares ticks with checks.'))
 # ai: narrator
 b.append(box(X[5], L['ai'] + 26, bw, bh, 'ai', '8. Narrator', 'What happened, why each meter moved, how your approach worked, another way.'))
 # you: debrief
-b.append(box(X[6] - 10, L['you'] + 22, bw - 8, bh - 10, 'you', '9. Read the debrief', 'Then the next decision, or the check-in after six.'))
+b.append(box(X[6] - 10, L['you'] + 22, bw - 8, bh - 10, 'you', '9. Read the debrief', 'Your ticks next to the checks, then the next decision.'))
 # arrows
 b.append(arrow(X[0] + bw, L['code'] + 70, X[1], L['ai'] + 90))
 b.append(arrow(X[1] + bw, L['ai'] + 85, X[2], L['ai'] + 85))
@@ -104,12 +104,12 @@ g.append(f'<text x="24" y="70" style="{FONT};font-size:14px;font-weight:800;lett
 steps = [('you', 'Benchmark', 'Answer one short scenario. AI marks protects, cost, who pays, delivery.'),
          ('you', 'Decisions 1-2', 'Pick the plan, the trade-off and the first words.'),
          ('you', 'Decision 3', 'Pick the plan; write the trade-off and first words.'),
-         ('you', 'Decisions 4-6', 'Write all three. The judge marks five checks.'),
-         ('you', 'Your own read', 'What went best, what was hard, your readiness call.'),
+         ('you', 'Decisions 4-6', 'Write all three: frames in 4-5, none in 6.'),
+         ('you', 'Your read', 'What went best, what was hard, one change, your call.'),
          ('code', 'Verdict', 'Meters out of the red, and 80% of written checks named.'),
          ('ai', 'Check-in', 'Noor\'s read and what happened next, fit to the verdict.'),
-         ('you', 'Last check', 'The same scenario again, then before and after.'),
-         ('code', '1:1 sheet', 'Questions, manager support, reminders. No game details.')]
+         ('you', 'Last check', 'After the story ends: the same scenario, then before and after.'),
+         ('code', '1:1 sheet', 'Questions, manager support, reminders in your words. No game names.')]
 sw, sh, gap = 132, 132, 10
 x = 24
 for i, (k, t, d) in enumerate(steps):
@@ -121,7 +121,7 @@ g.append(f'<text x="24" y="246" style="{FONT};font-size:12.5px;font-style:italic
 g.append(f'<text x="24" y="292" style="{FONT};font-size:14px;font-weight:800;letter-spacing:1px" fill="#5A5675">WHERE IT RUNS (THE HOSTED LINK)</text>')
 g.append(box(24, 306, 300, 170, 'infra', 'Your browser', 'One file, index.html, served by GitHub Pages. It holds the game, the world, all six prompts and the rules. It keeps the meters, story and run log in the browser. No accounts.', chars=40))
 g.append(box(440, 306, 300, 170, 'code', 'Relay: Cloudflare Worker', 'Answers only the game\'s page. Stops at 125 calls a day (about 5 games). Picks the model for each step and caps reply length. Holds the API key as a secret; the key never reaches the browser.', chars=40))
-g.append(box(840, 306, 290, 170, 'infra', 'Anthropic API', 'Claude Sonnet 5.5: scene, options, judge, check-in. Claude Haiku 5.5: debrief and benchmark marks. Prepaid $10 budget, no auto-reload.', chars=40))
+g.append(box(840, 306, 290, 170, 'infra', 'Anthropic API', 'Claude Sonnet 5.5: scene, options, judge, debrief, check-in. Claude Haiku 5.5: benchmark marks. Prepaid $10 budget, no auto-reload.', chars=40))
 g.append(arrow(324, 370, 440, 370, 'your text', lx=382, ly=360))
 g.append(arrow(440, 420, 324, 420, 'reply', lx=382, ly=440))
 g.append(arrow(740, 370, 840, 370, 'one call', lx=790, ly=360))
@@ -130,7 +130,7 @@ g.append(box(1150, 306, 146, 170, 'infra', 'claude.ai version', 'The same file a
 # what code owns vs AI owns
 g.append(f'<text x="24" y="522" style="{FONT};font-size:14px;font-weight:800;letter-spacing:1px" fill="#5A5675">WHO DECIDES WHAT</text>')
 g.append(box(24, 536, 420, 100, 'ai', 'AI writes and marks', 'Scenes, options, debriefs, the check-in, and what your written answers name. It can be wrong; every piece is labeled.', chars=58))
-g.append(box(460, 536, 420, 100, 'code', 'Code keeps the score', 'Meter limits, wellbeing, the verdict, decisions 1-2, the completeness read, the 1:1 sheet, the daily cap.', chars=58))
-g.append(box(896, 536, 400, 100, 'you', 'You decide', 'What to ask, what to do, what it costs, what to say, and how complete you think it is.', chars=55))
+g.append(box(460, 536, 420, 100, 'code', 'Code keeps the score', 'Meter limits, wellbeing, the verdict, decisions 1-2, the checklist read, the 1:1 sheet, the daily cap.', chars=58))
+g.append(box(896, 536, 400, 100, 'you', 'You decide', 'What to ask, what to do, what it costs, what to say, and which parts you think you named.', chars=55))
 open(os.path.join(OUT, 'whole-game.svg'), 'w').write(svg(W2, H2, '\n'.join(g), 'The whole game, and where it runs'))
 print('ok')

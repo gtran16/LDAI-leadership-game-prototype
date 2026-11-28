@@ -6,7 +6,8 @@
     "unit": "node tests/unit.js",
     "qa": "node tests/qa.js",
     "screens": "node tests/screens.js 1280 && node tests/screens.js 375",
-    "test": "node tests/unit.js && node tests/smoke.js && node tests/qa.js"
+    "test": "node tests/unit.js && node tests/smoke.js && node tests/qa.js && node tests/a11y.js",
+    "a11y": "node tests/a11y.js"
   },
   "devDependencies": {
     "playwright": "1.56.1"

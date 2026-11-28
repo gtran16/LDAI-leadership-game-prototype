@@ -5,12 +5,12 @@ A decision game for first-time managers. You play Cleo, a new support manager at
 **Play:** https://gtran16.github.io/LDAI-leadership-game-prototype/
 
 ## For testers
-- **Time:** about 45 minutes. Play on a laptop or desktop; the phone layout works but isn't polished yet.
+- **Time:** about 45 to 60 minutes. Play on a laptop or desktop; the phone layout works but isn't polished yet.
 - **What you'll do:**
   1. Answer a short benchmark scenario.
   2. Play six decisions: first you pick, then you write more yourself.
-  3. Read a readiness check-in.
-  4. Answer the benchmark again.
+  3. Give your own read, then read Noor's check-in and what happened next.
+  4. After the story ends, answer the benchmark again.
   5. Leave with a one-page sheet to bring to a 1:1 with your manager.
 - **What's sent to AI:** everything you type. That includes your plans, tradeoffs, first words, reflections and benchmark answers. It goes through a small relay server to Anthropic's API, and the relay doesn't store it. There are no accounts. Your browser keeps a run log of your last three games.
 - **Please don't type** real names or private details. The company and people are fictional.
@@ -23,7 +23,7 @@ A decision game for first-time managers. You play Cleo, a new support manager at
 |---|---|
 | `index.html` | The whole game: one file, no build step. Screens, world data, the six AI prompts and the rules. |
 | `worker/` | The Cloudflare Worker that relays AI calls. It answers only the game's page, caps calls per day, picks the model, and keeps the API key as a secret. |
-| `tests/` | `unit.js` (game logic), `smoke.js` (a full game at desktop and phone width with canned AI replies), `qa.js` (failure modes, navigation, the relay), `screens.js` (screenshots of every screen). |
+| `tests/` | `unit.js` (game logic), `smoke.js` (a full game at desktop and phone width with canned AI replies), `qa.js` (failure modes, navigation, the relay), `a11y.js` (contrast, labels, headings, keyboard focus, reflow, reduced motion), `screens.js` (screenshots of every screen). |
 | `docs/` | How it works (diagrams), the model choices, citations, the build log and the close-out. |
 
 ## Running the tests
