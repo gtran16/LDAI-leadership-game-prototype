@@ -1087,7 +1087,7 @@ const framesOn = () => G.n === 4 || G.n === 5;
 const frameBtn = (k, c) => framesOn() && !String(c[k] || '').trim() ? '<button class="ghost small" data-frame="' + k + '" style="align-self:flex-start">Start with a frame</button>' : '';
 /* V4.10: show the player how they used feedback. Last time's gaps before they write; what they fixed after. */
 function lastGaps() { const C = G.cal || [], x = C.find(e => e.n === G.n - 1); return x ? x.keys.filter(k => x.st[k] !== 'named') : []; }
-function fixedNow() { const C = G.cal || [], now = C.find(e => e.n === G.n); if (!now) return []; const before = C.filter(e => e.n < G.n); return now.keys.filter(k => now.st[k] === 'named' && before.some(e => e.keys.includes(k) && e.st[k] !== 'named')); }
+function fixedNow() { const C = G.cal || [], now = C.find(e => e.n === G.n); if (!now) return []; const before = C.filter(e => e.n < G.n); return now.keys.filter(k => { const last = before.filter(e => e.keys.includes(k)).pop(); return now.st[k] === 'named' && last && last.st[k] !== 'named'; }); } /* only when the most recent earlier answer missed it */
 const listWords = (a) => a.length < 2 ? a.join('') : a.slice(0, -1).join(', ') + ' and ' + a[a.length - 1];
 const ST_WORD = { named: 'Found', partly: 'Partly there', missing: 'Not found' };
 function tickRows(x) {

@@ -31,6 +31,12 @@ A factual record of how the game was built: what AI produced, what the designer 
 | Run-log review (Claude Code): business charged twice for one gap; boss never moved; the narrator told a story the player didn't write and misquoted them. | Code: since-last can't charge two in a row or a meter that just fell; the narrator sees no option stories for written plans; business starts at 6; P4 to Sonnet. Prompt (approved word for word): multi-step plans can move two meters; boss rises when told early, falls when left waiting. | Unit tests for each rule; one live game. |
 | Playtest notes (Giselle): long; the debrief drags; the game wants detail but doesn't say how much; show that feedback is being used. | V4.10: a checklist replaces the five-word rating; a length hint; frames in D4–5 (D6 free, Giselle's call); a "last time" note and "you fixed it"; check-in cut to Your read, Noor's read, What happened next, The game is over; the benchmark and the 1:1 sheet after the story; the player's own words on the sheet. | Unit 70, smoke, QA 23; one live game. |
 
+## V4.10 live run (Claude Code, Nov 27)
+One full game on GitHub Pages with live AI, answers written by Claude Code to each scene. 25 calls, no retries, no errors; about 7.5 minutes of machine time (the decision builder takes 30–41 seconds per decision). Verdict: Ready now. Checklist read: 17 of 19 parts matched.
+- **Worked:** the checklist, frames (blanks block commit), the "Last time" note, "You fixed it", no frames in D6, since-last no longer doubling up, boss moving both ways, the narrator telling the player's own plan, the check-in in three cards, the benchmark after the story, and names swapped on the 1:1 sheet.
+- **Fixed after the run:** "You fixed it" repeated for a part already fixed earlier.
+- **Open (prompt, needs review):** on Sonnet, the narrator skips "Another way:" on about half its plan and tradeoff lines. In D4–6 it points to "the written option", which the player never saw. Twice the boss line described Teo instead of Noor. "Lane" still shows up in AI text.
+
 ## Still to log after the final playtest
 - The rest of the live run, and any other blocker fixes.
 - The tag `v1.0-class-submission`.

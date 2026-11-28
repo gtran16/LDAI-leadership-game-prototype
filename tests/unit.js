@@ -40,6 +40,7 @@ const path = require('path');
     G.n = 4; eq('lastGaps: what decision 3 missed', T.lastGaps(), ['who_pays', 'delivery_check']);
     eq('fixedNow: who pays found this time', T.fixedNow(), ['who_pays']);
     G.n = 5; eq('lastGaps: what decision 4 missed', T.lastGaps(), ['plan_check', 'delivery_check']);
+    G.cal.push(ce(5, ALL(true), ALL('named')), ce(6, ALL(true), ALL('named'))); G.n = 6; eq('fixedNow: not repeated once already fixed', T.fixedNow(), []);
     // Since-last enforced in code
     const sceneWith = (sl) => ({ D: { sinceLast: sl } });
     G.dec = { 4: sceneWith({ key: 'business', d: -1, reason: 'x', applied: -1 }), 5: sceneWith(null) };
