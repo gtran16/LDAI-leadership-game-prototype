@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1320" height="690" viewBox="0 0 1320 690" role="img" aria-label="One decision: who does what">
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1E1B3A"/></marker></defs>
+<rect width="1320" height="690" fill="#FFFDF6"/>
+<text x="24" y="34" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:22px;font-weight:800" fill="#1E1B3A">One decision: who does what</text>
+<text x="24" y="56" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:13px" fill="#5A5675">Six decisions run this loop. The story log grows each time, and the next scene starts from what your last plan caused.</text>
+<text x="900" y="50" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:13px;font-weight:700" fill="#1E1B3A">Color key</text>
+<rect x="980" y="36" width="18" height="18" rx="4" fill="#CCFBF1" stroke="#0F766E" stroke-width="2"/><text x="1006" y="50" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:13px" fill="#1E1B3A">You, the player</text>
+<rect x="1140.5" y="36" width="18" height="18" rx="4" fill="#EFE9FF" stroke="#5B3DF5" stroke-width="2"/><text x="1166.5" y="50" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:13px" fill="#1E1B3A">AI</text>
+<rect x="1203.5" y="36" width="18" height="18" rx="4" fill="#EEEEF2" stroke="#4B5563" stroke-width="2"/><text x="1229.5" y="50" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:13px" fill="#1E1B3A">Code</text>
+<rect x="20" y="106" width="1280" height="170" rx="12" fill="#CCFBF1" opacity="0.35"/>
+<text x="46" y="130" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:13px;font-weight:800;letter-spacing:2px" fill="#0F766E">YOU</text>
+<rect x="20" y="300" width="1280" height="170" rx="12" fill="#EFE9FF" opacity="0.35"/>
+<text x="46" y="324" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:13px;font-weight:800;letter-spacing:2px" fill="#5B3DF5">AI</text>
+<rect x="20" y="494" width="1280" height="170" rx="12" fill="#EEEEF2" opacity="0.35"/>
+<text x="46" y="518" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:13px;font-weight:800;letter-spacing:2px" fill="#4B5563">CODE</text>
+<rect x="80" y="514" width="168" height="140" rx="10" fill="#EEEEF2" stroke="#4B5563" stroke-width="2"/>
+<text x="90" y="536" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:14.5px;font-weight:700" fill="#1F2937">1. Build the</text>
+<text x="90" y="554" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:14.5px;font-weight:700" fill="#1F2937">prompt</text>
+<text x="90" y="574" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#1F2937">World and cast, the</text>
+<text x="90" y="590" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#1F2937">plan for this</text>
+<text x="90" y="606" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#1F2937">decision, the story</text>
+<text x="90" y="622" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#1F2937">so far, meter words.</text>
+<rect x="262" y="316" width="168" height="140" rx="10" fill="#EFE9FF" stroke="#5B3DF5" stroke-width="2"/>
+<text x="272" y="338" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:14.5px;font-weight:700" fill="#2A1A7A">2. Scenario</text>
+<text x="272" y="356" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:14.5px;font-weight:700" fill="#2A1A7A">builder</text>
+<text x="272" y="376" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#2A1A7A">A memo, four</text>
+<text x="272" y="392" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#2A1A7A">questions, one</text>
+<text x="272" y="408" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#2A1A7A">hidden fact, and a</text>
+<text x="272" y="424" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#2A1A7A">&quot;since last time&quot;</text>
+<text x="272" y="440" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#2A1A7A">nudge.</text>
+<rect x="446" y="316" width="168" height="140" rx="10" fill="#EFE9FF" stroke="#5B3DF5" stroke-width="2"/>
+<text x="456" y="338" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:14.5px;font-weight:700" fill="#2A1A7A">3. Decision</text>
+<text x="456" y="356" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:14.5px;font-weight:700" fill="#2A1A7A">builder</text>
+<text x="456" y="376" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#2A1A7A">Five options with</text>
+<text x="456" y="392" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#2A1A7A">meter moves and</text>
+<text x="456" y="408" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#2A1A7A">trade-offs, two</text>
+<text x="456" y="424" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#2A1A7A">first-line openings,</text>
+<text x="456" y="440" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#2A1A7A">a manager&#x27;s advice.</text>
+<rect x="446" y="118" width="168" height="130" rx="10" fill="#CCFBF1" stroke="#0F766E" stroke-width="2"/>
+<text x="456" y="140" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:14.5px;font-weight:700" fill="#0B3B36">4. Ask two</text>
+<text x="456" y="158" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:14.5px;font-weight:700" fill="#0B3B36">questions</text>
+<text x="456" y="178" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#0B3B36">Each answer may</text>
+<text x="456" y="194" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#0B3B36">reveal the hidden</text>
+<text x="456" y="210" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#0B3B36">fact.</text>
+<rect x="630" y="118" width="178" height="130" rx="10" fill="#CCFBF1" stroke="#0F766E" stroke-width="2"/>
+<text x="640" y="140" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:14.5px;font-weight:700" fill="#0B3B36">5. Decide</text>
+<text x="640" y="160" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#0B3B36">Pick or write the</text>
+<text x="640" y="176" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#0B3B36">plan, trade-off and</text>
+<text x="640" y="192" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#0B3B36">first words. Rate how</text>
+<text x="640" y="208" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#0B3B36">complete it is (D3-6).</text>
+<rect x="814" y="514" width="168" height="140" rx="10" fill="#EEEEF2" stroke="#4B5563" stroke-width="2"/>
+<text x="824" y="536" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:14.5px;font-weight:700" fill="#1F2937">6a. Code judges</text>
+<text x="824" y="554" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:14.5px;font-weight:700" fill="#1F2937">(D1-2)</text>
+<text x="824" y="574" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#1F2937">You picked</text>
+<text x="824" y="590" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#1F2937">everything, so the</text>
+<text x="824" y="606" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#1F2937">option&#x27;s own moves</text>
+<text x="824" y="622" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#1F2937">and the opening&#x27;s</text>
+<text x="824" y="638" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#1F2937">verdict apply.</text>
+<rect x="814" y="316" width="168" height="140" rx="10" fill="#EFE9FF" stroke="#5B3DF5" stroke-width="2"/>
+<text x="824" y="338" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:14.5px;font-weight:700" fill="#2A1A7A">6b. Judge (D3-6)</text>
+<text x="824" y="358" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#2A1A7A">Marks five checks,</text>
+<text x="824" y="374" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#2A1A7A">notes what you</text>
+<text x="824" y="390" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#2A1A7A">surfaced, proposes</text>
+<text x="824" y="406" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#2A1A7A">meter moves with</text>
+<text x="824" y="422" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#2A1A7A">reasons.</text>
+<rect x="998" y="514" width="168" height="140" rx="10" fill="#EEEEF2" stroke="#4B5563" stroke-width="2"/>
+<text x="1008" y="536" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:14.5px;font-weight:700" fill="#1F2937">7. Rules</text>
+<text x="1008" y="556" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#1F2937">Caps each move at 2,</text>
+<text x="1008" y="572" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#1F2937">falls back if the</text>
+<text x="1008" y="588" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#1F2937">judge moves nothing,</text>
+<text x="1008" y="604" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#1F2937">sets wellbeing, logs</text>
+<text x="1008" y="620" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#1F2937">completeness.</text>
+<rect x="998" y="316" width="168" height="140" rx="10" fill="#EFE9FF" stroke="#5B3DF5" stroke-width="2"/>
+<text x="1008" y="338" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:14.5px;font-weight:700" fill="#2A1A7A">8. Narrator</text>
+<text x="1008" y="358" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#2A1A7A">What happened, why</text>
+<text x="1008" y="374" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#2A1A7A">each meter moved,</text>
+<text x="1008" y="390" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#2A1A7A">how your approach</text>
+<text x="1008" y="406" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#2A1A7A">worked, another way.</text>
+<rect x="1132" y="118" width="160" height="130" rx="10" fill="#CCFBF1" stroke="#0F766E" stroke-width="2"/>
+<text x="1142" y="140" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:14.5px;font-weight:700" fill="#0B3B36">9. Read the</text>
+<text x="1142" y="158" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:14.5px;font-weight:700" fill="#0B3B36">debrief</text>
+<text x="1142" y="178" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#0B3B36">Then the next</text>
+<text x="1142" y="194" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#0B3B36">decision, or the</text>
+<text x="1142" y="210" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px" fill="#0B3B36">check-in after six.</text>
+<line x1="248" y1="554" x2="262" y2="380" stroke="#1E1B3A" stroke-width="2" marker-end="url(#ah)"/>
+<line x1="430" y1="375" x2="446" y2="375" stroke="#1E1B3A" stroke-width="2" marker-end="url(#ah)"/>
+<line x1="530.0" y1="316" x2="530.0" y2="248" stroke="#1E1B3A" stroke-width="2" marker-end="url(#ah)"/>
+<line x1="614" y1="171" x2="630" y2="171" stroke="#1E1B3A" stroke-width="2" marker-end="url(#ah)"/>
+<path d="M808,156 C854,156 854,280 874,316" fill="none" stroke="#1E1B3A" stroke-width="2" marker-end="url(#ah)"/>
+<text x="884" y="298" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12px;font-style:italic" fill="#5A5675">you wrote a part</text>
+<path d="M670,248 C670,504 774,544 814,554" fill="none" stroke="#1E1B3A" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#ah)"/>
+<text x="636" y="508" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12px;font-style:italic" fill="#5A5675">all picked (D1-2)</text>
+<line x1="982" y1="375" x2="998" y2="554" stroke="#1E1B3A" stroke-width="2" marker-end="url(#ah)"/>
+<line x1="982" y1="579" x2="998" y2="579" stroke="#1E1B3A" stroke-width="2" marker-end="url(#ah)"/>
+<line x1="1082.0" y1="514" x2="1082.0" y2="456" stroke="#1E1B3A" stroke-width="2" marker-end="url(#ah)"/>
+<line x1="1166" y1="360" x2="1152" y2="248" stroke="#1E1B3A" stroke-width="2" marker-end="url(#ah)"/>
+<path d="M1202,118 L1202,88 L32,88 L32,584 L80,584" fill="none" stroke="#1E1B3A" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#ah)"/>
+<text x="640" y="82" text-anchor="middle" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12px;font-style:italic" fill="#5A5675">next decision: the story log and meters carry forward</text>
+</svg>
