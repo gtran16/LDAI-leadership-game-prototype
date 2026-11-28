@@ -103,6 +103,7 @@ It runs unit, then smoke, then QA. Run it after every change; it must pass befor
 - The practice minigames (5 rounds per skill: 2 fixed, 3 written) on the Skills page.
 - The mobile layout: the left panel sits above the scene at phone width.
 - A second repo for the real game: split the prompts and world into files, RunPod hosting with open-weight models.
+- Meters versus decision skill: players may play the meters instead of practicing the decision. Explore making the three skill checks the main feedback and the meters the consequence (mockups first).
 - An accessibility review: low vision (contrast, zoom, screen reader), hearing, physical (keyboard only), cognitive (reading load, time pressure).
 - A facilitator-view mockup, Giselle's spot-check of P8 marks, a retrospective.
 - **After class:** delete the Worker or revoke the key.
