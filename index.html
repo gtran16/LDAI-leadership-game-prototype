@@ -1038,7 +1038,7 @@ function verdictOf() {
   const noneLeft = keys.filter(k => end[k] <= 4).length <= 1;
   const n = (noRed ? 1 : 0) + (noneLeft ? 1 : 0);
   const C = G.cal || [], tot = C.reduce((a, x) => a + x.named + x.partly + x.missing, 0), named = C.reduce((a, x) => a + x.named, 0);
-  const writing = !tot || named / tot >= 0.5; /* Nov 27: meters keep it from being harsh; the writing keeps it honest */
+  const writing = !tot || named / tot >= 0.8; /* Nov 27 (Giselle): Ready now needs 80% of written checks named; meters keep it from being harsh */
   return n === 2 ? (writing ? 'ready' : 'support') : n === 1 ? 'support' : 'keep_building';
 }
 const VERDICT = { ready: 'Ready now', support: 'Ready with support', keep_building: 'Practice more at this level' };

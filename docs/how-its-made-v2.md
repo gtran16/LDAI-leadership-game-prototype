@@ -60,7 +60,7 @@ This replaces `how-its-made-changes.md`, which only patched the old page. Nothin
 - **The AI can misread you.** The check-in is told to use only your own words and the story, but read it with that in mind.
 - **The meters are a simplification.** Real teams don't move one step at a time.
 - **The benchmark is the same scenario both times.** Some change may come from seeing it twice.
-- **The readiness verdict is a rough read, not a grade.** It comes from your meters, plus whether about half of the checks on your written answers were fully named.
+- **The readiness verdict is a rough read, not a grade.** It comes from your meters, plus whether at least 80% of the checks on your written answers were fully named.
 - **Six decisions is a short practice.** You write the plan three times, and the trade-off and your first words four times each.
 - **A small test group.** The game was tested with a small number of players, in plain English.
 
