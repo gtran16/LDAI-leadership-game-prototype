@@ -29,7 +29,7 @@ Draft, filled in as the session goes. Giselle carries it to the Project Kit trac
 - [ ] Final playtest on the hosted page
 - [ ] How it's made page updates (draft in how-its-made-changes.md)
 - [x] Bring-your-own-key fallback: dropped for the freeze
-- [ ] Deploy: API key, KV namespace, Worker, Pages
+- [x] Deploy: API key (prepaid $10, auto-reload off), KV namespace, Worker at https://leadership-game-ai.leadership-game-ai.workers.dev, Pages live with AI (checked end to end Nov 27)
 - [ ] Live check, README for testers, build log, tag
 
 ## After freeze

@@ -29,7 +29,8 @@ export default {
     const origin = request.headers.get('origin') || '';
     const allowed = (env.ALLOWED_ORIGINS || '').split(',').map(s => s.trim()).filter(Boolean);
     if (!allowed.includes(origin)) return new Response('Forbidden', { status: 403 });
-    if (request.method === 'OPTIONS') return reply({}, 204, origin);
+    /* Browser preflight: a 204 must have no body, or the Workers runtime throws and the browser sees 'Failed to fetch'. */
+    if (request.method === 'OPTIONS') return new Response(null, { status: 204, headers: { 'access-control-allow-origin': origin, 'access-control-allow-methods': 'POST, OPTIONS', 'access-control-allow-headers': 'content-type', 'access-control-max-age': '86400', vary: 'Origin' } });
     if (request.method !== 'POST') return reply({ error: 'POST only' }, 405, origin);
 
     let body;
