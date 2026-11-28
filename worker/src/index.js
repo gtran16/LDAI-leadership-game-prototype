@@ -45,7 +45,8 @@ export default {
     if (used >= cap) return reply({ error: 'daily_cap', message: 'The shared AI budget for today is used up.' }, 429, origin);
     await env.USAGE.put(day, String(used + 1), { expirationTtl: 60 * 60 * 48 });
 
-    const client = new Anthropic({ apiKey: env.ANTHROPIC_API_KEY });
+    /* An org-level key must name its workspace on every request (Anthropic returns 400 otherwise). */
+    const client = new Anthropic({ apiKey: env.ANTHROPIC_API_KEY, defaultHeaders: env.ANTHROPIC_WORKSPACE_ID ? { 'anthropic-workspace-id': env.ANTHROPIC_WORKSPACE_ID } : {} });
     try {
       const params = { model: tier.model, max_tokens: tier.max_tokens, thinking: tier.thinking, messages: [{ role: 'user', content: prompt }] };
       if (tier.output_config) params.output_config = tier.output_config;
@@ -55,7 +56,7 @@ export default {
       return reply({ text, truncated: msg.stop_reason === 'max_tokens' }, 200, origin);
     } catch (e) {
       if (e instanceof Anthropic.RateLimitError) return reply({ error: 'rate_limited' }, 429, origin);
-      if (e instanceof Anthropic.APIError) return reply({ error: 'api_error', status: e.status }, 502, origin);
+      if (e instanceof Anthropic.APIError) return reply({ error: 'api_error', status: e.status, detail: String((e.error && e.error.error && e.error.error.message) || e.message || '').slice(0, 300) }, 502, origin);
       return reply({ error: 'worker_error' }, 500, origin);
     }
   }

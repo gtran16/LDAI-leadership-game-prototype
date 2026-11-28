@@ -6,6 +6,8 @@ compatibility_date = "2026-11-01"
 # The GitHub Pages origin, no trailing slash. Add http://localhost:8000 while testing locally.
 ALLOWED_ORIGINS = "https://gtran16.github.io"
 DAILY_CALL_CAP = "125"
+# Not a secret: the workspace the API key spends from (Console: Settings -> Workspaces, the ID starts with wrkspc_).
+ANTHROPIC_WORKSPACE_ID = "wrkspc_01GCfjeat5X6CQtTQ6rSeCAv"
 
 # Create once with: npx wrangler kv namespace create USAGE   then paste the id here.
 [[kv_namespaces]]
