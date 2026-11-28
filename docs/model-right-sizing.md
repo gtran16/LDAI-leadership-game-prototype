@@ -1,6 +1,6 @@
 # Model right-sizing (Nov 27)
 
-Status: approved by Giselle, Nov 27. Prices come from a live fetch of Anthropic's pricing page on Nov 27. Token counts are estimates from reading each prompt and its output spec, not measured.
+Status: approved by Giselle, Nov 27, and live on the hosted link (Cloudflare Worker, workspace-scoped header, thinking off). Prices come from a live fetch of Anthropic's pricing page on Nov 27. Token counts are estimates from reading each prompt and its output spec, not measured.
 
 ## Recommendation: keep the current tier map
 
@@ -13,11 +13,13 @@ Status: approved by Giselle, Nov 27. Prices come from a live fetch of Anthropic'
 | P3 judge | Sonnet 5.5 | 5.5K / 0.7K | Drives the meters; exact quotes; judges only what the player could see | Qwen3-235B-A22B |
 | P4 narrator | Haiku 5.5 | 6.5K / 0.35K | Short, bounded output (close call; see below) | Qwen3-30B-A3B |
 | P7 readiness check-in | Sonnet 5.5 | 8K / 0.9K | Runs once; long synthesis that must check its own quotes | Qwen3-235B-A22B |
-| P8 quick-check judge | Haiku 5.5 | 0.4K / 0.15K | Three named / partly / missing labels | Qwen3-8B or Llama-3.1-8B |
+| P8 quick-check judge | Haiku 5.5 | 0.4K / 0.15K | Four named / partly / missing labels (protects, cost, who pays, delivery) | Qwen3-8B or Llama-3.1-8B |
 
 Opus is not needed for any call. The open-weight names come from model knowledge, not a check; recheck them before RunPod work.
 
 ## Cost
+
+Six decisions make about 25 calls a game: 6 scenario builder, 6 decision builder, 4 judge (decisions 3 to 6), 6 narrator, 1 check-in and 2 quick checks. The original estimate below assumed about 22 calls.
 
 - **Per game:** about $0.45.
 - **5 games a day, every day:** about $67 a month. The $10 Console limit would stop it on day 4 or 5.

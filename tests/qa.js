@@ -123,7 +123,7 @@ async function answer(g, text) {
   await g.page.close();
 
   // 10. No live AI: clear message, no crash
-  g = await newGame(browser, { noAI: true }); await g.page.goto(FILE + '#play'); await g.page.waitForTimeout(300);
+  g = await newGame(browser, { noAI: true }); await g.page.goto(FILE); await g.page.evaluate(() => { LG.WORKER_URL = ''; LG._s = null; }); await g.page.evaluate(() => { location.hash = 'play'; }); await g.page.waitForTimeout(300);
   await g.act('pcSkip').click(); await g.act('skipIntro').click(); await g.act('beginGame').click();
   check('No AI: shows "Live AI isn’t available"', await g.page.getByText('Live AI isn’t available').count());
   check('No AI: status says not available', /not available/.test(await g.page.locator('#status').textContent()));

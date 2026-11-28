@@ -200,67 +200,6 @@ button,textarea,input,select{font-family:inherit}
 .app-game{min-height:calc(100vh - 60px)}
 
 
-/* ===== Practice styles (scoped to .app-practice) ===== */
-.app-practice, .app-practice *{box-sizing:border-box}
-.app-practice{color-scheme:light}
-.app-practice{margin:0;background:#FFF7E6;color:#1E1B3A;font-family:Nunito,system-ui,sans-serif;font-size:17px;line-height:1.55;font-weight:500}
-.app-practice button,.app-practice textarea,.app-practice input{font-family:inherit}
-.app-practice :focus-visible{outline:3px solid #5B3DF5;outline-offset:3px}
-.app-practice .bar{background:#1E1B3A}
-.app-practice .barin{max-width:1180px;margin:0 auto;padding:6px 24px;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:60px;flex-wrap:wrap}
-.app-practice .brand{display:flex;align-items:center;gap:10px;font-weight:900;font-size:19px;color:#fff}
-.app-practice .mark{width:28px;height:28px;border-radius:9px;background:#FFC93C;border:2px solid #fff;transform:rotate(-8deg)}
-.app-practice .status{font-size:13px;font-weight:800;padding:4px 12px;border-radius:999px;border:2px solid #fff;color:#1E1B3A;background:#CFCBF5}
-.app-practice .layout{max-width:1440px;margin:0 auto;padding:20px 24px 96px;display:grid;grid-template-columns:300px minmax(0,1fr) 300px;gap:24px;align-items:start}
-@media (max-width:1100px){.app-practice .layout{grid-template-columns:minmax(0,1fr)}
-}
-.app-practice .main{display:flex;flex-direction:column;gap:20px;min-width:0}
-.app-practice .side{position:sticky;top:16px;display:flex;flex-direction:column;gap:12px}
-@media (max-width:1100px){.app-practice .side{position:static}
-}
-.app-practice .pills{display:flex;flex-wrap:wrap;gap:6px}
-.app-practice .pill{min-height:40px;padding:0 12px;border:2px solid #1E1B3A;border-radius:10px;font-size:14px;font-weight:800;cursor:pointer;background:#fff;color:#1E1B3A}
-.app-practice .pill[aria-current="step"]{background:#FFC93C}
-.app-practice .eyebrow{font-size:12px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:#5A5675}
-.app-practice .lab{font-size:13px;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:#5A5675}
-.app-practice .muted{color:#5A5675}
-.app-practice .card{background:#fff;border:2px solid #1E1B3A;border-radius:18px;padding:18px 20px;box-shadow:0 4px 0 #1E1B3A;display:flex;flex-direction:column;gap:10px}
-.app-practice .sofar{padding:12px 16px;border-radius:14px;background:#F1ECFF;border:2px solid #1E1B3A;font-size:16px}
-.app-practice .para{margin:0;font-size:18px;line-height:1.65}
-.app-practice h2{margin:0;font-size:21px;font-weight:900}
-.app-practice .opt{display:flex;align-items:flex-start;gap:12px;width:100%;min-height:56px;padding:12px 16px;border-radius:14px;text-align:left;font-size:16px;line-height:1.5;font-weight:700;color:#1E1B3A;cursor:pointer;border:2px solid #1E1B3A;background:#fff}
-.app-practice .opt:hover:not([disabled]){background:#FFF1C2}
-.app-practice .opt[disabled]{cursor:default}
-.app-practice .opt.on{background:#FFE9A8}
-.app-practice .opt.dim{opacity:.45}
-.app-practice .letter,.app-practice .av{flex:none;width:28px;height:28px;border-radius:50%;border:2px solid #1E1B3A;display:inline-flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;background:#fff}
-.app-practice .av{background:#C9B8FF}
-.app-practice .answer{margin:0 0 0 14px;padding:10px 14px;border-radius:14px;background:#fff;border:2px solid #1E1B3A;font-size:16px}
-.app-practice .verdict{margin-left:40px;padding:8px 12px;border-radius:10px;border:2px solid #1E1B3A;font-size:15px}
-.app-practice .field{width:100%;min-height:48px;padding:10px 14px;border:2px solid #1E1B3A;border-radius:12px;background:#fff;color:#1E1B3A;font-size:16px}
-.app-practice .grow{resize:none;overflow:hidden;line-height:1.5;display:block}
-.app-practice .field[disabled],.app-practice .ta[disabled]{background:#F6F1E4;color:#3B3760}
-.app-practice .ta{width:100%;padding:12px 14px;border:2px solid #1E1B3A;border-radius:14px;background:#fff;color:#1E1B3A;font-size:16px;line-height:1.5;resize:vertical}
-.app-practice .btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 24px;border:2px solid #1E1B3A;border-radius:14px;background:#5B3DF5;color:#fff;font-size:17px;font-weight:800;cursor:pointer;box-shadow:0 4px 0 #1E1B3A}
-.app-practice .btn:hover:not([disabled]){background:#4A2DE0}
-.app-practice .btn[disabled]{opacity:.45;cursor:not-allowed}
-.app-practice .ghost{min-height:44px;padding:0 6px;border:none;background:none;color:#5B3DF5;font-size:15px;font-weight:800;cursor:pointer;align-self:flex-start}
-.app-practice .ai{border:2px dashed #1E1B3A;border-radius:18px;padding:18px 20px;background:#FFFDF6;display:flex;flex-direction:column;gap:10px}
-.app-practice .chip{display:inline-flex;align-items:center;padding:3px 12px;border-radius:999px;font-size:13px;font-weight:800;border:2px solid #1E1B3A}
-.app-practice .chip.live{background:#E6F5EC;color:#0E7A4D}
-.app-practice .chip.capt{background:#FFF4D6;color:#7A4A00}
-.app-practice .chip.ai{background:#EFE9FF;color:#3A24B8}
-.app-practice .panel{background:#fff;border:2px solid #1E1B3A;border-radius:16px;padding:14px 16px;display:flex;flex-direction:column;gap:8px;font-size:15px}
-.app-practice details{border-top:1px dashed #1E1B3A;padding-top:8px;font-size:14px}
-.app-practice summary{cursor:pointer;font-weight:800;color:#5B3DF5;min-height:32px}
-.app-practice pre{white-space:pre-wrap;word-break:break-word;background:#fff;border:1px solid #CFC3A5;border-radius:10px;padding:10px;font-size:12px;line-height:1.45;max-height:420px;overflow:auto}
-.app-practice .spin{display:inline-block;width:16px;height:16px;border:3px solid #CFCBF5;border-top-color:#5B3DF5;border-radius:50%;animation:s 0.8s linear infinite;vertical-align:-3px;margin-right:6px}
-@keyframes s{to{transform:rotate(360deg)}}
-.app-practice .err{background:#FDECEA;border:2px solid #B42318;border-radius:12px;padding:10px 14px;font-size:15px}
-.app-practice .glance{display:flex;flex-direction:column;gap:3px;padding:6px 0;border-top:1px solid #CFC3A5}
-.app-practice .tag{padding:0 8px;border-radius:999px;border:1px solid #1E1B3A;font-size:12px;font-weight:700}
-.app-practice{min-height:calc(100vh - 60px)}
-
 </style>
 <style>
 /* ===== V4: help drawer, option tradeoff lines ===== */
@@ -752,7 +691,6 @@ const SKILLS = {
   'Setting direction': [['Restate the goal', 'Say a business goal in plain words'], ['Turn it into priorities', 'Make two or three priorities your team can use'], ['Name assumptions', 'Say what you are assuming out loud'], ['Connect to why', 'Link the goal to what the company is pushing on'], ['Adjust', 'Change direction when an assumption fails']],
   'Business communication and influence': [['Give a clear update', 'Report wins, progress and risks'], ['Make a case', 'Ask for something with options and cost'], ['Say bad news early', 'Escalate at the right time'], ['Align with peers', 'Build agreement when interests conflict'], ['Advocate without crying wolf', 'Ask for what your team needs and protect your credibility']],
   'Systems and leverage': [['Spot the pattern', 'Notice when the same issue lands for the third time'], ['Choose the mechanism', 'Pick a rule, tool or habit that stops the repeat'], ['Write the guardrail', 'Say what the fix must not break'], ['Name an owner', 'Give the fix a person who keeps it running'], ['Connect people', 'Link teams that solve the same problem']] };
-const PRACTICE_URL = '#practice';
 const CONF = ['Missing a lot', 'Missing some', 'About half there', 'Mostly complete', 'Complete']; /* Nov 27: how complete the player says their answer is; compared in code with the judge's checks */
 const ROLE = { you: ['#CCFBF1', '#0F766E', 'You'], team: ['#DBEAFE', '#2563EB', 'Your team'], boss: ['#FDE7C7', '#B45309', 'Your boss'], peer: ['#FCE7F3', '#BE185D', 'Your peer'] };
 const WHO = { Remi: 'team', Jan: 'team', Ravi: 'team', Noor: 'boss', Teo: 'peer', Cleo: 'you', You: 'you' };
@@ -767,12 +705,6 @@ const CHAPTERS = {
   1: { title: 'First calls', range: '1 to 3', lead: 'In this chapter you choose from written plans. Each one shows what it protects, what it costs and who pays, and two ways to share it.', changes: [['Spend and restore.', 'You can\u2019t keep all four meters at the top. Keep every one out of the red, and go back for the one you spent.'], ['Ask two questions first.', 'Every scene starts with what you find out.'], ['Pick a plan.', 'Each option shows its trade-off.'], ['Share your choice.', 'Two ways to say it. One tends to land; one is a common trap.']] },
   2: { title: 'Your words', range: '4 to 6', lead: 'From here, you choose which parts to write yourself. Each part can use the written option or your own words.', changes: [['Mix and match.', 'For the plan, the trade-off and how you share it, pick the option or write your own.'], ['You can take a break.', 'Stepping away is now one of your options.'], ['You can ask for advice.', 'See what other managers would ask: a question and half a sentence.']] },
   3: { title: 'Your call', range: '7 to 10', lead: 'Year two. Everything is in your own words now.', changes: [['You write the plan.', 'The way you would at work.'], ['One box for the trade-off.', 'Protect, cost and who pays, together.'], ['Advice is still there.', 'For the plan, the trade-off and how you share it.'], ['A readiness check-in ends the level.', 'Your own read first, then Noor\u2019s.']] } };
-const TIPS = {
-  1: [['scene', 'Ask two questions', 'Before you decide, ask two questions. Someone may know a fact that changes your call.'], ['decide', 'How sure are you?', 'Pick how likely your plan is to work. You’ll see later how your read compared to what happened.'], ['debrief', 'Four meters, no score', 'Your team, your boss, the business and you. Every choice moves all four. You can\u2019t keep all four at the top: each month you spend one to protect another. Keep every meter out of the red, and go back for the one you spent.']],
-  6: [['decide', 'New: you write the trade-off', 'The options stay, but you say what it protects, what it costs and who pays. Short and plain is enough.'], ['decide', 'New: you can take a break', 'Stepping away, for you or the team, is now one of your options.'], ['decide', 'New: you can ask for advice', 'Stuck on a box? Ask a manager you trust. You get a question and half a sentence.']],
-  7: [['decide', 'New: you write your first words', 'No more picking an opening. Write what you would say or send. Advice works here too.']],
-  11: [['decide', 'New: you write the plan', 'No options from here. Breaks and advice are still yours to use.']] };
-
 let W = null, sample = null, live = false;
 const G = { pc: newPC(), phase: 'pre', help: { open: false, tab: 'why', auto: {} }, introI: 0, n: 1, meters: { team: 6, boss: 6, business: 5, wellbeing: 7 }, log: [], promises: [], carries: [], counters: {}, dec: {}, cur: null, busy: '', err: '', errCalls: null, tab: 'team', seenTips: {} };
 
@@ -780,7 +712,6 @@ const esc = (t) => String(t == null ? '' : t).replace(/[&<>"]/g, c => ({ '&': '&
 const $ = (id) => document.getElementById(id);
 const band = (n) => n <= 2 ? 'options' : n === 3 ? 'mix' : 'text';
 const chapterOf = (n) => n <= 3 ? 1 : n <= 6 ? 2 : 3;
-const stepOf = (v) => v <= 2 ? 0 : v <= 4 ? 1 : v <= 6 ? 2 : v <= 8 ? 3 : 4;
 const word = (k, v) => { const m = METERS.find(x => x.key === k); return m.words[v <= 2 ? 0 : v <= 4 ? 1 : v <= 6 ? 2 : v <= 8 ? 3 : 4]; };
 const dw = (d) => d >= 2 ? 'Way up' : d === 1 ? 'Up' : d <= -2 ? 'Way down' : d === -1 ? 'Down' : 'Held';
 const clamp = (x, a, b) => Math.max(a, Math.min(b, x));
@@ -865,7 +796,6 @@ function normOptions(v) {
 
 /* ---------- fills ---------- */
 const meterLine = () => METERS.map(m => m.label + ': ' + word(m.key, G.meters[m.key])).join('; ');
-const openPromises = () => G.promises.filter(p => p.status === 'open').map(p => '- [' + p.id + '] ' + p.what + ' (to ' + p.to + ', ' + p.when + ', made in decision ' + p.made + ')').join('\n') || 'none yet';
 const storySoFar = () => ['The premise: ' + PREMISE].concat(G.log.map(l => l.label + ': ' + l.text)).concat(G.carries.length ? ['Carried forward: ' + G.carries.join(' ')] : []).join('\n\n');
 function fillShared(t, n) {
   const d = W.decisions[n - 1];
@@ -1226,12 +1156,10 @@ const INFO = {
 function cleanReason(t) {
   return String(t).replace(/^\s*(your\s+)?(team standing|boss standing|business impact|wellbeing|team|boss|business)\s*[:\-\u2013\u2014]\s*/i, '').replace(/^\s*(way\s+)?(up|down|held|steady)\b[^.:\u2014\u2013-]*[:.\u2014\u2013-]\s*/i, '').replace(/^\s*[+\-]?\d+\s*[:.\u2014\u2013-]\s*/, '').replace(/^./, (ch) => ch.toUpperCase());
 }
-function isNew(key) { const t = INFO[key]; return !!t && t[0] > 1 && G.n === t[0]; }
 function info(key) {
   const t = INFO[key]; if (!t) return '';
   return ' <details class="info" data-info="' + key + '"><summary aria-label="About: ' + esc(t[1]) + '">?</summary><div class="infobox"><b>' + esc(t[1]) + '</b><br>' + esc(t[2]) + '</div></details>';
 }
-function newNote(key) { return ''; }
 function callsFold(calls, label) {
   if (!G.designer || !calls || !calls.length) return '';
   return '<details><summary>' + (label || 'What the AI received and returned') + '</summary>' + calls.map(c => '<div class="lab" style="margin-top:8px">' + esc(c.name) + ' · ' + (c.ms / 1000).toFixed(1) + ' s' + (c.retried ? ' · retried once' : '') + '</div><div class="muted" style="font-size:12px">Prompt sent</div><pre>' + esc(c.prompt) + '</pre><div class="muted" style="font-size:12px">Reply</div><pre>' + esc(c.reply) + '</pre>').join('') + '</details>';
@@ -1258,21 +1186,7 @@ function leftPanel() {
     h += '<div class="panel scrollp">' + (G.promises.length ? G.promises.map(p => { const t = icon[p.status]; return '<div style="display:flex;gap:8px"><span style="flex:none;width:24px;height:24px;border-radius:50%;border:2px solid #1E1B3A;background:' + t[1] + ';color:' + t[2] + ';display:inline-flex;align-items:center;justify-content:center;font-weight:900;font-size:13px">' + t[0] + '</span><div style="font-size:14px">' + (p.fresh === G.n && G.phase === 'debrief' ? '<span class="newchip">New</span> ' : '') + '<b>' + esc(p.what) + '</b><div class="muted">To ' + esc(p.to) + ', ' + esc(p.when) + ' · decision ' + p.made + ' · ' + t[3] + '</div>' + (p.note ? '<div style="font-size:13px">' + esc(p.note) + '</div>' : '') + '</div></div>'; }).join('') : '<p class="muted" style="margin:0">Promises you make show up here.</p>') + '</div>';
   }
   return h;
-}
-const LADDER = {
-  'Prioritization': ['Identify the demands competing for your time', 'Decide what waits and say what it costs', 'Renegotiate priorities with a boss and peers'],
-  'Delegation and accountability': ['Hand off a task with the outcome, limits and check-in clear', 'Follow up on a miss without taking the work back', 'Decide when a repeat miss needs a different conversation'],
-  'Coaching and development': ['Ask open questions that help someone name their goal', 'Help someone choose one next step', 'Decide when coaching is the wrong tool'],
-  'Hard conversations': ['Describe what happened and its impact without blame', 'Stay in the conversation when it gets uncomfortable', 'Choose the timing and setting'],
-  'Setting direction': ['Restate a business goal in plain words', 'Turn it into two or three priorities and name assumptions', 'Adjust direction when an assumption fails'],
-  'Business communication and influence': ['Give a clear update: wins, progress and risks', 'Make a case for a request with options and cost', 'Build alignment with peers when interests conflict'],
-  'Systems and leverage': ['Spot a problem that keeps coming back', 'Choose a fix that stops the repeat, and name its owner', 'Connect people across teams so fixes spread'] };
-function skillCard(D) {
-  const lead = W.decisions[G.n - 1].lead_skill;
-  return '<div style="display:flex;flex-direction:column;gap:4px;border-top:1px solid #CFC3A5;padding-top:6px"><button class="ghost" data-act="skillModal" style="padding:0">About this skill</button>' +
-    (lead === 'Prioritization' ? '<a href="' + PRACTICE_URL + '" style="font-size:14px;font-weight:800;color:#5B3DF5">Practice this skill</a>' : '<span class="muted" style="font-size:13px;opacity:.7">Practice rounds coming soon</span>') + '</div>';
-}
-const WHO_T = { Remi: ['Senior specialist, escalations', 'Knows the product best; fixes odd bugs fast', 'Fixes things alone and becomes the bottleneck'], Jan: ['Specialist, routing rules and reports', 'Builds tools and spots patterns in ticket data', 'Goes quiet when stuck, so dates slip late'], Ravi: ['Specialist, phone queue', 'Calm with upset callers; best satisfaction score', 'Agrees to dates they cannot meet'] };
+}const WHO_T = { Remi: ['Senior specialist, escalations', 'Knows the product best; fixes odd bugs fast', 'Fixes things alone and becomes the bottleneck'], Jan: ['Specialist, routing rules and reports', 'Builds tools and spots patterns in ticket data', 'Goes quiet when stuck, so dates slip late'], Ravi: ['Specialist, phone queue', 'Calm with upset callers; best satisfaction score', 'Agrees to dates they cannot meet'] };
 function whoModal() {
   if (!G.whoModal) return '';
   const card = (n, k, label, l1, l2, l3) => '<div class="whocard"><div style="display:flex;gap:8px;align-items:center">' + av(n) + '<b>' + esc(n) + '</b><span class="rolechip" style="color:' + ROLE[k][1] + ';border-color:' + ROLE[k][1] + ';background:' + ROLE[k][0] + '">' + label + '</span></div><div class="muted">' + l1 + '</div>' + (l2 ? '<div>' + l2 + '</div>' : '') + (l3 ? '<div>' + l3 + '</div>' : '') + '</div>';
@@ -1282,26 +1196,7 @@ function whoModal() {
     card('Cleo', 'you', 'You', 'Support manager, promoted from this team three months ago.', 'Still everyone\u2019s go-to for hard tickets, and still in the team\u2019s vent chat.');
   const right = '<div class="lab" style="color:' + ROLE.team[1] + '">Your team \u00b7 they report to you</div>' + ['Remi', 'Jan', 'Ravi'].map(n => card(n, 'team', 'Team', esc(WHO_T[n][0]), '<b>Strength:</b> ' + esc(WHO_T[n][1]), '<b>Watch:</b> ' + esc(WHO_T[n][2]))).join('') + '<div class="muted" style="font-size:13px">Also on your team: ' + esc(W.world.team.unnamed_reports.join(', ')) + '.</div>';
   return '<div class="modalback" data-act="closeWho"></div><div class="modal wide" role="dialog" aria-modal="true" aria-labelledby="wt"><div style="display:flex;justify-content:space-between;align-items:center"><h2 id="wt" style="margin:0">Who\u2019s who</h2><button class="ghost" data-act="closeWho">Close</button></div><div class="whogrid"><div class="whocol">' + left + '</div><div class="whocol">' + right + '</div></div></div>';
-}
-function skillModal() {
-  if (!G.modal) return '';
-  /* Nov 19 (B12): one clear order: what this decision practices, keep in mind, all sub-skills, then practice and the full card */
-  const lead = W.decisions[G.n - 1].lead_skill, subs = SKILLS[lead] || [];
-  const slot = G.dec[G.n], D = slot && slot.D;
-  const focus = ((D && D.focus.subs.length ? D.focus.subs : W.decisions[G.n - 1].subskills) || []).slice(0, 2);
-  const line = (n) => { const x = subs.find(y => y[0].toLowerCase() === String(n).toLowerCase()); return x ? x[1] : ''; };
-  const sid = { 'Prioritization': 'prioritization', 'Delegation and accountability': 'delegation', 'Coaching and development': 'coaching', 'Hard conversations': 'hard', 'Setting direction': 'direction', 'Business communication and influence': 'comms', 'Systems and leverage': 'systems' }[lead] || 'tradeoff';
-  const others = subs.filter(x => !focus.some(f => f.toLowerCase() === x[0].toLowerCase()));
-  return '<div class="modalback" data-act="closeModal"></div><div class="modal" role="dialog" aria-modal="true" aria-labelledby="mt" style="gap:14px">' +
-    '<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px"><div><div class="eyebrow">This decision practices</div><h2 id="mt" style="margin:2px 0 0;font-size:24px">' + esc(lead) + '</h2></div><button class="ghost" data-act="closeModal" aria-label="Close">Close</button></div>' +
-    '<div style="display:flex;flex-direction:column;gap:8px"><div class="lab">Focus on</div>' + focus.map(f => '<div style="padding:10px 12px;border:2px solid #1E1B3A;border-radius:12px;background:#FFE9A8"><b>' + esc(f) + '</b>' + (line(f) ? '<div style="font-size:15px">' + esc(line(f)) + '</div>' : '') + '</div>').join('') + '</div>' +
-    (D && D.focus.keep.length ? '<div style="display:flex;flex-direction:column;gap:4px"><div class="lab">Keep in mind</div><ul style="margin:0;padding-left:18px;display:flex;flex-direction:column;gap:2px">' + D.focus.keep.map(k => '<li>' + esc(k) + '</li>').join('') + '</ul></div>' : '') +
-    (others.length ? '<details><summary style="cursor:pointer;font-weight:800">The other sub-skills</summary><div style="display:flex;flex-direction:column;gap:4px;margin-top:6px;font-size:15px">' + others.map(x => '<div><b>' + esc(x[0]) + ':</b> ' + esc(x[1]) + '</div>').join('') + '</div></details>' : '') +
-    '<div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;border-top:1px solid #CFC3A5;padding-top:12px">' +
-    (lead === 'Prioritization' ? '<a class="btn2" href="#practice" style="min-height:44px">Practice Prioritization</a>' : '<button class="btn2" disabled style="min-height:44px;opacity:.5;cursor:not-allowed">Practice rounds coming soon</button>') +
-    '<a href="#skills" data-goskill="' + sid + '" style="font-weight:800;color:#5B3DF5">See the full skill card</a></div></div>';
-}
-function rightPanel() {
+}function rightPanel() {
   const slot = G.dec[G.n], D = slot && slot.D, c = G.cur, wr = stageWrites(G.n);
   const tab = ['plan', 'tradeoff', 'delivery'].includes(G.help.tab) ? G.help.tab : (wr[0] || 'plan'), t = HELP[tab];
   const list = (a) => '<ul style="margin:0;padding-left:18px;display:flex;flex-direction:column;gap:4px;font-size:14px">' + a.map(x => '<li>' + esc(x) + '</li>').join('') + '</ul>';
@@ -1327,7 +1222,6 @@ function stepPips() {
 const STG = {
   1: ['You pick', ''], 2: ['You pick', ''], 3: ['You write the tradeoff and first words', ''], 4: ['You write it all', ''], 5: ['You write it all', ''], 6: ['You write it all', ''] };
 const stageWrites = (n) => n <= 2 ? [] : n === 3 ? ['tradeoff', 'delivery'] : ['plan', 'tradeoff', 'delivery'];
-const helpDefault = (n) => n === 2 ? 'tradeoff' : n === 3 ? 'delivery' : n >= 4 ? 'plan' : 'why';
 const HELP = {
   why: { paras: [
     'There is no right choice. There are only tradeoffs. Every choice protects something and costs something.',
@@ -1522,7 +1416,6 @@ function act(a) {
   else if (a === 'chNext') { G.chStep = 1; render(); toTop(); }
   else if (a === 'startDecision') { G.chStep = 0; startDecision(G.n); }
   else if (a === 'retryLoad') startDecision(G.n);
-  else if (a === 'skillModal') { G.modal = true; render(); const m = document.querySelector('.modal button'); if (m) m.focus(); }
   else if (a === 'closeModal') { G.modal = false; render(); }
   else if (a === 'whoModal') { G.whoModal = true; render(); }
   else if (a === 'closeWho') { G.whoModal = false; render(); }
@@ -1596,489 +1489,6 @@ return {
 })();
 </script>
 <script>
-/* ===== Practice round (live) ===== */
-const PRACTICE = (function () {
-
-/* ============ CONTENT: Ledgerline practice round (P5 run 19, reviewed Nov 17) ============ */
-const ROUND = {"setting":{"company":"Ledgerline, a small software company that makes invoicing software for local shops","team":"The Billing team: five people who build and fix the invoicing screens and the payment export","player_role":"You are the Billing team's new manager. You started three weeks ago.","boss":{"name":"Vic","role":"Head of Product, your manager"},"people":[{"name":"Hana","role":"Senior engineer, owns the payment export"},{"name":"Omar","role":"Engineer, building the new invoice templates"},{"name":"Pia","role":"Support lead on the customer team, sends bug reports to Billing"}],"current_work":"This month the team is shipping new invoice templates (promised to Vic for launch day, two weeks from now), keeping the payment export running, and handling bugs from Pia's support queue."},
-"reps":[
-{"n":1,"sub":"Sort","format":"choices","so":"You're three weeks in as the new manager of Billing at Ledgerline.","task":"Choose how you sort these four items for the week.","strategy":"Eisenhower matrix",
-"blocks":[["p","It's Monday morning, and four things land on your desk:"],["b",["Pia, the support lead, reports that 40 shops can't download invoices as PDFs since Friday's release.","Vic, your boss, asks for a one-page update on the templates project by Thursday.","Omar wants a half-day meeting to redesign the team's code review process.","A sales rep asks if Billing can add a custom logo option for one large prospect “sometime soon.”"]]],
-"qs":[{"to":"Pia, support lead","q":"How bad is the PDF bug for shops?","a":"Forty shops can't send invoices, so they can't get paid. Three have called twice today."},{"to":"The sales rep","q":"How soon does the prospect need the logo option?","a":"They decide next quarter. Soon would be nice, but nothing's signed."},{"to":"Omar, builds the templates","q":"Can the review redesign wait a week?","a":"Sure. It's bugged me for months; another week is fine."}],
-"choices":[{"text":"Start with the logo request, because a large prospect could bring in the most money, then fix the PDF bug once the request is scoped.","v":"pitfall","why":"Ranks by who sounds biggest, not by what waiting costs; 40 shops keep losing invoices while a 'sometime soon' request jumps the line."},{"text":"Put the PDF bug first today, schedule the one-page update for Wednesday, book Omar's review redesign for next week, and tell the sales rep the logo request goes on the list for next month's planning.","v":"strong","why":"Protects the 40 shops losing work now, keeps Vic's date, and gives the two non-urgent items a real slot instead of a vague maybe."},{"text":"Do the one-page update for Vic first so your boss sees progress, then turn to the PDF bug in the afternoon.","v":"pitfall","why":"Feels safe with a new boss, but the update is due Thursday and the bug is costing shops every hour; it puts visibility ahead of harm."},{"text":"Fix the PDF bug first, then do the rest in the order they arrived.","v":"partial","why":"Gets the urgent item right, but arrival order is not a ranking; the review redesign could crowd out Vic's Thursday update."}]},
-{"n":2,"sub":"Read capacity","format":"choices","so":"Monday: you put the PDF bug first and booked Vic's update for Wednesday.","task":"Choose what you say to Vic right now.","strategy":"Impact and effort",
-"blocks":[["p","Vic stops you in the hallway. Can Billing also move the payment export to the new server by launch day, two weeks from now? That's the same day the templates are due."],["p","What you know:"],["b",["Hana owns the export. She's been on call twice this month and stayed late last week to patch it.","Omar is two days behind on the templates."]]],
-"qs":[{"to":"Hana, owns the payment export","q":"How is your load this month?","a":"Two on-call weeks and the patch. The move alone is five days if nothing surprises us."},{"to":"Omar, builds the templates","q":"How far behind are the templates?","a":"Two days. I can catch up if nothing else lands on me."},{"to":"Vic, your boss","q":"Why does the server move need to land on launch day?","a":"Honestly, it doesn't. Support on the old server runs out in about five weeks. Launch day just felt tidy."}],
-"choices":[{"text":"\"Yes, we'll make it work.\" You can sort out who does it later.","v":"pitfall","why":"The quiet yes: it feels helpful in the moment, but it commits Hana before you know she has room, and she is already stretched."},{"text":"\"Probably not by launch day. The team is busy.\"","v":"partial","why":"Avoids the quiet yes, but gives Vic no facts and no option, so the conversation ends instead of moving forward."},{"text":"\"Yes, and I'll do the server move myself so the team isn't overloaded.\"","v":"pitfall","why":"Carrying it yourself hides the real cost; your manager work slips and nobody sees the team is at capacity."},{"text":"\"Let me check with Hana and look at the templates schedule. I'll come back to you by tomorrow noon with what's realistic.\"","v":"strong","why":"Protects Hana and the templates date by checking load before committing, and gives Vic a firm time for the answer."}]},
-{"n":3,"sub":"Cut","format":"fields","so":"You put the PDF bug first. When Vic asked for the server move by launch day too, you promised him an answer by noon tomorrow.","task":"Choose what waits.","strategy":"Cost of delay",
-"blocks":[["p","You checked. The team can't finish everything by launch day:"],["b",["The templates need about 8 more days of work.","The server move needs about 5.","That is 13 days of work, and there are 10 working days left."]],["p","Two deadlines matter:"],["b",["The templates are promised to three shops for launch day, two weeks from now.","The old server's support contract ends in about five weeks, so there are about three weeks of room after launch day."]]],
-"qs":[{"to":"Hana, owns the payment export","q":"How solid is five days for the server move?","a":"Five if nothing surprises us. The last export patch took twice what I guessed."},{"to":"Omar, builds the templates","q":"Are the eight days of template work solid?","a":"Solid, if Hana reviews the tax piece. She's the only one who knows it."},{"to":"Vic, your boss","q":"What matters most to you about launch day?","a":"The three shops are our case study for the sales push next quarter. The server move I just need done before support runs out."}],
-"choices":[{"text":"Split the team and work on both at once, hoping overtime closes the gap.","v":"pitfall","why":"Avoids a hard choice, but both may slip, and Hana and Omar quietly pay with late nights nobody agreed to."},{"text":"Ship the templates first and start the server move after, without mentioning the order to Vic since both deadlines are still met.","v":"pitfall","why":"Ranking without telling: the plan may be sound, but Vic asked for both by launch day and will learn the cut only when he notices."},{"text":"Do the server move first and push the templates to next month.","v":"partial","why":"Clears the server early, but that deadline is weeks away; the three shops pay for a delay that was not needed yet."},{"text":"Ship the templates on launch day and start the server move right after, finishing before the old server's support ends. Tell Vic today.","v":"strong","why":"Keeps the promise to the three shops and still beats the real server deadline; the cost is a tighter window for the move."}],
-"fields":["What waits","What waiting costs","Who you tell"],
-"reference":["What waits: the server move (or the templates, if that was the choice), named as the item.","What waiting costs: the slack before the old server's support ends, or what the three shops lose; said as a time, a risk or a named consequence, not just 'time'.","Who you tell: Vic, who asked for both by launch day. Naming Vic counts as named; adding Hana or Omar is a plus, never required."],
-"captured":[{"answer":"What waits: The server move · What waiting costs: time! · Who you tell: Vic, Hana, Omar","fb":"\"The server move\" is exactly what waits, and \"Vic, Hana, Omar\" tells the people who carry it, not just the boss. \"Time!\" is right but loose: the cost is buffer. Waiting puts the move close to the support cutoff, with no slack if it overruns. Try it again: say how much slack is left, or what happens if the move slips."}]},
-{"n":4,"sub":"Weigh risk","format":"fields","so":"You're shipping the templates on launch day and moving the server right after, and you told Vic today. The move now runs close to the old server's support cutoff, about five weeks out.","task":"Choose how you handle this risk.","strategy":"Risk responses",
-"blocks":[["p","Your plan puts the server move in the last two weeks before the old server's support ends. Then you spot the risk:"],["b",["Hana is the only person who knows the export well.","She has a week of leave booked in that window.","If the move isn't done in time, shops' payment exports could fail, with no vendor support to call."]]],
-"qs":[{"to":"Hana, owns the payment export","q":"Could anyone else run the move if you're out?","a":"Omar's been in the export code once, last spring. If he pairs with me on two real fixes, he could run the move. That's maybe six hours of his time."},{"to":"Omar, builds the templates","q":"How much of the export code have you worked in?","a":"Once, last spring. I'd want Hana next to me the first time."},{"to":"Vic, your boss","q":"Is there budget if we need more time on the old server?","a":"Maybe, but I'd rather not spend it. Ask me only if there's no other way."}],
-"choices":[{"text":"Ask Hana to move her leave to next month so the server move is safe.","v":"pitfall","why":"Fixes the date by making one person pay; it protects the plan but costs Hana's rest and does not remove the dependency."},{"text":"Have Hana pair with Omar on two export fixes before launch day, so Omar can carry the move if Hana is out. Tell Vic the move has a backup person.","v":"strong","why":"Reduces the risk by ending the one-person dependency, at the cost of a few hours of Omar's template time."},{"text":"Keep the plan as it is. Hana is reliable and will likely shift her leave if needed.","v":"pitfall","why":"Accepts the risk without saying so, and quietly assumes Hana will give up her leave to cover it."},{"text":"Ask Vic to pay the vendor for one extra month of support on the old server.","v":"partial","why":"Transfers the risk and buys time, but costs money and leaves the one-person dependency in place for next time."}],
-"fields":["Your response (avoid, reduce, transfer or accept)","What it costs","What could still break it"],
-"reference":["Your response: the response type that matches the chosen option (pairing Omar with Hana is reduce; paying the vendor is transfer; moving Hana's leave avoids the clash at Hana's cost; keeping the plan is accept).","What it costs: a concrete cost, such as about six hours of Omar's template time, Hana's rest, or vendor money.","What could still break it: a specific remaining risk, such as Hana and Omar now carrying both deadlines, or the templates slipping."],
-"captured":[{"answer":"Your response: Accept and transfer/cross-train. · What it costs: Still too much on two people. I either need to jump in myself too or get help. · What could still break it: Templtes and server now rely on the same two people. that's bad juju if either has a snag.","fb":"\"Templates and server now rely on the same two people\" is the sharpest read of the round: the fix didn't remove the dependency, it spread it across both deadlines. Cross-training is a reduce move, not a transfer; transfer would be paying the vendor for more time. Naming it right matters when you explain the plan to Vic."}]},
-{"n":5,"sub":"Renegotiate","format":"open","so":"Templates ship on launch day; the server move follows, with Omar as backup to Hana. Omar is pairing with Hana for about six hours, out of time he was already short on.","task":"Write what you say to Vic today.","strategy":"MoSCoW",
-"blocks":[["p","It's four working days before launch day. Omar finds a problem: the tax display isn't working for two of the three shops. Fixing it takes about 3 more days."],["p","Launch day can't hold for those two shops. Vic set that date and told the shops himself."]],
-"qs":[{"to":"Omar, builds the templates","q":"What would help you most right now?","a":"Hana looking at the tax piece with me tomorrow. She knows it best."},{"to":"Vic, your boss","q":"How did the three shops take the date when you told them?","a":"Happy. One planned a staff training around it."},{"to":"Pia, support lead","q":"How do shops usually react when a date slips?","a":"They mind less when they hear early and get a date they can count on."}],
-"choices":[],
-"fields":["Raised early, with the cause","The new plan and date","What you ask of Vic, or offer him"],
-"reference":["Raised early, with the cause: tells Vic now, before launch day, and says why (the tax display isn't working for two shops). Any plain cause counts.","The new plan and date: what happens now, such as one shop on launch day and two about three days later, or all three together about three days later. Either plan counts; a rough timing (\"about three days later\") counts as a date.","What you ask of Vic, or offer him: one honest ask or offer counts as named. Offering to tell the shops yourself is a strong, proactive move and counts fully; Vic can still choose to do it himself. Offering to help Vic tell them, or asking for help, also counts. Never require more than one, and never mark it down for not asking Vic's permission."],
-"captured":[{"answer":"We can launch 2/3 of the templates, but issues cropped up on tax displays in two regions. we're working through it now. However, this is both the templates and the server move at risk. We need assistance from on person from another team to get everything back on track and moving correctly. Given that the templates are a promise, but nothing breaks without them, we have to delvier quality. Given the server move is required cut off, we cannot avoid it.","fb":"You raised it four days out, with the cause: \"issues cropped up on tax displays in two regions,\" and you sorted the must from the should: the server cutoff can't move, the templates can. What's missing is the line Vic has to say out loud. He told the pilot shops the date himself, so give him a new date for the two affected shops and offer to help with that message. Try it again with one sentence that does that."}]}
-]};
-const CAPTURED_DEBRIEF = {"note":"This debrief was written by AI from one practice round. It can misread what you meant or miss context, so treat it as one reading. Your own judgment, and real work with real people, decide what you take from it.","worked":["**Checking before committing.** In rep 2 you held Vic's hallway ask until you had talked to Hana, and in rep 4 Hana's six hours went straight into your rewrite. Your reflection names asking first as what clicked, and your answers bear it out.","**Telling the people who carry it.** You named \"Vic, Hana, Omar\" in rep 3, not only the boss, and in rep 5 you went to Vic four days out with the cause: \"issues cropped up on tax displays in two regions.\" In rep 4 you also caught that your own fix left both deadlines resting on \"the same two people.\""],"work_on":["**Saying the cost in specifics.** Your reflection says explaining your choices was hard, and the answers show where: the cost comes out as a who or a single word. \"Costs the team\" in rep 3, then \"time!\" in the rerun, and in rep 5, \"we're working through it now\" with no new date for the pilot shops. This sits in Cut and Renegotiate: the choice is sound, and the listener still can't tell how much it costs or when."],"try_next":{"move":"The next time you say not yet at work, add one number and one date: \"If we take this on, the review slips about a week, to next Thursday. Can you live with that?\"","practice":"Next round: Renegotiate, with cost of delay from the card."}};
-
-const CARD = {
-  skill: 'Prioritization',
-  definition: 'Deciding what gets your team’s time and what waits, and saying out loud what waiting costs and who pays.',
-  subs: [['Sort','Separate urgent from important, then rank.'],['Read capacity','Notice who is already stretched before you commit.'],['Cut','Decide what waits, name what it costs, and who pays.'],['Weigh risk','Choose avoid, reduce, transfer or accept, then ask what would break your own plan.'],['Renegotiate','Take a changed scope or date back to the person who set it.']],
-  strategies: [['Eisenhower matrix','Sort by urgent and important, then act, schedule, delegate or drop.'],['MoSCoW','Label each item must, should, could or won’t this time.'],['Impact and effort','Plot items by value and cost; start with high value, low cost.'],['Cost of delay','Ask what each week of waiting costs, and when that cost starts.'],['80/20','Find the few items that produce most of the result.'],['Risk responses','For each risk, choose avoid, reduce, transfer or accept, and say which.']],
-  watch: [['The quiet yes','agreeing before checking who is stretched'],['Carrying it yourself','absorbing the cost so nobody sees it'],['Ranking without telling','never telling the people who pay']],
-  know: ['You name what waits, the cost, and who pays.','The person you told could repeat it back.','You raise it before the deadline.']
-};
-const cardText = () => [
-  'Skill: ' + CARD.skill + '. ' + CARD.definition,
-  'Sub-skills: ' + CARD.subs.map(s => s[0] + ' (' + s[1] + ')').join('; '),
-  'Strategies: ' + CARD.strategies.map(s => s[0] + ' (' + s[1] + ')').join('; '),
-  'Watch for: ' + CARD.watch.map(s => s[0] + ' (' + s[1] + ')').join('; '),
-  'You will know when: ' + CARD.know.join(' ')
-].join('\n');
-
-/* ============ PROMPTS: verbatim from claude/game-prompts.md (v1, Nov 17). Do not edit here; edit the doc. ============ */
-const SHARED = `Shared rules (every prompt):
-1. Time is always relative to now: "in 10 working days", "end of next week", "in about five weeks". Weekday names are fine inside the current week ("by Thursday"). Never a day of the month ("the 28th") or a calendar date: the game has no calendar, so the player has no anchor for one.
-2. Fictional only. First names from the vetted list; never Koa, Giselle or Wren (use Ren). Never attribute behavior to background or identity.
-3. Plain language. No scores, no "the right answer" in player-facing text.`;
-
-const P3 = `You read one answer from a player and report what it did. You do not score, grade or coach. Code turns your report into game effects, so be exact and quote the player's words.
-
-MODE
-[MODE]
-
-THE TASK THE PLAYER WAS GIVEN
-[TASK]
-
-THE CHECKS (what a complete answer names)
-1. protects: what the choice protects, or what waits
-2. cost: what it costs
-3. who_pays (practice mode, and game mode when no skill check is given): who or what absorbs the cost. Any honest answer counts, including the player ("I'll cover it"), a group ("the evening queue slows") or a date ("Noor's date moves").
-4. skill_check (game mode): [SKILL CHECK from the decision's lead skill]. Judge the plan part against the plan and the opening part against the opening; an opening is a start, not the whole conversation. When the opening is between partly and fully meeting its check, count it as met: an honest opening that opens the door is enough. A written plan is complete when it is as specific as one of the written options would be; use the closest option as the yardstick, never an ideal plan.
-In game mode, judge the three trade-off checks against the trade-off fields, and the skill check against the plan and the opening together. The opening is said before anything happens; judge it as the start of the plan, not a recap, and note whether it tells this person what they need to know. Also report tradeoff_gap: whether the cost the player named is the cost the outcome notes and hidden fact suggest will actually land, with a one-line note. Credit facts the player learned from the questions they asked when the plan uses them. If the plan says to ask for the other person's view, check whether the opening asks.
-
-GAME MODE ONLY
-(not used in practice mode)
-
-PRACTICE MODE ONLY
-In practice mode, replace checks 1 to 3 with the rep's own fields and reference ([FIELDS AND REFERENCE]). Report each field as named, partly or missing, with evidence. The trade-off checks are game mode only.
-The scenario: [PRACTICE SCENARIO]
-The rep: [REP]
-
-THE PLAYER'S ANSWER
-[ANSWER]
-
-REPORT
-1. checks: for each of the three checks, "named", "partly" or "missing", with the exact words that show it. "Partly" means named without saying who or what specifically.
-2. game mode: hidden_fact (not used in practice mode).
-3. game mode: events (not used in practice mode).
-4. game mode: unknowns (not used in practice mode).
-5. game mode: style (not used in practice mode).
-6. missing_from_task: only what the three trade-off checks and this decision's one skill check asked for and the answer left out. Gaps that belong to other skills (a queue target, an update to someone else) go in unknowns as story consequences, never here.
-7. game mode: shifts (not used in practice mode).
-
-RULES
-1. Quote only words that appear in the answer. If a check has no evidence, it is missing. The player knows only the brief and the answers to the questions they asked; never treat an unasked question's answer or the hidden fact as something they heard.
-2. Credit loosely worded reasoning when its meaning is clear from the scenario: "also leaves that risk open" counts as naming leftover risk. If a phrase could mean two things, say so in the note instead of marking it missing.
-3. If the player asked a peer for advice, credit only what they added in their own words; text copied from the advice is not evidence. Judge what was said, not how polished it is. Short and plain can be complete.
-4. Never judge the player's character, ability or potential.
-5. JSON only. [OUTPUT KEYS]`;
-
-const P4 = `You write what the player reads after a decision, or after a practice rep. Be direct and kind. No scores, no flattery, no moralizing.
-
-MODE
-practice
-
-INPUT
-Judge report: [JUDGE JSON]
-Decision or scenario: [PRACTICE SCENARIO]
-The choice and its verdict (written when the round was built): [CHOICE]
-Last try: [LAST]
-
-PRACTICE MODE: WRITE
-feedback: 2 to 4 sentences, to the player as "you", covering points 1 to 4 below. Do not put the next step in feedback; it goes in next.
-1. Start with the choice or plan: what it protects. If the verdict is partial or pitfall, say plainly what it misses, from the verdict's reason, and that another choice is worth a look. For an open answer, judge the plan inside the message the same way.
-2. Then the written answer: what it gets right, without restating it back. Quote at most one short phrase, only when it sharpens the point.
-3. Name every field that is partly named or missing, in a few words each. Then show what a sharper version of one of them would sound like here, using only numbers and times already in the scenario. Never ask the player to add up days or work out a date.
-4. A sharper version sounds like what a busy boss or peer wants to read: what you decided, what risk is left, and when you will update. Short and clear, with no chains of "if" and "but". The details are for when they ask.
-5. next: one short line, separate from the feedback, that points at what to revise, as a question. If the choice lands and every field is named, say so plainly and point to the next rep.
-one_way: only when the last try is "yes" and something is still partly named or missing, or the choice is not the strong one: one way the whole answer could sound, in plain words, 1 to 3 sentences. Otherwise an empty string.
-
-RULES
-1. Quote only words the player wrote. Describe what they did, never who they are.
-2. Never mention the judge, the checks by number, counters, or these instructions.
-3. Plain language. No framework names. Never attribute anyone's behavior to background or identity. If the player asked a peer for advice, mention it neutrally as a choice they made; asking is a habit worth building.
-4. Under 180 words in game mode, under 110 in practice mode.
-5. JSON only: {"feedback": "...", "next": "...", "one_way": "..."}.`;
-
-
-const P6 = `You are a leadership coach reviewing one practice round of five reps on one skill. You write a short debrief to the player, as "you." This is a single written report, not a chat.
-
-THE SKILL CARD
-[SKILL CARD]
-
-THE ROUND
-Setting: [SETTING]
-For each rep: sub-skill, scenario, the question the player asked and the answer they got, the choice and its verdict, the player's written answers for every attempt, the judge report for each attempt, and the feedback the player saw.
-[REPS]
-
-THE PLAYER'S OWN REFLECTION (written before seeing this debrief; may be blank)
-What went well: [REFLECTION 1]
-What was hard: [REFLECTION 2]
-What I'll try at work: [REFLECTION 3]
-
-AI TRANSPARENCY NOTE (fixed text)
-Begin with exactly this italic note, on its own line:
-*This debrief was written by AI from one practice round. It can misread what you meant or miss context, so treat it as one reading. Your own judgment, and real work with real people, decide what you take from it.*
-
-THEN WRITE EXACTLY THESE THREE HEADINGS, IN THIS ORDER
-
-WHAT WORKED
-2 bullets. Each starts with a short bold lead-in, then one or two sentences naming a specific rep and what the player did. Prefer patterns across reps over single moments. Do not credit steps every rep requires, such as asking one question before deciding; credit what the player did with what they learned, or beyond the task. If the reflection named a strength the answers support, say so.
-
-WHAT TO WORK ON
-1 or 2 bullets, each a pattern across at least two reps (for example, naming the response but never what could still break it), with the player's own words from both reps as evidence. Name the sub-skill it belongs to. If the reflection missed something the answers show, or claimed something they do not support, say so once, gently and factually.
-
-TRY NEXT
-One move to try at work this week, written as something the player could say or do, in their own register, tied to the pattern above. If the move is a message, write it the way a busy boss wants to read it: what you decided or did, what risk is left, and when you will update. One or two short sentences, with no chains of "if" and "but"; the details are for when they ask. Then one sentence on why this move helps, tied to the pattern. Then one line naming the sub-skill and card strategy to practice next round.
-
-RULES
-1. No scores, grades, ratings or rankings. Never count verdicts ("4 of 5").
-2. Quote only words the player wrote. Check every quote against the answers before finishing.
-3. Retries are effort, not failure. Where a retry improved, say what changed.
-4. Describe what the player did, not who they are. No flattery, no catastrophizing, no moralizing.
-5. Do not repeat a point across sections. Do not restate the rep-by-rep feedback the player already saw; find what only shows across the round.
-6. Mention the reflection only if it is not blank.
-7. Under 250 words after the note. Plain language, no framework names beyond the card's strategy names.
-8. JSON only: {"note": "...", "worked": ["...", "..."], "work_on": ["..."], "try_next": {"move": "...", "why": "...", "practice": "..."}}`;
-
-/* Model tiers (game-prompts.md, Model tiers): P3 small to mid, P4 small, P6 mid. */
-const TIER = { P3: 'default', P4: 'quick', P6: 'default' };
-
-/* Role colors: you, your team, your boss, peers and other teams. Team and boss match their meters. */
-const ROLE = { you: ['#CCFBF1', '#0F766E', 'You'], team: ['#DBEAFE', '#2563EB', 'Your team'], boss: ['#FDE7C7', '#B45309', 'Your boss'], peer: ['#FCE7F3', '#BE185D', 'Peers and other teams'] };
-const WHO = { Vic: 'boss', Hana: 'team', Omar: 'team', Pia: 'peer', The: 'peer' };
-const roleOf = (name) => ROLE[WHO[String(name).split(/[ ,]/)[0]] || 'peer'];
-const av = (name, ini) => { const r = roleOf(name); return '<span class="av" style="background:' + r[0] + ';border-color:' + r[1] + ';color:' + r[1] + '" title="' + r[2] + '">' + esc(ini || String(name)[0]) + '</span>'; };
-/* ============ STATE ============ */
-const MAXTRY = 3;
-const freshRep = () => ({ asked: null, pick: null, fv: ['', '', ''], ft: '', attempts: [], busy: false, err: '' });
-const S = { rep: -1, reps: ROUND.reps.map(freshRep), refl: { c: '', h: '', t: '' }, db: null, dbBusy: false, dbErr: '', dbCalls: null };
-let sample = null; let live = false;
-
-const esc = (t) => String(t == null ? '' : t).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-const $ = (id) => document.getElementById(id);
-const VL = { strong: ['Lands', '#E6F5EC'], partial: ['Partly', '#FFF1C2'], pitfall: ['Common pitfall', '#FDE2D3'] };
-const ST = { named: ['✓', '#E6F5EC'], partly: ['◐', '#FFF1C2'], missing: ['✕', '#FDE2D3'] };
-
-function scenarioText(r) {
-  return r.blocks.map(b => b[0] === 'p' ? b[1] : b[1].map(x => '- ' + x).join('\n')).join('\n');
-}
-function answerText(r, st) {
-  if (r.format === 'open') return st.ft.trim();
-  return r.fields.map((f, i) => f.split(' (')[0] + ': ' + (st.fv[i] || '').trim()).join('\n');
-}
-function fieldKeys(r) { return r.fields.map(f => f.split(' (')[0]); }
-
-function fillP3(r, st) {
-  const ri = ROUND.reps.indexOf(r);
-  const q = st.asked !== null ? r.qs[st.asked] : null;
-  const choice = st.pick !== null ? r.choices[st.pick] : null;
-  const fr = 'Fields: ' + r.fields.join(' / ') + '\nReference (for you only):\n' + r.reference.map(x => '- ' + x).join('\n');
-  const rep = 'Rep ' + r.n + ', ' + r.sub + ', format ' + (r.format === 'open' ? 'open' : 'choices then fields') + '.' +
-    '\nSo far: ' + r.so +
-    (q ? '\nThe player asked ' + q.to + ': "' + q.q + '" and heard: "' + q.a + '"' : '\nThe player asked no question.') +
-    (choice ? '\nThe player chose: "' + choice.text + '" (verdict: ' + choice.v + ')' : '') +
-    '\nAttempt ' + (st.attempts.length + 1) + ' of 2.';
-  const keys = 'Use exactly these keys: {"checks": {' + fieldKeys(r).map(k => '"' + k + '": {"status", "evidence", "note"}').join(', ') + '}, "missing_from_task": ["..."]}. status is "named", "partly" or "missing".';
-  return SHARED + '\n\n' + P3.replace('[MODE]', 'practice').replace('[TASK]', r.task + (r.format === 'open' ? '' : ' Then say it in your own words in each field.'))
-    .replace('[FIELDS AND REFERENCE]', fr).replace('[PRACTICE SCENARIO]', ROUND.setting.company + '. ' + ROUND.setting.team + '.\n' + scenarioText(r))
-    .replace('[REP]', rep).replace('[ANSWER]', answerText(r, st)).replace('[OUTPUT KEYS]', keys);
-}
-function fillP4(r, judge, st, last) {
-  const c = st.pick !== null ? r.choices[st.pick] : null;
-  return SHARED + '\n\n' + P4.replace('[JUDGE JSON]', JSON.stringify(judge)).replace('[PRACTICE SCENARIO]', r.sub + ': ' + r.task + '\n' + scenarioText(r))
-    .replace('[CHOICE]', c ? '"' + c.text + '" Verdict: ' + c.v + '. Why: ' + c.why : 'No choices in this rep; the plan is inside the written answer.').replace('[LAST]', last ? 'yes' : 'no');
-}
-function fillP6() {
-  const reps = ROUND.reps.map((r, i) => {
-    const st = S.reps[i];
-    const q = st.asked !== null ? r.qs[st.asked] : null;
-    const c = st.pick !== null ? r.choices[st.pick] : null;
-    let s = 'Rep ' + r.n + ' · ' + r.sub + '\nScenario: ' + scenarioText(r) +
-      '\nQuestion asked: ' + (q ? q.to + ': "' + q.q + '" Answer: "' + q.a + '"' : 'none') +
-      '\nChoice: ' + (c ? '"' + c.text + '" (verdict: ' + c.v + ')' : 'none');
-    st.attempts.forEach((a, k) => { s += '\nAttempt ' + (k + 1) + ' written answer:\n' + a.answer + '\nJudge report: ' + JSON.stringify(a.judge) + '\nFeedback shown: ' + a.feedback; });
-    return s;
-  }).join('\n\n');
-  const set = ROUND.setting;
-  const setting = set.company + '. ' + set.team + '. ' + set.player_role + ' Boss: ' + set.boss.name + ', ' + set.boss.role + '. People: ' + set.people.map(p => p.name + ', ' + p.role).join('; ') + '. ' + set.current_work;
-  return SHARED + '\n\n' + P6.replace('[SKILL CARD]', cardText()).replace('[SETTING]', setting).replace('[REPS]', reps)
-    .replace('[REFLECTION 1]', S.refl.c.trim()).replace('[REFLECTION 2]', S.refl.h.trim()).replace('[REFLECTION 3]', S.refl.t.trim());
-}
-
-/* ============ CODE CHECKS on AI output ============ */
-function checkJudge(v, r) {
-  if (!v || typeof v !== 'object' || !v.checks) throw new Error('Judge reply had no checks.');
-  const out = { checks: {}, missing_from_task: Array.isArray(v.missing_from_task) ? v.missing_from_task.map(String) : [] };
-  fieldKeys(r).forEach(k => {
-    const found = v.checks[k] || v.checks[Object.keys(v.checks).find(x => x.toLowerCase().startsWith(k.toLowerCase().slice(0, 10))) || ''];
-    if (!found) throw new Error('Judge reply was missing the check "' + k + '".');
-    const status = String(found.status || '').toLowerCase();
-    if (!ST[status]) throw new Error('Judge gave an unknown status for "' + k + '".');
-    out.checks[k] = { status, evidence: String(found.evidence || ''), note: String(found.note || '') };
-  });
-  return out;
-}
-function checkFeedback(v) {
-  if (!v || typeof v.feedback !== 'string' || !v.feedback.trim()) throw new Error('Feedback reply was empty.');
-  return v.feedback.trim();
-}
-function checkDebrief(v) {
-  if (!v || !Array.isArray(v.worked) || !Array.isArray(v.work_on) || !v.try_next) throw new Error('Debrief reply was missing a section.');
-  return { note: String(v.note || ''), worked: v.worked.map(String), work_on: v.work_on.map(String), try_next: { move: String(v.try_next.move || ''), why: String(v.try_next.why || ''), practice: String(v.try_next.practice || '') } };
-}
-function parseJSON(text) {
-  const t = (text || '').replace(/```(?:json)?/gi, '').trim();
-  const a = t.indexOf('{'), b = t.lastIndexOf('}');
-  if (a < 0 || b <= a) return null;
-  try { return JSON.parse(t.slice(a, b + 1)); } catch (e) { return null; }
-}
-async function ask(prompt, tier) {
-  const t0 = Date.now(); let text = '';
-  for (let k = 0; k < 2; k++) {
-    const p = k === 0 ? prompt : prompt + '\n\nReply with the JSON object only: no other text, no code fences.';
-    const raw = await sample(p, { modelTier: tier });
-    text = raw && raw.text ? raw.text.trim() : '';
-    const v = raw && !raw.truncated ? parseJSON(text) : null;
-    if (v) return { value: v, text, ms: Date.now() - t0, retried: k > 0 };
-  }
-  const e = new Error('The AI reply could not be read, even after one retry. Its raw text is below.'); e.raw = text; e.prompt = prompt; throw e;
-}
-
-/* ============ ACTIONS ============ */
-async function checkAnswer() {
-  const i = S.rep, r = ROUND.reps[i], st = S.reps[i];
-  const answer = answerText(r, st);
-  if (!live) {
-    const cap = r.captured[Math.min(st.attempts.length, r.captured.length - 1)];
-    st.attempts.push({ pick: st.pick, answer, mode: 'captured', capturedAnswer: cap.answer, feedback: cap.fb, judge: null });
-    render(); return;
-  }
-  st.busy = true; st.err = ''; render();
-  const calls = [];
-  try {
-    const p3 = fillP3(r, st);
-    const j = await ask(p3, TIER.P3); calls.push({ name: 'P3 judge (practice mode)', prompt: p3, reply: j.text, ms: j.ms });
-    const judge = checkJudge(j.value, r);
-    const last = st.attempts.length + 1 >= MAXTRY;
-    const p4 = fillP4(r, judge, st, last);
-    const f = await ask(p4, TIER.P4); calls.push({ name: 'P4 narrator (practice mode)', prompt: p4, reply: f.text, ms: f.ms });
-    const feedback = checkFeedback(f.value);
-    st.attempts.push({ pick: st.pick, answer, mode: 'live', judge, feedback, oneWay: typeof f.value.one_way === 'string' ? f.value.one_way.trim() : '', next: typeof f.value.next === 'string' ? f.value.next.trim() : '', calls });
-  } catch (e) {
-    st.err = (e && (e.message || e.code)) ? (e.code === 'rate_limited' ? 'The AI is busy. Wait a minute, then try again.' : e.code === 'not_granted' ? 'Live AI was not allowed for this page.' : e.message) : 'Something went wrong.';
-    if (e && e.code === 'not_granted') { live = false; setStatus(); }
-    if (e && e.raw !== undefined) calls.push({ name: 'Failed reply', prompt: e.prompt, reply: e.raw || '(empty)', ms: 0 });
-    st.lastCalls = calls;
-  }
-  st.busy = false; render();
-}
-async function runDebrief() {
-  if (!live) { S.db = Object.assign({ mode: 'captured' }, CAPTURED_DEBRIEF); render(); return; }
-  S.dbBusy = true; S.dbErr = ''; render();
-  try {
-    const p6 = fillP6();
-    const d = await ask(p6, TIER.P6);
-    S.db = Object.assign({ mode: 'live' }, checkDebrief(d.value));
-    S.dbCalls = [{ name: 'P6 round debrief', prompt: p6, reply: d.text, ms: d.ms }];
-  } catch (e) { S.dbErr = e && e.code === 'rate_limited' ? 'The AI is busy. Wait a minute, then try again.' : (e && e.message) || 'Something went wrong.'; }
-  S.dbBusy = false; render();
-}
-function go(n) { S.rep = n; render(); try { window.scrollTo(0, 0); } catch (e) {} }
-
-/* ============ RENDER ============ */
-function md(t) { return esc(t).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>'); }
-function callsFold(calls) {
-  if (!calls || !calls.length) return '';
-  return '<details><summary>What the AI received and returned</summary>' + calls.map(c =>
-    '<div class="lab" style="margin-top:8px">' + esc(c.name) + ' · ' + (c.ms / 1000).toFixed(1) + ' s</div><div class="muted" style="font-size:12px">Prompt sent</div><pre>' + esc(c.prompt) + '</pre><div class="muted" style="font-size:12px">Reply</div><pre>' + esc(c.reply) + '</pre>').join('') + '</details>';
-}
-function pillsHTML() {
-  return '<nav class="pills" aria-label="Round steps"><button class="pill" data-go="-1"' + (S.rep === -1 ? ' aria-current="step"' : '') + '>Your round</button>' + ROUND.reps.map((r, i) => '<button class="pill" data-go="' + i + '"' + (S.rep === i ? ' aria-current="step"' : '') + '>' + r.n + ' ' + esc(r.sub) + (done(i) ? ' ✓' : '') + '</button>').join('') + '<button class="pill" data-go="5"' + (S.rep === 5 ? ' aria-current="step"' : '') + '>Debrief' + (S.db ? ' ✓' : '') + '</button></nav>';
-}
-function introHTML() {
-  const st = ROUND.setting;
-  return '<div class="eyebrow">Level 2 · New manager · Prioritization practice</div>' +
-    '<h1 style="margin:0;font-size:34px;line-height:1.15;font-weight:900">Your round: Ledgerline</h1>' +
-    '<section class="card"><p class="para">Ledgerline makes invoicing software for local shops. Three weeks ago you became the manager of its Billing team.</p>' +
-    '<p class="para">This month your team owes three shops new invoice templates by launch day, two weeks from now, while keeping payments running and fixing bugs.</p></section>' +
-    '<section class="card"><div class="lab">The people in this round</div><div style="display:flex;flex-wrap:wrap;gap:8px">' + Object.keys(ROLE).map(k => '<span class="tag" style="background:' + ROLE[k][0] + ';border-color:' + ROLE[k][1] + ';color:' + ROLE[k][1] + ';padding:2px 10px;font-size:13px">' + ROLE[k][2] + '</span>').join('') + '</div>' + [st.boss].concat(st.people).map(p => '<div style="display:flex;gap:12px;align-items:center">' + av(p.name) + '<div><b>' + esc(p.name) + '</b> · ' + esc(p.role) + '</div></div>').join('') + '</section>' +
-    '<section class="card" style="background:#F1ECFF"><div class="lab" style="color:#3A24B8">How it works</div><p style="margin:0">Five reps, one story. Ask one question, then decide. From rep 3, say it in your own words and get feedback. No meters, no score.</p></section>' +
-    '<button class="btn" data-go="0" style="align-self:flex-start">Start rep 1</button>';
-}
-function leftHTML(r) {
-  const strat = r ? (CARD.strategies.find(s => s[0].toLowerCase() === r.strategy.toLowerCase()) || CARD.strategies[0]) : null;
-  return (strat ? '<div class="panel" style="background:#FFFDF6"><div class="lab">Strategy for this rep</div><div style="font-size:17px;font-weight:900">' + esc(strat[0]) + '</div><p style="margin:0">' + esc(strat[1]) + '</p></div>' : '') +
-    '<div class="panel"><div class="lab">Skill card · Prioritization</div><p style="margin:0;font-size:14px">' + esc(CARD.definition) + '</p>' + CARD.subs.map(s => '<div style="padding:2px 6px;border-radius:6px;background:' + (r && s[0] === r.sub ? '#FFE9A8' : 'transparent') + '"><b>' + esc(s[0]) + '</b>' + (r && s[0] === r.sub ? ': ' + esc(s[1]) : '') + '</div>').join('') +
-    '<div class="lab" style="padding-top:6px;border-top:1px solid #CFC3A5">Watch for</div>' + CARD.watch.map(w => '<div><b>' + esc(w[0]) + ':</b> ' + esc(w[1]) + '</div>').join('') +
-    '<div class="lab" style="padding-top:6px;border-top:1px solid #CFC3A5;color:#0E7A4D">You will know when</div>' + CARD.know.map(k => '<div>' + esc(k) + '</div>').join('') + '</div>';
-}
-function rightHTML(r, st) {
-  const asked = st && st.asked !== null;
-  const set = ROUND.setting;
-  const sofar = r ? ROUND.reps.slice(0, ROUND.reps.indexOf(r) + 1).map(x => '<div style="font-size:14px"><span class="lab" style="font-size:11px">Rep ' + x.n + '</span><br>' + esc(x.so) + '</div>').join('') : '';
-  return (r ? '<div class="panel"><div class="lab">What you asked about</div>' + (asked ? '<div><span class="lab" style="font-size:12px">' + esc(r.qs[st.asked].to) + '</span><p style="margin:2px 0 0">“' + esc(r.qs[st.asked].a) + '”</p></div>' : '<p class="muted" style="margin:0">The answer to your question will show here.</p>') + '</div>' : '') +
-    '<div class="panel"><div class="lab">The round</div><p class="muted" style="margin:0;font-size:14px">You manage Billing at Ledgerline.</p>' + [set.boss].concat(set.people).map(p => '<div style="font-size:14px;display:flex;gap:8px;align-items:center">' + av(p.name) + '<span><b>' + esc(p.name) + '</b> · ' + esc(p.role) + '</span></div>').join('') +
-    (sofar ? '<div class="lab" style="padding-top:6px;border-top:1px solid #CFC3A5">So far</div>' + sofar : '') + '</div>';
-}
-function render() { if (LG.active !== 'practice') return; render_(); }
-function render_() {
-  const main = $('main'), side = $('side'), left = $('left');
-  if (S.rep === -1) { main.innerHTML = pillsHTML() + introHTML(); left.innerHTML = leftHTML(null); side.innerHTML = rightHTML(null, null); bind(); return; }
-  if (S.rep === 5) { main.innerHTML = pillsHTML() + debriefHTML(); left.innerHTML = leftHTML(null); side.innerHTML = glanceHTML(); bind(); return; }
-  const r = ROUND.reps[S.rep], st = S.reps[S.rep];
-  const asked = st.asked !== null, picked = st.pick !== null;
-  let h = pillsHTML();
-  h += '<div class="eyebrow">Level 2 · Prioritization practice · Rep ' + r.n + ' of 5 · ' + esc(r.sub) + '</div>';
-  h += '<div class="sofar"><span class="lab" style="color:#3A24B8">So far</span><br>' + esc(r.so) + '</div>';
-  h += r.blocks.map(b => b[0] === 'p' ? '<p class="para">' + esc(b[1]) + '</p>' : '<ul style="margin:0;padding-left:26px;font-size:18px;display:flex;flex-direction:column;gap:6px">' + b[1].map(x => '<li>' + esc(x) + '</li>').join('') + '</ul>').join('');
-  let sec = 1;
-  h += '<section class="card"><h2>' + (sec++) + '. Ask one</h2><p class="muted" style="margin:0;font-size:15px">Pick one person to ask before you answer.</p>';
-  r.qs.forEach((q, i) => {
-    const on = st.asked === i, dim = asked && !on;
-    h += '<button class="opt' + (on ? ' on' : '') + (dim ? ' dim' : '') + '" data-ask="' + i + '"' + (asked ? ' disabled' : '') + '>' + av(q.to, q.to === 'The sales rep' ? 'S' : q.to[0]) + '<span><span class="lab" style="font-size:12px">' + esc(q.to) + '</span><br>' + esc(q.q) + '</span></button>';
-    if (on) h += '<p class="answer">“' + esc(q.a) + '”</p>';
-  });
-  h += '</section>';
-  if (r.choices.length) {
-    h += '<section class="card" style="opacity:' + (asked ? 1 : .5) + '"><h2>' + (sec++) + '. ' + esc(r.task) + '</h2><div role="radiogroup" aria-label="Choices" style="display:flex;flex-direction:column;gap:8px">';
-    r.choices.forEach((c, i) => {
-      const canPick = asked && (r.format === 'choices' ? !picked : (st.attempts.length === 0 || st.retrying) && !st.busy);
-      h += '<button class="opt' + (st.pick === i ? ' on' : '') + '" role="radio" aria-checked="' + (st.pick === i) + '" data-pick="' + i + '"' + (canPick ? '' : ' disabled') + '><span class="letter">' + 'ABCD'[i] + '</span><span>' + esc(c.text) + '</span></button>';
-      if (r.format === 'choices' && picked && st.pick === i) h += '<div class="verdict" style="background:' + VL[c.v][1] + '"><b>' + VL[c.v][0] + '.</b> ' + esc(c.why) + '</div>';
-    });
-    h += '</div>' + (r.format === 'choices' ? '<p class="muted" style="margin:0;font-size:13px">Choice feedback was written by AI when the round was built and approved by the designer.</p>' : (st.retrying ? '<p class="muted" style="margin:0;font-size:14px">You can change your choice too.</p>' : '')) + '</section>';
-  }
-  if (r.format !== 'choices') {
-    const ready = r.format === 'open' ? asked : picked;
-    const n = st.attempts.length, fin = n >= MAXTRY || (n > 0 && lands(r, st.attempts[n - 1]));
-    const editable = ready && !st.busy && (n === 0 || st.retrying);
-    const dis = editable ? '' : ' disabled';
-    h += '<section class="card" style="opacity:' + (ready ? 1 : .5) + '"><h2>' + (sec++) + '. ' + (r.choices.length ? 'Say it in your own words' : esc(r.task)) + '</h2>';
-    if (editable) h += '<p class="muted" style="margin:0;font-size:14px">' + (n >= MAXTRY - 1 ? 'Last try. Then you will see one way to say it.' : 'You can revise until it lands, up to three tries.') + '</p>';
-    if (r.format === 'open') h += '<label class="lab" for="ft">What you say to Vic today</label><textarea id="ft" class="ta" rows="5"' + dis + '>' + esc(st.ft) + '</textarea>';
-    else r.fields.forEach((f, k) => { h += '<label class="lab" for="f' + k + '">' + esc(f) + '</label><textarea id="f' + k + '" class="field grow" rows="1" data-fv="' + k + '"' + dis + '>' + esc(st.fv[k]) + '</textarea>'; });
-    if (editable) {
-      const filled = r.format === 'open' ? st.ft.trim() : st.fv.every(x => x.trim());
-      h += '<div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center"><button class="btn" id="check"' + (filled ? '' : ' disabled') + '>' + (n ? 'Check my revision' : 'Check my answer') + '</button></div>';
-    }
-    if (st.busy) h += '<p style="margin:0"><span class="spin"></span>Reading your answer…</p>';
-    if (st.err) h += '<div class="err">' + esc(st.err) + ' <button class="ghost" id="check2">Send it again</button>' + callsFold(st.lastCalls) + '</div>';
-    h += '</section>';
-    if (n) {
-      const a = st.attempts[n - 1];
-      h += '<section class="ai"><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><h2 style="margin-right:4px">' + sec + '. Feedback</h2><span class="chip ai">AI feedback</span><span class="chip ' + (a.mode === 'live' ? 'live">Live' : 'capt">Captured Nov 17') + '</span>' + (n > 1 ? '<span class="lab">Try ' + n + '</span>' : '') + '</div>';
-      if (a.pick !== null && a.pick !== undefined && r.choices[a.pick]) { const c = r.choices[a.pick]; h += '<div class="verdict" style="margin-left:0;background:' + VL[c.v][1] + '"><span class="lab" style="font-size:11px">Your choice: ' + 'ABCD'[a.pick] + '</span><br><b>' + VL[c.v][0] + '.</b> ' + esc(c.why) + '</div>'; }
-      if (a.judge) h += '<div style="display:flex;flex-wrap:wrap;gap:6px">' + Object.keys(a.judge.checks).map(key => { const c = a.judge.checks[key]; return '<span class="tag" style="background:' + ST[c.status][1] + '">' + ST[c.status][0] + ' ' + esc(key) + '</span>'; }).join('') + '</div>';
-      h += '<p style="margin:0;font-size:17px;line-height:1.6">' + esc(a.feedback) + '</p>';
-      if (a.next) h += '<p style="margin:0;font-size:16px;padding-top:8px;border-top:1px dashed #1E1B3A"><span class="lab" style="font-size:11px">Next</span><br>' + esc(a.next) + '</p>';
-      if (a.oneWay) h += '<div style="padding:10px 14px;border-radius:12px;border:2px solid #1E1B3A;background:#E6F5EC"><span class="lab" style="font-size:11px">One way to say it</span><p style="margin:4px 0 0;font-size:16px">' + esc(a.oneWay) + '</p></div>';
-      if (n > 1) h += '<details><summary>Your earlier tries and their feedback</summary>' + st.attempts.slice(0, n - 1).map((x, k) => '<p class="lab" style="margin:8px 0 0">Try ' + (k + 1) + '</p><p style="white-space:pre-wrap;margin:4px 0">' + esc(x.answer) + '</p><p class="muted" style="margin:0">' + esc(x.feedback) + '</p>').join('') + '</details>';
-      if (a.mode === 'captured') h += '<div class="muted" style="font-size:13px;border-top:1px dashed #1E1B3A;padding-top:8px">Live AI is not available in this view, so this is feedback captured from a real run on Nov 17. The answer it judged: <i>' + esc(a.capturedAnswer) + '</i></div>';
-      h += callsFold(a.calls);
-      if (!st.retrying) {
-        const canRetry = !fin;
-        const nextBtn = S.rep < 4 ? '<button class="' + (canRetry ? 'ghost' : 'btn') + '" data-go="' + (S.rep + 1) + '">' + (canRetry ? 'Move on to rep ' + (S.rep + 2) : 'Next rep') + '</button>' : '<button class="' + (canRetry ? 'ghost' : 'btn') + '" data-go="5">' + (canRetry ? 'Move on to the debrief' : 'Go to your round debrief') + '</button>';
-        h += '<div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">' + (canRetry ? '<button class="btn" id="retry">Revise my answer</button>' : '') + nextBtn + '</div>';
-      }
-      h += '</section>';
-    }
-  } else if (picked && S.rep < 4) {
-    h += '<button class="btn" data-go="' + (S.rep + 1) + '" style="align-self:flex-start">Next rep</button>';
-  }
-  main.innerHTML = h;
-  left.innerHTML = leftHTML(r);
-  side.innerHTML = rightHTML(r, st);
-  bind();
-}
-function allNamed(a) { return a.judge && Object.values(a.judge.checks).every(c => c.status === 'named'); }
-function lands(r, a) { return allNamed(a) && (a.pick === null || a.pick === undefined || !r.choices[a.pick] || r.choices[a.pick].v === 'strong'); }
-function done(i) { const r = ROUND.reps[i], st = S.reps[i]; return r.format === 'choices' ? st.pick !== null : st.attempts.length > 0; }
-function glanceHTML() {
-  return '<div class="panel" style="gap:6px"><div class="lab">Your round at a glance</div>' + ROUND.reps.map((r, i) => {
-    const st = S.reps[i], c = st.pick !== null ? r.choices[st.pick] : null, last = st.attempts[st.attempts.length - 1];
-    const verdict = c ? VL[c.v][0] : (r.format === 'open' ? 'Your own words' : 'Not played');
-    const parts = last && last.judge ? Object.keys(last.judge.checks).map(k => { const s = last.judge.checks[k].status; return '<span class="tag" style="background:' + ST[s][1] + '">' + ST[s][0] + ' ' + esc(k) + '</span>'; }).join(' ') : '';
-    return '<div class="glance"><div style="font-size:14px"><b>' + r.n + ' · ' + esc(r.sub) + '</b> <span class="muted">· ' + esc(verdict) + (st.attempts.length > 1 ? ' · 2 tries' : '') + '</span></div><div style="display:flex;flex-wrap:wrap;gap:4px">' + parts + '</div></div>';
-  }).join('') + '<p class="muted" style="margin:0;font-size:12px">✓ named · ◐ partly · ✕ missing, from your last try. Drawn by code from your answers, not a score.</p></div>';
-}
-function debriefHTML() {
-  let h = '';
-  if (!S.db) {
-    h += '<section class="card"><h2>Round complete</h2><p class="muted" style="margin:0;font-size:15px">Before you see feedback on the whole round, say it in your own words.</p>';
-    [['c', 'What went well for you?'], ['h', 'What was hard?'], ['t', 'What will you try at work?']].forEach(x => { h += '<label class="lab" for="r' + x[0] + '">' + x[1] + '</label><textarea id="r' + x[0] + '" class="ta" rows="2" data-refl="' + x[0] + '">' + esc(S.refl[x[0]]) + '</textarea>'; });
-    const ok = ['c', 'h', 't'].every(k => S.refl[k].trim());
-    h += S.dbBusy ? '<p style="margin:0"><span class="spin"></span>Reading your whole round…</p>' : '<button class="btn" id="db"' + (ok ? '' : ' disabled') + ' style="align-self:flex-start">See your round debrief</button>';
-    if (S.dbErr) h += '<div class="err">' + esc(S.dbErr) + '</div>';
-    h += '</section>';
-    return h;
-  }
-  const d = S.db;
-  h += '<section class="ai"><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><h2>Your round debrief</h2><span class="chip ai">AI feedback</span><span class="chip ' + (d.mode === 'live' ? 'live">Live' : 'capt">Captured Nov 17') + '</span></div>';
-  h += '<p class="muted" style="margin:0;font-size:13px;font-style:italic">' + esc(d.note.replace(/^\*|\*$/g, '')) + '</p>';
-  h += '<div class="lab">What worked</div>' + d.worked.map(x => '<p style="margin:0;font-size:16px">' + md(x) + '</p>').join('');
-  h += '<div class="lab">What to work on</div>' + d.work_on.map(x => '<p style="margin:0;font-size:16px">' + md(x) + '</p>').join('');
-  h += '<div class="lab">Try next at work</div><div style="padding:12px 14px;border-radius:12px;border:2px solid #1E1B3A;background:#E6F5EC;font-size:16px">' + md(d.try_next.move) + '</div>' + (d.try_next.why ? '<p style="margin:0;font-size:15px">' + md(d.try_next.why) + '</p>' : '') + '<div class="lab">Practice next round</div><p style="margin:0;font-size:16px">' + md(d.try_next.practice) + '</p>';
-  if (d.mode === 'captured') h += '<div class="muted" style="font-size:13px">Live AI is not available in this view, so this is a debrief captured from a real run on Nov 17, written from a different player\'s round.</div>';
-  h += callsFold(S.dbCalls) + '</section>';
-  return h;
-}
-function grow(el) { el.style.height = 'auto'; el.style.height = (el.scrollHeight + 4) + 'px'; }
-function bind() {
-  document.querySelectorAll('.grow, .ta').forEach(el => { grow(el); el.addEventListener('input', () => grow(el)); });
-  document.querySelectorAll('[data-go]').forEach(b => b.onclick = () => go(+b.dataset.go));
-  document.querySelectorAll('[data-ask]').forEach(b => b.onclick = () => { S.reps[S.rep].asked = +b.dataset.ask; render(); });
-  document.querySelectorAll('[data-pick]').forEach(b => b.onclick = () => { S.reps[S.rep].pick = +b.dataset.pick; render(); });
-  document.querySelectorAll('[data-fv]').forEach(inp => inp.oninput = () => { S.reps[S.rep].fv[+inp.dataset.fv] = inp.value; const c = $('check'); if (c) c.disabled = !S.reps[S.rep].fv.every(x => x.trim()); });
-  const ft = $('ft'); if (ft) ft.oninput = () => { S.reps[S.rep].ft = ft.value; const c = $('check'); if (c) c.disabled = !ft.value.trim(); };
-  const c = $('check'); if (c) c.onclick = () => { S.reps[S.rep].retrying = false; checkAnswer(); };
-  const c2 = $('check2'); if (c2) c2.onclick = () => checkAnswer();
-  const rt = $('retry'); if (rt) rt.onclick = () => { const st = S.reps[S.rep]; st.retrying = true; render(); };
-  document.querySelectorAll('[data-refl]').forEach(t => t.oninput = () => { S.refl[t.dataset.refl] = t.value; const b = $('db'); if (b) b.disabled = !['c', 'h', 't'].every(k => S.refl[k].trim()); });
-  const db = $('db'); if (db) db.onclick = runDebrief;
-}
-function setStatus() { const s = $('status'); if (!s || LG.active !== 'practice') return; s.textContent = live ? 'Live AI on' : 'Captured runs (live AI not available here)'; s.style.background = live ? '#A7E3C4' : '#FFE9A8'; }
-
-/* ---------- Merged-app boot (replaces the artifact's boot; same steps) ---------- */
-let booted = false;
-return {
-  mount(stage) {
-    LG.active = 'practice';
-    $('tools').querySelectorAll('[data-apptool]').forEach((b) => b.remove());
-    stage.innerHTML = '<div class="app-practice">' + "<div class=\"layout\">\n<aside class=\"side\" id=\"left\" aria-label=\"Strategy and skill card\"></aside>\n<main class=\"main\" id=\"main\" aria-live=\"polite\"></main>\n<aside class=\"side\" id=\"side\" aria-label=\"The round and what you asked\"></aside>\n</div>" + '</div>';
-    render();
-    if (!booted) { booted = true; (async () => { sample = await LG.sample(); live = !!sample; setStatus(); render(); })(); } else setStatus();
-  },
-  unmount() { LG.active = ''; }
-};
-})();
-</script>
-<script>
 /* ===== Pages and router ===== */
 (function () {
 const esc = (s) => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -2103,179 +1513,6 @@ function home() {
   '<p class="muted" style="margin:0;font-size:15px">Designed by a learning designer, built with AI. <a href="#about">How it’s made</a></p></div>';
 }
 
-/* ---------- Choose a level ---------- */
-const SKN = { prioritization: 'Prioritization', delegation: 'Delegation and accountability', coaching: 'Coaching and development', hard: 'Hard conversations', direction: 'Setting direction', comms: 'Business communication and influence', systems: 'Systems and leverage' };
-const LV = [
- { id: 'l1', label: 'Level 1 · Curious contributor', play: false, line: 'Accountable for an outcome, not for people.', challenge: 'Getting results from people you have no authority over.', who: 'Jordan', ini: 'J', avBg: '#7FD6C2', whoLine: 'A senior analyst asked to lead a cross-team project. Nobody on it reports to Jordan.', ns: [['comms', 'Make a case to people who owe you nothing.'], ['delegation', 'Ask for work you cannot assign, then follow up.'], ['hard', 'Tell a peer their piece is late.']] },
- { id: 'l2', label: 'Level 2 · New manager', play: true, line: 'Getting results through a team instead of your own output.', challenge: 'Letting go of doing the work, and getting results through other people.', who: 'Cleo', ini: 'C', avBg: '#FFC93C', whoLine: 'Promoted from the team you now lead, at a mid-size software company. A team of six, a boss and a peer manager.', ns: [['delegation', 'Hand over a result, then follow up when it slips.'], ['coaching', 'Help someone find their next step.'], ['prioritization', 'Read your team’s capacity, not only your own.']] },
- { id: 'l3', label: 'Level 3 · Manager of managers', play: false, line: 'Developing the managers who lead the teams.', challenge: 'Leading people who lead, without taking their work back.', who: 'Marisol', ini: 'M', avBg: '#FF8FA3', whoLine: 'A director with two managers and about fifteen people under them.', ns: [['coaching', 'Coach your managers, and leave their people to them.'], ['direction', 'Set goals that still make sense two layers down.'], ['systems', 'Fix the process both teams keep tripping on.']] },
- { id: 'l4', label: 'Level 4 · Functional leader', play: false, line: 'Setting strategy across functions and deciding where resources go.', challenge: 'Choosing for the whole company, even when your own function loses.', who: 'Dev', ini: 'D', avBg: '#C9B8FF', whoLine: 'Head of operations across three functions, reporting to an executive.', ns: [['direction', 'Turn a vague company goal into a plan.'], ['systems', 'Redesign a structure so a problem stops coming back.'], ['comms', 'Make your case to the executive team in two minutes.']] }
-];
-function levels() {
-  const l = LV.find((x) => x.id === P.lvl) || LV[1];
-  return '<div class="col" style="gap:22px">' +
-  '<div style="display:flex;flex-direction:column;gap:10px"><h1 class="h1">Choose your level</h1>' +
-  '<p style="margin:0;font-size:18px;line-height:1.6">Four steps on a leader’s path. Each one asks you to let go of something that made you good, and learn something new.</p>' +
-  '<label style="display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:800">Level<select class="sel" data-pg="lvl">' + LV.map((x) => '<option value="' + x.id + '"' + (x.id === l.id ? ' selected' : '') + '>' + esc(x.label + (x.play ? '' : ' (coming soon)')) + '</option>').join('') + '</select></label></div>' +
-  '<div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:-8px"><p class="muted" style="margin:0;font-size:16px;flex:1">' + esc(l.line) + '</p><span style="padding:3px 10px;border-radius:999px;font-size:12px;font-weight:800;background:' + (l.play ? '#E6F5EC' : '#EFE6CC') + ';color:' + (l.play ? '#0E7A4D' : '#5A5675') + '">' + (l.play ? 'Playable' : 'Coming soon') + '</span></div>' +
-  '<div class="card" style="gap:18px"><div style="display:flex;gap:16px;align-items:center"><span class="av" style="width:64px;height:64px;font-size:26px;background:' + l.avBg + '">' + l.ini + '</span>' +
-  '<div style="display:flex;flex-direction:column;gap:4px"><h2 style="margin:0;font-size:28px;line-height:1.15;font-weight:900">You play ' + esc(l.who) + '</h2><p style="margin:0;font-size:17px;line-height:1.5">' + esc(l.whoLine) + '</p></div></div>' +
-  '<div style="display:flex;flex-direction:column;gap:4px;padding-left:14px;border-left:4px solid #5B3DF5"><div class="lab" style="color:#3A24B8">Your biggest challenge</div><p style="margin:0;font-size:17px;line-height:1.5">' + esc(l.challenge) + '</p></div>' +
-  '<div style="display:flex;flex-direction:column;gap:8px"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px"><div class="lab">New skills you’ll build</div><span class="muted" style="font-size:13px">Practice before you play, or anytime</span></div>' +
-  l.ns.map((n) => '<div style="display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:12px;padding:10px 0;border-top:1px solid #CFC3A5"><div style="display:flex;flex-direction:column;gap:2px"><b style="font-size:16px">' + esc(SKN[n[0]]) + '</b><span class="muted" style="font-size:15px;line-height:1.45">' + esc(n[1]) + '</span></div><button class="btn2" style="min-height:40px;padding:0 14px;font-size:14px;box-shadow:none" data-skill="' + n[0] + '" aria-label="Practice ' + esc(SKN[n[0]]) + '">Practice</button></div>').join('') +
-  '</div></div>' +
-  (l.play ? '<a class="btn" href="#learn" style="align-self:flex-start">Next: what you’ll learn</a>' : '<p class="muted" style="margin:0">This level is coming soon. Level 2 is playable now.</p>') + '</div>';
-}
-
-/* ---------- What you'll learn (Nov 19, E8) ---------- */
-P.slvl = 2;
-const OBJ = [
-  ['G1', 'Analyze my decisions by naming what each protects, what it costs, and who sees or pays.'],
-  ['G2', 'Evaluate how well my confidence matched what happened.'],
-  ['G3', 'Analyze patterns that build over time, such as repeat misses, unseen work and unkept commitments.'],
-  ['G4', 'Judge which defensible approach fits a situation, by what each one protects.'],
-  ['G5', 'Create my own approach when no options are given.'],
-  ['G6', 'Reflect on the move I reach for first under pressure, and when to step away.']];
-function learn() {
-  return '<div class="col">' +
-  '<div style="display:flex;flex-direction:column;gap:6px"><div class="eyebrow">Level 2 · New manager</div><h1 class="h1" style="font-size:34px">What you’ll learn</h1>' +
-  '<p style="margin:0;font-size:18px">One skill sits under all the others: saying what a decision protects, what it costs, and who pays, in your own words.</p></div>' +
-  '<div class="card" style="background:#F1ECFF"><div class="lab" style="color:#3A24B8">Three goals for every decision</div>' +
-  '<div class="row"><span class="num">1</span><p><b>Name the trade-off:</b> what you protect, what it costs, who pays.</p></div>' +
-  '<div class="row"><span class="num">2</span><p><b>Ask before you act:</b> find the fact that would change your call.</p></div>' +
-  '<div class="row"><span class="num">3</span><p><b>Check your confidence:</b> how sure you were, against how it went.</p></div></div>' +
-  '<div class="card"><div class="lab">By the end of level 2, I can</div>' +
-  OBJ.map((o) => '<div class="row"><span class="num" style="background:#fff">' + o[0] + '</span><p>' + esc(o[1]) + '</p></div>').join('') + '</div>' +
-  '<p style="margin:0;font-size:17px">During the game, you practice your trade-offs in scenarios built around seven leadership skills. <a href="#skills">See the skills and how to practice</a></p>' +
-  '<div style="display:flex;flex-wrap:wrap;gap:12px"><a class="btn" href="#play">Start level 2</a><a class="btn2" href="#practice">Practice first</a></div>' +
-  '<p class="muted" style="margin:0;font-size:13px">Objectives follow the revised Bloom’s taxonomy (Krathwohl, 2002).</p></div>';
-}
-
-/* ---------- Skills and practice (Nov 19, E1-E7): level dropdown, goals and key behaviors per level ---------- */
-const LEVELS = [[1, 'Level 1 · Curious contributor'], [2, 'Level 2 · New manager'], [3, 'Level 3 · Manager of managers'], [4, 'Level 4 · Functional leader']];
-/* Review status: Level 2 for these four skills is Giselle's to sign off; everything else is a draft marked Needs review. */
-const SIGNOFF = { tradeoff: 1, prioritization: 1, delegation: 1, coaching: 1 };
-const L = (g, k) => ({ g, k });
-const SK = [
- { id: 'tradeoff', name: 'Tradeoff judgment', short: 'Weigh options in context and choose', group: 'Core skill', core: true,
-   idea: 'Seeing what each option protects and what it costs, then choosing on purpose.',
-   lv: {
-    1: L(['Say what an option protects and what it costs for the people your project touches.', 'Ask the one question that would change your call before you choose.', 'Say how sure you are before you see the result.'], ['You name a cost for the option you chose.', 'You raise the trade-off with the people it affects.', 'You compare what happened with what you expected.']),
-    2: L(['Before you choose, say what each option protects and who pays, across all four meters.', 'Choose the option whose cost you can name and defend, and say how sure you are.', 'After the result, compare it with what you expected, and adjust next time.'], ['You can name at least one cost of the option you chose. No option is free.', 'Your explanation to your boss names the trade-off, not only the decision.', 'Over several decisions, your confidence ratings get closer to how things turn out.']),
-    3: L(['Weigh trade-offs your managers bring you without making the call for them.', 'Name what a choice costs two layers down, not only on your desk.', 'Spend one team’s capacity to protect another, and say why.'], ['Your managers can say what you protected and what it cost.', 'You ask what a choice does to the teams under your managers.', 'You go back for what you spent.']),
-    4: L(['Choose for the whole company, even when your own function pays.', 'Name the cost in money, time and trust to the executive team.', 'Set the trade-off rules other leaders will apply without you.'], ['Peers in other functions can say what you gave up and why.', 'Your case names the cost before anyone asks.', 'Leaders below you make similar calls the same way.']) },
-   action: [['The situation', 'Two people ask for the same week off, during a launch.'], ['Scan the meters', 'Approve both: the team and I win, the business takes a risk. Deny both: the business is safe, the team pays.'], ['Ask the deciding question', '“What actually needs a person that week?” Only release-day support.'], ['Choose and say the cost', '“I am approving both. It protects their time off. I cover release day myself, and my director hears it today.”'], ['Rate and check', 'I rate it likely to work. Afterward I check: did release day hold, and what did covering it cost me?']],
-   strategies: [['Four-meter scan', 'For each option, ask what happens to your team, your boss, the business, and you.', ''], ['One-way or two-way door', 'Move fast on choices you can undo. Slow down on the ones you cannot.', ''], ['The deciding question', 'Name the one fact that would change your choice, then go ask for it.', ''], ['Premortem', 'Imagine it is a month from now and this went badly. What caused it? Fix that first.', ''], ['Cost sentence', '“I am choosing X. It protects A. B pays, and here is what I will do about it.”', '']],
-   watch: [['Same meter every time', 'Always protecting your boss, or always the team. A pattern, not a choice.', ''], ['Pretending it is free', 'Choosing as if the option costs nothing, so nobody plans for who pays.', ''], ['Sure every time', 'Rating every choice “very likely” whatever you know.', 'Grolnick et al. (2024), ch. 7']],
-   subs: [['Scan the meters', 'Say what each option does to your team, your boss, the business, and you.'], ['Find the deciding fact', 'Spot what you do not know that would change your call, and ask for it.'], ['Name the cost', 'Say what pays and who, out loud, to the person who needs to know.'], ['Rate your confidence', 'Say how likely it is to work before you see the result.', 'Grolnick et al. (2024), ch. 7'], ['Learn from the result', 'Compare what happened with what you expected, and change one thing next time.']] },
- { id: 'prioritization', name: 'Prioritization', short: 'Rank what matters most, and by when', group: 'The work', ready: true,
-   idea: 'Choosing what waits, saying what that costs, and saying who pays.',
-   lv: {
-    1: L(['List what is competing for your own time this week.', 'Say which piece waits and who is waiting on it.', 'Tell the person waiting before the date slips.'], ['Your list fits the hours you actually have.', 'People waiting on you hear about a slip early.', 'You can say why the first item is first.']),
-    2: L(['Rank competing work by what each week of waiting costs, not by who asked loudest.', 'Say what waits, what it costs, and who pays, in one sentence.', 'Take a changed scope or date back to the person who set it, before it slips.'], ['Your cut statement names all three: what waits, the cost, and who pays.', 'The person you told could repeat back what is cut and who feels it.', 'You raise the trade-off before the deadline, not after the miss.']),
-    3: L(['Rank work across teams, not only your own.', 'Help your managers cut, instead of cutting for them.', 'Renegotiate priorities with your boss when two teams collide.'], ['Your managers bring you a ranked list, not a pile.', 'Cuts are announced by the manager who owns them.', 'Collisions reach your boss with options, not complaints.']),
-    4: L(['Set what the whole function will not do this year.', 'Fund the costliest delay first, even when it is not yours.', 'Revisit priorities on a set rhythm, not only in a crisis.'], ['Teams can name what is off the list, and why.', 'Resource moves come with a stated cost.', 'Priority changes are rare and explained.']) },
-   action: [['The situation', 'Your boss adds a launch checklist due Friday. Your team is already behind on two bug fixes.'], ['Read capacity', 'You ask who has room. Nobody does without dropping something.'], ['Cut', 'The smaller bug fix waits a week. It costs one customer a workaround, and Jo, who promised them a date.'], ['Say it', '“The checklist ships Friday. The export bug waits a week; the clinic keeps the workaround, and Jo tells them today.”'], ['Check', 'Friday: the checklist shipped, and the clinic heard early. Jo did not have to apologize later.']],
-   strategies: [['Eisenhower matrix', 'Sort by urgent and important, then act, schedule, delegate or drop.', 'Covey (1989)'], ['MoSCoW', 'Label each item must, should, could or won’t this time.', 'Clegg'], ['Impact and effort', 'Plot items by value and cost, and start with high value, low cost.', ''], ['Cost of delay', 'Ask what each week of waiting costs, and do the costliest first.', 'Reinertsen'], ['80/20', 'Find the few items that produce most of the result.', ''], ['Risk responses', 'For each risk in your plan, choose to avoid, reduce, transfer or accept it, and say which.', 'PMBOK']],
-   watch: [['The quiet yes', 'Agreeing to new work before you check who is already stretched.', ''], ['Carrying it yourself', 'Absorbing the cost so nobody sees it. The work gets done; the trade-off stays hidden.', ''], ['Ranking without telling', 'Deciding what waits, then never telling the people who pay for it.', '']],
-   subs: [['Sort', 'Separate urgent from important, then rank.', 'Eisenhower matrix'], ['Read capacity', 'Notice who is already stretched before you commit.'], ['Cut', 'Decide what waits, name what it costs, and who pays.'], ['Weigh risk', 'Choose avoid, reduce, transfer or accept, then ask what would break your own plan.', 'PMBOK risk responses'], ['Renegotiate', 'Take a changed scope or date back to the person who set it.']] },
- { id: 'delegation', name: 'Delegation and accountability', short: 'Hand over a result, then follow up', group: 'The work',
-   idea: 'Handing over a result and the authority to reach it, then following up when it slips.',
-   lv: {
-    1: L(['Ask for work from people you cannot assign, with a clear outcome and date.', 'Agree how you will check in before the work starts.', 'Follow up on a slip without going over their head first.'], ['The person can say back what you asked for and by when.', 'Check-ins happen when agreed, not when you panic.', 'You talk to them before you talk about them.']),
-    2: L(['Hand over a result with a clear outcome, a date, and what the person gets to decide.', 'Agree when and how you will check in, before the work starts.', 'Follow up on a miss by naming the situation, behavior and impact, then decide whether to coach or take it back.'], ['The person can say back the result, the date, and what they decide.', 'Check-ins are agreed before the work starts, not added after it slips.', 'Your follow-up names a specific behavior and its effect, and says nothing about their character.']),
-    3: L(['Delegate to managers, and let them delegate to their people.', 'Hold managers accountable for results, not for every task.', 'Step in on a repeat miss through the manager, not around them.'], ['Your managers make calls you would have made yourself a year ago.', 'You hear about problems from the manager first.', 'People two levels down are not waiting on you.']),
-    4: L(['Hand whole outcomes to leaders, with the budget and authority to reach them.', 'Set the few measures you will hold them to.', 'Replace a leader’s plan only when the measures say so.'], ['Leaders can name the outcome, the measure and their authority.', 'Reviews are about measures, not activity.', 'You rarely take work back.']) },
-   action: [['The situation', 'You want Sam to own the weekly report you have always written.'], ['Define it', '“The report goes to Dana every Friday by noon. You decide what goes in. I want to see the first two before they go.”'], ['Check in', 'You look at the first draft Thursday and the second on its own.'], ['A slip', 'Week four, it is late. You say: “Friday’s report went out Monday. Dana asked me for it. What got in the way?”'], ['Decide', 'Sam had a tool problem. You fix the tool and leave the report with Sam.']],
-   strategies: [['Outcome, date, decisions', 'Every handoff says these three things.', ''], ['Levels of authority', 'Say how much is theirs: do it as asked, recommend, decide and tell me, or decide.', ''], ['Match by growth', 'Give stretch work to someone it will grow, with support, not to whoever is free.', ''], ['Check-in rhythm', 'Agree the rhythm up front, so checking in is not hovering.', ''], ['SBI follow-up', 'Situation, behavior, impact, then ask for their view.', 'CCL (2025)']],
-   watch: [['Keeping the decisions', 'Handing off the task while still making every call.', ''], ['Hovering', 'Checking so often they stop owning it.', ''], ['Taking it back quietly', 'Redoing the work yourself without telling them why.', '']],
-   subs: [['Define the handoff', 'Say the result, the date, and who decides what.'], ['Match task to person', 'Fit the work to strengths and growth, not to who is free.'], ['Check in', 'Agree when and how you will look, before you hand off.'], ['Follow up on a miss', 'Name the situation, the behavior and the impact.', 'SBI (CCL, 2025)'], ['Take it back or not', 'Decide whether to keep coaching or take the work back.']] },
- { id: 'coaching', name: 'Coaching and development', short: 'Help someone find their next step', group: 'The people',
-   idea: 'Helping someone find their own next step: a goal, the current reality, options, and what they will do.', ideaSrc: 'GROW (Gopalan, 2025; Whitmore origin)',
-   lv: {
-    1: L(['Ask a teammate what they are trying to do before offering help.', 'Share what you know as options, not orders.', 'Let them choose the next step.'], ['You ask before you tell.', 'They leave with a step they picked.', 'You follow up once.']),
-    2: L(['Run a short conversation through goal, reality, options, and next step.', 'Draw out their options before you offer yours.', 'Notice when someone needs teaching instead of coaching, and switch.'], ['They leave with one step they chose, and when they will do it.', 'You asked more than you told.', 'When they lacked what they needed to choose, you taught first and said so.']),
-    3: L(['Coach your managers, and leave their people to them.', 'Help a manager plan a hard conversation without having it for them.', 'Build a habit of growth conversations across your teams.'], ['Your managers coach their own people.', 'You hear about growth plans you did not write.', 'People below your managers grow without your help.']),
-    4: L(['Grow the leaders who will replace you.', 'Coach across functions, not only in your own.', 'Make development part of how the function is run.'], ['You can name who is ready for your role.', 'Leaders from other functions ask you for coaching.', 'Development time survives busy quarters.']) },
-   action: [['The situation', 'Alex is stuck on a migration plan and has not asked for help.'], ['Goal', '“What would a good plan look like by Friday?”'], ['Reality', '“Where is it stuck right now?” The data mapping keeps failing.'], ['Options', '“What could you try?” Alex names two ideas, then asks about a third you hinted at.'], ['Next step', 'Alex picks pairing with Kim tomorrow morning. You check in after lunch.']],
-   strategies: [['GROW', 'Goal, reality, options, will. One question at each stage is enough.', 'Gopalan (2025)'], ['What and how', 'Open with what and how. “Why” can sound like blame.', ''], ['Wait', 'After a question, let the silence work before you fill it.', ''], ['Teach the novice first', 'Someone new to the work needs examples and steps before open questions help.', 'Kirschner & Hendrick (2024), ch. 6']],
-   watch: [['Leading questions', '“Have you thought about doing it my way?” is advice dressed as a question.', ''], ['Fixing it for them', 'Solving the problem because it is faster this time.', ''], ['Coaching the wrong moment', 'Asking open questions when the person needs direction now.', '']],
-   subs: [['Set the goal', 'Help them say what they want from this.', 'GROW'], ['Explore reality', 'Ask what is true now, without steering.', 'GROW'], ['Generate options', 'Draw out options before offering yours.', 'GROW'], ['Agree the next step', 'End with one thing they will do, and when.', 'GROW'], ['Know the wrong tool', 'Notice when a situation needs direction, not coaching.']] },
- { id: 'hard', name: 'Hard conversations', short: 'Name what happened, ask their view', group: 'The people',
-   idea: 'Naming what happened and its effect, then asking for the other person’s view.', ideaSrc: 'SBI (CCL, 2025)',
-   lv: {
-    1: L(['Tell a peer their piece is late, privately and soon.', 'Describe what happened without blame.', 'Ask what got in the way.'], ['You raise it within a day or two.', 'You describe the behavior, not the person.', 'You listen before you suggest.']),
-    2: L(['Raise a pattern privately and soon, with its effect on others.', 'Ask for their view, and stay in the conversation when it pushes back.', 'Agree one change and a date to check.'], ['You name the situation, the behavior and the impact.', 'You ask a question and wait for the answer.', 'The conversation ends with a change and a follow-up date.']),
-    3: L(['Have the hard conversation with a manager about their team’s results.', 'Help managers prepare their own hard conversations.', 'Address a conflict between two of your managers.'], ['Managers hear concerns from you first.', 'Your managers have their own hard talks.', 'Conflicts reach you early, not as escalations.']),
-    4: L(['Deliver hard news to the executive team.', 'Hold a peer leader to an agreement.', 'Address a culture problem in the open.'], ['Bad news arrives with a plan.', 'Agreements between functions stick.', 'People say the hard thing in your meetings.']) },
-   action: [['The situation', 'Pat has interrupted Lee in three meetings this week.'], ['Choose the moment', 'You ask Pat for ten minutes, privately, the same day.'], ['Describe', '“In today’s planning call, when Lee was presenting, you finished her points twice. She stopped talking.”'], ['Ask', '“How did that meeting look from your side?” Pat says they were trying to save time.'], ['Agree', 'Pat will hold questions until Lee finishes. You will check in after Thursday’s call.']],
-   strategies: [['SBI', 'Situation, behavior, impact, then ask for their view.', 'CCL (2025)'], ['Soon and private', 'Raise it while it is fresh, where no one else is listening.', ''], ['One change', 'End with one thing that will be different, and when you will check.', '']],
-   watch: [['The compliment sandwich', 'Burying the point between praise until it disappears.', ''], ['Waiting for the review', 'Saving it up until it is too late to change.', ''], ['Over-apologizing', 'Making the problem sound smaller than it is.', '']],
-   subs: [['Choose timing and setting', 'Pick a private, unhurried moment.'], ['Describe without blame', 'Say the situation, behavior and impact.', 'SBI (CCL, 2025)'], ['Ask for their view', 'Ask what they saw, and listen before you answer.', 'SBI (CCL)'], ['Stay in it', 'Keep going when it gets uncomfortable.'], ['Agree what changes', 'End with a clear next step.']] },
- { id: 'direction', name: 'Setting direction', short: 'Turn a vague goal into priorities', group: 'The direction',
-   idea: 'Turning a vague goal into a few priorities your team can act on, and saying why they matter.', ideaSrc: 'Leadership Pipeline (Charan et al., as cited)',
-   lv: {
-    1: L(['Restate your project’s goal in plain words.', 'Name the one assumption your plan depends on.', 'Check the goal with whoever set it.'], ['Your team could say the goal back.', 'You say your assumption out loud.', 'You check before you build.']),
-    2: L(['Restate a business goal in plain words for your team.', 'Turn it into two or three priorities, and name what you are assuming.', 'Change direction openly when an assumption fails.'], ['Your team can say why this work matters.', 'Your priorities fit on one line each.', 'When plans change, people hear why.']),
-    3: L(['Set goals that still make sense two layers down.', 'Let managers turn your direction into their own priorities.', 'Adjust direction across teams when the business changes.'], ['Teams two levels down can name the goal.', 'Managers’ priorities fit yours without copying them.', 'Changes reach every team the same week.']),
-    4: L(['Turn a company goal into a plan for a whole function.', 'Choose where the function will not compete.', 'Explain direction so other functions can plan around it.'], ['Other functions can predict your choices.', 'Your plan says what you will not do.', 'Direction holds for a year without a rewrite.']) },
-   action: [['The situation', 'Your boss says: “Make onboarding better this quarter.”'], ['Restate', '“Fewer new clinics need a second setup call.”'], ['Prioritize', 'Two priorities: a setup checklist, and a callback within one day.'], ['Assume', 'You assume most second calls come from setup mistakes. You check last month’s tickets.'], ['Adjust', 'Half came from training gaps. You swap the checklist for a short training video and tell the team why.']],
-   strategies: [['Plain-words goal', 'Say the goal in a sentence a new hire would understand.', ''], ['Two or three priorities', 'More than three is a list, not a direction.', ''], ['Assumption check', 'Name what has to be true, and how you will know if it is not.', '']],
-   watch: [['Waiting to be told', 'Holding off until the direction is perfectly clear.', ''], ['Everything is a priority', 'A long list that tells no one what to drop.', ''], ['Silent changes', 'Changing course without saying why.', '']],
-   subs: [['Find the real problem', 'Separate the symptom from the cause, then say the goal in plain words.'], ['Turn it into priorities', 'Pick the few things that matter most.', 'Leadership Pipeline'], ['Name assumptions', 'Say what you are assuming, and how you will check it.'], ['Connect to why', 'Tie the work to what it is for.'], ['Adjust', 'Change course openly when the goal moves.']] },
- { id: 'comms', name: 'Business communication and influence', short: 'Say what matters first', group: 'The direction',
-   idea: 'Saying what matters first, saying bad news early, and making a case the other person can act on.',
-   lv: {
-    1: L(['Make a case to people who owe you nothing.', 'Lead with the point, then the detail.', 'Say bad news as soon as you know it.'], ['People can act on your message without a follow-up.', 'Your first sentence is the point.', 'Nobody hears your bad news from someone else.']),
-    2: L(['Give a clear update: wins, progress and risks.', 'Make a case for a request with options and their cost.', 'Bring bad news early, with a plan.'], ['Your boss never hears about a problem from someone else first.', 'Requests come with at least two options.', 'Your updates fit in a short message.']),
-    3: L(['Build alignment with peers when interests conflict.', 'Represent several teams in one clear story.', 'Escalate with judgment: the few issues that matter.'], ['Peers agree to trade-offs with you before the meeting.', 'Your updates cover all teams in one page.', 'Your boss trusts what you escalate.']),
-    4: L(['Make your case to the executive team in two minutes.', 'Influence other functions’ plans without authority.', 'Tell the company what is changing and why.'], ['Executives decide in the meeting, not after.', 'Other functions change plans after talking with you.', 'People can explain the change in their own words.']) },
-   action: [['The situation', 'A launch will slip a week.'], ['Lead with it', '“The launch moves one week, to the 14th.”'], ['Cause and plan', '“The payment test failed twice. We fixed the cause and rerun it Monday.”'], ['The ask', '“I need you to tell the two pilot clinics, or I can. Which do you prefer?”'], ['Result', 'Your boss calls the clinics the same day. Nobody is surprised later.']],
-   strategies: [['Point first', 'Start with the decision or the news, then the detail.', ''], ['Options and cost', 'Bring two or three options, each with what it costs.', ''], ['No surprises', 'If it might reach your boss another way, tell them first.', '']],
-   watch: [['Burying the lead', 'Making people read to the end to find the point.', ''], ['Crying wolf', 'Escalating everything until nothing stands out.', ''], ['Waiting for good news', 'Holding bad news until you have fixed it.', '']],
-   subs: [['Give a clear update', 'Lead with the point, then the detail.'], ['Make a case', 'State the ask, the reason and the cost of waiting.'], ['Say bad news early', 'Bring it before it is asked for, with a plan.'], ['Read the audience', 'Find what each side cares about before you ask.'], ['Escalate with judgment', 'Raise the issues that matter, and not all of them.']] },
- { id: 'systems', name: 'Systems and leverage', short: 'Stop the problem that keeps coming back', group: 'The system',
-   idea: 'Noticing a problem that keeps coming back, then building a rule, an owner, or a connection so it stops depending on you.',
-   lv: {
-    1: L(['Notice when the same problem hits you twice.', 'Write down the fix so others can use it.', 'Tell the person who owns the process.'], ['Your fixes are written where others can find them.', 'You raise repeats instead of quietly fixing them.', 'The same problem stops reaching you.']),
-    2: L(['Spot a problem that keeps coming back to your team.', 'Choose a fix that stops the repeat, and name its owner.', 'Write down what the fix must not break.'], ['The same ticket stops landing on the same person.', 'Every fix has an owner and a date.', 'The team runs the fix without you.']),
-    3: L(['Fix the process both teams keep tripping on.', 'Decide when a person, a rule or AI should handle work.', 'Make your managers owners of their fixes.'], ['Cross-team problems have one owner.', 'Rules and tools replace manual workarounds.', 'Managers bring you fixes, not problems.']),
-    4: L(['Redesign a structure so a problem stops coming back.', 'Connect teams that solve the same problem.', 'Build systems that outlast you.'], ['Repeat problems drop across the function.', 'Teams share fixes without you in the room.', 'The system still works when you are away.']) },
-   action: [['The situation', 'The same billing ticket landed on Mo three times this month.'], ['Spot it', 'All three trace to one setting new clinics get wrong.'], ['Choose', 'A rule: setup now checks the setting before the clinic goes live.'], ['Name an owner', 'Ana owns the rule and checks it each month.'], ['Result', 'Next month, no billing tickets of that kind. Mo stops being the only one who knows.']],
-   strategies: [['Third time rule', 'The third time a problem lands, stop fixing it and fix the cause.', ''], ['Person, rule or AI', 'Use a person when judgment matters, a rule when the answer is the same every time, and AI for volume with a person checking.', ''], ['Owner and date', 'A fix without an owner is a wish.', '']],
-   watch: [['Heroics', 'One person quietly fixing the same thing again and again.', ''], ['Fix and forget', 'A fix nobody owns, so it breaks again.', ''], ['Over-building', 'A big system for a problem that happened once.', '']],
-   subs: [['Spot the pattern', 'Notice when the same problem keeps coming back.'], ['Choose the mechanism', 'Decide whether a person, a rule or AI should handle it.'], ['Write the guardrail', 'Turn a repeated fix into a rule that works without you there.'], ['Name an owner', 'Say who keeps it alive, and where people will find it.'], ['Connect people', 'Introduce two people or teams who share a problem.']] }
-];
-const GROUPS = ['Core skill', 'The work', 'The people', 'The direction', 'The system'];
-const tag = (signoff) => signoff ? '<span class="chip" style="background:#E6F5EC;color:#0E7A4D">Ready for sign-off</span>' : '<span class="chip" style="background:#FFF1C2;color:#8A5A00">Needs review</span>';
-function skills() {
-  const k = SK.find((x) => x.id === P.skill) || SK[1], lvl = P.slvl, lv = k.lv[lvl];
-  const panes = [['See it in action', k.action.map((i) => '<p style="margin:0;font-size:16px;line-height:1.55"><b>' + esc(i[0]) + '.</b> ' + esc(i[1]) + '</p>').join('')],
-    ['Strategies', k.strategies.map((i) => '<p style="margin:0;font-size:16px;line-height:1.55"><b>' + esc(i[0]) + '.</b> ' + esc(i[1]) + (i[2] ? ' <span class="muted">(' + esc(i[2]) + ')</span>' : '') + '</p>').join('')],
-    ['Watch for', k.watch.map((i) => '<p style="margin:0;font-size:16px;line-height:1.55"><b>' + esc(i[0]) + '.</b> ' + esc(i[1]) + (i[2] ? ' <span class="muted">(' + esc(i[2]) + ')</span>' : '') + '</p>').join('')],
-    ['Sub-skills', k.subs.map((u) => '<div><div style="font-size:17px;font-weight:800">' + esc(u[0]) + '</div><p style="margin:0;font-size:15px;line-height:1.55">' + esc(u[1]) + (u[2] ? ' <span class="muted">(' + esc(u[2]) + ')</span>' : '') + '</p></div>').join('')]];
-  const pi = Math.min(P.pane, panes.length - 1);
-  const action = k.core ? '<a class="btn" href="#levels">Play the game</a>' : k.ready ? '<a class="btn" href="#practice">Start a practice round</a>' : '<button class="btn" disabled style="opacity:.45;cursor:not-allowed;box-shadow:none">Practice rounds coming soon</button>';
-  const signed = !!SIGNOFF[k.id] && lvl === 2;
-  return '<div class="pwrap">' +
-  '<div style="display:flex;flex-direction:column;gap:8px"><h1 class="h1">Skills and practice</h1><p style="margin:0;font-size:18px;line-height:1.6">Pick a level and a skill to see what it asks of you, learn it, and practice it.</p></div>' +
-  '<div class="pgrid"><nav aria-label="Skills" style="display:flex;flex-direction:column;gap:6px">' +
-  '<label style="display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:800">Level<select class="sel" data-pg="slvl">' + LEVELS.map((l) => '<option value="' + l[0] + '"' + (l[0] === lvl ? ' selected' : '') + '>' + esc(l[1]) + '</option>').join('') + '</select></label>' +
-  GROUPS.map((g) => '<div class="eyebrow" style="padding-top:8px">' + g + '</div>' + SK.filter((x) => x.group === g).map((x) => '<button class="pick' + (x.core ? ' core' : '') + '" data-skill="' + x.id + '" aria-pressed="' + (x.id === k.id) + '"><b style="font-size:16px">' + esc(x.name) + '</b><span class="muted" style="font-size:13px;font-weight:600">' + esc(x.short) + '</span></button>').join('')).join('') + '</nav>' +
-  '<section style="display:flex;flex-direction:column;gap:18px;min-width:0" aria-label="Skill card">' +
-  '<div style="display:flex;flex-direction:column;gap:12px"><div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center"><div class="eyebrow">' + esc(k.group) + '</div>' + tag(signed) + '</div><h2 style="margin:0;font-size:30px;line-height:1.2;font-weight:900">' + esc(k.name) + '</h2>' +
-  (k.core ? '<p style="margin:0;padding:12px 16px;border-radius:12px;background:#5B3DF5;color:#fff;font-size:16px;line-height:1.5;font-weight:700">Core skill. Every decision in the game practices it, at every level. The other seven skills feed into it.</p>' : '') +
-  '<div class="defn"><div class="eyebrow" style="color:#3A24B8">Definition</div><p style="margin:0;font-size:21px;line-height:1.5;letter-spacing:-0.01em">' + esc(k.idea) + '</p>' + (k.ideaSrc ? '<p class="muted" style="margin:0;font-size:13px">Source: ' + esc(k.ideaSrc) + '</p>' : '') + '</div></div>' +
-  '<div class="card" style="gap:14px"><div style="display:flex;flex-wrap:wrap;gap:8px;align-items:baseline;justify-content:space-between"><h3 class="h2">Goals</h3><span class="muted" style="font-size:14px">' + esc(LEVELS[lvl - 1][1]) + '</span></div><p style="margin:0;font-size:15px">After practice, you can:</p><ol style="margin:0;padding-left:22px;display:flex;flex-direction:column;gap:6px;font-size:16px;line-height:1.5">' + lv.g.map((g) => '<li>' + esc(g) + '</li>').join('') + '</ol>' +
-  '<div class="know"><div class="eyebrow" style="color:#0E7A4D">Key behaviors</div><ul style="margin:0;padding-left:22px;display:flex;flex-direction:column;gap:4px;font-size:15px;line-height:1.5">' + lv.k.map((w) => '<li>' + esc(w) + '</li>').join('') + '</ul></div>' +
-  '<div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center">' + action + '</div></div>' +
-  '<div style="display:flex;flex-direction:column;gap:12px"><h3 class="h2">Learn it</h3><div role="tablist" aria-label="Skill details" style="display:flex;flex-wrap:wrap;gap:8px">' +
-  panes.map((t, i) => '<button class="tab" role="tab" data-pane="' + i + '" aria-selected="' + (i === pi) + '">' + esc(t[0]) + '</button>').join('') + '</div>' +
-  '<div class="card" role="tabpanel" style="gap:14px">' + panes[pi][1] + '</div></div>' +
-  '</section></div></div>';
-}
-
-/* ---------- How it's made (Nov 19, E9-E10): FAQ ---------- */
 /* ---------- How the game works, and Skills (Nov 27: the Guide split in two) ---------- */
 const gList = (a) => '<ul style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px">' + (a || []).map(x => '<li>' + esc(x) + '</li>').join('') + '</ul>';
 function meterExample() {
@@ -2375,8 +1612,8 @@ function about() {
 
 /* ---------- Router ---------- */
 const PAGES = { home, about, 'how-it-works': howPage, skills: skillsPage };
-const TITLES = { home: 'The Leadership Game V4', 'how-it-works': 'How the game works', skills: 'Skills', about: 'How it’s made', play: 'Play', practice: 'Practice round' };
-const APPS = { play: GAME, practice: PRACTICE };
+const TITLES = { home: 'The Leadership Game V4', 'how-it-works': 'How the game works', skills: 'Skills', about: 'How it’s made', play: 'Play' };
+const APPS = { play: GAME };
 let cur = '';
 function route() {
   let r = (location.hash || '').replace('#', '');
