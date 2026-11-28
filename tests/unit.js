@@ -70,16 +70,17 @@ const path = require('path');
     G.cal = [];
     G.hist = [h(7, 4, 4, 7), h(7, 4, 4, 7)]; eq('verdict support (two in red at end)', T.verdictOf(), 'support');
     G.hist = [h(4, 4, 6, 7), h(4, 4, 6, 7), h(4, 4, 6, 7)]; eq('verdict keep building', T.verdictOf(), 'keep_building');
-    // 1:1 sheet
-    G.rv = { out: { worked: 'You asked first.', keep: 'Raise risks early.', work_on: 'Name who pays.', grow: [{ skill: 'tradeoff', why: 'In decisions 4 and 5, name who pays.' }] } };
-    G.pc = { skipped: false, pre: { text: 'Before answer' }, post: { text: 'After answer' } }; G.cal = [];
+    // 1:1 sheet: no game details, questions first, reminders from the player's own checks
+    G.parts = { protects: { named: 4, total: 4 }, cost: { named: 3, total: 4 }, who_pays: { named: 1, total: 4 }, plan_check: { named: 2, total: 3 }, delivery_check: { named: 4, total: 4 } };
+    G.pc = { skipped: false, pre: { text: 'Before answer' }, post: { text: 'After answer' } }; G.cal = [{ said: 3, score: 6 }, { said: 2, score: 5 }];
     const sd = T.sheetData();
-    eq('sheet: question names the part to work on', sd.questions[1], 'What decision coming up could I practice my tradeoff on?');
-    eq('sheet: work on includes grow', sd.workOn, ['Name who pays.', 'Tradeoff: In decisions 4 and 5, name who pays.']);
-    eq('sheet: benchmark both answers', sd.bench, { before: 'Before answer', after: 'After answer' });
+    eq('sheet: strengths are the parts named 75%+', sd.strong, ['saying what a decision protects', 'first words that say what I decided, what it means for the person, and check in']);
+    eq('sheet: working on the two weakest', sd.work, ['naming who pays for it', 'making a specific plan: who does what, and by when']);
+    eq('sheet: question 2 names the weakest area', sd.questions[1], 'What decision coming up could I use to practice naming the tradeoff?');
+    eq('sheet: own-read line', sd.read, 'My read of my own work is accurate.');
     G.pc.skipped = true; eq('sheet: no benchmark when skipped', T.sheetData().bench, null);
-    G.rv = { out: {} }; eq('sheet: generic question without grow', T.sheetData().questions[1], 'What decision coming up could I practice one of the three parts on?');
-    eq('sheet text has the footer', /fictional company/.test(T.sheetText()), true);
+    G.parts = {}; G.cal = []; eq('sheet: generic with no data', [T.sheetData().strong.length, T.sheetData().work.length, /one of the three parts/.test(T.sheetData().questions[1])], [0, 0, true]);
+    eq('sheet text: questions come first', T.sheetText().split('\n').slice(0, 4)[2], 'Three questions for my manager');
     // Safety
     eq('esc', T.esc('<img src=x onerror="a()">&'), '&lt;img src=x onerror=&quot;a()&quot;&gt;&amp;');
     // Commit gate

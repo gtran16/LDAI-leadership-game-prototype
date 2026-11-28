@@ -84,8 +84,10 @@ async function play(width) {
   });
   await step('1:1 sheet', async () => {
     await act('openSheet').click();
-    await page.getByRole('heading', { name: 'What I practiced, and where I’d like your help' }).waitFor();
-    for (const t of ['What went well', 'What I want to work on', 'How my read of my own work compared', 'My benchmark, before and after', 'Three questions for my manager']) await page.getByRole('heading', { name: t }).waitFor();
+    await page.getByRole('heading', { name: 'Three questions for my manager' }).waitFor();
+    await page.getByRole('heading', { name: 'Reminders for me' }).waitFor();
+    const sheetText = await page.locator('.sheet').innerText();
+    for (const nm of ['Remi', 'Jan', 'Ravi', 'Noor', 'Teo', 'Cleo', 'Tidewell', 'Northfield']) if (sheetText.includes(nm)) throw new Error('game detail on the 1:1 sheet: ' + nm);
     if (await page.locator('#meters .meterwrap').count()) throw new Error('meters shown on the sheet');
     await act('copySheet').click(); await page.getByText('Copied').waitFor();
     await act('printSheet').click();

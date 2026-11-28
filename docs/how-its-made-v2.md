@@ -1,4 +1,4 @@
-# How it's made: full redraft for your review (Nov 27, rev. 3)
+# How it's made: redraft (Nov 27, rev. 3) — APPLIED to the page Nov 27, with section 7 split into steps, models and cost, and a Kirkpatrick Level 3 limit added
 
 Rev. 3 applies your notes and your `citations-full-list.md`:
 - **Citations:** every claim carries an APA 7 in-text citation, and the feedback item has one citation.

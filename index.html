@@ -351,7 +351,10 @@ body{background-color:var(--desk) !important;background-image:radial-gradient(rg
 .app-game .sheetname{font-size:14px;color:#5A5675;margin-top:6px}
 .app-game .sheetbench{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.app-game .sheetbench p{margin:2px 0 0;font-style:italic}
 @media (max-width:700px){.app-game .sheetbench{grid-template-columns:minmax(0,1fr)}.app-game .sheet{padding:22px 18px}}
-.app-game .sheetsrc{font-size:14px;color:#5A5675;margin:0 0 2px !important}
+.app-game .sheetq{font-size:20px;line-height:1.5;font-weight:700;display:flex;flex-direction:column;gap:14px !important;padding-left:28px !important}
+.app-game .sheetq li::marker{color:#0F766E;font-weight:900}
+.app-game .sheetrem{display:flex;flex-direction:column;gap:6px;border-top:1px solid #CFC3A5;padding-top:14px}
+.app-game .sheetrem h3{margin:8px 0 0;font-size:16px;font-weight:900}
 @page{margin:0.75in}
 .app-game .sheet footer{font-size:13px;color:#5A5675;border-top:1px solid #CFC3A5;padding-top:10px}
 @media print{body{background:#fff !important}.lgbar,#meters,#left,#right,.noprint,.app-game .pager{display:none !important}.app-game .layout{display:block !important;padding:0 !important;max-width:none !important}.app-game .sheet{box-shadow:none !important;max-width:none;padding:0}}
@@ -1029,6 +1032,7 @@ function applyResult(D, c, judge, N, calls) {
   } catch (e) {}
   try { const op = c.opening !== null && o && o.openings && o.openings[c.opening] ? o.openings[c.opening].text : (c.open || ''); (G.ans = G.ans || []).push({ n: G.n, skill: d.lead_skill, plan: [o ? o.text : '', c.plan || ''].filter(Boolean).join(' / Your words: '), trade: [c.tp, c.tc, c.tw, c.tt].filter(Boolean).join(' · ') || (o ? [o.tp, o.tc, o.tw].filter(Boolean).join(' · ') : ''), opening: op, conf: c.conf !== null ? CONF[c.conf] : '', moves: Object.assign({}, moves) }); } catch (e) {}
   if (c.conf !== null && !judge.built_by) { const ch = judge.checks || {}, wk = writtenKeys(modes(c, band(G.n))), sts = wk.map(k => String((ch[k] || {}).status || 'missing').toLowerCase()); (G.cal = G.cal || []).push({ n: G.n, said: c.conf, score: checkScore(judge, wk), named: sts.filter(x => x === 'named').length, partly: sts.filter(x => x === 'partly').length, missing: sts.filter(x => x !== 'named' && x !== 'partly').length }); }
+  if (!judge.built_by) { const ch = judge.checks || {}; writtenKeys(modes(c, band(G.n))).forEach(k => { const st = String((ch[k] || {}).status || 'missing').toLowerCase(); const t = (G.parts = G.parts || {})[k] = G.parts[k] || { named: 0, total: 0 }; t.total++; if (st === 'named') t.named++; }); }
   (G.recap = G.recap || []).push({ n: G.n, skill: d.lead_skill, pp: o && o.pp ? o.pp : String(N.story_entry).split(/(?<=\.)\s/)[0] });
 }
 /* ---------- confidence read (code, not AI): how complete the player said each written answer was, against the judge's four checks ---------- */
@@ -1140,7 +1144,7 @@ function reviewScreen() {
   if (!needPost) steps.push(['Your record', '<details><summary style="cursor:pointer;font-weight:900;font-size:17px">Review your answers</summary>' + (A.length ? A.map(a => '<div style="display:flex;flex-direction:column;gap:4px;padding-top:10px;border-top:1px solid #E5DCC4;font-size:15px"><b>Decision ' + a.n + '</b><div><span class="lab">Plan</span> ' + esc(a.plan) + '</div>' + (a.trade ? '<div><span class="lab">Trade-off</span> ' + esc(a.trade) + '</div>' : '') + (a.opening ? '<div><span class="lab">First words</span> “' + esc(a.opening) + '”</div>' : '') + '<div class="muted">' + (a.conf ? 'You rated it: ' + esc(a.conf) + ' · ' : '') + METERS.map(m => m.label + ' ' + dw(a.moves[m.key] || 0).toLowerCase()).join(', ') + '</div></div>').join('') : '<p class="muted" style="margin:0">No answers recorded.</p>') + '</details>' +
     '<details><summary style="cursor:pointer;font-weight:900;font-size:17px">Read the full story</summary>' + (G.log || []).map(e => '<div style="padding-top:8px;border-top:1px solid #E5DCC4"><div class="lab">' + esc(e.label) + '</div><p style="margin:2px 0 0;white-space:pre-line">' + esc(e.text) + '</p></div>').join('') + '</details>' +
     '<h3 style="margin:0;font-size:17px">What next?</h3><div style="display:flex;flex-wrap:wrap;gap:10px"><button class="btn" data-act="playAgain">Play again</button><a class="btn2" href="#home">Home</a></div>' +
-    '<div class="oneone"><h3 style="margin:0;font-size:18px">Take this to your next 1:1</h3><p style="margin:0">A one-page sheet with what you practiced, what you want to work on, and three questions to ask your manager. Print it, save it as a PDF, or copy it as text.</p><button class="btn" data-act="openSheet" style="align-self:flex-start">Open my 1:1 sheet</button></div>']);
+    '<div class="oneone"><h3 style="margin:0;font-size:18px">Take this to your next 1:1</h3><p style="margin:0">A one-page sheet with three questions to ask your manager and a few reminders for you. It leaves out the game\u2019s story and names. Print it, save it as a PDF, or copy it as text.</p><button class="btn" data-act="openSheet" style="align-self:flex-start">Open my 1:1 sheet</button></div>']);
   /* Nov 27: five cards, each a group of things that go together (Giselle: eight was too many) */
   const GROUPS = [['What happened next', ['What happened next', 'Where you stand']], ['Noor\u2019s read', ['Noor\u2019s read', 'What others saw']], ['Your next steps', ['What to practice next']], ['Check your own read', ['How complete your answers were', 'One last check', 'Before and after']], ['Your record', ['Your record']]];
   const byTitle = {}; steps.forEach(x => { byTitle[x[0]] = x[1]; });
@@ -1155,42 +1159,44 @@ function reviewScreen() {
   return h;
 }
 /* ---------- Nov 27: the 1:1 sheet, a conversation starter for the player's real manager ---------- */
+/* The sheet holds no game details (no names, company or story): only the player's own habits, in general words, built by code from the checks. */
+const PART_LINE = { protects: 'saying what a decision protects', cost: 'naming what a decision costs', who_pays: 'naming who pays for it', plan_check: 'making a specific plan: who does what, and by when', delivery_check: 'first words that say what I decided, what it means for the person, and check in' };
+const PART_AREA = { protects: 'naming the tradeoff', cost: 'naming the tradeoff', who_pays: 'naming the tradeoff', plan_check: 'making a specific plan', delivery_check: 'how I tell someone a decision' };
 function sheetData() {
-  const o = (G.rv && G.rv.out) || {}, g = (o.grow || []).map(x => String(x.skill || '').toLowerCase()).filter(Boolean);
-  const part = g[0] || 'one of the three parts';
+  const P = G.parts || {}, keys = Object.keys(PART_LINE).filter(k => P[k] && P[k].total), rate = (k) => P[k].named / P[k].total;
+  const byRate = keys.slice().sort((a, b) => rate(b) - rate(a));
+  const strong = byRate.filter(k => rate(k) >= 0.75).slice(0, 2), work = byRate.slice().reverse().filter(k => rate(k) < 0.75).slice(0, 2);
+  const area = work.length ? PART_AREA[work[0]] : 'one of the three parts: the plan, the tradeoff, or how I tell someone';
+  const r = calRead(), read = { over: 'I tend to rate my answers as more complete than they are. Before I send a plan, I check that it says what it protects, what it costs and who pays.', under: 'My answers are often more complete than I think. I can trust my read of my own work a bit more.', calibrated: 'My read of my own work is accurate.', mixed: 'My read of my own work is right some of the time. A second look before I send a plan helps.' }[r] || '';
   const pc = G.pc, bench = !pc.skipped && pc.pre.text.trim() ? { before: pc.pre.text.trim(), after: pc.post.text.trim() } : null;
   return {
-    practiced: 'Six decisions as a new manager at a fictional software company. In each one I made a plan, named the tradeoff (what it protects, what it costs, who pays), and practiced my first words to the person.',
-    well: [o.worked, o.keep].filter(Boolean),
-    workOn: [o.work_on].concat((o.grow || []).map(x => (String(x.skill || '').replace(/^./, ch => ch.toUpperCase())) + ': ' + (x.why || ''))).filter(Boolean),
-    read: (G.cal || []).length ? calMsg() : '',
-    bench,
-    questions: ['Where have you seen me name the cost of a decision well, or miss it?', 'What decision coming up could I practice ' + (g[0] ? 'my ' + part : part) + ' on?', 'When there’s a tradeoff, do you want to hear it before I decide, or after?']
+    questions: ['When have you seen me name what a decision costs, and who pays for it? When did I miss it?', 'What decision coming up could I use to practice ' + area + '?', 'When there’s a tradeoff, do you want to hear it before I decide, or after?'],
+    strong: strong.map(k => PART_LINE[k]), work: work.map(k => PART_LINE[k]), read, bench
   };
 }
 function sheetScreen() {
-  const d = sheetData(), ul = (a) => '<ul>' + a.map(x => '<li>' + esc(x) + '</li>').join('') + '</ul>';
+  const d = sheetData(), ul = (a) => '<ul>' + a.map(x => '<li>' + esc(x.replace(/^./, ch => ch.toUpperCase())) + '</li>').join('') + '</ul>';
   return '<div class="noprint" style="display:flex;flex-wrap:wrap;gap:10px;align-items:center"><button class="btn" data-act="printSheet">Print or save as PDF</button><button class="btn2" data-act="copySheet">' + (G.sheetCopied ? 'Copied' : 'Copy as text') + '</button><button class="ghost" data-act="closeSheet">Back to your check-in</button></div>' +
     (G.sheetMsg ? '<p class="noprint muted" style="margin:0;font-size:15px">' + esc(G.sheetMsg) + '</p>' : '') +
     '<article class="sheet" aria-label="Your 1:1 sheet">' +
-    '<header><div class="sheetkicker">For my next 1:1</div><h1>What I practiced, and where I’d like your help</h1><div class="sheetname">Name: ______________________ &nbsp; Date: ____________</div></header>' +
-    '<section><h2>What I practiced</h2><p>' + esc(d.practiced) + '</p></section>' +
-    (d.well.length ? '<section><h2>What went well</h2><p class="sheetsrc">From the game\u2019s check-in:</p>' + ul(d.well) + '</section>' : '') +
-    (d.workOn.length ? '<section><h2>What I want to work on</h2><p class="sheetsrc">From the game\u2019s check-in:</p>' + ul(d.workOn) + '</section>' : '') +
-    (d.read ? '<section><h2>How my read of my own work compared</h2><p>' + esc(d.read) + '</p></section>' : '') +
-    (d.bench ? '<section><h2>My benchmark, before and after</h2><div class="sheetbench"><div><b>Before</b><p>“' + esc(d.bench.before) + '”</p></div><div><b>After</b><p>“' + esc(d.bench.after || '(not answered)') + '”</p></div></div></section>' : '') +
-    '<section><h2>Three questions for my manager</h2><ol>' + d.questions.map(q => '<li>' + esc(q) + '</li>').join('') + '</ol></section>' +
-    '<footer>From a practice game with a fictional company. Parts were written by AI; treat them as one reading.</footer></article>';
+    '<header><div class="sheetkicker">For my next 1:1</div><h1>Three questions for my manager</h1></header>' +
+    '<ol class="sheetq">' + d.questions.map(q => '<li>' + esc(q) + '</li>').join('') + '</ol>' +
+    '<section class="sheetrem"><h2>Reminders for me</h2>' +
+    (d.strong.length ? '<h3>I do this well</h3>' + ul(d.strong) : '') +
+    (d.work.length ? '<h3>I’m working on</h3>' + ul(d.work) : '') +
+    (d.read ? '<h3>How I judge my own work</h3><p>' + esc(d.read) + '</p>' : '') +
+    (d.bench ? '<h3>My answer to the same scenario, before and after</h3><div class="sheetbench"><div><b>Before</b><p>“' + esc(d.bench.before) + '”</p></div><div><b>After</b><p>“' + esc(d.bench.after || '(not answered)') + '”</p></div></div>' : '') +
+    '</section><footer>From a practice game. These are reminders, not a grade. They come from how AI marked my written answers.</footer></article>';
 }
 function sheetText() {
-  const d = sheetData();
-  return ['For my next 1:1: what I practiced, and where I’d like your help', '', 'What I practiced', d.practiced]
-    .concat(d.well.length ? ['', 'What went well (from the game\u2019s check-in)'].concat(d.well.map(x => '- ' + x)) : [])
-    .concat(d.workOn.length ? ['', 'What I want to work on (from the game\u2019s check-in)'].concat(d.workOn.map(x => '- ' + x)) : [])
-    .concat(d.read ? ['', 'How my read of my own work compared', d.read] : [])
-    .concat(d.bench ? ['', 'My benchmark, before and after', 'Before: "' + d.bench.before + '"', 'After: "' + (d.bench.after || '(not answered)') + '"'] : [])
-    .concat(['', 'Three questions for my manager'].concat(d.questions.map((q, i) => (i + 1) + '. ' + q)))
-    .concat(['', 'From a practice game with a fictional company. Parts were written by AI; treat them as one reading.']).join('\n');
+  const d = sheetData(), cap = (x) => x.replace(/^./, ch => ch.toUpperCase());
+  return ['For my next 1:1', '', 'Three questions for my manager'].concat(d.questions.map((q, i) => (i + 1) + '. ' + q))
+    .concat(['', 'Reminders for me'])
+    .concat(d.strong.length ? ['I do this well:'].concat(d.strong.map(x => '- ' + cap(x))) : [])
+    .concat(d.work.length ? ['I’m working on:'].concat(d.work.map(x => '- ' + cap(x))) : [])
+    .concat(d.read ? ['How I judge my own work: ' + d.read] : [])
+    .concat(d.bench ? ['My answer to the same scenario, before: "' + d.bench.before + '"', 'After: "' + (d.bench.after || '(not answered)') + '"'] : [])
+    .concat(['', 'From a practice game. These are reminders, not a grade. They come from how AI marked my written answers.']).join('\n');
 }
 const toTop = () => { try { window.scrollTo(0, 0); } catch (e) {} };
 
@@ -1550,7 +1556,7 @@ function attachTools() {
   t.insertAdjacentHTML('afterbegin', "<button data-apptool=\"1\" id=\"designer\" class=\"status\" style=\"cursor:pointer;background:#fff\" aria-pressed=\"false\">Designer view: off</button><button data-apptool=\"1\" id=\"runlog\" class=\"status\" style=\"cursor:pointer;background:#fff;display:none\">Run log</button><button data-apptool=\"1\" id=\"restart\" class=\"status\" style=\"cursor:pointer;background:#fff\">Start a new run</button>");
   document.getElementById('runlog').onclick = () => { G.rlModal = true; G.rlWhich = 'cur'; render(); };
   document.getElementById('designer').onclick = (e) => { G.designer = !G.designer; document.getElementById('runlog').style.display = G.designer ? '' : 'none'; e.currentTarget.textContent = 'Designer view: ' + (G.designer ? 'on' : 'off'); e.currentTarget.setAttribute('aria-pressed', String(!!G.designer)); render(); };
-  document.getElementById('restart').onclick = () => { rlArchive(); Object.assign(G, { pc: newPC(), trail: [], ans: [], cal: [], rvI: 0, phase: 'pre', help: { open: false, tab: 'why', auto: {} }, endAt: 0, introI: 0, n: 1, meters: { team: 6, boss: 6, business: 5, wellbeing: 7 }, log: [], promises: [], carries: [], counters: {}, dec: {}, cur: null, busy: '', err: '', errCalls: null, tab: 'team', seenTips: {}, recap: [], modal: false, clean: 0, lastAbsorb: 0, chStep: 0, hist: [], sum: [], rv: null, preview: null }); render(); toTop(); if (live) loadDecision(1); };
+  document.getElementById('restart').onclick = () => { rlArchive(); Object.assign(G, { pc: newPC(), trail: [], ans: [], cal: [], parts: {}, rvI: 0, phase: 'pre', help: { open: false, tab: 'why', auto: {} }, endAt: 0, introI: 0, n: 1, meters: { team: 6, boss: 6, business: 5, wellbeing: 7 }, log: [], promises: [], carries: [], counters: {}, dec: {}, cur: null, busy: '', err: '', errCalls: null, tab: 'team', seenTips: {}, recap: [], modal: false, clean: 0, lastAbsorb: 0, chStep: 0, hist: [], sum: [], rv: null, preview: null }); render(); toTop(); if (live) loadDecision(1); };
   const d = $('designer'); d.textContent = 'Designer view: ' + (G.designer ? 'on' : 'off'); d.setAttribute('aria-pressed', String(!!G.designer));
   $('runlog').style.display = G.designer ? '' : 'none';
 }
@@ -2259,53 +2265,6 @@ function skills() {
 }
 
 /* ---------- How it's made (Nov 19, E9-E10): FAQ ---------- */
-const box = (who, t, d) => { const c = { you: ['#CCFBF1', '#0F766E', 'You'], ai: ['#EFE9FF', '#5B3DF5', 'AI'], code: ['#EEEEF2', '#4B5563', 'Code'] }[who]; return '<div style="display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border:2px solid ' + c[1] + ';border-radius:12px;background:' + c[0] + '"><span style="flex:none;padding:2px 8px;border-radius:999px;background:' + c[1] + ';color:#fff;font-size:12px;font-weight:900">' + c[2] + '</span><div><b>' + t + '</b><div style="font-size:14px">' + d + '</div></div></div>'; };
-const arrow = '<div aria-hidden="true" style="text-align:center;font-weight:900;color:#5A5675;line-height:1">↓</div>';
-const flow = (title, steps) => '<div class="item"><div style="font-size:16px;font-weight:800">' + title + '</div><div style="display:flex;flex-direction:column;gap:4px;margin-top:6px">' + steps.map((s) => box(s[0], s[1], s[2])).join(arrow) + '</div></div>';
-const SECS = [
- { title: 'What the designer reviewed', items: [
-  ['The design', 'The game format, the five decisions and how support fades, the learning goals, which AI step does what and in what order, and how it all feels to play.'],
-  ['Everything that stays the same between plays', 'The screens, the code, the rules text, the help drawer, and the world you play in: the company, your team and the plan for the five decisions. AI generated these; the designer reviewed, gave feedback and approved them.'],
-  ['Every AI instruction', 'Each prompt, and every change to one, was read and approved before it ran, then tested on sample runs.']] },
- { title: 'What AI generates each time', items: [
-  ['As you play', 'Each scene and its questions, the options in the first three decisions, the debrief after each decision, your story log, and the readiness check-in at the end.'],
-  ['How it is labeled', 'Every piece written live carries a “Written by AI” label. The designer does not see each one you get.']] },
- { title: 'How AI and code make decisions', items: [
-  ['AI reads and writes', 'AI reads your written answers, reports what they named and left out, proposes how the meters move, and writes what happened next.'],
-  ['Code keeps score', 'Plain code sets how far a meter can move, applies the moves, decides your wellbeing, and sets the readiness verdict. In decision 1, where you pick from written options, code judges your choice without AI.'],
-  ['No scores', 'You see words and meter bars, never points or grades.'],
-  ['It can be wrong', 'The AI can misread what you meant or miss context. Treat its feedback as one reading. Your judgment, and real work with real people, decide what you take from it.']] },
- { title: 'Where the leadership ideas come from', items: [
-  ['The help drawer', 'The do and don’t lists, sentence frames and worked examples in Help were drafted with AI and reviewed by the designer. They describe what a good plan, tradeoff and delivery look like.'],
-  ['Its general training', 'How the AI phrases things comes from its general training, which cannot be traced to sources. That is why it never cites anything to you.'],
-  ['A note on evidence', 'Practitioner frameworks like the Eisenhower matrix and GROW give useful words for a skill. They are not proof that a method works. The design choices rest on learning research instead.']] },
- { title: 'Why the game works for learning', items: [
-  ['Support fades across five decisions', 'In decision 1 you pick everything. In decision 2 you write the tradeoff. In decision 3 you write the tradeoff and your first words. In decisions 4 and 5 you write all three.', 'Martin et al. (2025); Kirschner & Hendrick (2024), ch. 6'],
-  ['Ask before you decide', 'Real decisions come with missing information, so every scene hides a fact you can find by asking.', 'Herrington & Herrington (2008)'],
-  ['Rate your confidence', 'Saying how sure you are, then seeing what happened, trains you to judge your own judgment.', 'Grolnick et al. (2024), ch. 7'],
-  ['Help stays close', 'Help opens on top of your decision, with examples for the part you are writing, so you never lose your place.', 'Mayer & Moreno (2003); CAST, UDL Guidelines'],
-  ['Feedback starts with what you did', 'Every note opens with what your answer named before the one thing to work on.', 'Ocumpaugh et al. (2024)'],
-  ['Effort counts, not scores', 'Practice counts rounds you finish. Growth over the level matters more than any one decision.', 'Kirschner & Hendrick (2024), ch. 15; Linnenbrink-Garcia et al. (2016)'],
-  ['Practice the part, then the whole', 'The game adds one written part at a time: the tradeoff first, then your first words, then the plan.', 'Grossman & Salas (2011)'],
-  ['You do the thinking', 'You write and reflect before the AI responds, so it supports your reasoning instead of replacing it.', 'Melisa et al. (2025)'],
-  ['Transparent, with a person in charge', 'The designer reviews the instructions, rules and sample runs, and AI content is labeled.', 'Li et al. (2025), ARCHED']] },
- { title: 'System diagrams', html: () =>
-  flow('One decision', [['code', 'Before the scene', 'Code gathers the world, the plan for this decision, your story so far and the meters.'], ['ai', 'Scene', 'The scenario builder writes the scene, four questions and a hidden fact.'], ['ai', 'Options', 'The decision builder writes the options, trade-offs, openings and advice.'], ['you', 'Ask and decide', 'You ask two questions, then pick or write your plan, trade-off and first words, and say how sure you are.'], ['ai', 'Judge (decisions 2 to 5)', 'Reads what you wrote and proposes meter moves. In decision 1, code does this.'], ['code', 'Rules', 'Code limits the moves, sets your wellbeing and updates the meters.'], ['ai', 'Narrator', 'Writes what happened, why the meters moved, and a note on your choice.'], ['you', 'Debrief', 'You read it, then move to the next decision.']]) +
-  flow('End of level', [['you', 'Your read', 'You say what went best, what kept coming back, and whether you are ready.'], ['code', 'Verdict', 'Code reads your meters across all five decisions and sets the verdict.'], ['ai', 'Readiness check-in', 'Writes Noor’s read to fit that verdict, and what happened next.']]) +
-  '<p class="muted" style="margin:0;font-size:13px">Colors: teal is you, purple is AI, gray is code.</p>' },
- { title: 'Prompts and models used', html: () => '<div class="item"><div style="overflow-x:auto"><table style="border-collapse:collapse;width:100%;font-size:14px;line-height:1.45">' +
-  '<thead><tr>' + ['Step', 'What it does', 'Model', 'When'].map((h) => '<th style="text-align:left;padding:6px 8px;border-bottom:2px solid #1E1B3A">' + h + '</th>').join('') + '</tr></thead><tbody>' +
-  [['Scenario builder', 'Writes the scene, the questions and a hidden fact', 'Claude, default tier', 'Before each decision, while you read the last one'], ['Decision builder', 'Writes options, trade-offs, openings and advice', 'Claude, default tier', 'Before each decision'], ['Judge', 'Reads your written answer and proposes meter moves', 'Claude, default tier', 'After you commit, decisions 2 to 5'], ['Narrator', 'Writes the story, reasons and the note on your choice', 'Claude, quick tier', 'After each decision'], ['Readiness check-in', 'Writes Noor’s read and what happened next', 'Claude, default tier', 'End of the level'], ['Quick check judge', 'Marks the before and after check', 'Claude, quick tier', 'Twice per game']]
-    .map((r) => '<tr>' + r.map((c, i) => '<td style="padding:6px 8px;border-bottom:1px solid #E5DCC4;vertical-align:top' + (i === 0 ? ';font-weight:800' : '') + '">' + esc(c) + '</td>').join('') + '</tr>').join('') +
-  '</tbody></table></div><p class="muted" style="margin:6px 0 0;font-size:13px">About 22 AI calls make one full game. Most run ahead of time, so you rarely wait.</p></div>' },
- { title: 'Data transparency', items: [
-  ['What is sent', 'Everything you type (your plans, trade-offs, first words and reflections) is sent to the AI model so it can write your feedback and story.'],
-  ['What is kept', 'There are no accounts. A run log of your current and last game stays in this browser only, and nothing is saved anywhere else.'],
-  ['What not to type', 'This is a practice game with a fictional company. Leave out real names and private details.']] },
- { title: 'Reference list', lists: [
-  ['Learning research', ['CAST. (2024). Universal Design for Learning Guidelines.', 'Grolnick et al. (2024). We need help accurately assessing our abilities (ch. 7).', 'Grossman, R., & Salas, E. (2011). The transfer of training: What really matters.', 'Herrington, A., & Herrington, J. (2008). What is an authentic learning environment?', 'Kirschner, P. A., & Hendrick, C. (2024). A novice is not a little expert (ch. 6).', 'Kirschner, P. A., & Hendrick, C. (2024). How you think about achievement is more important than the achievement itself (ch. 15).', 'Krathwohl, D. R. (2002). A revision of Bloom’s taxonomy: An overview.', 'Li et al. (2025). ARCHED: A human-centered framework for transparent, responsible, and collaborative AI-assisted instructional design.', 'Linnenbrink-Garcia et al. (2016). Adaptive motivation and emotion in education: Research and principles for instructional design.', 'Martin et al. (2025). Integrating generative AI and load reduction instruction to individualize and optimize students’ learning.', 'Mayer, R. E., & Moreno, R. (2003). Nine ways to reduce cognitive load in multimedia learning.', 'Melisa et al. (2025). Critical thinking in the age of AI: A systematic review of AI’s effects on higher education.', 'Ocumpaugh et al. (2024). Toward asset-based instruction and assessment in artificial intelligence in education.']],
-  ['AI used to build this game', ['Anthropic. (2026). Claude Opus 5.5 [Large language model].', 'Anthropic. (2026). Claude Sonnet 5.5 [Large language model].'], 'Draft entries. Full APA 7th references are in the proposal.']] }
-];
 /* ---------- How the game works, and Skills (Nov 27: the Guide split in two) ---------- */
 const gList = (a) => '<ul style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px">' + (a || []).map(x => '<li>' + esc(x) + '</li>').join('') + '</ul>';
 function meterExample() {
@@ -2342,14 +2301,64 @@ function skillsPage() {
   const back = wh ? '<a class="btn" href="#play" style="align-self:flex-start">' + (wh.review ? 'Back to your check-in' : 'Back to decision ' + wh.n) + '</a>' : '';
   return '<div class="col" style="gap:20px">' + back + '<div style="display:flex;flex-direction:column;gap:10px"><h1 class="h1">Skills</h1><p style="margin:0;font-size:18px;line-height:1.6">Three parts of one skill: see both sides of a choice, choose on purpose, and say so. If you are in the middle of a game, your place is kept: go back with Play.</p></div>' + tabs + body + '</div>';
 }
+const DIAGRAMS_URL = 'https://github.com/gtran16/LDAI-leadership-game-prototype/blob/main/docs/system-diagrams.md';
+const SECS = [
+ { title: 'Is AI judging me?', items: [
+  ['AI reads, and code decides', 'AI reads what you write and reports what it names: what your plan protects, what it costs, who pays, how specific your plan is, and whether your first words say what you decided and check in. It proposes how the meters move and writes what happens next.'],
+  ['Code keeps the score', 'Plain code limits every meter move, sets your wellbeing, and sets the readiness verdict. In decisions 1 and 2, where you pick from written options, code judges your choice without AI.'],
+  ['No points or grades', 'You see words and meter bars, never a score.'],
+  ['AI can be wrong', 'It can misread what you meant or miss context. Treat its feedback as one reading. Your own judgment, and real work with real people, decide what you take from it.']] },
+ { title: 'What happens to what I type?', items: [
+  ['It goes to an AI model', 'Everything you type is sent to an AI model so it can respond to you. That includes your plans, trade-offs, first words, reflections and benchmark answers.'],
+  ['How it gets there', 'On claude.ai, it goes through claude.ai. On the hosted link, it passes through a small relay server on its way to the AI model, and the relay does not store it.'],
+  ['What stays in your browser', 'There are no accounts. This browser keeps a run log of your last three games so the designer can review how the AI behaved. Clearing your browser data removes it.'],
+  ['What not to type', 'The company is fictional. Leave out real names and private details.']] },
+ { title: 'Who made what?', items: [
+  ['The learning designer', 'The game format, the learning goals, how support fades across the six decisions, which AI step does what, and the world you play in. Every AI instruction was read and approved before it ran, then tested on sample runs.'],
+  ['AI, reviewed by the designer', 'The screens, the code, and the text that stays the same between games: the intro, the Skills page, the worked examples and this page. AI drafted them; the designer reviewed, edited and approved them.'],
+  ['AI, live in every game', 'Each memo and its questions, the options, the debrief after each decision, your story, the readiness check-in, and the marks on your benchmark. Each carries a “Written by AI” label. The designer does not see each one you get.']] },
+ { title: 'Why does the game work this way?', items: [
+  ['Support fades across six decisions', 'In decisions 1 and 2 you pick everything. In decision 3 you pick a plan and write the trade-off and your first words. In decisions 4 to 6 you write all three.', 'Kirschner & Hendrick, 2024; Martin et al., 2025'],
+  ['Ask before you decide', 'Real decisions come with missing information, so every scene hides a fact you can find by asking.', 'Herrington & Herrington, 2008'],
+  ['Rate your own answer', 'Before you commit a written answer, you rate how complete it is. At the end you see your ratings next to what the checks found, which helps you judge your own work.', 'Grolnick et al., 2024'],
+  ['The skill guide stays beside you', 'What good looks like, sentence frames and two worked examples sit next to every decision, so you never leave your place.', 'CAST, 2024; Mayer & Moreno, 2003'],
+  ['Feedback starts with what worked', 'Every debrief says how your approach worked before the one gap, then shows another way you could have handled each part.', 'Ocumpaugh et al., 2024'],
+  ['Practice the part, then the whole', 'The game adds written parts in steps: first the trade-off and your first words, then the plan.', 'Grossman & Salas, 2011'],
+  ['You do the thinking first', 'You write and reflect before the AI responds, so it supports your reasoning instead of replacing it.', 'Melisa et al., 2025'],
+  ['Moves, not ability', 'The check-in talks about moves you made and can change, never about who you are.', 'Kirschner & Hendrick, 2024; Linnenbrink-Garcia et al., 2016'],
+  ['A benchmark, before and after', 'You answer the same short scenario before the story and after it. It’s a simple before-and-after check of what you learned, there for you and not a grade.', 'American Psychological Association, 2015; Kirkpatrick & Kirkpatrick, 2022; Mayer, 2011'],
+  ['A person in charge', 'The designer reviews the instructions, rules and sample runs, and AI content is labeled.', 'Li et al., 2025']] },
+ { title: 'What can’t this game do?', items: [
+  ['It can’t change how you lead at work', 'This game can practice and check what you know. Changing how you lead day to day is up to you and your manager. Talk about it with them: the 1:1 sheet at the end of the game is a place to start.', 'Kirkpatrick & Kirkpatrick, 2022'],
+  ['The AI can misread you', 'The check-in is told to use only your own words and the story, but read it with that in mind.'],
+  ['The meters are a simplification', 'Real teams don’t move one step at a time.'],
+  ['The benchmark is the same scenario both times', 'Some change may come from seeing it twice.'],
+  ['The readiness verdict is a rough read, not a grade', 'It comes from your meters, plus whether at least 80% of the checks on your written answers were fully named.'],
+  ['It’s a short practice', 'You write the plan three times, and the trade-off and your first words four times each. It was tested with a small number of players, in plain English.']] },
+ { title: 'Where do the leadership ideas come from?', items: [
+  ['The level', 'The game treats becoming a manager as one turn on a longer path: you now get results through other people, and you let go of the work you were best at. The next role, manager of managers, asks for that again.', 'Charan et al., 2001, as cited in Minh, 2026'],
+  ['The situations', 'What pays off in each scene draws on a few well-known practitioner ideas: sorting what is urgent from what is important, asking what waiting costs, coaching with open questions so the person picks the next step, and describing the situation, the behavior and its impact when something is missed.', 'Covey, 1989; Reinertsen, 2009; Gopalan, 2025; Center for Creative Leadership, 2025'],
+  ['The skill guide', 'What good looks like, the do and don’t lists, the sentence frames and the worked examples were drafted with AI from those ideas and reviewed by the designer.'],
+  ['A note on evidence', 'These frameworks give useful words for a skill. They are not proof that a method works. The design choices rest on the learning research above. How the AI phrases things comes from its general training, which can’t be traced to sources, so it never cites anything to you.']] },
+ { title: 'The AI steps, the models and the cost', html: () =>
+  '<div class="item"><div style="font-size:16px;font-weight:800">The AI steps</div><p style="margin:0;font-size:15px;line-height:1.55">Six instructions (prompts) run the game. Each one is a separate step:</p><div style="overflow-x:auto"><table style="border-collapse:collapse;width:100%;font-size:14px;line-height:1.45;margin-top:6px"><thead><tr>' + ['Step', 'What it does', 'When'].map((h) => '<th style="text-align:left;padding:6px 8px;border-bottom:2px solid #1E1B3A">' + h + '</th>').join('') + '</tr></thead><tbody>' +
+  [['Scenario builder', 'Writes the memo, the questions and a hidden fact', 'Before each decision'], ['Decision builder', 'Writes options, trade-offs, openings and advice', 'Before each decision'], ['Judge', 'Marks your written answer and proposes meter moves', 'After you commit, decisions 3 to 6'], ['Narrator', 'Writes the debrief', 'After each decision'], ['Readiness check-in', 'Writes Noor’s read and what happened next', 'End of the game'], ['Quick-check judge', 'Marks your benchmark and last check', 'Twice per game']]
+   .map((r) => '<tr>' + r.map((c, i) => '<td style="padding:6px 8px;border-bottom:1px solid #E5DCC4;vertical-align:top' + (i === 0 ? ';font-weight:800' : '') + '">' + esc(c) + '</td>').join('') + '</tr>').join('') + '</tbody></table></div></div>' +
+  '<div class="item"><div style="font-size:16px;font-weight:800">The models</div><p style="margin:0;font-size:15px;line-height:1.55">On the hosted link, the scenario builder, decision builder, judge and check-in use Claude Sonnet 5.5. The narrator and the quick-check judge use Claude Haiku 5.5, a smaller, faster model. On claude.ai, claude.ai chooses the models.</p></div>' +
+  '<div class="item"><div style="font-size:16px;font-weight:800">The cost</div><p style="margin:0;font-size:15px;line-height:1.55">About 25 AI calls make one game. On the hosted link that costs about $0.45 a game, paid from the designer’s capped budget. When the day’s budget is used up, the game says so.</p></div>' +
+  '<div class="item"><a href="' + DIAGRAMS_URL + '" target="_blank" rel="noopener" style="font-size:16px;font-weight:800">See the system diagrams on GitHub</a><p style="margin:0;font-size:14px" class="muted">Flowcharts of one decision and the whole game. Teal is you, purple is AI, gray is code.</p></div>' },
+ { title: 'Reference list', lists: [
+  ['Learning research', ['American Psychological Association, Coalition for Psychology in Schools and Education. (2015). Top 20 principles from psychology for preK–12 teaching and learning. http://www.apa.org/ed/schools/cpse/top-twenty-principles.pdf', 'CAST. (2024). Universal Design for Learning guidelines (Version 3.0). https://udlguidelines.cast.org', 'Grolnick, W. S., et al. (2024). We need help accurately assessing our abilities. In Motivation myth busters: Science-based strategies to boost motivation in yourself and others (pp. 135–152). American Psychological Association.', 'Grossman, R., & Salas, E. (2011). The transfer of training: What really matters. International Journal of Training and Development, 15(2), 103–120. https://doi.org/10.1111/j.1468-2419.2011.00373.x', 'Herrington, A., & Herrington, J. (2008). What is an authentic learning environment? In L. A. Tomei (Ed.), Online and distance learning: Concepts, methodologies, tools, and applications (pp. 68–77). IGI Global.', 'Kirkpatrick, J. D., & Kirkpatrick, W. K. (2022). An introduction to the New World Kirkpatrick Model. Kirkpatrick Partners. https://www.kirkpatrickpartners.com/the-kirkpatrick-model/', 'Kirschner, P. A., & Hendrick, C. (2024). How learning happens: Seminal works in educational psychology and what they mean in practice (2nd ed.). Routledge. https://doi.org/10.4324/9781003395713', 'Li, H., Fang, Y., Zhang, S., Lee, S. M., Wang, Y., Trexler, M., & Botelho, A. F. (2025). ARCHED: A human-centered framework for transparent, responsible, and collaborative AI-assisted instructional design. Proceedings of Machine Learning Research, 273, 1–11. https://arxiv.org/abs/2503.08931', 'Linnenbrink-Garcia, L., Patall, E. A., & Pekrun, R. (2016). Adaptive motivation and emotion in education: Research and principles for instructional design. Policy Insights from the Behavioral and Brain Sciences, 3(2), 228–236. https://doi.org/10.1177/2372732216644450', 'Martin, A. J., Collie, R. J., Kennett, R., Liu, D., Ginns, P., Sudimantara, L. B., Dewi, E. W., & Rüschenpöhler, L. G. (2025). Integrating generative AI and load reduction instruction to individualize and optimize students’ learning. Learning and Individual Differences, Article 102723. https://doi.org/10.1016/j.lindif.2025.102723', 'Mayer, R. E. (2011). Applying the science of learning. Pearson.', 'Mayer, R. E., & Moreno, R. (2003). Nine ways to reduce cognitive load in multimedia learning. Educational Psychologist, 38(1), 43–52. https://doi.org/10.1207/S15326985EP3801_6', 'Melisa, R., Ashadi, A., Triastuti, A., Hidayati, S., Salido, A., Ero, P. E. L., Marlini, C., Zefrin, & Fuad, Z. A. (2025). Critical thinking in the age of AI: A systematic review of AI’s effects on higher education. Educational Process: International Journal, 14, Article e2025031. https://doi.org/10.22521/edupij.2025.14.31', 'Ocumpaugh, J., Roscoe, R. D., Baker, R. S., Hutt, S., & Aguilar, S. J. (2024). Toward asset-based instruction and assessment in artificial intelligence in education. International Journal of Artificial Intelligence in Education, 34, 1559–1598. https://doi.org/10.1007/s40593-023-00382-x']],
+  ['Leadership ideas (vocabulary, not evidence)', ['Center for Creative Leadership. (2025, February 24). Improve talent development with our SBI feedback model. https://www.ccl.org/articles/leading-effectively-articles/sbi-feedback-model-a-quick-win-to-improve-talent-conversations-development/', 'Covey, S. R. (1989). The 7 habits of highly effective people. Free Press.', 'Gopalan, R. (2025, October 21). GROW coaching model explained with tips and real examples. Simply.Coach. https://simply.coach/learn-coaching-models/grow-coaching-model-explained-with-tips-and-real-examples/', 'Minh, T. (2026, June 4). The leadership pipeline model: 6 leadership passages explained. Rework. https://resources.rework.com/libraries/leadership/leadership-pipeline-model', 'Reinertsen, D. G. (2009). The principles of product development flow: Second generation lean product development. Celeritas Publishing.']],
+  ['AI used to build this game', ['Anthropic. (2026). Claude Opus 5.5 [Large language model]. Used in Claude Code for the build and testing.', 'Anthropic. (2026). Claude Sonnet 5.5 [Large language model].', 'Anthropic. (2026). Claude Haiku 5.5 [Large language model].'], 'Draft entries. Full APA 7th references are in the proposal.']] }
+];
 function about() {
   return '<div class="col"><div style="display:flex;flex-direction:column;gap:10px"><div class="eyebrow">How it’s made</div><h1 class="h1" style="font-size:34px">Who made what, and how AI is used</h1>' +
-  '<p style="margin:0;font-size:18px;line-height:1.6">This game draws on practitioner experience, learning science, and a belief that practicing leadership can be fun.</p>' +
-  '<ul style="margin:0;padding-left:22px;display:flex;flex-direction:column;gap:8px;font-size:17px;line-height:1.55"><li>A learning designer designed this game: the format, the learning design, how the AI steps work together, and the experience as a whole.</li><li>AI generated the screens, the code and nearly all the written content, and the designer reviewed it, gave feedback and approved it.</li></ul></div>' +
+  '<p style="margin:0;font-size:18px;line-height:1.6">A learning designer designed this game. AI helped write most of the words and the code, and it writes your scenes and feedback live as you play. Here is who does what, what happens to what you type, and why the game works the way it does.</p></div>' +
   SECS.map((x, i) => { const open = !!P.about[i];
     let body = '';
-    if (open) body = (x.html ? x.html() : '') + (x.items || []).map((it) => '<div class="item"><div style="font-size:16px;font-weight:800">' + esc(it[0]) + '</div><p style="margin:0;font-size:15px;line-height:1.55">' + esc(it[1]) + '</p>' + (it[2] ? '<p class="muted" style="margin:0;font-size:13px">' + esc(it[2]) + '</p>' : '') + '</div>').join('') +
-      (x.lists || []).map((l) => '<div class="item"><div style="font-size:16px;font-weight:800">' + esc(l[0]) + '</div><ul style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px;font-size:15px;line-height:1.5">' + l[1].map((t) => '<li>' + esc(t) + '</li>').join('') + '</ul>' + (l[2] ? '<p class="muted" style="margin:0;font-size:13px">' + esc(l[2]) + '</p>' : '') + '</div>').join('');
+    if (open) body = (x.html ? x.html() : '') + (x.items || []).map((it) => '<div class="item"><div style="font-size:16px;font-weight:800">' + esc(it[0]) + '</div><p style="margin:0;font-size:15px;line-height:1.55">' + esc(it[1]) + (it[2] ? ' <span class="muted" style="white-space:normal">(' + esc(it[2]) + ')</span>' : '') + '</p></div>').join('') +
+      (x.lists || []).map((l) => '<div class="item"><div style="font-size:16px;font-weight:800">' + esc(l[0]) + '</div><ul style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px;font-size:14px;line-height:1.5">' + l[1].map((t) => '<li>' + esc(t) + '</li>').join('') + '</ul>' + (l[2] ? '<p class="muted" style="margin:0;font-size:13px">' + esc(l[2]) + '</p>' : '') + '</div>').join('');
     return '<section class="card" style="gap:10px"><button class="sec" data-sec="' + i + '" aria-expanded="' + open + '"><span style="font-size:20px;font-weight:900">' + esc(x.title) + '</span><span style="font-size:22px;font-weight:900" aria-hidden="true">' + (open ? '−' : '+') + '</span></button>' + body + '</section>'; }).join('') + '</div>';
 }
 
