@@ -64,7 +64,8 @@ const path = require('path');
     // Verdict (code-owned)
     const h = (t, b, bu, w) => ({ meters: { team: t, boss: b, business: bu, wellbeing: w } });
     G.cal = []; G.hist = [h(7, 6, 6, 7), h(7, 6, 6, 7)]; eq('verdict ready (no written data)', T.verdictOf(), 'ready');
-    G.cal = [{ named: 3, partly: 1, missing: 1 }, { named: 2, partly: 2, missing: 0 }]; eq('verdict ready: meters fine, over half named', T.verdictOf(), 'ready');
+    G.cal = [{ named: 4, partly: 1, missing: 0 }, { named: 4, partly: 0, missing: 0 }]; eq('verdict ready: meters fine, 80%+ named', T.verdictOf(), 'ready');
+    G.cal = [{ named: 3, partly: 1, missing: 1 }, { named: 2, partly: 2, missing: 0 }]; eq('verdict support: meters fine, 5 of 9 named (under 80%)', T.verdictOf(), 'support');
     G.cal = [{ named: 1, partly: 4, missing: 0 }, { named: 1, partly: 3, missing: 1 }]; eq('verdict support: meters fine, writing mostly partly', T.verdictOf(), 'support');
     G.cal = [];
     G.hist = [h(7, 4, 4, 7), h(7, 4, 4, 7)]; eq('verdict support (two in red at end)', T.verdictOf(), 'support');
