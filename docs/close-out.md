@@ -12,14 +12,24 @@ Draft, filled in as the session goes. Giselle carries it to the Project Kit trac
 | Repo made public, `CLAUDE.md` kept; GitHub Pages serves `main` at https://gtran16.github.io/LDAI-leadership-game-prototype/ | Pages needs a public repo on a free account; nothing in the repo is secret. |
 | Mobile layout (Team/Story panel above the scene at 375 px) deferred to after freeze | Not a blocker for a desktop demo. |
 
+| Office desk look across every screen and page; type system Nunito (game) + Courier Prime (in-world paperwork only) | Giselle chose P2 after mockups; immersive without the generic app feel. |
+| Bring-your-own-key fallback dropped for the freeze | The $10 Console limit and Worker cap cover class use; less code to verify. |
+
+## Tests (Nov 27, end of day)
+- `npm test`: unit 43/43, smoke (full game at 1280 and 375 px), QA 19/19.
+- QA covers: retries on bad or truncated AI replies; error recovery with answers kept; rate limit and Worker daily cap messages; leaving for Skills and returning to the same place; restart; HTML injection; skipping the benchmark; no-AI state; no sideways scroll at 375 px; named buttons.
+- Contrast: every token pair passes WCAG AA (lowest 5.4:1).
+
 ## Tasks
 
 - [x] Repo layout, `.gitignore`
 - [x] Smoke test (`npm run smoke`): full game at 1280 px and 375 px, stubbed AI
 - [x] Worker scaffold, game falls back to the Worker off claude.ai
-- [ ] Player test notes and second player test
-- [ ] Prompt batch approval, `PROMPTS_APPROVED = true`
-- [ ] Bring-your-own-key fallback
+- [x] Playtests 2 and 3 applied
+- [x] Prompt batches A and B approved and applied
+- [ ] Final playtest on the hosted page
+- [ ] How it's made page updates (draft in how-its-made-changes.md)
+- [x] Bring-your-own-key fallback: dropped for the freeze
 - [ ] Deploy: API key, KV namespace, Worker, Pages
 - [ ] Live check, README for testers, build log, tag
 
