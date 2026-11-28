@@ -381,7 +381,7 @@ body{background-color:var(--desk) !important;background-image:radial-gradient(rg
 <header class="lgbar"><div class="lgbarin">
 <a class="lgbrand" href="#home"><span class="lgmark"></span>The Leadership Game <span style="font-size:12px;font-weight:900;background:#FFC93C;color:#1E1B3A;border-radius:999px;padding:1px 9px;margin-left:2px">V4</span></a>
 <nav class="lgnav" aria-label="Main">
-<a href="#play" data-nav="play home">Play</a><a href="#how-it-works" data-nav="how-it-works">How the game works</a><a href="#skills" data-nav="skills">Skills</a><a href="#about" data-nav="about">How it’s made</a>
+<a href="#home" data-nav="play home">Play</a><a href="#how-it-works" data-nav="how-it-works">How the game works</a><a href="#skills" data-nav="skills">Skills</a><a href="#about" data-nav="about">How it’s made</a>
 </nav>
 <div class="lgtools" id="tools"><span class="status" id="status">Checking for live AI…</span></div>
 </div></header>
@@ -2091,7 +2091,7 @@ function home() {
   '<div class="eyebrow">A decision game for first-time managers</div>' +
   '<h1 style="margin:0;font-size:50px;line-height:1.05;font-weight:900;letter-spacing:-0.03em">Make the call. Say what it costs.</h1>' +
   '<p style="margin:0;font-size:20px;line-height:1.6;color:#3B3760">You are a first-time manager. In six decisions, you choose what to do, name what it protects and what it costs, and practice how to say it to the person. It takes about 45 minutes.</p>' +
-  '<div style="display:flex;flex-wrap:wrap;gap:12px;padding-top:6px"><a class="btn" href="#play">Start playing</a></div></div>' +
+  (function () { const wh = GAME && GAME.where && GAME.where(); return '<div style="display:flex;flex-wrap:wrap;gap:12px;padding-top:6px">' + (wh ? '<a class="btn" href="#play">' + (wh.review ? 'Back to your check-in' : 'Continue decision ' + wh.n) + '</a><a class="btn2" href="#play" data-restart="1">Start over</a>' : '<a class="btn" href="#play">Start playing</a>') + '</div></div>'; })() +
   '<div class="card" style="gap:10px"><div class="eyebrow">Why this game</div>' +
   '<p style="margin:0;font-size:17px;line-height:1.6">There is no right choice. There are only tradeoffs. Every choice protects something and costs something.</p>' +
   '<p style="margin:0;font-size:17px;line-height:1.6">Managing is not about winning. It is about making hard decisions again and again, and keeping your team, your boss, the work and yourself in balance.</p></div>' +
@@ -2100,7 +2100,7 @@ function home() {
   '<div class="row"><span class="num">1</span><p><b>Make a plan:</b> what you will do, who does it, and by when.</p></div>' +
   '<div class="row"><span class="num">2</span><p><b>Name the tradeoff:</b> what it protects, what it costs, and who pays.</p></div>' +
   '<div class="row"><span class="num">3</span><p><b>Deliver it:</b> your first words to the person.</p></div></div>' +
-  '<p class="muted" style="margin:0;font-size:15px">Built with AI, designed by a learning designer. <a href="#about">How it’s made</a></p></div>';
+  '<p class="muted" style="margin:0;font-size:15px">Designed by a learning designer, built with AI. <a href="#about">How it’s made</a></p></div>';
 }
 
 /* ---------- Choose a level ---------- */
@@ -2406,6 +2406,7 @@ document.addEventListener('click', (e) => {
 });
 document.addEventListener('change', (e) => { if (LG.active !== 'page' || !e.target.dataset) return; if (e.target.dataset.pg === 'lvl') { P.lvl = e.target.value; rerender(); } if (e.target.dataset.pg === 'slvl') { P.slvl = +e.target.value; rerender(); } });
 /* links from inside the game to a skill card */
+document.addEventListener('click', (e) => { const r = e.target.closest('[data-restart]'); if (r) { setTimeout(() => { const b = document.getElementById('restart'); if (b) b.click(); }, 0); } }, true);
 document.addEventListener('click', (e) => { const g = e.target.closest('[data-goskill]'); if (g) { P.skill = g.dataset.goskill; P.pane = 0; } }, true);
 window.addEventListener('hashchange', route);
 route();

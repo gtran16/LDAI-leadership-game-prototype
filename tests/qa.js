@@ -91,6 +91,13 @@ async function answer(g, text) {
   await g.page.getByText('Back to decision 5').click();
   await g.page.getByRole('heading', { name: 'Decision 5 of 6' }).waitFor();
   check('Back on decision 5 with the typed plan kept', (await g.page.locator('[data-f="plan"]').inputValue()) === 'Half-written plan');
+  // 5b. The Play tab goes home; home offers to continue the game in progress
+  await g.page.click('.lgnav a[href="#home"]'); await g.page.waitForTimeout(250);
+  check('Play tab opens the home page, not the benchmark', (await g.page.getByText('Make the call. Say what it costs.').count()) && !(await g.page.locator('[data-pc="pre"]').count()));
+  check('Home offers "Continue decision 5"', await g.page.getByText('Continue decision 5').count());
+  check('Tagline leads with the designer', await g.page.getByText('Designed by a learning designer, built with AI.').count());
+  await g.page.getByText('Continue decision 5').click(); await g.page.getByRole('heading', { name: 'Decision 5 of 6' }).waitFor();
+  check('Continue returns to the same place with answers kept', (await g.page.locator('[data-f="plan"]').inputValue()) === 'Half-written plan');
   // 6. Back to the scene and forward keeps answers
   await g.act('toScene').click(); await g.act('toDecide').click();
   check('Back to the scene and forward keeps answers', (await g.page.locator('[data-f="plan"]').inputValue()) === 'Half-written plan');
