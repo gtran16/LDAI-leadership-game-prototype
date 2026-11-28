@@ -64,6 +64,10 @@ button,textarea,input,select{font-family:inherit}
 .pg .item{display:flex;flex-direction:column;gap:2px;padding-top:8px;border-top:1px solid #CFC3A5}
 .pg .defn{padding:24px 26px;border-radius:14px;background:#F1ECFF;display:flex;flex-direction:column;gap:10px}
 .pg .know{display:flex;flex-direction:column;gap:8px;padding:14px 16px;border-radius:12px;background:#E6F5EC;border:2px solid #1E1B3A}
+.pg .mexgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.pg .mex{display:flex;flex-direction:column;gap:6px;padding:12px 14px;border:2px solid #EFE6CC;border-radius:12px}
+.pg .mbar{display:flex;gap:2px}.pg .mbar span{flex:1;height:10px;border:2px solid #1E1B3A;border-radius:3px}
+@media (max-width:700px){.pg .mexgrid{grid-template-columns:minmax(0,1fr)}}
 .pg .sktabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
 .pg .sktab{display:flex;align-items:center;justify-content:center;gap:8px;min-height:54px;padding:0 12px;border:2px solid #1E1B3A;border-radius:14px;background:#fff;font-size:17px;font-weight:900;color:#1E1B3A;cursor:pointer;box-shadow:0 3px 0 #1E1B3A}
 .pg .sktab[aria-selected="true"]{background:#FFC93C;box-shadow:0 1px 0 #1E1B3A;transform:translateY(2px)}
@@ -266,6 +270,8 @@ button,textarea,input,select{font-family:inherit}
 .app-game .compare{font-size:15px;padding:10px 14px;border-radius:10px;background:#F7F1DF}
 .app-game .compare ul{margin:4px 0 0;padding-left:20px}
 .app-game .helpp{gap:10px}
+.app-game .hsep{border:0;border-top:1px dashed #CFC3A5;margin:2px 0;width:100%}
+.app-game .hex{padding:8px 10px;border-radius:10px;background:#F7F1DF}
 .app-game .helptabs{display:flex;gap:6px;flex-wrap:nowrap}
 .app-game .helpp .pill2{min-height:36px;padding:0 12px;font-size:14px}
 .app-game .tabs{display:flex;gap:6px;flex-wrap:nowrap}
@@ -278,6 +284,8 @@ button,textarea,input,select{font-family:inherit}
 .app-game .twocol{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 @media (max-width:700px){.app-game .twocol{grid-template-columns:minmax(0,1fr)}}
 .app-game .endmeters{position:static;grid-template-columns:repeat(2,minmax(0,1fr));padding:0;border:0;background:none}
+.app-game .sawcard{display:flex;flex-direction:column;gap:6px;padding:12px 14px;border:2px solid #EFE6CC;border-radius:12px;background:#fff;font-size:15px}
+.app-game .caltag{grid-column:1/-1;justify-self:start;padding:2px 10px;border-radius:999px;border:1.5px solid #1E1B3A;font-size:13px;font-weight:800}
 .app-game .calrow{display:grid;grid-template-columns:110px minmax(0,1fr) minmax(0,1.4fr);gap:8px;font-size:15px;padding-top:8px;border-top:1px solid #E5DCC4}
 .app-game .trd{display:block;font-size:14px;font-weight:600;color:#3B3760;margin-top:4px;line-height:1.4}
 .app-game .helpfab{position:fixed;right:18px;bottom:18px;z-index:15;min-height:52px;padding:0 22px;border:2px solid #1E1B3A;border-radius:999px;background:#FFC93C;color:#1E1B3A;font-size:17px;font-weight:900;cursor:pointer;box-shadow:0 4px 0 #1E1B3A}
@@ -686,7 +694,7 @@ const TIPS = {
   11: [['decide', 'New: you write the plan', 'No options from here. Breaks and advice are still yours to use.']] };
 
 let W = null, sample = null, live = false;
-const G = { pc: newPC(), phase: 'how', help: { open: false, tab: 'why', auto: {} }, introI: 0, n: 1, meters: { team: 6, boss: 6, business: 5, wellbeing: 7 }, log: [], promises: [], carries: [], counters: {}, dec: {}, cur: null, busy: '', err: '', errCalls: null, tab: 'team', seenTips: {} };
+const G = { pc: newPC(), phase: 'pre', help: { open: false, tab: 'why', auto: {} }, introI: 0, n: 1, meters: { team: 6, boss: 6, business: 5, wellbeing: 7 }, log: [], promises: [], carries: [], counters: {}, dec: {}, cur: null, busy: '', err: '', errCalls: null, tab: 'team', seenTips: {} };
 
 const esc = (t) => String(t == null ? '' : t).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const $ = (id) => document.getElementById(id);
@@ -711,8 +719,8 @@ const RL = { cur: 'lg_run', last: 'lg_last' };
 G.runlog = []; G.runStart = Date.now();
 function rlSave() { try { localStorage.setItem(RL.cur, JSON.stringify(G.runlog)); } catch (e) { try { G.runlog.forEach(x => { if (x.kind === 'call') x.prompt = '(dropped to save space)'; }); localStorage.setItem(RL.cur, JSON.stringify(G.runlog)); } catch (e2) {} } }
 function rl(x) { x.at = Math.round((Date.now() - G.runStart) / 1000); G.runlog.push(x); rlSave(); }
-function rlArchive() { try { const c = localStorage.getItem(RL.cur); if (c && c !== '[]') localStorage.setItem(RL.last, c); localStorage.removeItem(RL.cur); } catch (e) {} G.runlog = []; G.runStart = Date.now(); }
-function rlLoad(which) { if (which === 'cur') return G.runlog; try { return JSON.parse(localStorage.getItem(RL.last) || '[]'); } catch (e) { return []; } }
+function rlArchive() { try { const c = localStorage.getItem(RL.cur); if (c && c !== '[]') { const p1 = localStorage.getItem(RL.last); if (p1) { const p2 = localStorage.getItem('lg_last2'); if (p2) localStorage.setItem('lg_last3', p2); localStorage.setItem('lg_last2', p1); } localStorage.setItem(RL.last, c); } localStorage.removeItem(RL.cur); } catch (e) {} G.runlog = []; G.runStart = Date.now(); }
+function rlLoad(which) { if (which === 'cur') return G.runlog; try { return JSON.parse(localStorage.getItem({ last: RL.last, last2: 'lg_last2', last3: 'lg_last3' }[which] || RL.last) || '[]'); } catch (e) { return []; } }
 function rlText(log, full) {
   if (!log.length) return '(empty)';
   return log.map(x => {
@@ -727,8 +735,8 @@ function runlogModal() {
   if (!G.rlModal) return '';
   const which = G.rlWhich || 'cur', full = !!G.rlFull, log = rlLoad(which);
   return '<div class="modalback" data-act="closeRL"></div><div class="modal wide" role="dialog" aria-modal="true" aria-labelledby="rlt"><div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><h2 id="rlt" style="margin:0">Run log</h2><button class="ghost" data-act="closeRL">Close</button></div>' +
-    '<div style="display:flex;gap:8px;flex-wrap:wrap"><button class="pill2" aria-pressed="' + (which === 'cur') + '" data-act="rlCur">This run</button><button class="pill2" aria-pressed="' + (which === 'last') + '" data-act="rlLast">Last run</button><button class="pill2" aria-pressed="' + full + '" data-act="rlFull">' + (full ? 'With prompts and replies' : 'Summary only') + '</button><button class="btn" data-act="rlCopy">Copy</button></div>' +
-    '<p class="muted" style="margin:0;font-size:13px">Kept in this browser until you start a new run; the run before stays under Last run.</p><textarea id="rltext" class="ta" rows="18" readonly style="font-family:monospace;font-size:12px">' + esc(rlText(log, full)) + '</textarea></div>';
+    '<div style="display:flex;gap:8px;flex-wrap:wrap"><button class="pill2" aria-pressed="' + (which === 'cur') + '" data-act="rlCur">This run</button><button class="pill2" aria-pressed="' + (which === 'last') + '" data-act="rlLast">Last run</button><button class="pill2" aria-pressed="' + (which === 'last2') + '" data-act="rlLast2">2 runs ago</button><button class="pill2" aria-pressed="' + (which === 'last3') + '" data-act="rlLast3">3 runs ago</button><button class="pill2" aria-pressed="' + full + '" data-act="rlFull">' + (full ? 'With prompts and replies' : 'Summary only') + '</button><button class="btn" data-act="rlCopy">Copy</button></div>' +
+    '<p class="muted" style="margin:0;font-size:13px">Kept in this browser. Starting a new run moves this one to Last run; the three most recent runs are kept.</p><textarea id="rltext" class="ta" rows="18" readonly style="font-family:monospace;font-size:12px">' + esc(rlText(log, full)) + '</textarea></div>';
 }
 async function ask(name, prompt, tier) {
   const t0 = Date.now(); let text = '';
@@ -858,7 +866,7 @@ function afterOptions() {
 
 function freshCur() { return { asked: [], pick: null, opening: null, conf: null, tp: '', tc: '', tw: '', tt: '', plan: '', open: '', advT: false, advO: false, advP: false, mPlan: 'pick', mTrade: 'pick', mOpen: 'pick', result: null }; }
 async function startDecision(n) {
-  G.n = n; G.cur = freshCur(); G.tab = 'team'; G.help.tab = stageWrites(n)[0] || 'plan'; G.err = ''; G.errCalls = null;
+  G.n = n; G.cur = freshCur(); G.tab = 'team'; G.help.tab = { 3: 'tradeoff', 4: 'delivery' }[n] || 'plan'; /* open on the part that is new this decision */ G.err = ''; G.errCalls = null;
   if (!live) { G.phase = 'nolive'; render(); return; }
   G.phase = 'loading'; G.busy = 'Writing your next scene…'; render();
   let slot = G.dec[n];
@@ -876,7 +884,7 @@ async function commit() {
     let judge;
     const M = modes(c, band(G.n));
     if (M.planPick && M.tradePick && M.openPick) judge = codeJudge(D, c);
-    else { const j = await ask('P3 judge, decision ' + G.n, fillP3(D, c), TIER.P3); calls.push(j.call); judge = j.value; if (!judge.shifts) throw Object.assign(new Error('The judge reply had no meter shifts.'), { call: j.call }); }
+    else { const j = await ask('P3 judge, decision ' + G.n, fillP3(D, c), TIER.P3); calls.push(j.call); judge = j.value; if (!judge.shifts) throw Object.assign(new Error('The judge reply had no meter shifts.'), { call: j.call }); zeroGuard(D, c, judge); }
     wellbeingRule(D, c, judge);
     G.busy = 'Writing what happened\u2026'; render(); /* Nov 19 (B9): debrief shows all at once */
     const nar = await ask('P4 narrator, decision ' + G.n, fillP4(D, c, judge), TIER.P4); calls.push(nar.call);
@@ -885,6 +893,14 @@ async function commit() {
     G.phase = 'debrief'; render(); toTop();
     if (G.n < NDEC) loadDecision(G.n + 1);
   } catch (e) { if (e.call) calls.push(e.call); G.err = e.code === 'rate_limited' ? 'The AI is busy. Wait a minute, then try again.' : (e.message || 'Something went wrong.'); G.errCalls = calls; G.preview = null; G.phase = 'decide'; render(); }
+}
+/* Nov 27: P3 starts from the chosen option's deltas. If it returns no movement on team, boss and business while the picked option has some, use the option's deltas and log it. */
+function zeroGuard(D, c, judge) {
+  const o = c.pick !== null ? D.options[c.pick] : null; if (!o) return;
+  const keys = ['team', 'boss', 'business'], d = (k) => { const x = (judge.shifts || {})[k]; return Math.round(+(x && x.delta != null ? x.delta : x) || 0); };
+  if (keys.some(k => d(k)) || !keys.some(k => o.delta[k])) return;
+  keys.forEach(k => { judge.shifts[k] = { delta: o.delta[k], reason: (o.reasons && o.reasons[k]) || '', set_by: 'code: judge returned no movement, used the picked option' }; });
+  judge.zero_guard = true; rl({ kind: 'note', n: G.n, text: 'Judge returned no meter movement; used the picked option deltas.' });
 }
 /* Wellbeing is set by code, not AI (Giselle's rule, Nov 18):
    holds at default; taking work on yourself dips 1, or 2 if you took work on within the last 3 decisions;
@@ -947,12 +963,13 @@ function applyResult(D, c, judge, N, calls) {
 /* ---------- confidence read (code, not AI): how complete the player said each written answer was, against the judge's four checks ---------- */
 const CHECK_KEYS = ['protects', 'cost', 'who_pays', 'skill_check'], PTS = { named: 2, partly: 1, missing: 0 };
 function checkScore(judge) { const ch = judge.checks || {}; return CHECK_KEYS.reduce((a, k) => a + (PTS[String((ch[k] || {}).status || 'missing').toLowerCase()] || 0), 0); }
+const calLevel = (score) => Math.min(4, Math.floor(score / 2)); /* 8 Complete, 6-7 Mostly, 4-5 About half, 2-3 Missing some, 0-1 Missing a lot */
 function calRead() {
   const C = G.cal || []; if (C.length < 2) return 'not_enough';
-  const gap = C.reduce((a, x) => a + (x.said - x.score / 2), 0) / C.length;
-  return gap >= 1 ? 'over' : gap <= -1 ? 'under' : 'calibrated';
+  const hi = C.filter(x => x.said > calLevel(x.score)).length, lo = C.filter(x => x.said < calLevel(x.score)).length;
+  return hi * 2 >= C.length && hi > lo ? 'over' : lo * 2 >= C.length && lo > hi ? 'under' : hi + lo === 0 ? 'calibrated' : 'mixed';
 }
-const CALREAD = { over: 'rated their answers as more complete than the checks found', under: 'rated their answers as less complete than the checks found', calibrated: 'their rating matched what the checks found', not_enough: 'not enough written answers to tell' };
+const CALREAD = { over: 'rated their answers as more complete than the checks found', under: 'rated their answers as less complete than the checks found', calibrated: 'their rating matched what the checks found', mixed: 'their rating matched on some answers and not others', not_enough: 'not enough written answers to tell' };
 /* ---------- readiness review (P7) ---------- */
 function verdictOf() {
   const H = G.hist || [], keys = ['team', 'boss', 'business', 'wellbeing'];
@@ -983,13 +1000,13 @@ const MARKC = { named: ['#D1FAE5', '#065F46', 'Named'], partly: ['#FEF3C7', '#92
 function markChip(label, status) { const m = MARKC[status] || MARKC.missing; return '<span style="display:inline-flex;align-items:center;gap:4px;padding:2px 10px;border-radius:999px;font-size:13px;font-weight:800;background:' + m[0] + ';color:' + m[1] + ';border:2px solid ' + m[1] + '">' + label + ' · ' + m[2] + '</span>'; }
 function checkScreen(stage) {
   const S = CHECKS[0], st = G.pc[stage], ok = st.text.trim().length >= 20, pre = stage === 'pre';
-  return '<div class="checkframe"><div class="checktop"><span class="checkbadge">' + (pre ? 'Check 1 of 2 · before you start' : 'Check 2 of 2 · after six decisions') + '</span><span class="checknote">Not part of the story · no score</span></div>' +
-    '<h1 style="margin:0;font-size:32px;font-weight:900">' + (pre ? 'Before you start: one scenario' : 'The same scenario, one more time') + '</h1>' +
-    '<p class="para">' + (pre ? 'Answer one short scenario from another software company. There is no right answer. At the end you answer the same scenario again and see your two answers side by side.' : 'This is the scenario you answered before the story. Answer it again without looking back, then see both answers side by side in your check-in.') + '</p>' +
+  return '<div class="checkframe"><div class="checktop"><span class="checkbadge">' + (pre ? 'Check 1 of 2 · your benchmark' : 'Check 2 of 2 · compare to your benchmark') + '</span><span class="checknote">Not part of the story · no score</span></div>' +
+    '<h1 style="margin:0;font-size:32px;font-weight:900">' + (pre ? 'Before you start: set your benchmark' : 'The same scenario, one more time') + '</h1>' +
+    '<p class="para">' + (pre ? 'Answer one short scenario from another software company. This is your benchmark: there is no right answer and no score. After the game you answer the same scenario again and compare.' : 'This is the scenario you answered before the story. Answer it again without looking back, using what you practiced, then compare yourself to your benchmark.') + '</p>' +
     '<div class="checkscene"><div class="lab">' + esc(S.title) + '</div><p style="margin:0;font-size:18px;line-height:1.6">' + esc(S.text) + '</p></div>' +
     '<label class="lab" for="pc_' + stage + '">' + esc(CHECK_ASK) + '</label><textarea id="pc_' + stage + '" class="ta grow" rows="4" data-pc="' + stage + '">' + esc(st.text) + '</textarea>' +
     '<p class="muted" style="margin:0;font-size:14px">Your answer goes to the AI so your two answers can be compared. Leave out real names.</p>' +
-    '<div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center"><button class="btn" data-act="' + (pre ? 'preDone' : 'postDone') + '"' + (ok ? '' : ' disabled') + '>' + (pre ? 'Start the story' : 'Go to your check-in') + '</button><button class="ghost" data-act="pcSkip">Skip the check</button></div></div>';
+    '<div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center"><button class="btn" data-act="' + (pre ? 'preDone' : 'postDone') + '"' + (ok ? '' : ' disabled') + '>' + (pre ? 'Start the story' : 'Compare to my benchmark') + '</button><button class="ghost" data-act="pcSkip">Skip the check</button></div></div>';
 }
 async function runCheck(stage) {
   const st = G.pc[stage]; if (!live || !P8_APPROVED || !st.text.trim()) return;
@@ -1003,7 +1020,7 @@ function compareSection() {
   const col = (stage, label) => { const st = pc[stage], S = CHECKS[pc.order[stage === 'pre' ? 0 : 1]];
     const marks = st.out ? MARKS.map(m => markChip(m[1], String((st.out[m[0]] || {}).status || 'missing').toLowerCase())).join(' ') : '<span class="muted" style="font-size:13px">' + (st.busy ? 'Reading your answer…' : st.err ? 'Could not be read. ' : P8_APPROVED ? '' : 'Marks appear once the designer approves the check.') + '</span>';
     return '<div style="display:flex;flex-direction:column;gap:6px;padding:12px 14px;border:2px solid #1E1B3A;border-radius:14px;background:#fff"><div class="lab">' + label + ' · ' + esc(S.title) + '</div><p style="margin:0;font-style:italic">“' + esc(st.text.trim() || '(no answer)') + '”</p><div style="display:flex;flex-wrap:wrap;gap:6px">' + marks + '</div></div>'; };
-  return '<p class="muted" style="margin:0;font-size:15px">The same scenario, before the story and after it. Did your answer name what it protects, what it costs and who pays?</p><div class="twocol">' + col('pre', 'Before') + col('post', 'After six decisions') + '</div>';
+  return '<p class="muted" style="margin:0;font-size:15px">The same scenario, before the story and after it. Did your answer name what it protects, what it costs and who pays?</p><div class="twocol">' + col('pre', 'Your benchmark') + col('post', 'After six decisions') + '</div>';
 }
 function standingSection() {
   const start = { team: 6, boss: 6, business: 5, wellbeing: 7 };
@@ -1013,9 +1030,10 @@ function standingSection() {
 function calSection() {
   const C = G.cal || []; if (!C.length) return '';
   const r = calRead();
-  const msg = { over: 'Your answers were a little less complete than you rated them. A quick check before you send a plan helps: does it name what it protects, what it costs and who pays, with a person, a piece of work or a date in each?', under: 'Your answers were more complete than you rated them. Your read of your own work can be a little more generous.', calibrated: 'How complete you rated your answers matched what you wrote. You have a good read on your own work.', not_enough: 'Write at least two of your own answers to see how your rating compares.' }[r];
+  const hi = C.filter(x => x.said > calLevel(x.score)).length, lo = C.filter(x => x.said < calLevel(x.score)).length, same = C.length - hi - lo;
+  const msg = { over: 'On ' + hi + ' of ' + C.length + ' answers, you rated your answer as more complete than the checks found. A quick check before you send a plan helps: does it name what it protects, what it costs and who pays, with a person, a piece of work or a date in each?', under: 'On ' + lo + ' of ' + C.length + ' answers, your answer was more complete than you rated it. Your read of your own work can be a little more generous.', calibrated: 'Your rating matched what the checks found on every answer. You have a good read on your own work.', mixed: 'Your rating matched on ' + same + ' of ' + C.length + ' answers. Look at the ones that did not match: what did the checks find that you missed?', not_enough: 'Write at least two of your own answers to see how your rating compares.' }[r];
   return '<p class="muted" style="margin:0;font-size:15px">Before each commit, you rated how complete your answer was. Here is that rating next to what the checks found.</p>' +
-    C.map(x => '<div class="calrow"><b>Decision ' + x.n + '</b><span><span class="lab">You rated it</span><br>' + esc(CONF[x.said]) + '</span><span><span class="lab">The checks found</span><br>' + esc(CONF[Math.min(4, Math.floor(x.score / 2))]) + ' <span class="muted">(' + x.named + ' named, ' + x.partly + ' partly, ' + x.missing + ' missing)</span></span></div>').join('') +
+    C.map(x => '<div class="calrow"><b>Decision ' + x.n + '</b><span><span class="lab">You rated it</span><br>' + esc(CONF[x.said]) + '</span><span><span class="lab">The checks found</span><br>' + esc(CONF[calLevel(x.score)]) + ' <span class="muted">(' + x.named + ' named, ' + x.partly + ' partly, ' + x.missing + ' missing)</span></span><span class="caltag" style="background:' + (x.said === calLevel(x.score) ? '#E6F5EC' : '#FFF1C2') + '">' + (x.said === calLevel(x.score) ? 'Matched' : x.said > calLevel(x.score) ? 'You rated it higher' : 'You rated it lower') + '</span></div>').join('') +
     '<p style="margin:0;font-weight:700">' + msg + '</p>';
 }
 function reviewScreen() {
@@ -1033,17 +1051,20 @@ function reviewScreen() {
   steps.push(['What happened next', '<span class="chip ai" style="align-self:flex-start">Written by AI</span><p class="para">' + esc(o.story || '') + '</p>']);
   steps.push(['Where you stand', standingSection()]);
   steps.push(['Noor’s read', '<div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center"><span class="tag" style="font-size:16px;background:#FFE9A8">' + VERDICT[rv.verdict] + '</span></div><p class="muted" style="margin:0;font-style:italic;font-size:14px">' + esc(String(o.note_header || '').replace(/\*/g, '')) + '</p>' + sec('What worked', o.worked) + sec('What to work on', o.work_on) + sec('Keep in your toolkit', o.keep)]);
-  steps.push(['What others saw', sec('What you spent', o.spend) + ((o.watching || []).length ? '<h3 style="margin:0;font-size:17px">What they saw</h3><ul style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px">' + o.watching.map(w => '<li><b>' + esc(w.who || '') + '</b> watched for ' + esc(String(w.cared || '').replace(/^./, ch => ch.toLowerCase()).replace(/\.$/, '')) + '. <span class="muted">Saw:</span> ' + esc(w.saw || '') + '</li>').join('') + '</ul>' : '')]);
-  steps.push(['What to practice next', ((o.grow || []).length ? '<ul style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px">' + o.grow.map(g => '<li><b>' + esc(String(g.skill || '').replace(/^./, ch => ch.toUpperCase())) + ':</b> ' + esc(g.why || '') + '</li>').join('') + '</ul>' : '') + sec('Add to your toolkit', o.add) + sec('Your read and Noor’s', o.calibration)]);
+  steps.push(['What others saw', sec('What you spent', o.spend) + ((o.watching || []).length ? '<h3 style="margin:0;font-size:17px">What they saw</h3>' + o.watching.map(w => '<div class="sawcard"><b>' + esc(w.who || '') + '</b><div><span class="lab">What they watched for</span><br>' + esc(w.cared || '') + '</div><div><span class="lab">What they saw you do</span><br>' + esc(w.saw || '') + '</div></div>').join('') : '')]);
+  steps.push(['What to practice next', ((o.grow || []).length ? '<ul style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px">' + o.grow.map(g => '<li><b>' + esc(String(g.skill || '').replace(/^./, ch => ch.toUpperCase())) + ':</b> ' + esc(g.why || '') + '</li>').join('') + '</ul>' : '') + sec('Add to your toolkit', o.add) + sec('Your call and Noor’s', o.calibration)]);
   const cal = calSection(); if (cal) steps.push(['How complete your answers were', cal]);
-  const cmp = compareSection(); if (cmp) steps.push(['Before and after', cmp]);
+  const pc = G.pc, needPost = !pc.skipped && pc.pre.done && !pc.post.done;
+  if (needPost) steps.push(['One last check', '<p class="para">One more time: answer the scenario you answered before the story. Then compare yourself to your benchmark.</p><button class="btn" data-act="toPost" style="align-self:flex-start">Go to the last check</button>']);
+  const cmp = needPost ? '' : compareSection(); if (cmp) steps.push(['Before and after', cmp]);
   const A = G.ans || [];
-  steps.push(['Your record', '<details><summary style="cursor:pointer;font-weight:900;font-size:17px">Review your answers</summary>' + (A.length ? A.map(a => '<div style="display:flex;flex-direction:column;gap:4px;padding-top:10px;border-top:1px solid #E5DCC4;font-size:15px"><b>Decision ' + a.n + '</b><div><span class="lab">Plan</span> ' + esc(a.plan) + '</div>' + (a.trade ? '<div><span class="lab">Trade-off</span> ' + esc(a.trade) + '</div>' : '') + (a.opening ? '<div><span class="lab">First words</span> “' + esc(a.opening) + '”</div>' : '') + '<div class="muted">' + (a.conf ? 'You rated it: ' + esc(a.conf) + ' · ' : '') + METERS.map(m => m.label + ' ' + dw(a.moves[m.key] || 0).toLowerCase()).join(', ') + '</div></div>').join('') : '<p class="muted" style="margin:0">No answers recorded.</p>') + '</details>' +
+  if (!needPost) steps.push(['Your record', '<details><summary style="cursor:pointer;font-weight:900;font-size:17px">Review your answers</summary>' + (A.length ? A.map(a => '<div style="display:flex;flex-direction:column;gap:4px;padding-top:10px;border-top:1px solid #E5DCC4;font-size:15px"><b>Decision ' + a.n + '</b><div><span class="lab">Plan</span> ' + esc(a.plan) + '</div>' + (a.trade ? '<div><span class="lab">Trade-off</span> ' + esc(a.trade) + '</div>' : '') + (a.opening ? '<div><span class="lab">First words</span> “' + esc(a.opening) + '”</div>' : '') + '<div class="muted">' + (a.conf ? 'You rated it: ' + esc(a.conf) + ' · ' : '') + METERS.map(m => m.label + ' ' + dw(a.moves[m.key] || 0).toLowerCase()).join(', ') + '</div></div>').join('') : '<p class="muted" style="margin:0">No answers recorded.</p>') + '</details>' +
     '<details><summary style="cursor:pointer;font-weight:900;font-size:17px">Read the full story</summary>' + (G.log || []).map(e => '<div style="padding-top:8px;border-top:1px solid #E5DCC4"><div class="lab">' + esc(e.label) + '</div><p style="margin:2px 0 0;white-space:pre-line">' + esc(e.text) + '</p></div>').join('') + '</details>' +
     '<h3 style="margin:0;font-size:17px">What next?</h3><div style="display:flex;flex-wrap:wrap;gap:10px"><button class="btn" data-act="playAgain">Play again</button><a class="btn2" href="#home">Home</a><button class="btn2" data-act="snapCopy">' + (G.snapDone ? 'Copied' : 'Copy a snapshot') + '</button></div><p class="muted" style="margin:0;font-size:14px">The snapshot copies your story, Noor’s read and your answers as text, ready to paste anywhere.</p>']);
+  if (G.rvJump) { const j = steps.findIndex(x => x[0] === G.rvJump); if (j >= 0) G.rvI = j; G.rvJump = ''; }
   const i = Math.max(0, Math.min(steps.length - 1, G.rvI || 0)), st = steps[i];
   h += '<section class="card" style="gap:14px"><h2 style="margin:0">' + st[0] + '</h2>' + st[1] + '</section>';
-  h += '<div style="display:flex;justify-content:space-between;align-items:center;gap:12px"><button class="ghost" data-act="rvBack"' + (i ? '' : ' disabled') + '>Back</button><span class="muted">' + (i + 1) + ' of ' + steps.length + '</span>' + (i < steps.length - 1 ? '<button class="btn" data-act="rvNext">Next: ' + steps[i + 1][0] + '</button>' : '<span></span>') + '</div>';
+  h += '<div style="display:flex;justify-content:space-between;align-items:center;gap:12px"><button class="ghost" data-act="rvBack"' + (i ? '' : ' disabled') + '>Back</button><span class="muted">' + (i + 1) + ' of ' + steps.length + '</span>' + (i < steps.length - 1 && !(needPost && i === steps.length - 1) ? '<button class="btn" data-act="rvNext">Next: ' + steps[i + 1][0] + '</button>' : '<span></span>') + '</div>';
   h += callsFold(rv.call7 ? [rv.call7] : null);
   return h;
 }
@@ -1155,11 +1176,14 @@ function rightPanel() {
   const A = D && c && G.phase === 'decide' && writes ? { plan: D.adviceP, tradeoff: D.adviceT, delivery: D.adviceO }[tab] : null;
   if (A && c) c[advKey] = true; /* the judge is told which advice the player could see */
   const start = A && A.start ? String(A.start).replace(/[\s.…]+$/, '') : '';
-  return '<div class="panel helpp" aria-label="Help"><div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><div class="lab">Help</div><a href="#skills" style="font-size:13px;font-weight:800;color:#5B3DF5">Full skill guide</a></div>' +
+  const exs = [t.ex, t.ex2].filter(Boolean);
+  return '<div class="panel helpp" aria-label="Skill guide"><div class="lab">Skill guide</div>' +
     '<div class="helptabs" role="tablist">' + [['plan', 'Plan'], ['tradeoff', 'Tradeoff'], ['delivery', 'Delivery']].map(x => '<button class="pill2" role="tab" aria-selected="' + (tab === x[0]) + '" data-htab="' + x[0] + '" style="background:' + (tab === x[0] ? '#FFE9A8' : '#fff') + '">' + x[1] + '</button>').join('') + '</div>' +
     (writes ? '<span class="tag" style="align-self:flex-start;background:#CCFBF1">You write this part</span>' : '') +
-    '<div class="lab">What good looks like</div>' + list(t.good) + '<div class="lab">Sentence frames</div>' + list(t.frames) +
-    (A ? '<div class="advice"><span class="lab">A manager you trust would ask</span><b>' + esc(A.question || '') + '</b>' + (start ? '<span>“' + esc(start) + '…”</span>' : '') + '</div>' : '') + '</div>';
+    (A ? '<div class="advice"><span class="lab">A manager you trust would ask</span><b>' + esc(A.question || '') + '</b>' + (start ? '<span>“' + esc(start) + '…”</span>' : '') + '</div><hr class="hsep">' : '') +
+    '<div class="lab">What good looks like</div>' + list(t.good) + '<hr class="hsep"><div class="lab">Sentence frames</div>' + list(t.frames) +
+    (exs.length ? '<hr class="hsep"><div class="lab">Worked examples</div>' + exs.map((e, i) => '<div class="hex"><span class="muted" style="font-size:13px">' + esc(e.short || e.scene) + '</span><p style="margin:4px 0 0;font-size:14px">' + esc(e.text) + '</p></div>').join('') : '') +
+    '<hr class="hsep"><a href="#skills" style="font-size:14px;font-weight:800;color:#5B3DF5">Open the full skill guide</a><span class="muted" style="font-size:13px">It opens in this tab. Your game stays where you left it; come back with Play.</span></div>';
 }
 function stepPips() {
   const order = ['scene', 'decide', 'debrief'], idx = G.phase === 'committing' ? 2 : (G.phase === 'optwait' || G.phase === 'opterr') ? 1 : order.indexOf(G.phase);
@@ -1180,17 +1204,20 @@ const HELP = {
     dos: ['Name who does what, and by when.', 'Use a fact from your questions.', 'Say what you will not do.'],
     donts: ['Write “I’ll handle it” without saying how.', 'Plan around someone’s time without checking that they have it.', 'Try to protect everything.'],
     frames: ['I will ___.', '___ does ___ by ___.', 'These things wait: ___.'],
-    ex: { scene: 'A 400-person company that makes project-tracking software has promised a large customer a new export feature by Friday. You manage a team of six engineers, and Ana, the strongest one, is already working late.', text: 'I will give the export feature to Ana and Luis. Luis builds the simple screens and Ana builds the data export. We pause the small bug fixes until Friday, and I will check in with both of them on Thursday.' } },
+    ex2: { short: 'Payroll bug the day before a release.', scene: 'A 300-person company that makes HR software. The day before a release, two customers report a payroll bug. Sam, on your team of five, knows the payroll code best.', text: 'I will ask Sam to fix the payroll bug today, and Mo takes over Sam\u2019s release checks. The release moves from Tuesday to Wednesday, and I will tell the product manager this morning.' },
+    ex: { short: 'Export feature due Friday; Ana is already working late.', scene: 'A 400-person company that makes project-tracking software has promised a large customer a new export feature by Friday. You manage a team of six engineers, and Ana, the strongest one, is already working late.', text: 'I will give the export feature to Ana and Luis. Luis builds the simple screens and Ana builds the data export. We pause the small bug fixes until Friday, and I will check in with both of them on Thursday.' } },
   tradeoff: { good: ['Names what the plan protects.', 'Names what it costs: a date, a task, or someone’s time.', 'Names who pays, by name or by group.'],
     dos: ['Name a real cost, such as a date that moves or work that waits.', 'Name who pays: a person or a group.', 'Keep each part to one short sentence.'],
     donts: ['Write “there is no real downside.”', 'Write “it will be stressful” without saying for whom.', 'Leave out a cost you already know about.'],
     frames: ['This plan protects ___.', 'It costs ___.', '___ pays for it.'],
-    ex: { scene: 'A 400-person project-tracking software company. A new export feature is promised to a large customer by Friday, and Ana and Luis are building it.', text: 'This plan protects the export promised to the customer for Friday. It costs the small bug fixes, which wait until next week. The customers who reported those bugs wait, and Priya, who leads support, has to explain the delay to them.' } },
+    ex2: { short: 'Payroll bug the day before a release.', scene: 'A 300-person company that makes HR software. The day before a release, two customers report a payroll bug. Sam, on your team of five, knows the payroll code best. You ask Sam to fix it today.', text: 'This plan protects the two customers\u2019 payroll. It costs one day on the release, which moves to Wednesday. The product manager pays, because they have to tell sales the new date.' },
+    ex: { short: 'Export feature due Friday.', scene: 'A 400-person project-tracking software company. A new export feature is promised to a large customer by Friday, and Ana and Luis are building it.', text: 'This plan protects the export promised to the customer for Friday. It costs the small bug fixes, which wait until next week. The customers who reported those bugs wait, and Priya, who leads support, has to explain the delay to them.' } },
   delivery: { good: ['Starts with what you decided.', 'Says what it means for this person.', 'Asks what they need, or says when you will check in.'],
     dos: ['Start with what you decided.', 'Say what it means for this person.', 'Ask what they need, or say when you will check in.'],
     donts: ['Announce the decision without asking anything.', 'Put the cost at the end, where it is easy to miss.', 'Apologize so much that the decision sounds unsure.'],
     frames: ['I decided ___.', 'This means ___ for you.', 'What do you need from me? I will check in on ___.'],
-    ex: { scene: 'A 400-person project-tracking software company. A new export feature is due Friday, and you are talking to Ana, your strongest engineer.', text: 'Ana, I decided that you and Luis will build the export feature, and we will pause the small bug fixes until Friday. That means longer days for you this week. What do you need from me to make it work? I will check in on Thursday.' } } };
+    ex2: { short: 'Payroll bug the day before a release; talking to Sam.', scene: 'A 300-person company that makes HR software. The day before a release, two customers report a payroll bug. Sam, on your team of five, knows the payroll code best. You are talking to Sam.', text: 'Sam, I decided you will fix the payroll bug today, and Mo will take your release checks. That means the release moves a day. Is there anything Mo needs from you before you start?' },
+    ex: { short: 'Export feature due Friday; talking to Ana.', scene: 'A 400-person project-tracking software company. A new export feature is due Friday, and you are talking to Ana, your strongest engineer.', text: 'Ana, I decided that you and Luis will build the export feature, and we will pause the small bug fixes until Friday. That means longer days for you this week. What do you need from me to make it work? I will check in on Thursday.' } } };
 function openHelp(tab) { G.help.tab = tab; render(); }
 function howScreen() {
   const row = (a, b) => '<div style="display:flex;gap:12px;align-items:baseline"><b style="flex:none;min-width:64px">' + a + '</b><span>' + b + '</span></div>';
@@ -1204,9 +1231,9 @@ function howScreen() {
 function debriefLines(D, c, N, o) {
   const M = modes(c, band(G.n));
   const rows = [['Plan', N.plan_line], ['Tradeoff', N.tradeoff_line], ['Delivery', N.delivery_line]];
-  let h = '<h2 style="margin:6px 0 0;font-size:19px">What you did</h2>';
+  let h = '<h2 style="margin:6px 0 0;font-size:19px">How your approach worked</h2>';
   if (!rows.some(r => r[1])) return h + '<p style="margin:0">' + esc(N.reasoning_note || '') + '</p>';
-  const split = (t) => { const x = String(t || ''), i = x.search(/another way:/i); return i < 0 ? [x.trim(), ''] : [x.slice(0, i).trim(), x.slice(i).replace(/^another way:\s*/i, '').trim()]; };
+  const split = (t) => { const x = String(t || ''), i = x.search(/another (way|option|approach)\s*:/i); return i < 0 ? [x.trim(), ''] : [x.slice(0, i).trim(), x.slice(i).replace(/^another (way|option|approach)\s*:\s*/i, '').trim()]; };
   h += '<ul class="didlist">' + rows.filter(r => r[1]).map(r => { const pr = split(r[1]); return '<li><b>' + r[0] + ':</b> ' + esc(pr[0]) + (pr[1] ? '<ul><li><i>Another way:</i> ' + esc(pr[1]) + '</li></ul>' : '') + '</li>'; }).join('') + '</ul>';
   if (M.planPick && !M.tradePick && o) h += '<div class="compare"><b>For comparison, the written option’s trade-off:</b><ul><li><b>Protects:</b> ' + esc(o.tp) + '</li><li><b>Costs:</b> ' + esc(o.tc) + '</li><li><b>Who pays:</b> ' + esc(o.tw) + '</li></ul></div>';
   return h;
@@ -1308,7 +1335,7 @@ function main() {
       (R.judge.opening ? '<div class="muted">' + (R.judge.opening === 'lands' ? 'This opening was a strong start. ' : 'This opening is a common trap. ') + esc(R.judge.checks.skill_check.note || '') + '</div>' : '') + (c.conf !== null ? '<div><b>How complete you said it was:</b> ' + CONF[c.conf] + '</div>' : '') + (G.designer ? '<div class="muted">Designer: wellbeing ' + (R.judge.shifts && R.judge.shifts.wellbeing ? R.judge.shifts.wellbeing.delta + ' (' + esc(R.judge.shifts.wellbeing.reason) + '; source: ' + esc(R.judge.shifts.wellbeing.source || '?') + ')' : 'n/a') + '; events: ' + esc(JSON.stringify(R.judge.events || [])) + '</div>' : '') + '</div></details>';
     x += callsFold(G.dec[G.n].calls.concat(R.calls).filter(Boolean)) + '</section>';
     h += x;
-    h += '<div style="display:flex;gap:12px;flex-wrap:wrap"><button class="btn" data-act="next">' + (G.n === NDEC ? (G.pc.skipped || !G.pc.pre.done ? 'See your check-in' : 'Go to the last check') : 'Next decision') + '</button></div>';
+    h += '<div style="display:flex;gap:12px;flex-wrap:wrap"><button class="btn" data-act="next">' + (G.n === NDEC ? 'See your check-in' : 'Next decision') + '</button></div>';
     return h;
   }
   return '';
@@ -1325,7 +1352,7 @@ function ready() {
 function readyHelp() { return asksConf(modes(G.cur, band(G.n))) ? 'Finish each part, then say how complete your answer is.' : 'Pick a plan and your first words.'; }
 function render() { if (LG.active !== 'game') return; render_(); }
 function render_() {
-  const early = ['how', 'pre'].includes(G.phase);
+  const early = ['how', 'pre', 'post', 'review'].includes(G.phase);
   $('meters').innerHTML = W && !early ? meterStrip(G.phase === 'debrief' && G.cur && G.cur.result ? G.cur.result.moves : null) : '';
   $('main').innerHTML = (W ? main() : '<p>Loading Tidewell…</p>') + (W ? whoModal() + runlogModal() : '');
   $('left').innerHTML = W && !['intro', 'pre', 'how', 'post', 'review'].includes(G.phase) ? leftPanel() : '';
@@ -1367,6 +1394,8 @@ function act(a) {
   else if (a === 'closeRL') { G.rlModal = false; render(); }
   else if (a === 'rlCur') { G.rlWhich = 'cur'; render(); }
   else if (a === 'rlLast') { G.rlWhich = 'last'; render(); }
+  else if (a === 'rlLast2') { G.rlWhich = 'last2'; render(); }
+  else if (a === 'rlLast3') { G.rlWhich = 'last3'; render(); }
   else if (a === 'rlFull') { G.rlFull = !G.rlFull; render(); }
   else if (a === 'rlCopy') { const t = document.getElementById('rltext'); if (t) { t.select(); try { navigator.clipboard.writeText(t.value).catch(() => document.execCommand('copy')); } catch (e) { try { document.execCommand('copy'); } catch (e2) {} } } }
   else if (a === 'toDecide') { G.tab = 'scene'; const sl = G.dec[G.n]; if (sl.optReady) { G.phase = 'decide'; render(); toTop(); } else { G.phase = 'optwait'; render(); toTop(); if (!sl.optPending) loadOptions(G.n); } }
@@ -1376,8 +1405,9 @@ function act(a) {
   else if (a === 'advO') { G.cur.advO = !G.cur.advO; render(); }
   else if (a === 'advP') { G.cur.advP = !G.cur.advP; render(); }
   else if (a === 'preDone') { G.pc.pre.done = true; runCheck('pre'); G.phase = 'intro'; render(); toTop(); }
-  else if (a === 'postDone') { G.pc.post.done = true; runCheck('post'); G.phase = 'review'; render(); toTop(); }
-  else if (a === 'pcSkip') { G.pc.skipped = true; if (G.phase === 'pre') G.phase = 'intro'; else if (G.phase === 'post') G.phase = 'review'; render(); toTop(); }
+  else if (a === 'postDone') { G.pc.post.done = true; runCheck('post'); G.phase = 'review'; G.rvJump = 'Before and after'; render(); toTop(); }
+  else if (a === 'toPost') { G.phase = 'post'; render(); toTop(); }
+  else if (a === 'pcSkip') { G.pc.skipped = true; if (G.phase === 'pre') G.phase = 'intro'; else if (G.phase === 'post') { G.phase = 'review'; G.rvJump = 'Your record'; } render(); toTop(); }
   else if (a === 'playAgain') { const r = document.getElementById('restart'); if (r) r.click(); toTop(); }
   else if (a === 'snapCopy') { const t = snapshotText(); const done = () => { G.snapDone = true; render(); }; try { navigator.clipboard.writeText(t).then(done, () => { const ta = document.createElement('textarea'); ta.value = t; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); } catch (e) {} ta.remove(); done(); }); } catch (e) { done(); } }
   else if (a === 'rvNext') { G.rvI = (G.rvI || 0) + 1; render(); toTop(); }
@@ -1385,7 +1415,7 @@ function act(a) {
   else if (a === 'runReview') { if (G.rv && G.rv.call && !G.rv.busy) runReview(); }
   else if (a === 'commit') { if (ready()) commit(); }
   else if (a === 'next') {
-    if (G.n === NDEC) { G.endAt = Date.now(); G.phase = G.pc.skipped || !G.pc.pre.done ? 'review' : 'post'; G.rv = { best: '', back: '', call: null, out: null, busy: false, err: '' }; render(); toTop(); return; }
+    if (G.n === NDEC) { G.endAt = Date.now(); G.phase = 'review'; G.rvI = 0; G.rv = { best: '', back: '', call: null, out: null, busy: false, err: '' }; render(); toTop(); return; }
     const nx = G.n + 1;
     startDecision(nx);
   }
@@ -1398,7 +1428,7 @@ function attachTools() {
   t.insertAdjacentHTML('afterbegin', "<button data-apptool=\"1\" id=\"designer\" class=\"status\" style=\"cursor:pointer;background:#fff\" aria-pressed=\"false\">Designer view: off</button><button data-apptool=\"1\" id=\"runlog\" class=\"status\" style=\"cursor:pointer;background:#fff;display:none\">Run log</button><button data-apptool=\"1\" id=\"restart\" class=\"status\" style=\"cursor:pointer;background:#fff\">Start a new run</button>");
   document.getElementById('runlog').onclick = () => { G.rlModal = true; G.rlWhich = 'cur'; render(); };
   document.getElementById('designer').onclick = (e) => { G.designer = !G.designer; document.getElementById('runlog').style.display = G.designer ? '' : 'none'; e.currentTarget.textContent = 'Designer view: ' + (G.designer ? 'on' : 'off'); e.currentTarget.setAttribute('aria-pressed', String(!!G.designer)); render(); };
-  document.getElementById('restart').onclick = () => { rlArchive(); Object.assign(G, { pc: newPC(), trail: [], ans: [], cal: [], phase: 'how', help: { open: false, tab: 'why', auto: {} }, endAt: 0, introI: 0, n: 1, meters: { team: 6, boss: 6, business: 5, wellbeing: 7 }, log: [], promises: [], carries: [], counters: {}, dec: {}, cur: null, busy: '', err: '', errCalls: null, tab: 'team', seenTips: {}, recap: [], modal: false, clean: 0, lastAbsorb: 0, chStep: 0, hist: [], sum: [], rv: null, preview: null }); render(); toTop(); if (live) loadDecision(1); };
+  document.getElementById('restart').onclick = () => { rlArchive(); Object.assign(G, { pc: newPC(), trail: [], ans: [], cal: [], rvI: 0, phase: 'pre', help: { open: false, tab: 'why', auto: {} }, endAt: 0, introI: 0, n: 1, meters: { team: 6, boss: 6, business: 5, wellbeing: 7 }, log: [], promises: [], carries: [], counters: {}, dec: {}, cur: null, busy: '', err: '', errCalls: null, tab: 'team', seenTips: {}, recap: [], modal: false, clean: 0, lastAbsorb: 0, chStep: 0, hist: [], sum: [], rv: null, preview: null }); render(); toTop(); if (live) loadDecision(1); };
   const d = $('designer'); d.textContent = 'Designer view: ' + (G.designer ? 'on' : 'off'); d.setAttribute('aria-pressed', String(!!G.designer));
   $('runlog').style.display = G.designer ? '' : 'none';
 }
@@ -1419,7 +1449,8 @@ return {
     attachTools();
     if (!booted) { booted = true; W = WORLD_DATA; boot(); } else { setLiveStatus(); render(); }
   },
-  help: HELP,
+  help: HELP, meters: METERS, word: (k, v) => word(k, v),
+  where() { return W && G.cur && G.n && !['pre', 'how', 'intro'].includes(G.phase) ? { n: G.n, review: ['review', 'post'].includes(G.phase) } : null; },
   unmount() { LG.active = ''; try { document.body.classList.remove('helpopen'); } catch (e) {} $('tools').querySelectorAll('[data-apptool]').forEach((b) => b.remove()); }
 };
 })();
@@ -2154,11 +2185,18 @@ const SECS = [
 ];
 /* ---------- How the game works, and Skills (Nov 27: the Guide split in two) ---------- */
 const gList = (a) => '<ul style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px">' + (a || []).map(x => '<li>' + esc(x) + '</li>').join('') + '</ul>';
+function meterExample() {
+  const M = (GAME && GAME.meters) || [], ex = { team: 7, boss: 4, business: 6, wellbeing: 3 };
+  if (!M.length) return '';
+  return '<div class="eyebrow">Example: halfway through a game</div><div class="mexgrid">' + M.map(m => { const v = ex[m.key], red = v <= 4;
+    return '<div class="mex"><div style="display:flex;align-items:center;gap:6px;font-weight:800' + (red ? ';color:#B42318' : '') + '"><span style="width:12px;height:12px;border-radius:50%;border:2px solid #1E1B3A;background:' + m.color + '"></span><span style="flex:1">' + esc(m.label) + '</span><span style="font-size:14px">' + esc(GAME.word(m.key, v)) + '</span></div><div class="mbar">' + [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(k => '<span style="background:' + (k <= v ? m.color : '#EADFC4') + '"></span>').join('') + '</div><div class="muted" style="font-size:13px">' + m.words.map(esc).join(' · ') + '</div></div>'; }).join('') + '</div>' +
+    '<p class="muted" style="margin:0;font-size:15px">Here, the team trusts you, but your boss is watching closely and your wellbeing is stretched. Both are in the red: the next decisions should go back for them.</p>';
+}
 function howPage() {
   const row = (a, b) => '<li><b>' + a + ':</b> ' + b + '</li>';
   return '<div class="col" style="gap:22px"><div style="display:flex;flex-direction:column;gap:10px"><h1 class="h1">How the game works</h1><p style="margin:0;font-size:18px;line-height:1.6">Six decisions, four meters, and no score. If you are in the middle of a game, your place is kept: go back with Play.</p></div>' +
     '<div class="card" style="gap:10px"><h2 style="margin:0">The six decisions</h2><ul style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px">' + row('Decisions 1 and 2', 'you pick a plan and your first words. Each plan shows what it protects, what it costs and who pays.') + row('Decision 3', 'you pick a plan, then write the tradeoff.') + row('Decision 4', 'you pick a plan, then write the tradeoff and your first words.') + row('Decisions 5 and 6', 'you write all three: the plan, the tradeoff and your first words.') + '</ul><p style="margin:0">Each decision starts with two questions, so you know more before you choose.</p></div>' +
-    '<div class="card" style="gap:8px"><h2 style="margin:0">The four meters</h2><p style="margin:0">Every choice moves the four meters: team standing, boss standing, business impact and your wellbeing. You cannot keep all four at the top; you spend one to protect another. Keep every meter out of the red, and go back for the one you spent.</p></div>' +
+    '<div class="card" style="gap:12px"><h2 style="margin:0">The four meters</h2><p style="margin:0">Every choice moves the four meters. You cannot keep all four at the top; you spend one to protect another. Keep every meter out of the red, and go back for the one you spent.</p>' + meterExample() + '</div>' +
     '<p style="margin:0;font-size:17px">The three parts you practice in every decision are on the <a href="#skills">Skills</a> page.</p></div>';
 }
 function skillsPage() {
@@ -2174,10 +2212,12 @@ function skillsPage() {
     body += sec('What good looks like', marked(t.good, '★', '#5B3DF5'), 'background:#F1ECFF;border-color:#5B3DF5');
     body += '<div class="dodont">' + sec('Do', marked(t.dos, '✓', '#0E7A4D'), 'background:#E6F5EC;border-color:#0E7A4D') + sec('Don’t', marked(t.donts, '✕', '#B42318'), 'background:#FDECEA;border-color:#B42318') + '</div>';
     body += sec('Sentence frames', '<p class="muted" style="margin:0;font-size:15px">Fill in the blanks to get started.</p><div style="display:flex;flex-direction:column;gap:6px">' + (t.frames || []).map(f => '<div class="skframe">' + esc(f) + '</div>').join('') + '</div>');
-    body += sec('A worked example, at another software company', '<p style="margin:0;font-size:16px"><span class="lab">The situation</span><br>' + esc(t.ex.scene) + '</p><div class="skex"><span class="lab">What a good ' + SKL[k][1].toLowerCase() + ' sounds like</span><p style="margin:4px 0 0;font-size:17px;line-height:1.6">' + esc(t.ex.text) + '</p></div>');
+    body += sec('Worked examples, at other software companies', [t.ex, t.ex2].filter(Boolean).map((e, i) => (i ? '<hr style="border:0;border-top:1px dashed #CFC3A5;margin:4px 0;width:100%">' : '') + '<p style="margin:0;font-size:16px"><span class="lab">Example ' + (i + 1) + ': the situation</span><br>' + esc(e.scene) + '</p><div class="skex"><span class="lab">What a good ' + SKL[k][1].toLowerCase() + ' sounds like</span><p style="margin:4px 0 0;font-size:17px;line-height:1.6">' + esc(e.text) + '</p></div>').join(''));
   }
   body += sec('Practice ' + SKL[k][1].toLowerCase() + ' on its own', '<p style="margin:0">' + PRACTICE[k] + ' You get feedback after each one, and you can try again.</p><button class="btn" disabled style="align-self:flex-start;opacity:.5;cursor:not-allowed;box-shadow:none">Practice coming soon</button>', 'background:#FFF4D6;border-color:#B45309');
-  return '<div class="col" style="gap:20px"><div style="display:flex;flex-direction:column;gap:10px"><h1 class="h1">Skills</h1><p style="margin:0;font-size:18px;line-height:1.6">Three parts of one skill: see both sides of a choice, choose on purpose, and say so. If you are in the middle of a game, your place is kept: go back with Play.</p></div>' + tabs + body + '</div>';
+  const wh = GAME && GAME.where && GAME.where();
+  const back = wh ? '<a class="btn" href="#play" style="align-self:flex-start">' + (wh.review ? 'Back to your check-in' : 'Back to decision ' + wh.n) + '</a>' : '';
+  return '<div class="col" style="gap:20px">' + back + '<div style="display:flex;flex-direction:column;gap:10px"><h1 class="h1">Skills</h1><p style="margin:0;font-size:18px;line-height:1.6">Three parts of one skill: see both sides of a choice, choose on purpose, and say so. If you are in the middle of a game, your place is kept: go back with Play.</p></div>' + tabs + body + '</div>';
 }
 function about() {
   return '<div class="col"><div style="display:flex;flex-direction:column;gap:10px"><div class="eyebrow">How it’s made</div><h1 class="h1" style="font-size:34px">Who made what, and how AI is used</h1>' +
