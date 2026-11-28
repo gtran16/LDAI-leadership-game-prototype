@@ -10,6 +10,6 @@ DAILY_CALL_CAP = "125"
 # Create once with: npx wrangler kv namespace create USAGE   then paste the id here.
 [[kv_namespaces]]
 binding = "USAGE"
-id = "REPLACE_WITH_KV_ID"
+id = "24f415b202ae42368dad21dc3bf86d74"
 
 # Secret, never in this file: npx wrangler secret put ANTHROPIC_API_KEY

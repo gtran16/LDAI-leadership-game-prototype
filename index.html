@@ -395,7 +395,7 @@ const LG = {
      For GitHub Pages, replace this one function with a call to the Worker. Nothing else changes. */
   _s: null,
   /* Off claude.ai (GitHub Pages), calls go to the Cloudflare Worker in worker/. Empty means no live AI. */
-  WORKER_URL: '',
+  WORKER_URL: 'https://leadership-game-ai.leadership-game-ai.workers.dev',
   sample() {
     if (!LG._s) LG._s = (async () => {
       try { if (window.claude && window.claude.use) return await window.claude.use('sample'); } catch (e) { /* fall through to the Worker */ }
