@@ -37,6 +37,9 @@ One full game on GitHub Pages with live AI, answers written by Claude Code to ea
 - **Fixed after the run:** "You fixed it" repeated for a part already fixed earlier.
 - **Open (prompt, needs review):** on Sonnet, the narrator skips "Another way:" on about half its plan and tradeoff lines. In D4–6 it points to "the written option", which the player never saw. Twice the boss line described Teo instead of Noor. "Lane" still shows up in AI text.
 
+## Prompt review (Nov 27)
+All six prompts were reviewed as one unit (6,205 → 5,804 words). The review cut outputs nothing reads anymore (P7 spend, watching, grow and add; P2B protected_and_paid; P2A send.prompt). It made wellbeing code-only in P2B and P3, dropped the "up to 3" meter move, matched P2B's boss rule and event names to P3, moved repeated rules into SHARED, and moved P7's citation note into a code comment. Giselle approved every edit word for word. Checked by running each prompt, old and new, once through Claude Code subagents (Sonnet; Haiku for P8). All replies were valid JSON; P2B kept to its meter rules; P7's output was about half as long.
+
 ## Still to log after the final playtest
 - The rest of the live run, and any other blocker fixes.
 - The tag `v1.0-class-submission`.

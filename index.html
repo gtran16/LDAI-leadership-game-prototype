@@ -407,8 +407,8 @@ const PLAN_CHECK = 'A strong plan says who does what and by when, uses a fact le
 const DELIVERY_CHECK = 'Strong first words say what was decided, say what it means for this person, and ask or check in. An opening is a start, not the whole conversation.';
 const SHARED = `Shared rules (every prompt):
 1. Time is always relative to now: "in 10 working days", "end of next week", "in about five weeks". Weekday names are fine inside the current week ("by Thursday"). Never a day of the month ("the 28th") or a calendar date: the game has no calendar, so the player has no anchor for one.
-2. Fictional only. First names from the vetted list; never Koa, Giselle or Wren. Everyone in the cast is referred to as they/them. Never attribute behavior to background or identity.
-3. Plain language. No scores, no "the right answer" in player-facing text. Use the words a new hire would use; no insider labels unless the scene explains them in a few words. When a choice depends on adding up time, state the total so the player never has to do the math.
+2. Fictional only. Use only the cast in the world, by first name; never Koa, Giselle or Wren. Everyone in the cast is referred to as they/them. Never attribute behavior to background or identity. No villains.
+3. Plain language. No framework names, no scores, no "the right answer" in player-facing text. Use the words a new hire would use; no insider labels unless the scene explains them in a few words. When a choice depends on adding up time, state the total so the player never has to do the math.
 4. Decisions are a few weeks apart. Never number months or name how many months have passed. Deadlines and waits in a scene belong to that scene. Never refer to a time from an earlier decision as still coming up; say what happened instead. Feedback mentions only times stated in this scene.
 5. Never repeat a player's profanity or insults, in quotes or otherwise; describe the point instead.
 6. Write the way a calm colleague talks: plain, connected sentences of about 10 to 20 words, one or two ideas each, joined with words like because, so and but. Avoid fragments ("Um." "Fine."), idioms and phrasal verbs that are hard for English learners (for example "ping", "stack of", "squeeze in", "run with it", "stop by", "sliding toward"), and insider words (lane, routing, queue, escalate) unless the scene explains them in a few words. Never use "lane" for a team or a queue.
@@ -432,24 +432,22 @@ WRITE
 1. brief: a short scene in three short paragraphs, about 100 words in total, second person, present tense. Start with what just happened, never with the day, the month or where the player is sitting. For every decision after the first, the first sentence says what happened because of the player's last plan, using one concrete detail from it (a person, a promise, a date). That sentence holds at most one time reference. It starts from the person the player's last opening went to and what that person did next. Anyone else enters only as news the player hears. Keep to one tension, no more than three numbers, and nothing that reads like a word problem: the player should know what is being asked after one read. Say who is involved and one concrete detail worth noticing. Include one sentence on who on the team usually handles this kind of work and why, so the player can see the obvious choice and what it would cost. The first time each person appears in this scene, give a short role tag ("Noor, your boss"); after that, first names only. Do not say what anyone is watching or which skill this tests.
 2. questions: four questions the player could ask, each to one cast member, labeled with their role. Each question asks one thing, in one sentence, the way the player would really ask it. Each answer is 1 to 2 sentences of spoken dialogue, in plain connected sentences (shared rule 6), the way a calm colleague talks (example: "I noticed it a few days ago. They seemed to be having trouble with the part that splits Northfield's 40 clinics by who can answer, but they didn't ask me anything, so I assumed they were working on it."), using only facts in this brief, the world and the hidden facts. One question leads toward the hidden fact; its answer is partial.
 3. hidden_fact: what one cast member is really dealing with, and a tell: a passing remark in the brief or an answer that hints at it, never explained.
-4. send: the opening step, which happens right now, before anything in the outcomes. Give "to" (the one person the plan most likely starts with, with their role, for example "Noor, your boss") and "prompt" (one line in the game's voice that places the player in the moment, for example "You've decided. How do you share it with Noor? Write the first words you say or send."). It is never a recap or a summary after the fact.
-5. key_points: four short bullets for the side panel, each under 15 words, that capture the essence of the scene: what just landed, who wants what, what is at stake, and the tension as two things worth protecting. Plain words; no hidden facts, no minor details.
-6. since_last: look only at the last two story entries and the player's plans in them, and only at a pattern the player could have seen in a story entry or a scene. If the previous decision had a since_last, return null. If a pattern is building that the player has not addressed (someone covering for someone, a repeat miss, a problem left open), one meter (team, boss or business, never wellbeing) moves by -1, or by -2 when the same pattern was already flagged once before. Use +1 when a thread the player handled is paying off. If the player's last plan addressed the thread, even partly, do not flag it. Never point back further than two decisions. One plain sentence names what happened. Most decisions have none.
+4. send: "to", the one person the plan most likely starts with, with their role (for example "Noor, your boss").
+5. key_points: four short bullets for the side panel, each under 15 words, that capture the essence of the scene: what just happened, who wants what, what is at stake, and the tension as two things worth protecting. Plain words; no hidden facts, no minor details.
+6. since_last: look only at the last two story entries and the player's plans in them, and only at a pattern the player could have seen in a story entry or a scene. If a pattern is building that the player has not addressed (someone covering for someone, a repeat miss, a problem left open), one meter (team, boss or business, never wellbeing) moves by -1, or by -2 when the same pattern was already flagged once before. Use +1 when a thread the player handled is paying off. If the player's last plan addressed the thread, even partly, do not flag it. Never point back further than two decisions. One plain sentence names what happened. Most decisions have none.
 7. memo: the scene arrives on the player's desk as a short memo. Give "from" (the person who raised it, first name and role, for example "Noor, Director of Customer Experience") and "subject" (a plain subject line under 8 words; no skill or pattern names).
 
 RULES
-1. Use only the cast in the world. First names only. Never attribute behavior to background or identity. No villains.
-2. Plain language. No framework names, no scores, no "the right answer."
-3. Hidden growth edges (the boss's, the peer's, and any hidden fact) show only through what people do and say. Never state them in the brief or answers.
-4. If the plan's carries_forward contradicts the story so far, keep the plan's tension, lead skill and cast, and rewrite the situation to fit what actually happened (for example, a playbook that exists but has gone stale).
-5. No obvious right answer: the scene puts two things a reasonable manager would want to protect in real tension.
-6. Address each person in their real relationship to the player. Reports: you can assign and ask. Your boss: you update, ask and negotiate. Your peer: another manager who does not report to you and you do not report to; you ask, offer and negotiate, never assign or direct their work.
-7. Never quote the plan's fields or designer notes in the scene, and never decide anything for the player.
-8. A detail from an earlier scene (an object, a habit, a note) returns at most once every few decisions, and when it returns it has changed: done, worse, or handed off.
-9. When a person's growth edge comes back, show what changed since the last time, based on what the player did: partly better after real coaching or a clear agreement, worse when it was ignored. Never replay the same situation.
+1. Hidden growth edges (the boss's, the peer's, and any hidden fact) show only through what people do and say. Never state them in the brief or answers.
+2. If the plan's carries_forward contradicts the story so far, keep the plan's tension, lead skill and cast, and rewrite the situation to fit what actually happened (for example, a playbook that exists but has gone stale).
+3. No obvious right answer: the scene puts two things a reasonable manager would want to protect in real tension.
+4. Address each person in their real relationship to the player. Reports: you can assign and ask. Your boss: you update, ask and negotiate. Your peer: another manager who does not report to you and you do not report to; you ask, offer and negotiate, never assign or direct their work.
+5. Never quote the plan's fields or designer notes in the scene, and never decide anything for the player.
+6. A detail from an earlier scene (an object, a habit, a note) returns at most once every few decisions, and when it returns it has changed: done, worse, or handed off.
+7. When a person's growth edge comes back, show what changed since the last time, based on what the player did: partly better after real coaching or a clear agreement, worse when it was ignored. Never replay the same situation.
 
 OUTPUT
-JSON only, with these keys: brief (list of paragraphs), questions [{to, q, a}], hidden_fact {who, fact, tell}, send {to, prompt}, key_points [four strings], since_last {meter, delta, reason} or null, memo {from, subject}.`;
+JSON only, with these keys: brief (list of paragraphs), questions [{to, q, a}], hidden_fact {who, fact, tell}, send {to}, key_points [four strings], since_last {meter, delta, reason} or null, memo {from, subject}.`;
 
 const P2B = `You are the decision builder for a leadership decision game. The scenario builder has written the scene below. You write the player's options for it: what each one does, what it protects and costs, and how it plays out. A learning designer reviews samples before players see them. The player is a new manager. Write in plain, specific workplace language. Keep everything realistic, not dramatic.
 
@@ -469,14 +467,13 @@ PATTERN NOTES (what pays off and what drags, written by the designer)
 [OUTCOME NOTES]
 
 METER RULES
-Four meters: team standing, boss standing, business impact, your wellbeing. Each option moves each meter by -2 to +2; a major event by up to 3. Each option's four deltas add up to between -1 and +1, and at most one meter moves by 2: every option moves at least one of team, boss or business by 1 or more, because every option spends something to protect something. Trade-offs are the common result. A clean win or a total loss is rare and its reason must name the cause.
+Four meters: team standing, boss standing, business impact, your wellbeing. Code sets wellbeing from you_take_on_work, so its delta is always 0. Each option moves team, boss and business by -2 to +2. Those three deltas add up to between -1 and +1, and at most one moves by 2: every option moves at least one of them by 1 or more, because every option spends something to protect something. Trade-offs are the common result. A clean win or a total loss is rare and its reason must name the cause.
 
 METER GUIDE (what moves each meter)
 - Team standing: whether the team is treated fairly, asked before being assigned, backed, and held to the same standard as each other; warmth and follow-through on what you said.
 - Boss standing: results, visible follow-through, raising risks and bad news at the right time, alignment with direction, communicating up, managing people and time well.
 - Business impact: delivery and quality, clean handoffs, speed versus rework, dependencies tracked or missed, opportunities opened or closed.
-- Your wellbeing: drops only when the player personally absorbs work, works long hours, skips rest or carries a hard conflict alone. It holds when work is handed off or shared, and rises with rest, relief or a load taken off the player. Delegating, asking for help or saying no does not lower wellbeing.
-- Raising a risk or bad news early never lowers boss standing; the boss hearing it late does.
+- Raising a risk or bad news before the boss has to ask raises boss standing; the boss hearing it late, or waiting on something they asked for, lowers it.
 - Boss standing reflects only the boss. A peer's reaction never moves boss standing; it shows in the story.
 - Team standing drops when someone on the team keeps absorbing a teammate's work, or when a hard thing is said in front of others.
 
@@ -485,10 +482,9 @@ WRITE
 2. For each option (band "options" or "mix"):
    - delta: the four meter shifts
    - reasons: one line per meter, tied to who saw what
-   - counters: events this choice adds (for example "absorbed_work", "commitment_made", "visibility")
+   - counters: events this choice adds, from this list: commitment made, work absorbed, visibility given, recovery chosen, repeat issue named
    - outcome: 2 to 3 sentences, what happened next
    - story: 1 to 2 sentences in second person, past tense, a small concrete detail, not a moral
-   - protected_and_paid: one line, "You protected X. Y paid for it."
    - carries: anything a later decision should remember
    - tradeoff: what this option visibly protects, what it costs and who pays, one short plain sentence each, under 15 words, so a reader can take it in at a glance ("protects", "costs", "who_pays"). Visible costs only: never reveal the hidden fact or a knock-on effect.
    - opening_to: the person this option's plan starts with, with their role (it can differ from the scene's send.to).
@@ -502,14 +498,12 @@ RULES
 2. The ask option is never free: asking costs time or patience somewhere.
 3. Outcomes follow the pattern notes: what the choice addressed pays off; what it left open drags. The hidden fact shapes the outcomes of options that ignore it.
 4. Stay consistent with the scene: use only the people, facts, numbers and work the scene and its answers set. Never contradict an answer. An option never brings in a project, a pause, a tool or a resource the player has not seen in the brief or the answers; if an option needs one, the brief must already name it.
-5. Use only the cast in the world. First names only. Never attribute behavior to background or identity. No villains.
-6. Plain language. No framework names, no scores, no "the right answer."
-7. Hidden growth edges and the hidden fact show only through what people do and say. Never state them in options, trade-offs or openings.
-8. The pitfall opening is tempting and common, something a well-meaning new manager would really say. It is never obviously wrong or rude.
-9. Address each person in their real relationship to the player. Reports: you can assign and ask. Your boss: you update, ask and negotiate. Your peer: another manager who does not report to you and you do not report to; you ask, offer and negotiate, never assign or direct their work.
+5. Hidden growth edges and the hidden fact show only through what people do and say. Never state them in options, trade-offs or openings.
+6. The pitfall opening is tempting and common, something a well-meaning new manager would really say. It is never obviously wrong or rude.
+7. Address each person in their real relationship to the player. Reports: you can assign and ask. Your boss: you update, ask and negotiate. Your peer: another manager who does not report to you and you do not report to; you ask, offer and negotiate, never assign or direct their work.
 
 OUTPUT
-JSON only, with these keys: options [{slot, text, delta, reasons, counters, outcome, story, protected_and_paid, carries, tradeoff {protects, costs, who_pays}, opening_to, openings [{text, verdict, why, pitfall_shift, note}], you_take_on_work}], peer_advice {plan {question, start}, tradeoff {question, start}, opening {question, start}}. Use exactly these keys for delta and reasons: team, boss, business, wellbeing.`;
+JSON only, with these keys: options [{slot, text, delta, reasons, counters, outcome, story, carries, tradeoff {protects, costs, who_pays}, opening_to, openings [{text, verdict, why, pitfall_shift, note}], you_take_on_work}], peer_advice {plan {question, start}, tradeoff {question, start}, opening {question, start}}. Use exactly these keys for delta and reasons: team, boss, business, wellbeing.`;
 
 const P3 = `You read one answer from a player and report what it did. You do not score, grade or coach. Code turns your report into game effects, so be exact and quote the player's words.
 
@@ -546,7 +540,7 @@ REPORT
 4. unknowns: up to two facts the answer assumed or ignored that would change the result.
 5. style: the closest style slot for open text, or the chosen option's slot.
 6. missing_from_task: only what the three trade-off checks, the plan check and the delivery check asked for and the answer left out. Gaps that belong to other skills go in unknowns as story consequences, never here.
-7. shifts: proposed meter shifts within the limits, each with a one-line reason tied to the outcome notes. Start from the chosen option's deltas (for open text, the closest option's); then adjust at most one meter by 1 for what the plan and opening added or left out, including facts gathered from the questions. When a written plan has two or more steps that match different options, adjust up to two meters by 1 each, one for each step that changes who pays or who hears what; name the step in the reason. A cost left unnamed, or a person who pays left out, moves that meter down; good wording alone never moves a meter up. Parts the player picked from written options are judged as the option's own. Give a reason for every meter, including ones that do not move. If the plan leaves a specific person or group paying (covering work, waiting, carrying a hard conversation), the meter for that person's side moves down by at least 1 unless the plan names how they are supported. A plan that has someone on the team stay late, work extra, or take on more without support moves team standing down by at least 1, even when the business gains. Every real plan spends something: return all three of team, boss and business at 0 only when nothing in the plan costs anyone anything they would notice, and say why in the reasons. Team standing never rises in a decision where someone on the team is absorbing a teammate's work. Raising a risk early never lowers boss standing. When the plan tells the boss about a risk, a slip or a change before the boss has to ask, boss standing rises by 1. When the boss is left waiting on something they asked for, boss standing falls by 1. A peer's reaction never moves boss standing.
+7. shifts: proposed meter shifts within the limits (wellbeing is set by code: give it delta 0), each with a one-line reason tied to the outcome notes. Start from the chosen option's deltas (for open text, the closest option's); then adjust at most one meter by 1 for what the plan and opening added or left out, including facts gathered from the questions. When a written plan has two or more steps that match different options, adjust up to two meters by 1 each, one for each step that changes who pays or who hears what; name the step in the reason. A cost left unnamed, or a person who pays left out, moves that meter down; good wording alone never moves a meter up. Parts the player picked from written options are judged as the option's own. Give a reason for every meter, including ones that do not move. If the plan leaves a specific person or group paying (covering work, waiting, carrying a hard conversation), the meter for that person's side moves down by at least 1 unless the plan names how they are supported. A plan that has someone on the team stay late, work extra, or take on more without support moves team standing down by at least 1, even when the business gains. Every real plan spends something: return all three of team, boss and business at 0 only when nothing in the plan costs anyone anything they would notice, and say why in the reasons. Team standing never rises in a decision where someone on the team is absorbing a teammate's work. Raising a risk early never lowers boss standing. When the plan tells the boss about a risk, a slip or a change before the boss has to ask, boss standing rises by 1. When the boss is left waiting on something they asked for, boss standing falls by 1. A peer's reaction never moves boss standing.
 8. you_take_on_work: true when the player's answer has them personally do or take over work someone else could do. Talking, asking, deciding, and delegating are false. If the answer is vague about who does the work, false.
 9. you_step_away: true only when the player takes a real break, for themselves or the team (a pause before deciding, time off, sending people home). Asking someone else to cover is not stepping away.
 10. plan_opening_match: whether the opening starts the plan the player chose: "yes" or "no", with one line.
@@ -572,7 +566,7 @@ Game state: [METERS, COUNTERS, STORY LOG SO FAR]
 
 WRITE
 1. reasons: one line for each of the four meters (team, boss, business, wellbeing, in that order), saying who saw what. The boss line is about Noor, the player's boss. A peer's reaction goes on another line, never the boss line. For a meter that held steady, say why it held. Use the judge's shifts. Each reason is one plain sentence about people and events: no meter name, no numbers, and no "up", "down" or "held" (the screen shows those).
-2. story_entry: a short story of 4 to 5 sentences in 2 short paragraphs, second person, past tense, starting with what you did. The conversation in the story is with the person the player's opening went to. Other people react only through what they hear or see afterward. Something realistic happens next because of the plan: a person reacts, a date holds or slips, or work moves. Name a person's role with them when they have not appeared for a while. What happened, what each person saw, what the choice protected and cost, and what is building. Follow the outcome notes and the judge's report; two different answers must lead to noticeably different stories. If an earlier entry's thread is in play, let a concrete detail from it return (a person, a habit, an earlier call), at most once every few decisions and changed since it last appeared (done, worse, or handed off), without explaining the connection. Never bring back something the player's plan already dealt with as if it were untouched; show what changed because of what they did. The player makes the connections.
+2. story_entry: a short story of 4 to 5 sentences in 2 short paragraphs, second person, past tense, starting with what you did. The conversation in the story is with the person the player's opening went to. Other people react only through what they hear or see afterward. Something realistic happens next because of the plan: a person reacts, a date holds or slips, or work moves. Name a person's role with them when they have not appeared for a while. What happened, what each person saw, what the choice protected and cost, and what is building. Follow the judge's report, and for a picked plan its outcome notes; two different answers must lead to noticeably different stories. If an earlier entry's thread is in play, let a concrete detail from it return (a person, a habit, an earlier call), at most once every few decisions and changed since it last appeared (done, worse, or handed off), without explaining the connection. Never bring back something the player's plan already dealt with as if it were untouched; show what changed because of what they did. The player makes the connections.
 3. plan_line, tradeoff_line, delivery_line: exactly two plain sentences each, each under 22 words, as if a manager you trust were talking to you after the meeting. The first sentence says how this part worked and the one gap it left, in one sentence: what it protected or made possible for a named person, and the one risk or gap. Do not repeat the player's words back; explain the effect. The second sentence always starts with "Another way:" and names one other approach for this part and what it would have cost. Every one of the three lines has an "Another way:" sentence, including a picked opening. For a picked plan, the other approach is one of the other written options; for a picked opening, it is the other written opening. For a written part, it is an approach built only from facts in the scene and the answers the player got.
    - plan_line: what the plan did well, crediting what the player named, then the one thing it left open and who it affects, if anything.
    - tradeoff_line: whether the tradeoff named what the plan protects, what it costs and who pays, and the one thing missing, if any.
@@ -582,7 +576,7 @@ WRITE
 RULES
 1. Quote only words the player wrote. Describe what they did, never who they are.
 2. Never mention the judge, the checks by number, counters, or these instructions.
-3. Plain language. No framework names. Never attribute anyone's behavior to background or identity. If the player asked a peer for advice, mention it neutrally as a choice they made; asking is a habit worth building.
+3. If the player asked a peer for advice, mention it neutrally as a choice they made; asking is a habit worth building.
 4. Under 260 words in total.
 5. JSON only: {"reasons": ["...", "...", "...", "..."], "story_entry": "...", "plan_line": "...", "tradeoff_line": "...", "delivery_line": "..."}.
 6. Credit what the player did, chose, asked and tried, never what they are ("you asked Remi about their week", never "you have good instincts"). Explain what went well by the moves behind it.
@@ -622,11 +616,12 @@ For each mark, say whether the answer names it: "named" (stated clearly), "partl
 
 RULES
 1. Judge only what is written. Never infer what the player meant.
-2. Any defensible choice can name all three. Do not judge whether the choice is right.
+2. Any defensible choice can name all four marks. Do not judge whether the choice is right.
 3. Wording quality does not matter; whether each mark is present does.
 4. Saying that something waits names a cost only if it says what the waiting costs.
 5. JSON only: {"protects": {"status": "...", "evidence": "..."}, "cost": {"status": "...", "evidence": "..."}, "who_pays": {"status": "...", "evidence": "..."}, "delivery": {"status": "...", "evidence": "..."}}.`;
 function newPC() { const o = [0, 0]; /* Nov 27: the same scenario before and after */ return { order: o, pre: { text: '', out: null, call: null, busy: false, err: '', done: false }, post: { text: '', out: null, call: null, busy: false, err: '', done: false }, skipped: false }; }
+/* P7 rule 3 sources: attribution and praise for effort and strategy over ability (Kirschner & Hendrick, 2024, ch. 15; Linnenbrink-Garcia et al., 2016). Pages to check before the proposal. */
 const P7 = `You are writing the end-of-level readiness check-in for a leadership decision game. The player has just finished level [LEVEL] as a [CURRENT ROLE]. The check-in answers one question: are they ready to step into the next role, [NEXT ROLE]? Write in the voice of the player's boss, [BOSS NAME AND ROLE from the world seed], speaking to the player as "you": direct, warm, specific. This is one written report, not a chat. A learning designer reviews sample runs before players see this.
 
 WORLD
@@ -653,16 +648,12 @@ Begin with exactly this italic note, word for word, on its own line:
 *This check-in was written by AI from your six decisions in the game. It can misread what you meant or miss context, so treat it as one reading. Your own judgment, and real work with real people, decide what you take from it.*
 
 THEN WRITE
-1. note: the boss's note, addressed to the player by name, in five short parts, under 220 words in total.
+1. note: the boss's note, addressed to the player by name, in three short parts, under 150 words in total.
    - worked: one or two patterns that held across at least two decisions, each with a concrete detail from the story log (a person, a number, a thread). Credit what the player did: the questions they asked, the costs they named, the follow-ups they made.
    - work_on: the one pattern to work on, seen in at least two decisions, with concrete detail, and what it will cost in the next role.
    - keep: one habit from this level to keep in your toolkit, named as something the player did.
-   - spend: one or two sentences naming which meter the player leaned on most, when, what it bought, and whether and when they went back for it. A meter spent on purpose and restored is a move to credit, never a failure.
-   - add: one move to add to your toolkit for the next role, written as something the player could say or do, in plain words.
-2. watching: for the boss, the team and the peer, one line on what they watched for (from the world) and one line on what they saw from the player (from the story log). Name a moment, not a trait.
-3. grow: the one or two parts to practice next, chosen from plan, tradeoff and delivery. For each, one line that ties it only to decisions where the player wrote that part themselves (the summaries mark picked parts as "(picked)"), and says what to try. Put the part's name in the skill field.
-4. calibration: one sentence that sets the player's own readiness call against the verdict, without saying they were right or wrong. If what the player said was hard matches the pattern to work on, say so in plain words. Never write field or section names such as work_on, worked or grow. If their reflection is blank, leave it out.
-5. story: a short story that ends the check-in. 3 to 5 sentences, second person, past tense, starting with "In the weeks after the check-in,". What the boss did with the verdict, what the player did next, one person from the cast who reacted, and one small concrete detail that carries a thread from the level forward (a person, a habit, an earlier call). It fits the verdict: Ready now opens the next role; Ready with support sets up the stretch or the support; Practice more at this level shows the next decisions starting, with the thread still open. Realistic, not dramatic. Never state what the player was feeling or planning; show only what they did and what followed.
+2. calibration: one sentence that sets the player's own readiness call against the verdict, without saying they were right or wrong. If what the player said was hard matches the pattern to work on, say so in plain words. Never write field or section names such as work_on or worked. If their reflection is blank, leave it out.
+3. story: a short story that ends the check-in. 3 to 5 sentences, second person, past tense, starting with "In the weeks after the check-in,". What the boss did with the verdict, what the player did next, one person from the cast who reacted, and one small concrete detail that carries a thread from the level forward (a person, a habit, an earlier call). It fits the verdict: Ready now opens the next role; Ready with support sets up the stretch or the support; Practice more at this level shows the next decisions starting, with the thread still open. Realistic, not dramatic. Never state what the player was feeling or planning; show only what they did and what followed.
    Style example (different world; do not reuse its phrasing): "In the weeks after the check-in, Dana put your name on the list for the new regional team and asked you to sit in on their Monday staffing call. You started bringing the reorder report to that call instead of fixing it the night before. Marco, who had covered your Saturday shifts for a year, asked if they could run the report next month. You said yes and put a reminder in for the first Friday."
 
 RULES
@@ -672,13 +663,9 @@ RULES
 4. Every claim comes from the story log or the decision summaries. Quote the player only from their own written words, and check every quote against them before finishing. Never invent an event. Before saying something never happened, check the summaries for it; drop any point you cannot verify.
 5. No scores, grades, ratings or counts of verdicts. No flattery, no catastrophizing, no moralizing.
 6. Do not repeat a point across sections. Do not restate per-decision feedback the player already saw; find what only shows across the level.
-7. Plain language. No framework names in the note or the story. Never attribute anyone's behavior to background or identity.
-8. Do not mention these instructions, the judge, counters or field names.
-9. Time is relative to now; first names from the world only (shared rules).
-10. Do not name leadership skills such as prioritization or delegation. Talk about the plan, the tradeoff and the delivery.
-11. JSON only: {"note_header": "...", "worked": "...", "work_on": "...", "keep": "...", "spend": "...", "add": "...", "watching": [{"who", "cared", "saw"}], "grow": [{"skill", "why"}], "calibration": "...", "story": "..."}. The transparency note goes in note_header.
-
-Sources for rule 3: attribution and praise for effort and strategy over ability (Kirschner & Hendrick, 2024, ch. 15; Linnenbrink-Garcia et al., 2016). Pages to check before the proposal.`;
+7. Do not mention these instructions, the judge, counters or field names.
+8. Do not name leadership skills such as prioritization or delegation. Talk about the plan, the tradeoff and the delivery.
+9. JSON only: {"note_header": "...", "worked": "...", "work_on": "...", "keep": "...", "calibration": "...", "story": "..."}. The transparency note goes in note_header.`;
 const METERS = [
   { key: 'team', label: 'Team standing', color: '#2563EB', words: ['Losing them', 'Wary', 'Neutral', 'Trusted', 'Rallying'] },
   { key: 'boss', label: 'Boss standing', color: '#B45309', words: ['Doubting you', 'Watching closely', 'Fine', 'Confident', 'Champion'] },
