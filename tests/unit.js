@@ -17,7 +17,13 @@ const path = require('path');
     eq('stageWrites', [1, 2, 3, 4, 5, 6].map(T.stageWrites), [[], [], ['tradeoff'], ['tradeoff', 'delivery'], ['plan', 'tradeoff', 'delivery'], ['plan', 'tradeoff', 'delivery']]);
     // Completeness read
     eq('calLevel scale', [8, 7, 6, 5, 4, 3, 2, 1, 0].map(T.calLevel), [4, 3, 3, 2, 2, 1, 1, 0, 0]);
-    eq('checkScore', T.checkScore({ checks: { protects: { status: 'named' }, cost: { status: 'Partly' }, who_pays: { status: 'missing' }, skill_check: { status: 'named' } } }), 5);
+    const J5 = { checks: { protects: { status: 'named' }, cost: { status: 'Partly' }, who_pays: { status: 'missing' }, plan_check: { status: 'named' }, delivery_check: { status: 'named' } } };
+    eq('checkScore all five parts (7 of 10 points -> 5.6 of 8)', T.checkScore(J5).toFixed(1), '5.6');
+    eq('checkScore tradeoff only (3 of 6 -> 4 of 8)', T.checkScore(J5, ['protects', 'cost', 'who_pays']), 4);
+    eq('checkScore no written parts', T.checkScore(J5, []), 0);
+    G.n = 3; eq('writtenKeys D3: tradeoff only', T.writtenKeys(T.modes({}, 'mix')), ['protects', 'cost', 'who_pays']);
+    G.n = 4; eq('writtenKeys D4: tradeoff and delivery', T.writtenKeys(T.modes({}, 'mix')), ['protects', 'cost', 'who_pays', 'delivery_check']);
+    eq('writtenKeys D5: all five', T.writtenKeys(T.modes({}, 'text')), ['protects', 'cost', 'who_pays', 'plan_check', 'delivery_check']);
     eq('checkScore no checks', T.checkScore({}), 0);
     G.cal = [{ said: 2, score: 5 }, { said: 3, score: 5 }, { said: 4, score: 4 }, { said: 2, score: 5 }]; eq('calRead: playtest 3 data is over, not matched', T.calRead(), 'over');
     G.cal = [{ said: 2, score: 5 }, { said: 3, score: 6 }]; eq('calRead all matched', T.calRead(), 'calibrated');

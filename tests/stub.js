@@ -60,7 +60,7 @@ const P2B = {
 
 const check = (status, evidence) => ({ status, evidence, note: '' });
 const P3 = {
-  checks: { protects: check('named', 'the launch'), cost: check('named', 'two bugs wait'), who_pays: check('partly', 'Remi'), skill_check: check('named', 'Does that work for you?') },
+  checks: { protects: check('named', 'the launch'), cost: check('named', 'two bugs wait'), who_pays: check('partly', 'Remi'), plan_check: check('partly', 'I will ask Remi to lead it'), delivery_check: check('named', 'Does that work for you?') },
   tradeoff_gap: { gap: false, note: 'The cost named matches the cost that came true.' },
   hidden_fact: { status: 'not_reachable', evidence: '' },
   events: [{ event: 'visibility given', evidence: 'I will tell Noor today' }],
