@@ -27,7 +27,7 @@ Draft, filled in as the session goes. Giselle carries it to the Project Kit trac
 - [x] Playtests 2 and 3 applied
 - [x] Prompt batches A and B approved and applied
 - [ ] Final playtest on the hosted page
-- [ ] How it's made page updates (draft in how-its-made-changes.md)
+- [x] How it's made page rewritten and applied (APA references checked against the syllabi); 1:1 sheet built
 - [x] Bring-your-own-key fallback: dropped for the freeze
 - [x] Deploy: API key (prepaid $10, auto-reload off), KV namespace, Worker at https://leadership-game-ai.leadership-game-ai.workers.dev, Pages live with AI (checked end to end Nov 27)
 - [ ] Live check, README for testers, build log, tag
