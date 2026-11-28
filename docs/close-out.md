@@ -11,7 +11,6 @@ Draft, filled in as the session goes. Giselle carries it to the Project Kit trac
 | P7 `[NEXT ROLE]` stays "manager of managers" (prompt line ~910 and check-in screen) | Giselle: fine for now. Open P7 item closed. |
 | Repo made public, `CLAUDE.md` kept; GitHub Pages serves `main` at https://gtran16.github.io/LDAI-leadership-game-prototype/ | Pages needs a public repo on a free account; nothing in the repo is secret. |
 | Mobile layout (Team/Story panel above the scene at 375 px) deferred to after freeze | Not a blocker for a desktop demo. |
-
 | Office desk look across every screen and page; type system Nunito (game) + Courier Prime (in-world paperwork only) | Giselle chose P2 after mockups; immersive without the generic app feel. |
 | Bring-your-own-key fallback dropped for the freeze | The $10 Console limit and Worker cap cover class use; less code to verify. |
 
