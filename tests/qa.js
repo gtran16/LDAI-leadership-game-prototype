@@ -47,7 +47,7 @@ async function answer(g, text) {
   const pick = page.locator('[data-pick]:visible'); if (await pick.count()) await pick.first().click();
   const op = page.locator('[data-opening]:visible'); if (await op.count()) await op.first().click();
   const f = page.locator('[data-f]:visible'); for (let k = 0; k < await f.count(); k++) await f.nth(k).fill(text || 'I will ask Remi to lead it, so two bugs wait a week.');
-  const conf = page.locator('[data-conf]:visible'); if (await conf.count()) await conf.nth(2).click();
+  const tk = page.locator('[data-tick]:visible'); if (await tk.count()) await tk.first().check();
 }
 
 (async () => {
@@ -103,7 +103,7 @@ async function answer(g, text) {
   check('Back to the scene and forward keeps answers', (await g.page.locator('[data-f="plan"]').inputValue()) === 'Half-written plan');
   // 7. Start a new run resets
   await g.page.click('#restart'); await g.page.waitForTimeout(200);
-  check('Start a new run goes to the benchmark and resets meters', (await g.page.locator('[data-pc="pre"]').count()) && (await g.page.evaluate(() => JSON.stringify(GAME.__test.G.meters))) === '{"team":6,"boss":6,"business":5,"wellbeing":7}');
+  check('Start a new run goes to the benchmark and resets meters', (await g.page.locator('[data-pc="pre"]').count()) && (await g.page.evaluate(() => JSON.stringify(GAME.__test.G.meters))) === '{"team":6,"boss":6,"business":6,"wellbeing":7}');
   await g.page.close();
 
   // 8. Typed HTML is shown as text, never run
@@ -117,9 +117,9 @@ async function answer(g, text) {
   g = await newGame(browser); await toDecision(g, 6, false); await answer(g); await g.act('commit').click(); await g.act('next').click();
   for (const t of await g.page.locator('[data-rv]:visible').all()) await t.fill('x');
   await g.page.locator('[data-rvcall]').nth(0).click(); await g.act('runReview').click();
-  await g.page.getByText('In the weeks after the check-in').first().waitFor();
+  await g.page.getByRole('heading', { name: 'Noor’s read' }).waitFor();
   const steps = []; for (let k = 0; k < 10; k++) { steps.push(await g.page.locator('#main section.card h2').first().textContent()); const nx = g.page.locator('[data-act="rvNext"]:visible'); if (!(await nx.count())) break; await nx.click(); }
-  check('Skipped benchmark: no last check or before-and-after', JSON.stringify(steps) === JSON.stringify(['What happened next', 'Noor’s read', 'Your next steps', 'Check your own read', 'Your record']) && !(await g.page.locator('[data-act="toPost"]').count()), steps.join(' / '));
+  check('Skipped benchmark: no last check or before-and-after', JSON.stringify(steps) === JSON.stringify(['Noor’s read', 'What happened next', 'The game is over']) && !(await g.page.locator('[data-act="toPost"]').count()) && !(await g.page.getByRole('heading', { name: 'Before and after' }).count()), steps.join(' / '));
   await g.page.close();
 
   // 10. No live AI: clear message, no crash

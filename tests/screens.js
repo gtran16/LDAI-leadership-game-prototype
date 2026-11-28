@@ -29,7 +29,7 @@ const W = +(process.argv[2] || 1280), OUT = path.join(__dirname, 'out', 'screens
     const pick = page.locator('[data-pick]:visible'); if (await pick.count()) await pick.first().click();
     const op = page.locator('[data-opening]:visible'); if (await op.count()) await op.first().click();
     const f = page.locator('[data-f]:visible'); for (let k = 0; k < await f.count(); k++) await f.nth(k).fill('I will ask Remi to lead it, so two bugs wait a week and Jan learns the routing rules.');
-    const conf = page.locator('[data-conf]:visible'); if (await conf.count()) await conf.nth(3).click();
+    const tk = page.locator('[data-tick]:visible'); for (let k = 0; k < await tk.count(); k += 2) await tk.nth(k).check();
     if ([1, 3, 4, 5].includes(n)) await shot('d' + n + '-decide');
     await act('commit').click(); await act('next').waitFor();
     if ([1, 3, 6].includes(n)) await shot('d' + n + '-debrief');
@@ -38,11 +38,11 @@ const W = +(process.argv[2] || 1280), OUT = path.join(__dirname, 'out', 'screens
   await shot('checkin-self');
   for (const t of await page.locator('[data-rv]:visible').all()) await t.fill('Asking before assigning.');
   await page.locator('[data-rvcall]:visible').nth(1).click(); await act('runReview').click();
-  await page.getByText('In the weeks after the check-in').first().waitFor();
-  for (let k = 0; k < 4; k++) { await shot('checkin-step-' + (k + 1)); const nx = page.locator('[data-act="rvNext"]:visible'); if (!(await nx.count())) break; await nx.click(); }
+  await page.getByRole('heading', { name: 'Noor’s read' }).waitFor();
+  for (let k = 0; k < 3; k++) { await shot('checkin-step-' + (k + 1)); const nx = page.locator('[data-act="rvNext"]:visible'); if (!(await nx.count())) break; await nx.click(); }
   await act('toPost').click(); await shot('post');
   await page.fill('[data-pc="post"]', 'I would give the fix to two people on Friday and ask my boss to present a shorter report, so nobody works the weekend.'); await act('postDone').click();
-  await shot('compare'); await act('rvNext').click(); await shot('record');
+  await shot('game-over');
   await page.goto(file + '#skills'); await shot('skills-mid-game-back');
   console.log(W + 'px: ' + i + ' screens, errors: ' + (errs.length ? errs.join(' | ') : 'none'));
   await browser.close();

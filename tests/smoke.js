@@ -49,27 +49,41 @@ async function play(width) {
       if (await pick.count()) await pick.first().click();
       const opening = page.locator('[data-opening]:visible');
       if (await opening.count()) await opening.first().click();
+      const frames = page.locator('[data-frame]:visible');
+      if ((n === 4 || n === 5) && !(await frames.count())) throw new Error('no frame offered in decision ' + n);
+      if (n !== 4 && n !== 5 && await frames.count()) throw new Error('frame offered in decision ' + n);
+      if (n === 4) {
+        await frames.first().click();
+        if (!(await act('commit').isDisabled())) throw new Error('commit allowed with frame blanks left');
+      }
       const fields = page.locator('[data-f]:visible');
       for (let i = 0; i < await fields.count(); i++) await fields.nth(i).fill(ANSWER);
-      const conf = page.locator('[data-conf]:visible');
-      if (n <= 2 && await conf.count()) throw new Error('confidence asked on a pick-only decision');
-      if (n > 2) await conf.nth(3).click();
+      const ticks = page.locator('[data-tick]:visible');
+      if (n <= 2 && await ticks.count()) throw new Error('checklist shown on a pick-only decision');
+      if (n === 3 && await ticks.count() !== 4) throw new Error('decision 3 checklist should have 4 parts');
+      if (n > 3 && await ticks.count() !== 5) throw new Error('decision ' + n + ' checklist should have 5 parts');
+      for (let i = 0; i < await ticks.count(); i += 2) await ticks.nth(i).check();
       await act('commit').click();
     });
-    await step('decision ' + n + ' debrief', async () => { await act('next').click({ timeout: 15000 }); });
+    await step('decision ' + n + ' debrief', async () => {
+      await act('next').waitFor({ timeout: 15000 });
+      if (n >= 3 && !(await page.getByRole('heading', { name: 'Your checklist and the checks' }).count())) throw new Error('no checklist feedback in the debrief');
+      await act('next').click();
+    });
   }
 
   await step('check-in', async () => {
     const tx = page.locator('[data-rv]:visible');
-    for (let i = 0; i < await tx.count(); i++) await tx.nth(i).fill('I asked before assigning work.');
+    if (await tx.count() !== 3) throw new Error('Your read should have 3 boxes');
+    for (let i = 0; i < await tx.count(); i++) await tx.nth(i).fill(i === 2 ? 'Tell Noor early, the way I did with Remi and Northfield.' : 'I asked before assigning work.');
     await page.getByText('What was hard?').waitFor();
     await page.locator('[data-rvcall]:visible').nth(1).click();
     await act('runReview').click();
-    await page.getByText('In the weeks after the check-in').first().waitFor({ timeout: 15000 });
+    await page.getByRole('heading', { name: 'Noor’s read' }).waitFor({ timeout: 15000 });
     if (await page.locator('#meters .meterwrap').count()) throw new Error('meters still shown on the check-in');
     const seen = [];
     for (let k = 0; k < 12; k++) { seen.push(await page.locator('#main section.card h2').first().textContent()); const nx = page.locator('[data-act="rvNext"]:visible'); if (!(await nx.count())) break; await nx.click(); }
-    const want = ['What happened next', 'Noor’s read', 'Your next steps', 'Check your own read'];
+    const want = ['Noor’s read', 'What happened next', 'The game is over'];
     if (JSON.stringify(seen) !== JSON.stringify(want)) throw new Error('check-in steps: ' + seen.join(' / '));
     if (await page.getByText(/overconfident|underconfident/i).count()) throw new Error('person label shown');
   });
@@ -78,14 +92,18 @@ async function play(width) {
     await page.fill('[data-pc="post"]', 'I would give the fix to two people on Friday and ask my boss to present a shorter report, so nobody works the weekend.');
     await act('postDone').click();
     await page.getByRole('heading', { name: 'Before and after' }).waitFor();
-    if (!(await page.getByRole('heading', { name: 'How complete your answers were' }).count())) throw new Error('completeness missing from Check your own read');
-    await act('rvNext').click();
+    await page.getByRole('heading', { name: 'The game is over' }).waitFor();
     await act('playAgain').waitFor();
+    await act('rvBack').click(); await act('rvBack').click();
+    if (!(await page.getByText('Your checklist:').count())) throw new Error('checklist read missing from Noor’s read');
+    if (await page.getByText(/What you spent|What they saw/).count()) throw new Error('spent/saw still shown');
+    await act('rvNext').click(); await act('rvNext').click();
   });
   await step('1:1 sheet', async () => {
     await act('openSheet').click();
     for (const t of ['Three questions for your manager', 'How your manager can support you', 'Reminders for me']) await page.getByRole('heading', { name: t }).waitFor();
     const sheetText = await page.locator('.sheet').innerText();
+    if (!/In my own words/.test(sheetText)) throw new Error('own words missing from the sheet');
     for (const nm of ['Remi', 'Jan', 'Ravi', 'Noor', 'Teo', 'Cleo', 'Tidewell', 'Northfield']) if (new RegExp('\\b' + nm + '\\b').test(sheetText)) throw new Error('game detail on the 1:1 sheet: ' + nm);
     if (await page.locator('#meters .meterwrap').count()) throw new Error('meters shown on the sheet');
     await act('copySheet').click(); await page.getByText('Copied').waitFor();

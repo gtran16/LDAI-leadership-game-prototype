@@ -28,6 +28,8 @@ A factual record of how the game was built: what AI produced, what the designer 
 |---|---|---|
 | Decision 1 failed twice with "came back unreadable" (Giselle). | Claude Code reproduced it on the hosted page: the decision builder's reply (about 4K tokens) hit the Worker's 4096-token cap. Raised the cap to 8192. | A live run to the decision 1 choices on GitHub Pages: reply complete, no retry. |
 | No accessibility testing yet (Giselle). | Logged for after the freeze. | — |
+| Run-log review (Claude Code): business charged twice for one gap; boss never moved; the narrator told a story the player didn't write and misquoted them. | Code: since-last can't charge two in a row or a meter that just fell; the narrator sees no option stories for written plans; business starts at 6; P4 to Sonnet. Prompt (approved word for word): multi-step plans can move two meters; boss rises when told early, falls when left waiting. | Unit tests for each rule; one live game. |
+| Playtest notes (Giselle): long; the debrief drags; the game wants detail but doesn't say how much; show that feedback is being used. | V4.10: a checklist replaces the five-word rating; a length hint; frames in D4–5 (D6 free, Giselle's call); a "last time" note and "you fixed it"; check-in cut to Your read, Noor's read, What happened next, The game is over; the benchmark and the 1:1 sheet after the story; the player's own words on the sheet. | Unit 70, smoke, QA 23; one live game. |
 
 ## Still to log after the final playtest
 - The rest of the live run, and any other blocker fixes.

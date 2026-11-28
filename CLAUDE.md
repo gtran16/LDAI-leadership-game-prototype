@@ -27,11 +27,12 @@ The class version is built, hosted and in its final playtest.
   1. Benchmark: one short scenario.
   2. Six-screen intro.
   3. **Six decisions with a 2-1-3 support fade:** D1–2 pick everything; D3 picks the plan and writes the tradeoff and first words; D4–6 write all three.
-  4. Readiness check-in in **five cards**. "One last check" (the same benchmark scenario) sits inside card 4.
-  5. A **1:1 sheet** for the player's manager.
+  4. Readiness check-in: **Your read** (three boxes), then three cards: Noor's read · What happened next · The game is over.
+  5. Outside the story: **One last check** (the same benchmark scenario), Before and after, then the **1:1 sheet** for the player's manager (includes the player's own words, with game names swapped for roles).
 - **Four meters** (team, boss, business, wellbeing), 0 to 10. Code caps each move at ±2 and owns wellbeing and the verdict.
 - **Verdict:** "Ready now" needs meters out of the red **and** at least 80% of written checks named.
-- **Completeness rating** (D3–6): the player rates how complete their answer is, and code compares it with the judge's checks on the parts they wrote.
+- **Checklist** (D3–6, V4.10): the player ticks the parts they think their answer has; code compares each tick with the judge's check. The debrief shows ticks against checks and "You fixed it"; the next decide screen shows last time's gaps.
+- **Frames** (D4–5 only): "Start with a frame" fills a box with blanks; commit stays off until the blanks are filled. D6 has no frames.
 - **Layout:** an office desk. Left: tabs Team / Scene / Questions / Story. Center: the memo and cards. Right: the Skill guide on a clipboard. Top: the status board.
 - **Pages:** Home · How the game works · Skills (Plan, Tradeoff, Delivery; practice minigames are "coming soon") · How it's made.
 
@@ -63,14 +64,17 @@ It runs unit, then smoke, then QA. Run it after every change; it must pass befor
   - `P4` narrator ("Another way:" on every line)
   - `P7` readiness check-in
   - `P8` quick-check judge (four marks, including delivery)
-- **Model tiers:** `TIER` maps P2, P3 and P7 to `default` (Sonnet 5.5) and P4 and P8 to `quick` (Haiku 5.5). Notes are in `docs/model-right-sizing.md`.
+- **Model tiers:** `TIER` maps P2, P3, P4 and P7 to `default` (Sonnet 5.5) and P8 to `quick` (Haiku 5.5). P4 moved to Sonnet in V4.10. Notes are in `docs/model-right-sizing.md`.
 - **Constants:** `PROMPTS_APPROVED = true`, `NDEC = 6`, `WORLD_DATA` (decisions picked from the ten seeds: old 1, 2, 3, 4, 5, 10).
 - **Logic that belongs to code, not AI:**
   - `wellbeingRule`
   - `zeroGuard`: if the judge moves nothing, use the picked option's deltas
   - `movesFrom` (±2 cap)
   - `verdictOf`
-  - `calRead` / `calLevel` / `writtenKeys`: the completeness read
+  - `calRead` / `calCounts` / `writtenKeys`: the checklist read
+  - `sinceAllowed`: drops a since-last charge two decisions in a row, or on a meter the last decision already lowered
+  - `narratorView`: the narrator sees only the picked option's story, none for a written plan
+  - `START`: starting meters (business 6)
   - `sheetData`: the 1:1 sheet; no game names, by design
 - **Type system:** Nunito for all game UI. Courier Prime only for in-world paperwork (memo letterhead, the 1:1 stamp). The colors are CSS tokens in the last `<style>` block.
 

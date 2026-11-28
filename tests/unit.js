@@ -15,7 +15,6 @@ const path = require('path');
     eq('modes text', T.modes({}, 'text'), { planPick: false, tradePick: false, openPick: false });
     eq('stageWrites', [1, 2, 3, 4, 5, 6].map(T.stageWrites), [[], [], ['tradeoff', 'delivery'], ['plan', 'tradeoff', 'delivery'], ['plan', 'tradeoff', 'delivery'], ['plan', 'tradeoff', 'delivery']]);
     // Completeness read
-    eq('calLevel scale', [8, 7, 6, 5, 4, 3, 2, 1, 0].map(T.calLevel), [4, 3, 3, 2, 2, 1, 1, 0, 0]);
     const J5 = { checks: { protects: { status: 'named' }, cost: { status: 'Partly' }, who_pays: { status: 'missing' }, plan_check: { status: 'named' }, delivery_check: { status: 'named' } } };
     eq('checkScore all five parts (7 of 10 points -> 5.6 of 8)', T.checkScore(J5).toFixed(1), '5.6');
     eq('checkScore tradeoff only (3 of 6 -> 4 of 8)', T.checkScore(J5, ['protects', 'cost', 'who_pays']), 4);
@@ -23,11 +22,41 @@ const path = require('path');
     G.n = 3; eq('writtenKeys D3: tradeoff and delivery', T.writtenKeys(T.modes({}, 'mix')), ['protects', 'cost', 'who_pays', 'delivery_check']);
     eq('writtenKeys D4-6: all five', T.writtenKeys(T.modes({}, 'text')), ['protects', 'cost', 'who_pays', 'plan_check', 'delivery_check']);
     eq('checkScore no checks', T.checkScore({}), 0);
-    G.cal = [{ said: 2, score: 5 }, { said: 3, score: 5 }, { said: 4, score: 4 }, { said: 2, score: 5 }]; eq('calRead: playtest 3 data is over, not matched', T.calRead(), 'over');
-    G.cal = [{ said: 2, score: 5 }, { said: 3, score: 6 }]; eq('calRead all matched', T.calRead(), 'calibrated');
-    G.cal = [{ said: 0, score: 8 }, { said: 1, score: 6 }]; eq('calRead under', T.calRead(), 'under');
-    G.cal = [{ said: 3, score: 4 }, { said: 1, score: 4 }, { said: 2, score: 4 }, { said: 2, score: 5 }]; eq('calRead mixed', T.calRead(), 'mixed');
-    G.cal = [{ said: 4, score: 0 }]; eq('calRead needs two', T.calRead(), 'not_enough');
+    // Checklist read (V4.10): a tick on a part found missing is high; no tick on a part found named is low; partly is close
+    const ce = (n, ticks, st) => { const keys = Object.keys(st); return { n, keys, ticks, st, over: keys.filter(k => ticks[k] && st[k] === 'missing'), under: keys.filter(k => !ticks[k] && st[k] === 'named') }; };
+    const ALL = (v) => ({ protects: v, cost: v, who_pays: v, plan_check: v, delivery_check: v });
+    G.cal = [ce(4, ALL(true), { protects: 'named', cost: 'missing', who_pays: 'missing', plan_check: 'partly', delivery_check: 'missing' }), ce(5, ALL(true), { protects: 'named', cost: 'named', who_pays: 'missing', plan_check: 'named', delivery_check: 'missing' })];
+    eq('calRead: ticked everything, checks found gaps -> over', T.calRead(), 'over');
+    eq('calCounts over 5 of 10', [T.calCounts().over, T.calCounts().items], [5, 10]);
+    G.cal = [ce(4, ALL(true), { protects: 'named', cost: 'named', who_pays: 'partly', plan_check: 'named', delivery_check: 'named' }), ce(5, ALL(true), ALL('named'))];
+    eq('calRead: ticks match (partly counts as close)', T.calRead(), 'calibrated');
+    G.cal = [ce(4, ALL(false), ALL('named')), ce(5, ALL(false), { protects: 'named', cost: 'named', who_pays: 'missing', plan_check: 'named', delivery_check: 'named' })];
+    eq('calRead: left named parts unticked -> under', T.calRead(), 'under');
+    G.cal = [ce(4, { protects: true, cost: true, who_pays: false, plan_check: false, delivery_check: true }, { protects: 'missing', cost: 'missing', who_pays: 'named', plan_check: 'named', delivery_check: 'named' }), ce(5, ALL(true), { protects: 'missing', cost: 'named', who_pays: 'named', plan_check: 'named', delivery_check: 'named' })];
+    eq('calRead mixed', T.calRead(), 'mixed');
+    G.cal = [ce(4, ALL(true), ALL('missing'))]; eq('calRead needs two', T.calRead(), 'not_enough');
+    // Last time / you fixed it
+    G.cal = [ce(3, ALL(true), { protects: 'named', cost: 'named', who_pays: 'missing', delivery_check: 'partly' }), ce(4, ALL(true), { protects: 'named', cost: 'named', who_pays: 'named', plan_check: 'partly', delivery_check: 'partly' })];
+    G.n = 4; eq('lastGaps: what decision 3 missed', T.lastGaps(), ['who_pays', 'delivery_check']);
+    eq('fixedNow: who pays found this time', T.fixedNow(), ['who_pays']);
+    G.n = 5; eq('lastGaps: what decision 4 missed', T.lastGaps(), ['plan_check', 'delivery_check']);
+    // Since-last enforced in code
+    const sceneWith = (sl) => ({ D: { sinceLast: sl } });
+    G.dec = { 4: sceneWith({ key: 'business', d: -1, reason: 'x', applied: -1 }), 5: sceneWith(null) };
+    G.hist = [{ n: 3, meters: { team: 6, boss: 6, business: 6, wellbeing: 7 } }, { n: 4, meters: { team: 6, boss: 6, business: 6, wellbeing: 7 } }];
+    eq('since-last: never two in a row', T.sinceAllowed(5, { key: 'team', d: -1, reason: 'y' }), false);
+    G.dec = { 4: sceneWith(null), 5: sceneWith(null) }; G.hist = [{ n: 3, meters: { team: 6, boss: 6, business: 6, wellbeing: 7 } }, { n: 4, meters: { team: 6, boss: 6, business: 5, wellbeing: 7 } }];
+    eq('since-last: no second charge on a meter that just fell', T.sinceAllowed(5, { key: 'business', d: -1, reason: 'y' }), false);
+    eq('since-last: other meter allowed', T.sinceAllowed(5, { key: 'team', d: -1, reason: 'y' }), true);
+    eq('since-last: a gain is allowed', T.sinceAllowed(5, { key: 'business', d: 1, reason: 'y' }), true);
+    eq('business starts at 6', T.START.business, 6);
+    // Narrator sees no option stories for a written plan; only the picked one for a picked plan
+    const Dn = { raw: { brief: ['b'], options: [{ slot: 'go', story: 's1', outcome: 'o1' }, { slot: 'carry', story: 's2', outcome: 'o2' }] } };
+    G.n = 5; eq('narratorView: written plan has no option stories', T.narratorView(Dn, { pick: null }).options.map(o => o.story || ''), ['', '']);
+    G.n = 3; eq('narratorView: picked plan keeps its own story', T.narratorView(Dn, { pick: 1 }).options.map(o => o.story || ''), ['', 's2']);
+    eq('narratorView leaves the scene intact', Dn.raw.options[0].story, 's1');
+    // Sheet scrubs game names from the player's own words
+    eq('scrub names', T.scrub('Tell Noor and Remi before Northfield Health starts at Tidewell.'), 'Tell my manager and a teammate before a new customer starts at my company.');
     // Parsing and normalizing AI output
     eq('parseJSON fenced', T.parseJSON('```json\n{"a":1}\n```'), { a: 1 });
     eq('parseJSON with preamble', T.parseJSON('Here you go: {"a":[1,2]} thanks'), { a: [1, 2] });
@@ -56,7 +85,7 @@ const path = require('path');
     j = { shifts: { team: 0, boss: 0, business: 0 } }; T.zeroGuard(D, { pick: null }, j);
     eq('zeroGuard skips written plans', !!j.zero_guard, false);
     // Wellbeing (code-owned)
-    Object.assign(G, { n: 3, lastAbsorb: 0, clean: 0, meters: { team: 6, boss: 6, business: 5, wellbeing: 7 } });
+    Object.assign(G, { n: 3, lastAbsorb: 0, clean: 0, meters: { team: 6, boss: 6, business: 6, wellbeing: 7 } });
     j = { you_take_on_work: true }; T.wellbeingRule({ options: [] }, { pick: null }, j); eq('wellbeing: take on work -1', j.shifts.wellbeing.delta, -1);
     G.n = 4; j = { you_take_on_work: true }; T.wellbeingRule({ options: [] }, { pick: null }, j); eq('wellbeing: again soon -2', j.shifts.wellbeing.delta, -2);
     G.n = 5; G.meters.wellbeing = 4; j = { you_take_on_work: false, you_step_away: true }; T.wellbeingRule({ options: [] }, { pick: null }, j); eq('wellbeing: step away +2', j.shifts.wellbeing.delta, 2);
@@ -72,22 +101,23 @@ const path = require('path');
     G.hist = [h(4, 4, 6, 7), h(4, 4, 6, 7), h(4, 4, 6, 7)]; eq('verdict keep building', T.verdictOf(), 'keep_building');
     // 1:1 sheet: no game details, questions first, reminders from the player's own checks
     G.parts = { protects: { named: 4, total: 4 }, cost: { named: 3, total: 4 }, who_pays: { named: 1, total: 4 }, plan_check: { named: 2, total: 3 }, delivery_check: { named: 4, total: 4 } };
-    G.pc = { skipped: false, pre: { text: 'Before answer' }, post: { text: 'After answer' } }; G.cal = [{ said: 3, score: 6 }, { said: 2, score: 5 }];
+    G.pc = { skipped: false, pre: { text: 'Before answer' }, post: { text: 'After answer' } }; G.rv = { lesson: 'Tell Noor early.' }; G.cal = [ce(4, ALL(true), ALL('named')), ce(5, ALL(true), ALL('named'))];
     const sd = T.sheetData();
     eq('sheet: strengths are the parts named 75%+', sd.strong, ['saying what a decision protects', 'first words that say what I decided, what it means for the person, and check in']);
     eq('sheet: working on the two weakest', sd.work, ['naming who pays for it', 'making a specific plan: who does what, and by when']);
     eq('sheet: question 2 names the weakest area', sd.questions[1], 'What decision coming up could I use to practice naming the tradeoff?');
     eq('sheet: own-read line', sd.read, 'My read of my own work is accurate.');
+    eq('sheet: own words, names swapped', sd.lesson, 'Tell my manager early.');
     G.pc.skipped = true; eq('sheet: no benchmark when skipped', T.sheetData().bench, null);
-    G.parts = {}; G.cal = []; eq('sheet: generic with no data', [T.sheetData().strong.length, T.sheetData().work.length, /one of the three parts/.test(T.sheetData().questions[1])], [0, 0, true]);
+    G.parts = {}; G.cal = []; G.rv = null; eq('sheet: generic with no data', [T.sheetData().strong.length, T.sheetData().work.length, /one of the three parts/.test(T.sheetData().questions[1])], [0, 0, true]);
     eq('sheet text: questions come first', T.sheetText().split('\n')[2], 'Three questions for your manager');
     eq('sheet: four ways a manager can support', T.sheetData().support.length, 4);
     // Safety
     eq('esc', T.esc('<img src=x onerror="a()">&'), '&lt;img src=x onerror=&quot;a()&quot;&gt;&amp;');
     // Commit gate
     G.n = 1; eq('ready D1 without confidence', T.ready.call(null, (G.cur = { asked: [0, 1], pick: 0, opening: 1, conf: null, tp: '', tc: '', tw: '', tt: '', plan: '', open: '' }, undefined)), true);
-    G.n = 3; G.cur = { asked: [0, 1], pick: 0, opening: null, conf: null, tp: 'a', tc: 'b', tw: 'c', tt: '', plan: '', open: 'Remi, I decided' }; eq('ready D3 needs confidence', T.ready(), false);
-    G.cur.conf = 2; eq('ready D3 with confidence', T.ready(), true);
+    G.n = 3; G.cur = { asked: [0, 1], pick: 0, opening: null, conf: null, ticks: {}, tp: 'a', tc: 'b', tw: 'c', tt: '', plan: '', open: 'Remi, I decided' }; eq('ready D3 with no ticks (unticked is an answer)', T.ready(), true);
+    G.cur.open = 'Remi, I\u2019ve decided to ___.'; eq('ready blocks a frame with blanks left', T.ready(), false); G.cur.open = 'Remi, I decided';
     G.cur.tw = '  '; eq('ready D3 blank field', T.ready(), false);
     return out;
   });
