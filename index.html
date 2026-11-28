@@ -64,6 +64,19 @@ button,textarea,input,select{font-family:inherit}
 .pg .item{display:flex;flex-direction:column;gap:2px;padding-top:8px;border-top:1px solid #CFC3A5}
 .pg .defn{padding:24px 26px;border-radius:14px;background:#F1ECFF;display:flex;flex-direction:column;gap:10px}
 .pg .know{display:flex;flex-direction:column;gap:8px;padding:14px 16px;border-radius:12px;background:#E6F5EC;border:2px solid #1E1B3A}
+.pg .sktabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.pg .sktab{display:flex;align-items:center;justify-content:center;gap:8px;min-height:54px;padding:0 12px;border:2px solid #1E1B3A;border-radius:14px;background:#fff;font-size:17px;font-weight:900;color:#1E1B3A;cursor:pointer;box-shadow:0 3px 0 #1E1B3A}
+.pg .sktab[aria-selected="true"]{background:#FFC93C;box-shadow:0 1px 0 #1E1B3A;transform:translateY(2px)}
+.pg .skhead{display:flex;flex-direction:column;gap:6px;padding:4px 2px}
+.pg .sksec{display:flex;flex-direction:column;gap:10px;padding:16px 18px;border:2px solid #1E1B3A;border-radius:16px;background:#fff}
+.pg .skh{margin:0;font-size:19px;font-weight:900}
+.pg .sklist{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}
+.pg .sklist li{display:flex;gap:10px;align-items:flex-start;font-size:16px;line-height:1.5}
+.pg .skmark{flex:none;display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;color:#fff;font-size:12px;font-weight:900;margin-top:2px}
+.pg .dodont{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.pg .skframe{padding:8px 12px;border:2px dashed #5A5675;border-radius:10px;background:#FFFDF6;font-size:16px;font-weight:700}
+.pg .skex{padding:12px 14px;border-left:6px solid #5B3DF5;border-radius:10px;background:#F7F1DF}
+@media (max-width:700px){.pg .dodont{grid-template-columns:minmax(0,1fr)}.pg .sktabs{grid-template-columns:minmax(0,1fr)}}
 @media (max-width:900px){.pg .pgrid{grid-template-columns:minmax(0,1fr)}}
 @media (max-width:820px){.pg .ladder,.pg .howgrid{grid-template-columns:minmax(0,1fr)}.pg .sub{grid-template-columns:minmax(0,1fr);gap:2px}}
 
@@ -2150,13 +2163,21 @@ function howPage() {
 }
 function skillsPage() {
   const H = (GAME && GAME.help) || {}, k = ['plan', 'tradeoff', 'delivery'].includes(P.gsk) ? P.gsk : 'plan', t = H[k];
-  const NAMES = { plan: 'Plan', tradeoff: 'Tradeoff', delivery: 'Delivery' };
-  const LEAD = { plan: 'What you will do, who does it, and by when.', tradeoff: 'What your plan protects, what it costs, and who pays.', delivery: 'Your first words to the person: what you decided, what it means for them, and a question or check-in.' };
+  const SKL = { plan: ['1', 'Plan', 'What you will do, who does it, and by when.'], tradeoff: ['2', 'Tradeoff', 'What your plan protects, what it costs, and who pays.'], delivery: ['3', 'Delivery', 'Your first words to the person: what you decided, what it means for them, and a question or check-in.'] };
   const PRACTICE = { plan: 'Five short decisions at another mid-sized software company. In the first two you pick a plan; in the last three you write your own.', tradeoff: 'Five short decisions at another mid-sized software company. In the first two you pick the tradeoff; in the last three you write what it protects, what it costs and who pays.', delivery: 'Five short decisions at another mid-sized software company. In the first two you pick your first words; in the last three you write them.' };
-  return '<div class="col" style="gap:22px"><div style="display:flex;flex-direction:column;gap:10px"><h1 class="h1">Skills</h1><p style="margin:0;font-size:18px;line-height:1.6">Three parts of one skill: see both sides of a choice, choose on purpose, and say so. If you are in the middle of a game, your place is kept: go back with Play.</p></div>' +
-    '<div role="tablist" aria-label="Skills" style="display:flex;flex-wrap:wrap;gap:8px">' + Object.keys(NAMES).map(x => '<button class="tab" role="tab" data-gsk="' + x + '" aria-selected="' + (x === k) + '">' + NAMES[x] + '</button>').join('') + '</div>' +
-    (t ? '<div class="card" style="gap:10px"><h2 style="margin:0">' + NAMES[k] + '</h2><p style="margin:0;font-size:17px">' + LEAD[k] + '</p><div class="eyebrow">What good looks like</div>' + gList(t.good) + '<div class="eyebrow" style="color:#0E7A4D">Do</div>' + gList(t.dos) + '<div class="eyebrow" style="color:#B42318">Don’t</div>' + gList(t.donts) + '<div class="eyebrow">Sentence frames</div>' + gList(t.frames) + '<div class="eyebrow">A worked example, at another software company</div><p style="margin:0">' + esc(t.ex.scene) + '</p><p style="margin:0;padding:12px 14px;border-radius:12px;background:#F7F1DF;border:2px solid #E5DCC4">' + esc(t.ex.text) + '</p></div>' : '') +
-    '<div class="card" style="gap:10px;background:#F1ECFF"><div class="eyebrow" style="color:#3A24B8">Practice ' + NAMES[k].toLowerCase() + ' on its own</div><p style="margin:0">' + PRACTICE[k] + ' You get feedback after each one, and you can try again.</p><button class="btn" disabled style="align-self:flex-start;opacity:.5;cursor:not-allowed;box-shadow:none">Practice coming soon</button></div></div>';
+  const marked = (a, mark, color) => '<ul class="sklist">' + (a || []).map(x => '<li><span class="skmark" style="background:' + color + '">' + mark + '</span><span>' + esc(x) + '</span></li>').join('') + '</ul>';
+  const sec = (title, body, style) => '<section class="sksec" style="' + (style || '') + '"><h3 class="skh">' + title + '</h3>' + body + '</section>';
+  const tabs = '<div role="tablist" aria-label="Skills" class="sktabs">' + Object.keys(SKL).map(x => '<button class="sktab" role="tab" data-gsk="' + x + '" aria-selected="' + (x === k) + '"><span class="num" style="width:28px;height:28px;font-size:13px">' + SKL[x][0] + '</span><span>' + SKL[x][1] + '</span></button>').join('') + '</div>';
+  let body = '';
+  if (t) {
+    body += '<div class="skhead"><div class="eyebrow" style="color:#3A24B8">Part ' + SKL[k][0] + ' of 3</div><h2 style="margin:0;font-size:32px;font-weight:900;line-height:1.15">' + SKL[k][1] + '</h2><p style="margin:0;font-size:19px;line-height:1.5">' + SKL[k][2] + '</p></div>';
+    body += sec('What good looks like', marked(t.good, '★', '#5B3DF5'), 'background:#F1ECFF;border-color:#5B3DF5');
+    body += '<div class="dodont">' + sec('Do', marked(t.dos, '✓', '#0E7A4D'), 'background:#E6F5EC;border-color:#0E7A4D') + sec('Don’t', marked(t.donts, '✕', '#B42318'), 'background:#FDECEA;border-color:#B42318') + '</div>';
+    body += sec('Sentence frames', '<p class="muted" style="margin:0;font-size:15px">Fill in the blanks to get started.</p><div style="display:flex;flex-direction:column;gap:6px">' + (t.frames || []).map(f => '<div class="skframe">' + esc(f) + '</div>').join('') + '</div>');
+    body += sec('A worked example, at another software company', '<p style="margin:0;font-size:16px"><span class="lab">The situation</span><br>' + esc(t.ex.scene) + '</p><div class="skex"><span class="lab">What a good ' + SKL[k][1].toLowerCase() + ' sounds like</span><p style="margin:4px 0 0;font-size:17px;line-height:1.6">' + esc(t.ex.text) + '</p></div>');
+  }
+  body += sec('Practice ' + SKL[k][1].toLowerCase() + ' on its own', '<p style="margin:0">' + PRACTICE[k] + ' You get feedback after each one, and you can try again.</p><button class="btn" disabled style="align-self:flex-start;opacity:.5;cursor:not-allowed;box-shadow:none">Practice coming soon</button>', 'background:#FFF4D6;border-color:#B45309');
+  return '<div class="col" style="gap:20px"><div style="display:flex;flex-direction:column;gap:10px"><h1 class="h1">Skills</h1><p style="margin:0;font-size:18px;line-height:1.6">Three parts of one skill: see both sides of a choice, choose on purpose, and say so. If you are in the middle of a game, your place is kept: go back with Play.</p></div>' + tabs + body + '</div>';
 }
 function about() {
   return '<div class="col"><div style="display:flex;flex-direction:column;gap:10px"><div class="eyebrow">How it’s made</div><h1 class="h1" style="font-size:34px">Who made what, and how AI is used</h1>' +
