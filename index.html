@@ -341,6 +341,20 @@ body{background-color:var(--desk) !important;background-image:radial-gradient(rg
 .app-game .checkframe{border-top:8px solid #0F766E !important}
 .app-game .mlist{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px;font-size:15px;line-height:1.5}
 .app-game .mlist li{display:flex;gap:8px;align-items:flex-start}.app-game .mlist .mdot{flex:none;margin-top:6px}
+.app-game .oneone{display:flex;flex-direction:column;gap:8px;padding:14px 16px;border-left:6px solid #0F766E;background:var(--paper-2);border-radius:2px}
+.app-game .sheet{background:#fff;color:#1E1B3A;max-width:760px;padding:36px 40px;box-shadow:var(--sheet);border-radius:2px;display:flex;flex-direction:column;gap:18px;font-size:16px;line-height:1.55}
+.app-game .sheet header{border-bottom:2px solid #1E1B3A;padding-bottom:12px;display:flex;flex-direction:column;gap:4px}
+.app-game .sheet h1{margin:0;font-size:26px;font-weight:900;line-height:1.2}
+.app-game .sheet h2{margin:0 0 4px;font-size:15px;font-weight:900;text-transform:uppercase;letter-spacing:.06em;color:#3A24B8}
+.app-game .sheet section p,.app-game .sheet ul,.app-game .sheet ol{margin:0}.app-game .sheet ul,.app-game .sheet ol{padding-left:22px;display:flex;flex-direction:column;gap:4px}
+.app-game .sheetkicker{font:700 13px var(--paperfont);letter-spacing:.15em;text-transform:uppercase;color:#0F766E}
+.app-game .sheetname{font-size:14px;color:#5A5675;margin-top:6px}
+.app-game .sheetbench{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.app-game .sheetbench p{margin:2px 0 0;font-style:italic}
+@media (max-width:700px){.app-game .sheetbench{grid-template-columns:minmax(0,1fr)}.app-game .sheet{padding:22px 18px}}
+.app-game .sheetsrc{font-size:14px;color:#5A5675;margin:0 0 2px !important}
+@page{margin:0.75in}
+.app-game .sheet footer{font-size:13px;color:#5A5675;border-top:1px solid #CFC3A5;padding-top:10px}
+@media print{body{background:#fff !important}.lgbar,#meters,#left,#right,.noprint,.app-game .pager{display:none !important}.app-game .layout{display:block !important;padding:0 !important;max-width:none !important}.app-game .sheet{box-shadow:none !important;max-width:none;padding:0}}
 .app-game .cardsep{border:0;border-top:1px dashed var(--rule);margin:6px 0;width:100%}
 .app-game .pager{display:flex;justify-content:space-between;align-items:center;gap:12px}.app-game .pager .ghost{align-self:center}
 .app-game .checkscene{border-radius:2px !important;background:var(--paper-2) !important;border:0 !important;box-shadow:inset 4px 0 0 #0F766E}
@@ -1089,11 +1103,14 @@ function standingSection() {
   return '<p class="muted" style="margin:0;font-size:15px">Your four meters after six decisions, and where each one started.</p>' + meterStrip(null).replace('class="meterwrap"', 'class="meterwrap endmeters"') +
     '<ul style="margin:0;padding-left:20px;font-size:15px">' + METERS.map(m => '<li><b>' + m.label + ':</b> started ' + word(m.key, start[m.key]) + ', now ' + word(m.key, G.meters[m.key]) + '</li>').join('') + '</ul>';
 }
+function calMsg() {
+  const C = G.cal || [], r = calRead();
+  const hi = C.filter(x => x.said > calLevel(x.score)).length, lo = C.filter(x => x.said < calLevel(x.score)).length, same = C.length - hi - lo;
+  return { over: 'On ' + hi + ' of ' + C.length + ' answers, you rated your answer as more complete than the checks found. A quick check before you send a plan helps: does it name what it protects, what it costs and who pays, with a person, a piece of work or a date in each?', under: 'On ' + lo + ' of ' + C.length + ' answers, your answer was more complete than you rated it. Your read of your own work can be a little more generous.', calibrated: 'Your rating matched what the checks found on every answer. You have a good read on your own work.', mixed: 'Your rating matched on ' + same + ' of ' + C.length + ' answers. Look at the ones that did not match: what did the checks find that you missed?', not_enough: 'Write at least two of your own answers to see how your rating compares.' }[r];
+}
 function calSection() {
   const C = G.cal || []; if (!C.length) return '';
-  const r = calRead();
-  const hi = C.filter(x => x.said > calLevel(x.score)).length, lo = C.filter(x => x.said < calLevel(x.score)).length, same = C.length - hi - lo;
-  const msg = { over: 'On ' + hi + ' of ' + C.length + ' answers, you rated your answer as more complete than the checks found. A quick check before you send a plan helps: does it name what it protects, what it costs and who pays, with a person, a piece of work or a date in each?', under: 'On ' + lo + ' of ' + C.length + ' answers, your answer was more complete than you rated it. Your read of your own work can be a little more generous.', calibrated: 'Your rating matched what the checks found on every answer. You have a good read on your own work.', mixed: 'Your rating matched on ' + same + ' of ' + C.length + ' answers. Look at the ones that did not match: what did the checks find that you missed?', not_enough: 'Write at least two of your own answers to see how your rating compares.' }[r];
+  const msg = calMsg();
   return '<p class="muted" style="margin:0;font-size:15px">Before each commit, you rated how complete your answer was. Here is that rating next to what the checks found in the parts you wrote yourself.</p>' +
     C.map(x => '<div class="calrow"><span><b>Decision ' + x.n + '</b><br><span class="caltag" style="background:' + (x.said === calLevel(x.score) ? '#E6F5EC' : '#FFF1C2') + '">' + (x.said === calLevel(x.score) ? 'Matched' : x.said > calLevel(x.score) ? 'You rated it higher' : 'You rated it lower') + '</span></span><span><span class="lab">You rated it</span><br>' + esc(CONF[x.said]) + '</span><span><span class="lab">The checks found</span><br>' + esc(CONF[calLevel(x.score)]) + ' <span class="muted">(' + x.named + ' named, ' + x.partly + ' partly, ' + x.missing + ' missing)</span></span></div>').join('') +
     '<p style="margin:0;font-weight:700">' + msg + '</p>';
@@ -1122,7 +1139,8 @@ function reviewScreen() {
   const A = G.ans || [];
   if (!needPost) steps.push(['Your record', '<details><summary style="cursor:pointer;font-weight:900;font-size:17px">Review your answers</summary>' + (A.length ? A.map(a => '<div style="display:flex;flex-direction:column;gap:4px;padding-top:10px;border-top:1px solid #E5DCC4;font-size:15px"><b>Decision ' + a.n + '</b><div><span class="lab">Plan</span> ' + esc(a.plan) + '</div>' + (a.trade ? '<div><span class="lab">Trade-off</span> ' + esc(a.trade) + '</div>' : '') + (a.opening ? '<div><span class="lab">First words</span> “' + esc(a.opening) + '”</div>' : '') + '<div class="muted">' + (a.conf ? 'You rated it: ' + esc(a.conf) + ' · ' : '') + METERS.map(m => m.label + ' ' + dw(a.moves[m.key] || 0).toLowerCase()).join(', ') + '</div></div>').join('') : '<p class="muted" style="margin:0">No answers recorded.</p>') + '</details>' +
     '<details><summary style="cursor:pointer;font-weight:900;font-size:17px">Read the full story</summary>' + (G.log || []).map(e => '<div style="padding-top:8px;border-top:1px solid #E5DCC4"><div class="lab">' + esc(e.label) + '</div><p style="margin:2px 0 0;white-space:pre-line">' + esc(e.text) + '</p></div>').join('') + '</details>' +
-    '<h3 style="margin:0;font-size:17px">What next?</h3><div style="display:flex;flex-wrap:wrap;gap:10px"><button class="btn" data-act="playAgain">Play again</button><a class="btn2" href="#home">Home</a><button class="btn2" data-act="snapCopy">' + (G.snapDone ? 'Copied' : 'Copy a snapshot') + '</button></div><p class="muted" style="margin:0;font-size:14px">The snapshot copies your story, Noor’s read and your answers as text, ready to paste anywhere.</p>']);
+    '<h3 style="margin:0;font-size:17px">What next?</h3><div style="display:flex;flex-wrap:wrap;gap:10px"><button class="btn" data-act="playAgain">Play again</button><a class="btn2" href="#home">Home</a></div>' +
+    '<div class="oneone"><h3 style="margin:0;font-size:18px">Take this to your next 1:1</h3><p style="margin:0">A one-page sheet with what you practiced, what you want to work on, and three questions to ask your manager. Print it, save it as a PDF, or copy it as text.</p><button class="btn" data-act="openSheet" style="align-self:flex-start">Open my 1:1 sheet</button></div>']);
   /* Nov 27: five cards, each a group of things that go together (Giselle: eight was too many) */
   const GROUPS = [['What happened next', ['What happened next', 'Where you stand']], ['Noor\u2019s read', ['Noor\u2019s read', 'What others saw']], ['Your next steps', ['What to practice next']], ['Check your own read', ['How complete your answers were', 'One last check', 'Before and after']], ['Your record', ['Your record']]];
   const byTitle = {}; steps.forEach(x => { byTitle[x[0]] = x[1]; });
@@ -1136,13 +1154,43 @@ function reviewScreen() {
   h += callsFold(rv.call7 ? [rv.call7] : null);
   return h;
 }
-function snapshotText() {
-  const o = (G.rv && G.rv.out) || {}, A = G.ans || [];
-  return ['The Leadership Game V4 · Readiness check-in', 'Noor’s read: ' + VERDICT[G.rv.verdict], '', 'What happened next', o.story || '', '', 'What worked: ' + (o.worked || ''), 'What to work on: ' + (o.work_on || ''), 'Keep: ' + (o.keep || ''), 'Add: ' + (o.add || ''), '', 'Your answers']
-    .concat(A.map(a => 'Decision ' + a.n + ' (' + a.skill + '): ' + a.plan + (a.trade ? ' | Trade-off: ' + a.trade : '') + (a.opening ? ' | First words: ' + a.opening : '') + (a.conf ? ' | You said: ' + a.conf : '')))
-    .concat(G.pc.skipped ? [] : ['', 'Quick check, before: ' + G.pc.pre.text.trim(), 'Quick check, after: ' + G.pc.post.text.trim()])
-    .concat(['', 'How complete your answers were: ' + CALREAD[calRead()].replace(/^their /, 'your ').replace(/^rated their/, 'you rated your')])
-    .concat(['', 'The full story']).concat((G.log || []).map(e => e.label + ': ' + e.text)).join('\n');
+/* ---------- Nov 27: the 1:1 sheet, a conversation starter for the player's real manager ---------- */
+function sheetData() {
+  const o = (G.rv && G.rv.out) || {}, g = (o.grow || []).map(x => String(x.skill || '').toLowerCase()).filter(Boolean);
+  const part = g[0] || 'one of the three parts';
+  const pc = G.pc, bench = !pc.skipped && pc.pre.text.trim() ? { before: pc.pre.text.trim(), after: pc.post.text.trim() } : null;
+  return {
+    practiced: 'Six decisions as a new manager at a fictional software company. In each one I made a plan, named the tradeoff (what it protects, what it costs, who pays), and practiced my first words to the person.',
+    well: [o.worked, o.keep].filter(Boolean),
+    workOn: [o.work_on].concat((o.grow || []).map(x => (String(x.skill || '').replace(/^./, ch => ch.toUpperCase())) + ': ' + (x.why || ''))).filter(Boolean),
+    read: (G.cal || []).length ? calMsg() : '',
+    bench,
+    questions: ['Where have you seen me name the cost of a decision well, or miss it?', 'What decision coming up could I practice ' + (g[0] ? 'my ' + part : part) + ' on?', 'When there’s a tradeoff, do you want to hear it before I decide, or after?']
+  };
+}
+function sheetScreen() {
+  const d = sheetData(), ul = (a) => '<ul>' + a.map(x => '<li>' + esc(x) + '</li>').join('') + '</ul>';
+  return '<div class="noprint" style="display:flex;flex-wrap:wrap;gap:10px;align-items:center"><button class="btn" data-act="printSheet">Print or save as PDF</button><button class="btn2" data-act="copySheet">' + (G.sheetCopied ? 'Copied' : 'Copy as text') + '</button><button class="ghost" data-act="closeSheet">Back to your check-in</button></div>' +
+    (G.sheetMsg ? '<p class="noprint muted" style="margin:0;font-size:15px">' + esc(G.sheetMsg) + '</p>' : '') +
+    '<article class="sheet" aria-label="Your 1:1 sheet">' +
+    '<header><div class="sheetkicker">For my next 1:1</div><h1>What I practiced, and where I’d like your help</h1><div class="sheetname">Name: ______________________ &nbsp; Date: ____________</div></header>' +
+    '<section><h2>What I practiced</h2><p>' + esc(d.practiced) + '</p></section>' +
+    (d.well.length ? '<section><h2>What went well</h2><p class="sheetsrc">From the game\u2019s check-in:</p>' + ul(d.well) + '</section>' : '') +
+    (d.workOn.length ? '<section><h2>What I want to work on</h2><p class="sheetsrc">From the game\u2019s check-in:</p>' + ul(d.workOn) + '</section>' : '') +
+    (d.read ? '<section><h2>How my read of my own work compared</h2><p>' + esc(d.read) + '</p></section>' : '') +
+    (d.bench ? '<section><h2>My benchmark, before and after</h2><div class="sheetbench"><div><b>Before</b><p>“' + esc(d.bench.before) + '”</p></div><div><b>After</b><p>“' + esc(d.bench.after || '(not answered)') + '”</p></div></div></section>' : '') +
+    '<section><h2>Three questions for my manager</h2><ol>' + d.questions.map(q => '<li>' + esc(q) + '</li>').join('') + '</ol></section>' +
+    '<footer>From a practice game with a fictional company. Parts were written by AI; treat them as one reading.</footer></article>';
+}
+function sheetText() {
+  const d = sheetData();
+  return ['For my next 1:1: what I practiced, and where I’d like your help', '', 'What I practiced', d.practiced]
+    .concat(d.well.length ? ['', 'What went well (from the game\u2019s check-in)'].concat(d.well.map(x => '- ' + x)) : [])
+    .concat(d.workOn.length ? ['', 'What I want to work on (from the game\u2019s check-in)'].concat(d.workOn.map(x => '- ' + x)) : [])
+    .concat(d.read ? ['', 'How my read of my own work compared', d.read] : [])
+    .concat(d.bench ? ['', 'My benchmark, before and after', 'Before: "' + d.bench.before + '"', 'After: "' + (d.bench.after || '(not answered)') + '"'] : [])
+    .concat(['', 'Three questions for my manager'].concat(d.questions.map((q, i) => (i + 1) + '. ' + q)))
+    .concat(['', 'From a practice game with a fictional company. Parts were written by AI; treat them as one reading.']).join('\n');
 }
 const toTop = () => { try { window.scrollTo(0, 0); } catch (e) {} };
 
@@ -1336,6 +1384,7 @@ function main() {
   if (p === 'loading') return header() + '<div class="card"><p style="margin:0"><span class="spin"></span>' + esc(G.busy) + '</p><p class="muted" style="margin:0;font-size:14px">The scenario builder is writing decision ' + G.n + ' from your story so far.</p><p class="muted" style="margin:0;font-size:13px" id="prog"></p></div>';
   if (p === 'loaderr') return header() + '<div class="err">' + esc(G.err) + ' <button class="ghost" data-act="retryLoad">Try again</button>' + callsFold(G.errCalls) + '</div>';
   if (p === 'review') return reviewScreen();
+  if (p === 'sheet') return sheetScreen();
   if (p === 'end') return '<div class="eyebrow">Your six decisions</div><h1 style="margin:0;font-size:36px;font-weight:900">Six decisions</h1><p class="para">Your story log is in the left panel. The readiness check-in is next; in this build it is a design mock on the canvas.</p>';
   const D = G.dec[G.n].D, c = G.cur, b = band(G.n);
   let h = header();
@@ -1421,11 +1470,11 @@ function ready() {
 function readyHelp() { return asksConf(modes(G.cur, band(G.n))) ? 'Finish each part, then say how complete your answer is.' : 'Pick a plan and your first words.'; }
 function render() { if (LG.active !== 'game') return; render_(); }
 function render_() {
-  const early = ['how', 'pre', 'intro', 'post', 'review'].includes(G.phase);
+  const early = ['how', 'pre', 'intro', 'post', 'review', 'sheet'].includes(G.phase);
   $('meters').innerHTML = W && !early ? meterStrip(G.phase === 'debrief' && G.cur && G.cur.result ? G.cur.result.moves : null) : '';
   $('main').innerHTML = (W ? main() : '<p>Loading Tidewell…</p>') + (W ? whoModal() + runlogModal() : '');
-  $('left').innerHTML = W && !['intro', 'pre', 'how', 'post', 'review'].includes(G.phase) ? leftPanel() : '';
-  $('right').innerHTML = W && !['intro', 'pre', 'how', 'post', 'chapter', 'review'].includes(G.phase) ? rightPanel() : '';
+  $('left').innerHTML = W && !['intro', 'pre', 'how', 'post', 'review', 'sheet'].includes(G.phase) ? leftPanel() : '';
+  $('right').innerHTML = W && !['intro', 'pre', 'how', 'post', 'chapter', 'review', 'sheet'].includes(G.phase) ? rightPanel() : '';
   bind();
 }
 function grow(el) { el.style.height = 'auto'; el.style.height = (el.scrollHeight + 4) + 'px'; }
@@ -1478,6 +1527,10 @@ function act(a) {
   else if (a === 'toPost') { G.phase = 'post'; render(); toTop(); }
   else if (a === 'pcSkip') { G.pc.skipped = true; if (G.phase === 'pre') G.phase = 'intro'; else if (G.phase === 'post') { G.phase = 'review'; G.rvJump = 'Your record'; } render(); toTop(); }
   else if (a === 'playAgain') { const r = document.getElementById('restart'); if (r) r.click(); toTop(); }
+  else if (a === 'openSheet') { G.phase = 'sheet'; G.sheetCopied = false; G.sheetMsg = ''; render(); toTop(); }
+  else if (a === 'closeSheet') { G.phase = 'review'; G.rvJump = 'Your record'; render(); toTop(); }
+  else if (a === 'printSheet') { try { window.print(); } catch (e) { G.sheetMsg = 'Printing isn\u2019t available in this view. Use Copy as text, or open the game from its GitHub link to print.'; render(); } }
+  else if (a === 'copySheet') { const t = sheetText(); const done = () => { G.sheetCopied = true; render(); }; const fall = () => { try { const ta = document.createElement('textarea'); ta.value = t; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove(); done(); } catch (e) { G.sheetMsg = 'Copying isn\u2019t available here. Select the sheet text and copy it.'; render(); } }; try { navigator.clipboard.writeText(t).then(done, fall); } catch (e) { fall(); } }
   else if (a === 'snapCopy') { const t = snapshotText(); const done = () => { G.snapDone = true; render(); }; try { navigator.clipboard.writeText(t).then(done, () => { const ta = document.createElement('textarea'); ta.value = t; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); } catch (e) {} ta.remove(); done(); }); } catch (e) { done(); } }
   else if (a === 'rvNext') { G.rvI = (G.rvI || 0) + 1; render(); toTop(); }
   else if (a === 'rvBack') { G.rvI = Math.max(0, (G.rvI || 0) - 1); render(); toTop(); }
@@ -1518,7 +1571,7 @@ return {
     attachTools();
     if (!booted) { booted = true; W = WORLD_DATA; boot(); } else { setLiveStatus(); render(); }
   },
-  __test: { G, band, modes, calLevel, calRead, checkScore, writtenKeys, normDelta, normSince, normScene, normOptions, parseJSON, movesFrom, zeroGuard, wellbeingRule, verdictOf, esc, answerOf, ready, stageWrites },
+  __test: { sheetData, sheetText, G, band, modes, calLevel, calRead, checkScore, writtenKeys, normDelta, normSince, normScene, normOptions, parseJSON, movesFrom, zeroGuard, wellbeingRule, verdictOf, esc, answerOf, ready, stageWrites },
   help: HELP, meters: METERS, word: (k, v) => word(k, v),
   where() { return W && G.cur && G.n && !['pre', 'how', 'intro'].includes(G.phase) ? { n: G.n, review: ['review', 'post'].includes(G.phase) } : null; },
   unmount() { LG.active = ''; try { document.body.classList.remove('helpopen'); } catch (e) {} $('tools').querySelectorAll('[data-apptool]').forEach((b) => b.remove()); }

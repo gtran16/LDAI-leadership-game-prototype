@@ -82,6 +82,16 @@ async function play(width) {
     await act('rvNext').click();
     await act('playAgain').waitFor();
   });
+  await step('1:1 sheet', async () => {
+    await act('openSheet').click();
+    await page.getByRole('heading', { name: 'What I practiced, and where I’d like your help' }).waitFor();
+    for (const t of ['What went well', 'What I want to work on', 'How my read of my own work compared', 'My benchmark, before and after', 'Three questions for my manager']) await page.getByRole('heading', { name: t }).waitFor();
+    if (await page.locator('#meters .meterwrap').count()) throw new Error('meters shown on the sheet');
+    await act('copySheet').click(); await page.getByText('Copied').waitFor();
+    await act('printSheet').click();
+    if (width === 1280) { await page.emulateMedia({ media: 'print' }); await page.pdf({ path: path.join(__dirname, 'out', 'one-on-one-sheet.pdf'), format: 'Letter' }).catch(() => {}); await page.screenshot({ path: path.join(__dirname, 'out', 'one-on-one-print.png'), fullPage: true }); await page.emulateMedia({ media: 'screen' }); }
+    await act('closeSheet').click(); await act('openSheet').waitFor();
+  });
   await page.screenshot({ path: path.join(__dirname, 'out', 'end-' + width + '.png'), fullPage: true });
   await browser.close();
 }
