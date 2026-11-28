@@ -363,7 +363,7 @@ const WORLD_DATA = {"world":{"company":{"name":"Tidewell","industry":"clinic sch
   D[5].threads = { echoes: 1, carries_forward: "Two months before Northfield's renewal, training for its 8 new clinics has slipped two weeks; Teo promised them it would be done by the end of next week and Noor has not heard yet. The Northfield relationship from the first decision and Teo's habit of promising on the team's behalf both meet here." };
 })();
 const NDEC = 6;
-const PROMPTS_APPROVED = false; /* V4 prompt batch of Nov 20 is awaiting the designer's review; remove this flag when approved */
+const PROMPTS_APPROVED = true; /* V4 batch and the Nov 27 playtest-2 changes approved by Giselle, Nov 27 */
 const PLAN_CHECK = 'A strong plan says who does what and by when, uses a fact learned from the questions, and says what waits or stays out.';
 const DELIVERY_CHECK = 'Strong first words say what was decided, say what it means for this person, and ask or check in. An opening is a start, not the whole conversation.';
 const SHARED = `Shared rules (every prompt):
@@ -597,7 +597,7 @@ THE LEVEL
 Story log, every entry in order: [STORY LOG]
 Meter words at each decision and at the end: [METER HISTORY]
 For each decision: number, lead skill, the judge's checks (named, partly, missing), hidden fact status, events, how complete the player said their answer was, and the player's own written words where there were any: [DECISION SUMMARIES]
-Confidence read (set by code from how complete the player said their answers were, against the judge's checks): [CONFIDENCE READ]
+Completeness read (set by code from how complete the player rated their answers, against the judge's checks): [CONFIDENCE READ]
 
 THE PLAYER'S OWN READ (written before seeing this check-in; may be blank)
 What went best: [SELF 1]
@@ -620,7 +620,7 @@ THEN WRITE
    - add: one move to add to your toolkit for the next role, written as something the player could say or do, in plain words.
 2. watching: for the boss, the team and the peer, one line on what they watched for (from the world) and one line on what they saw from the player (from the story log). Name a moment, not a trait.
 3. grow: the one or two parts to practice next, chosen from plan, tradeoff and delivery. For each, one line that ties it to decisions by number and says what to try. Put the part's name in the skill field.
-4. calibration: one sentence that sets the player's own readiness call against the verdict, without saying they were right or wrong, and one sentence on the confidence read: when the player rated their answers more complete than the checks found, or less, say so plainly as something to notice, never as a flaw; when it matched, say their read of their own work was accurate. If the player's "what was hard" names the same pattern as work_on, say so. If their reflection is blank, leave it out.
+4. calibration: one sentence that sets the player's own readiness call against the verdict, without saying they were right or wrong, and one sentence on the completeness read: when the player rated their answers more complete than the checks found, or less, say so plainly as something to notice, never as a flaw; when it matched, say their read of their own work was accurate. Never call the player overconfident or underconfident, or use any label for the person; talk about the answers. If the player's "what was hard" names the same pattern as work_on, say so. If their reflection is blank, leave it out.
 5. story: a short story that ends the check-in. 3 to 5 sentences, second person, past tense, starting with "In the weeks after the check-in,". What the boss did with the verdict, what the player did next, one person from the cast who reacted, and one small concrete detail that carries a thread from the level forward (a person, a habit, an earlier call). It fits the verdict: Ready now opens the next role; Ready with support sets up the stretch or the support; Practice more at this level shows the next decisions starting, with the thread still open. Realistic, not dramatic. Never state what the player was feeling or planning; show only what they did and what followed.
    Style example (different world; do not reuse its phrasing): "In the weeks after the check-in, Dana put your name on the list for the new regional team and asked you to sit in on their Monday staffing call. You started bringing the reorder report to that call instead of fixing it the night before. Marco, who had covered your Saturday shifts for a year, asked if they could run the report next month. You said yes and put a reminder in for the first Friday."
 
@@ -939,7 +939,7 @@ function calRead() {
   const gap = C.reduce((a, x) => a + (x.said - x.score / 2), 0) / C.length;
   return gap >= 1 ? 'over' : gap <= -1 ? 'under' : 'calibrated';
 }
-const CALREAD = { over: 'overconfident: rated their answers more complete than the checks found', under: 'underconfident: rated their answers less complete than the checks found', calibrated: 'calibrated: their rating matched the checks', not_enough: 'not enough written answers to tell' };
+const CALREAD = { over: 'rated their answers as more complete than the checks found', under: 'rated their answers as less complete than the checks found', calibrated: 'their rating matched what the checks found', not_enough: 'not enough written answers to tell' };
 /* ---------- readiness review (P7) ---------- */
 function verdictOf() {
   const H = G.hist || [], keys = ['team', 'boss', 'business', 'wellbeing'];
@@ -961,7 +961,7 @@ function fillP7() {
 }
 async function runReview() {
   const rv = G.rv; rv.busy = true; rv.err = ''; render();
-  try { const r = await ask('P7 readiness reviewer', fillP7(), TIER.P7); rv.out = r.value; rv.call7 = r.call; rv.verdict = verdictOf(); }
+  try { const r = await ask('P7 readiness reviewer', fillP7(), TIER.P7); G.rvI = 0; rv.out = r.value; rv.call7 = r.call; rv.verdict = verdictOf(); }
   catch (e) { rv.err = e.message || 'The check-in could not be written.'; rv.call7 = e.call; }
   rv.busy = false; render(); toTop();
 }
@@ -990,20 +990,20 @@ function compareSection() {
   const col = (stage, label) => { const st = pc[stage], S = CHECKS[pc.order[stage === 'pre' ? 0 : 1]];
     const marks = st.out ? MARKS.map(m => markChip(m[1], String((st.out[m[0]] || {}).status || 'missing').toLowerCase())).join(' ') : '<span class="muted" style="font-size:13px">' + (st.busy ? 'Reading your answer…' : st.err ? 'Could not be read. ' : P8_APPROVED ? '' : 'Marks appear once the designer approves the check.') + '</span>';
     return '<div style="display:flex;flex-direction:column;gap:6px;padding:12px 14px;border:2px solid #1E1B3A;border-radius:14px;background:#fff"><div class="lab">' + label + ' · ' + esc(S.title) + '</div><p style="margin:0;font-style:italic">“' + esc(st.text.trim() || '(no answer)') + '”</p><div style="display:flex;flex-wrap:wrap;gap:6px">' + marks + '</div></div>'; };
-  return '<section class="card" style="gap:12px"><h2 style="margin:0">Before and after</h2><p class="muted" style="margin:0;font-size:15px">The same scenario, before the story and after it. Did your answer name what it protects, what it costs and who pays?</p><div class="twocol">' + col('pre', 'Before') + col('post', 'After six decisions') + '</div></section>';
+  return '<p class="muted" style="margin:0;font-size:15px">The same scenario, before the story and after it. Did your answer name what it protects, what it costs and who pays?</p><div class="twocol">' + col('pre', 'Before') + col('post', 'After six decisions') + '</div>';
 }
 function standingSection() {
   const start = { team: 6, boss: 6, business: 5, wellbeing: 7 };
-  return '<section class="card" style="gap:12px"><h2 style="margin:0">Where you stand</h2><p class="muted" style="margin:0;font-size:15px">Your four meters after six decisions, and where each one started.</p>' + meterStrip(null).replace('class="meterwrap"', 'class="meterwrap endmeters"') +
-    '<ul style="margin:0;padding-left:20px;font-size:15px">' + METERS.map(m => '<li><b>' + m.label + ':</b> started ' + word(m.key, start[m.key]) + ', now ' + word(m.key, G.meters[m.key]) + '</li>').join('') + '</ul></section>';
+  return '<p class="muted" style="margin:0;font-size:15px">Your four meters after six decisions, and where each one started.</p>' + meterStrip(null).replace('class="meterwrap"', 'class="meterwrap endmeters"') +
+    '<ul style="margin:0;padding-left:20px;font-size:15px">' + METERS.map(m => '<li><b>' + m.label + ':</b> started ' + word(m.key, start[m.key]) + ', now ' + word(m.key, G.meters[m.key]) + '</li>').join('') + '</ul>';
 }
 function calSection() {
   const C = G.cal || []; if (!C.length) return '';
   const r = calRead();
-  const msg = { over: 'You rated your answers as more complete than they were. Before you send a plan, check that it names what it protects, what it costs and who pays, with a person, a piece of work or a date in each.', under: 'Your answers were more complete than you said. You can trust your read of your own work a little more.', calibrated: 'How complete you said your answers were matched what you wrote. Your read of your own work is accurate.', not_enough: 'Write at least two of your own answers to see how your read compares.' }[r];
-  return '<section class="card" style="gap:10px"><h2 style="margin:0">Your confidence</h2><p class="muted" style="margin:0;font-size:15px">For each answer you wrote: how complete you said it was, and what the checks found.</p>' +
-    C.map(x => '<div class="calrow"><b>Decision ' + x.n + '</b><span><span class="lab">You said</span><br>' + esc(CONF[x.said]) + '</span><span><span class="lab">Checks found</span><br>' + esc(CONF[Math.min(4, Math.floor(x.score / 2))]) + ' <span class="muted">(' + x.named + ' named, ' + x.partly + ' partly, ' + x.missing + ' missing)</span></span></div>').join('') +
-    '<p style="margin:0;font-weight:700">' + msg + '</p></section>';
+  const msg = { over: 'Your answers were a little less complete than you rated them. A quick check before you send a plan helps: does it name what it protects, what it costs and who pays, with a person, a piece of work or a date in each?', under: 'Your answers were more complete than you rated them. Your read of your own work can be a little more generous.', calibrated: 'How complete you rated your answers matched what you wrote. You have a good read on your own work.', not_enough: 'Write at least two of your own answers to see how your rating compares.' }[r];
+  return '<p class="muted" style="margin:0;font-size:15px">Before each commit, you rated how complete your answer was. Here is that rating next to what the checks found.</p>' +
+    C.map(x => '<div class="calrow"><b>Decision ' + x.n + '</b><span><span class="lab">You rated it</span><br>' + esc(CONF[x.said]) + '</span><span><span class="lab">The checks found</span><br>' + esc(CONF[Math.min(4, Math.floor(x.score / 2))]) + ' <span class="muted">(' + x.named + ' named, ' + x.partly + ' partly, ' + x.missing + ' missing)</span></span></div>').join('') +
+    '<p style="margin:0;font-weight:700">' + msg + '</p>';
 }
 function reviewScreen() {
   const rv = G.rv;
@@ -1015,20 +1015,22 @@ function reviewScreen() {
     return h;
   }
   const o = rv.out, sec = (t, b) => b ? '<div style="display:flex;flex-direction:column;gap:2px"><h3 style="margin:0;font-size:17px">' + t + '</h3><p style="margin:0">' + esc(b) + '</p></div>' : '';
-  /* Nov 27 order (Giselle): what happened next, where you stand, Noor's read, what to practice next; then confidence, before and after, and the record */
-  h += '<section class="card" style="gap:10px"><span class="chip ai" style="align-self:flex-start">Written by AI</span><h2 style="margin:0">What happened next</h2><p class="para">' + esc(o.story || '') + '</p></section>';
-  h += standingSection();
-  h += '<section class="ai" style="gap:14px"><div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center"><span class="lab">Noor’s read</span><span class="tag" style="font-size:16px;background:#FFE9A8">' + VERDICT[rv.verdict] + '</span></div>' +
-    '<p class="muted" style="margin:0;font-style:italic;font-size:14px">' + esc(String(o.note_header || '').replace(/\*/g, '')) + '</p>' +
-    sec('What worked', o.worked) + sec('What to work on', o.work_on) + sec('Keep in your toolkit', o.keep) + sec('What you spent', o.spend) + sec('Add to your toolkit', o.add) + sec('Your read and Noor’s', o.calibration);
-  if ((o.watching || []).length) h += '<h3 style="margin:0;font-size:17px">What they saw</h3><ul style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px">' + o.watching.map(w => '<li><b>' + esc(w.who || '') + '</b> watched for ' + esc(String(w.cared || '').replace(/^./, ch => ch.toLowerCase()).replace(/\.$/, '')) + '. <span class="muted">Saw:</span> ' + esc(w.saw || '') + '</li>').join('') + '</ul>';
-  h += '</section>';
-  if ((o.grow || []).length) h += '<section class="card" style="gap:8px"><h2 style="margin:0">What to practice next</h2><ul style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px">' + o.grow.map(g => '<li><b>' + esc(String(g.skill || '').replace(/^./, ch => ch.toUpperCase())) + ':</b> ' + esc(g.why || '') + '</li>').join('') + '</ul></section>';
-  h += calSection() + compareSection();
+  /* Nov 27 (Giselle): the check-in comes in steps, like the intro, each step one group of things that go together */
+  const steps = [];
+  steps.push(['What happened next', '<span class="chip ai" style="align-self:flex-start">Written by AI</span><p class="para">' + esc(o.story || '') + '</p>']);
+  steps.push(['Where you stand', standingSection()]);
+  steps.push(['Noor’s read', '<div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center"><span class="tag" style="font-size:16px;background:#FFE9A8">' + VERDICT[rv.verdict] + '</span></div><p class="muted" style="margin:0;font-style:italic;font-size:14px">' + esc(String(o.note_header || '').replace(/\*/g, '')) + '</p>' + sec('What worked', o.worked) + sec('What to work on', o.work_on) + sec('Keep in your toolkit', o.keep)]);
+  steps.push(['What others saw', sec('What you spent', o.spend) + ((o.watching || []).length ? '<h3 style="margin:0;font-size:17px">What they saw</h3><ul style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px">' + o.watching.map(w => '<li><b>' + esc(w.who || '') + '</b> watched for ' + esc(String(w.cared || '').replace(/^./, ch => ch.toLowerCase()).replace(/\.$/, '')) + '. <span class="muted">Saw:</span> ' + esc(w.saw || '') + '</li>').join('') + '</ul>' : '')]);
+  steps.push(['What to practice next', ((o.grow || []).length ? '<ul style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px">' + o.grow.map(g => '<li><b>' + esc(String(g.skill || '').replace(/^./, ch => ch.toUpperCase())) + ':</b> ' + esc(g.why || '') + '</li>').join('') + '</ul>' : '') + sec('Add to your toolkit', o.add) + sec('Your read and Noor’s', o.calibration)]);
+  const cal = calSection(); if (cal) steps.push(['How complete your answers were', cal]);
+  const cmp = compareSection(); if (cmp) steps.push(['Before and after', cmp]);
   const A = G.ans || [];
-  h += '<details class="card"><summary style="cursor:pointer;font-weight:900;font-size:18px">Review your answers</summary>' + (A.length ? A.map(a => '<div style="display:flex;flex-direction:column;gap:4px;padding-top:10px;border-top:1px solid #E5DCC4;font-size:15px"><b>Decision ' + a.n + '</b><div><span class="lab">Plan</span> ' + esc(a.plan) + '</div>' + (a.trade ? '<div><span class="lab">Trade-off</span> ' + esc(a.trade) + '</div>' : '') + (a.opening ? '<div><span class="lab">First words</span> “' + esc(a.opening) + '”</div>' : '') + '<div class="muted">' + (a.conf ? 'You said: ' + esc(a.conf) + ' · ' : '') + METERS.map(m => m.label + ' ' + dw(a.moves[m.key] || 0).toLowerCase()).join(', ') + '</div></div>').join('') : '<p class="muted" style="margin:0">No answers recorded.</p>') + '</details>';
-  h += '<details class="card"><summary style="cursor:pointer;font-weight:900;font-size:18px">Read the full story</summary>' + (G.log || []).map(e => '<div style="padding-top:8px;border-top:1px solid #E5DCC4"><div class="lab">' + esc(e.label) + '</div><p style="margin:2px 0 0;white-space:pre-line">' + esc(e.text) + '</p></div>').join('') + '</details>';
-  h += '<section class="card" style="gap:12px"><h2 style="margin:0">What next?</h2><div style="display:flex;flex-wrap:wrap;gap:10px"><button class="btn" data-act="playAgain">Play again</button><a class="btn2" href="#home">Home</a><button class="btn2" data-act="snapCopy">' + (G.snapDone ? 'Copied' : 'Copy a snapshot') + '</button></div><p class="muted" style="margin:0;font-size:14px">The snapshot copies your story, Noor’s read and your answers as text, ready to paste anywhere.</p></section>';
+  steps.push(['Your record', '<details><summary style="cursor:pointer;font-weight:900;font-size:17px">Review your answers</summary>' + (A.length ? A.map(a => '<div style="display:flex;flex-direction:column;gap:4px;padding-top:10px;border-top:1px solid #E5DCC4;font-size:15px"><b>Decision ' + a.n + '</b><div><span class="lab">Plan</span> ' + esc(a.plan) + '</div>' + (a.trade ? '<div><span class="lab">Trade-off</span> ' + esc(a.trade) + '</div>' : '') + (a.opening ? '<div><span class="lab">First words</span> “' + esc(a.opening) + '”</div>' : '') + '<div class="muted">' + (a.conf ? 'You rated it: ' + esc(a.conf) + ' · ' : '') + METERS.map(m => m.label + ' ' + dw(a.moves[m.key] || 0).toLowerCase()).join(', ') + '</div></div>').join('') : '<p class="muted" style="margin:0">No answers recorded.</p>') + '</details>' +
+    '<details><summary style="cursor:pointer;font-weight:900;font-size:17px">Read the full story</summary>' + (G.log || []).map(e => '<div style="padding-top:8px;border-top:1px solid #E5DCC4"><div class="lab">' + esc(e.label) + '</div><p style="margin:2px 0 0;white-space:pre-line">' + esc(e.text) + '</p></div>').join('') + '</details>' +
+    '<h3 style="margin:0;font-size:17px">What next?</h3><div style="display:flex;flex-wrap:wrap;gap:10px"><button class="btn" data-act="playAgain">Play again</button><a class="btn2" href="#home">Home</a><button class="btn2" data-act="snapCopy">' + (G.snapDone ? 'Copied' : 'Copy a snapshot') + '</button></div><p class="muted" style="margin:0;font-size:14px">The snapshot copies your story, Noor’s read and your answers as text, ready to paste anywhere.</p>']);
+  const i = Math.max(0, Math.min(steps.length - 1, G.rvI || 0)), st = steps[i];
+  h += '<section class="card" style="gap:14px"><h2 style="margin:0">' + st[0] + '</h2>' + st[1] + '</section>';
+  h += '<div style="display:flex;justify-content:space-between;align-items:center;gap:12px"><button class="ghost" data-act="rvBack"' + (i ? '' : ' disabled') + '>Back</button><span class="muted">' + (i + 1) + ' of ' + steps.length + '</span>' + (i < steps.length - 1 ? '<button class="btn" data-act="rvNext">Next: ' + steps[i + 1][0] + '</button>' : '<span></span>') + '</div>';
   h += callsFold(rv.call7 ? [rv.call7] : null);
   return h;
 }
@@ -1037,7 +1039,7 @@ function snapshotText() {
   return ['The Leadership Game V4 · Readiness check-in', 'Noor’s read: ' + VERDICT[G.rv.verdict], '', 'What happened next', o.story || '', '', 'What worked: ' + (o.worked || ''), 'What to work on: ' + (o.work_on || ''), 'Keep: ' + (o.keep || ''), 'Add: ' + (o.add || ''), '', 'Your answers']
     .concat(A.map(a => 'Decision ' + a.n + ' (' + a.skill + '): ' + a.plan + (a.trade ? ' | Trade-off: ' + a.trade : '') + (a.opening ? ' | First words: ' + a.opening : '') + (a.conf ? ' | You said: ' + a.conf : '')))
     .concat(G.pc.skipped ? [] : ['', 'Quick check, before: ' + G.pc.pre.text.trim(), 'Quick check, after: ' + G.pc.post.text.trim()])
-    .concat(['', 'Confidence: ' + CALREAD[calRead()]])
+    .concat(['', 'How complete your answers were: ' + CALREAD[calRead()].replace(/^their /, 'your ').replace(/^rated their/, 'you rated your')])
     .concat(['', 'The full story']).concat((G.log || []).map(e => e.label + ': ' + e.text)).join('\n');
 }
 const toTop = () => { try { window.scrollTo(0, 0); } catch (e) {} };
@@ -1365,6 +1367,8 @@ function act(a) {
   else if (a === 'pcSkip') { G.pc.skipped = true; if (G.phase === 'pre') G.phase = 'intro'; else if (G.phase === 'post') G.phase = 'review'; render(); toTop(); }
   else if (a === 'playAgain') { const r = document.getElementById('restart'); if (r) r.click(); toTop(); }
   else if (a === 'snapCopy') { const t = snapshotText(); const done = () => { G.snapDone = true; render(); }; try { navigator.clipboard.writeText(t).then(done, () => { const ta = document.createElement('textarea'); ta.value = t; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); } catch (e) {} ta.remove(); done(); }); } catch (e) { done(); } }
+  else if (a === 'rvNext') { G.rvI = (G.rvI || 0) + 1; render(); toTop(); }
+  else if (a === 'rvBack') { G.rvI = Math.max(0, (G.rvI || 0) - 1); render(); toTop(); }
   else if (a === 'runReview') { if (G.rv && G.rv.call && !G.rv.busy) runReview(); }
   else if (a === 'commit') { if (ready()) commit(); }
   else if (a === 'next') {

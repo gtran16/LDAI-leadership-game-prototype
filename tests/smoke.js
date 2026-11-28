@@ -71,7 +71,12 @@ async function play(width) {
     await page.locator('[data-rvcall]:visible').nth(1).click();
     await act('runReview').click();
     await page.getByText('In the weeks after the check-in').first().waitFor({ timeout: 15000 });
-    for (const t2 of ['Where you stand', 'Noor’s read', 'What to practice next', 'Your confidence', 'Before and after']) await page.getByRole('heading', { name: t2 }).or(page.getByText(t2, { exact: true })).first().waitFor();
+    const seen = [];
+    for (let k = 0; k < 12; k++) { seen.push(await page.locator('#main section.card h2').first().textContent()); const nx = page.locator('[data-act="rvNext"]:visible'); if (!(await nx.count())) break; await nx.click(); }
+    const want = ['What happened next', 'Where you stand', 'Noor’s read', 'What others saw', 'What to practice next', 'How complete your answers were', 'Before and after', 'Your record'];
+    if (JSON.stringify(seen) !== JSON.stringify(want)) throw new Error('check-in steps: ' + seen.join(' / '));
+    await act('playAgain').waitFor();
+    if (await page.getByText(/overconfident|underconfident/i).count()) throw new Error('person label shown');
     if (await page.getByText(/trade-off trail|How sure you were/i).count()) throw new Error('removed sections still shown');
   });
   await page.screenshot({ path: path.join(__dirname, 'out', 'end-' + width + '.png'), fullPage: true });
