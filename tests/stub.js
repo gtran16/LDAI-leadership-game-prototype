@@ -19,7 +19,8 @@ const P2A = {
   hidden_fact: { who: 'Ravi', fact: 'Ravi has agreed to more follow-ups than they can finish.', tell: 'Ravi mentions two follow-ups that are not done yet.' },
   send: { to: 'Noor, your boss', prompt: 'You have decided. How do you share it with Noor? Write the first words you say or send.' },
   key_points: ['Noor promised Northfield support in five weeks.', 'Remi is the expert but is already full.', 'The team is at full capacity.', 'Protect the launch or protect the team.'],
-  since_last: null
+  since_last: null,
+  memo: { from: 'Noor, Director of Customer Experience', subject: 'Northfield Health support' }
 };
 
 function option(slot, text) {
@@ -97,7 +98,7 @@ const P7 = {
   story: 'In the weeks after the check-in, Noor asked you to join the Northfield planning call. You brought Jan with you. Remi asked to teach the next calendar fix to the whole team.'
 };
 
-const P8 = { protects: { status: 'named', evidence: 'the customer fix' }, cost: { status: 'partly', evidence: 'the report waits' }, who_pays: { status: 'missing', evidence: '' } };
+const P8 = { protects: { status: 'named', evidence: 'the customer fix' }, cost: { status: 'partly', evidence: 'the report waits' }, who_pays: { status: 'missing', evidence: '' }, delivery: { status: 'partly', evidence: 'I would fix the customer issue first' } };
 
 const ROUTES = [
   [/You are the scenario builder for a leadership decision game/, P2A],
