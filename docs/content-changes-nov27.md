@@ -115,3 +115,11 @@ The Guide is now two top-nav pages: **How the game works** and **Skills**.
     - Delivery: "Five short decisions in a new workplace. In the first two you pick your first words; in the last three you write them."
 - **In-game Help panel:** the link now reads "Full skill guide" and opens Skills.
 - **Open:** the Tradeoff and Delivery worked examples begin "The same bakery, the same plan." / "The same bakery. You are talking to Ana." That points back to the Plan example, which isn't on screen when each tab stands alone. Suggest repeating the one-line bakery setup in each.
+
+## All scenarios at mid-sized software companies (added Nov 27, later)
+- **Worked examples:** the bakery is now a 400-person project-tracking software company: Ana and Luis build an export feature promised to a large customer by Friday, the small bug fixes wait, and Priya leads support. Each example now sets its own scene, which also fixes the "same bakery" issue.
+- **Quick check scenarios:** "You lead an engineering team of five at a mid-sized software company." The first one now says "Two things are due Friday" (was "land for").
+- **Other wording:**
+  - "from a different workplace" became "from another software company"
+  - "in a new workplace" became "at another mid-sized software company"
+  - "A worked example, in a different workplace" became "A worked example, at another software company"
