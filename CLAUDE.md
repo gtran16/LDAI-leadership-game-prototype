@@ -40,7 +40,7 @@ The class version is built, hosted and in its final playtest.
 | Path | What it is |
 |---|---|
 | `index.html` | The whole game, one file, no build step. Shell (the `LG` object and the AI seam), the game (`GAME` closure), then the pages and the router. |
-| `worker/` | Cloudflare Worker. `src/index.js` holds the origin check, the KV daily cap (125), the tier-to-model map, thinking off and the workspace header. `wrangler.toml` holds the vars and the KV id. The secret `ANTHROPIC_API_KEY` lives in Cloudflare only. |
+| `worker/` | Cloudflare Worker. `src/index.js` holds the origin check, the KV daily cap (125), the tier-to-model map (default capped at 8192 tokens), thinking off and the workspace header. `wrangler.toml` holds the vars and the KV id. The secret `ANTHROPIC_API_KEY` lives in Cloudflare only. |
 | `tests/` | `unit.js` (pure logic via `GAME.__test`), `smoke.js` (a full game at 1280 and 375 px; also checks the 1:1 sheet fits one page and holds no game names), `qa.js` (failure modes, navigation, the Worker path, overflow), `screens.js`, `stub.js` (canned replies matched on each prompt's opening line). |
 | `docs/` | `system-diagrams.md` and `diagrams/` (SVG plus `make_diagrams.py`), `model-right-sizing.md`, `citations-to-verify.md`, `build-log.md`, `close-out.md`. |
 
@@ -103,6 +103,7 @@ It runs unit, then smoke, then QA. Run it after every change; it must pass befor
 - The practice minigames (5 rounds per skill: 2 fixed, 3 written) on the Skills page.
 - The mobile layout: the left panel sits above the scene at phone width.
 - A second repo for the real game: split the prompts and world into files, RunPod hosting with open-weight models.
+- An accessibility review: low vision (contrast, zoom, screen reader), hearing, physical (keyboard only), cognitive (reading load, time pressure).
 - A facilitator-view mockup, Giselle's spot-check of P8 marks, a retrospective.
 - **After class:** delete the Worker or revoke the key.
 

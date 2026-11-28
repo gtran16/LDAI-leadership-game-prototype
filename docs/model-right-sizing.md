@@ -28,9 +28,9 @@ Six decisions make about 25 calls a game: 6 scenario builder, 6 decision builder
 
 ## Worker settings
 
-- **`max_tokens` caps:** `default` 4096, `quick` 1024. Tighter caps truncate the JSON and cause retries.
-- **Extended thinking:** off on every call, because it bills as output.
-- **Later, not a freeze blocker:** prompt caching of the fixed instructions plus the world seed.
+- **`max_tokens` caps:** `default` 8192, `quick` 1024. The decision builder's reply runs about 4K tokens (about 15K characters), so the first cap of 4096 cut it off in the final playtest. Only tokens used are billed.
+- **Extended thinking:** off on every call, because it bills as output. Sonnet 5.5 turns it off with `between_tools`; Haiku 5.5 with `disabled`.
+- **Later, not a freeze blocker:** prompt caching of the fixed instructions plus the world seed, and a shorter P2B reply (it is the slowest call).
 
 ## What would change a pick
 

@@ -4,9 +4,11 @@
 import Anthropic from '@anthropic-ai/sdk';
 
 /* Lightest model each tier needs (see docs/model-right-sizing.md). Open-weight stand-ins for later RunPod hosting are noted there.
-   Thinking is off on both tiers: every call is a single JSON reply, and thinking tokens bill as output. */
+   Thinking is off on both tiers: every call is a single JSON reply, and thinking tokens bill as output.
+   Sonnet 5.5 turns thinking off with 'between_tools' (it rejects 'disabled'); Haiku 5.5 uses 'disabled'.
+   default max_tokens is 8192: P2B's options JSON runs about 4K tokens, so 4096 cut it off (playtest 4, D1). Only used tokens are billed. */
 const TIERS = {
-  default: { model: 'claude-sonnet-5-5', max_tokens: 4096, thinking: { type: 'between_tools' } },
+  default: { model: 'claude-sonnet-5-5', max_tokens: 8192, thinking: { type: 'between_tools' } },
   quick: { model: 'claude-haiku-5-5', max_tokens: 1024, thinking: { type: 'disabled' }, output_config: { effort: 'medium' } }
 };
 const MAX_PROMPT_CHARS = 60000; /* longest prompt (P7) is about 32K characters */
