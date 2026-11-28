@@ -80,7 +80,8 @@ const path = require('path');
     eq('sheet: own-read line', sd.read, 'My read of my own work is accurate.');
     G.pc.skipped = true; eq('sheet: no benchmark when skipped', T.sheetData().bench, null);
     G.parts = {}; G.cal = []; eq('sheet: generic with no data', [T.sheetData().strong.length, T.sheetData().work.length, /one of the three parts/.test(T.sheetData().questions[1])], [0, 0, true]);
-    eq('sheet text: questions come first', T.sheetText().split('\n').slice(0, 4)[2], 'Three questions for my manager');
+    eq('sheet text: questions come first', T.sheetText().split('\n')[2], 'Three questions for your manager');
+    eq('sheet: four ways a manager can support', T.sheetData().support.length, 4);
     // Safety
     eq('esc', T.esc('<img src=x onerror="a()">&'), '&lt;img src=x onerror=&quot;a()&quot;&gt;&amp;');
     // Commit gate

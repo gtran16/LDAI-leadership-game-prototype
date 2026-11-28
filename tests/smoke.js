@@ -84,14 +84,23 @@ async function play(width) {
   });
   await step('1:1 sheet', async () => {
     await act('openSheet').click();
-    await page.getByRole('heading', { name: 'Three questions for my manager' }).waitFor();
-    await page.getByRole('heading', { name: 'Reminders for me' }).waitFor();
+    for (const t of ['Three questions for your manager', 'How your manager can support you', 'Reminders for me']) await page.getByRole('heading', { name: t }).waitFor();
     const sheetText = await page.locator('.sheet').innerText();
-    for (const nm of ['Remi', 'Jan', 'Ravi', 'Noor', 'Teo', 'Cleo', 'Tidewell', 'Northfield']) if (sheetText.includes(nm)) throw new Error('game detail on the 1:1 sheet: ' + nm);
+    for (const nm of ['Remi', 'Jan', 'Ravi', 'Noor', 'Teo', 'Cleo', 'Tidewell', 'Northfield']) if (new RegExp('\\b' + nm + '\\b').test(sheetText)) throw new Error('game detail on the 1:1 sheet: ' + nm);
     if (await page.locator('#meters .meterwrap').count()) throw new Error('meters shown on the sheet');
     await act('copySheet').click(); await page.getByText('Copied').waitFor();
     await act('printSheet').click();
-    if (width === 1280) { await page.emulateMedia({ media: 'print' }); await page.pdf({ path: path.join(__dirname, 'out', 'one-on-one-sheet.pdf'), format: 'Letter' }).catch(() => {}); await page.screenshot({ path: path.join(__dirname, 'out', 'one-on-one-print.png'), fullPage: true }); await page.emulateMedia({ media: 'screen' }); }
+    if (width === 1280) {
+      const pdfPages = async (file) => { const buf = await page.pdf({ path: path.join(__dirname, 'out', file), format: 'Letter', printBackground: true, preferCSSPageSize: true }); return (buf.toString('latin1').match(/\/Type\s*\/Page[^s]/g) || []).length; };
+      await page.emulateMedia({ media: 'print' }); await page.screenshot({ path: path.join(__dirname, 'out', 'one-on-one-print.png'), fullPage: true });
+      const n1 = await pdfPages('one-on-one-sheet.pdf'); if (n1 !== 1) throw new Error('1:1 sheet prints on ' + n1 + ' pages');
+      /* worst case: long benchmark answers still fit on one page */
+      const long = 'I would talk to my boss first and explain that both the customer fix and the leadership report matter, so I would ask two people to split the fix on Friday while I draft the report outline myself, and we would agree that nobody works the weekend unless the fix is still broken on Saturday morning, in which case I would cover it and tell the team on Monday what it cost us.';
+      await page.evaluate((t) => { const G = GAME.__test.G; G.pc.pre.text = t; G.pc.post.text = t; }, long);
+      await page.emulateMedia({ media: 'screen' }); await act('closeSheet').click(); await act('openSheet').click(); await page.emulateMedia({ media: 'print' });
+      const n2 = await pdfPages('one-on-one-sheet-long.pdf'); if (n2 !== 1) throw new Error('1:1 sheet with long answers prints on ' + n2 + ' pages');
+      await page.emulateMedia({ media: 'screen' });
+    }
     await act('closeSheet').click(); await act('openSheet').waitFor();
   });
   await page.screenshot({ path: path.join(__dirname, 'out', 'end-' + width + '.png'), fullPage: true });

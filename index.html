@@ -342,22 +342,28 @@ body{background-color:var(--desk) !important;background-image:radial-gradient(rg
 .app-game .mlist{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px;font-size:15px;line-height:1.5}
 .app-game .mlist li{display:flex;gap:8px;align-items:flex-start}.app-game .mlist .mdot{flex:none;margin-top:6px}
 .app-game .oneone{display:flex;flex-direction:column;gap:8px;padding:14px 16px;border-left:6px solid #0F766E;background:var(--paper-2);border-radius:2px}
-.app-game .sheet{background:#fff;color:#1E1B3A;max-width:760px;padding:36px 40px;box-shadow:var(--sheet);border-radius:2px;display:flex;flex-direction:column;gap:18px;font-size:16px;line-height:1.55}
-.app-game .sheet header{border-bottom:2px solid #1E1B3A;padding-bottom:12px;display:flex;flex-direction:column;gap:4px}
-.app-game .sheet h1{margin:0;font-size:26px;font-weight:900;line-height:1.2}
-.app-game .sheet h2{margin:0 0 4px;font-size:15px;font-weight:900;text-transform:uppercase;letter-spacing:.06em;color:#3A24B8}
-.app-game .sheet section p,.app-game .sheet ul,.app-game .sheet ol{margin:0}.app-game .sheet ul,.app-game .sheet ol{padding-left:22px;display:flex;flex-direction:column;gap:4px}
-.app-game .sheetkicker{font:700 13px var(--paperfont);letter-spacing:.15em;text-transform:uppercase;color:#0F766E}
-.app-game .sheetname{font-size:14px;color:#5A5675;margin-top:6px}
-.app-game .sheetbench{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.app-game .sheetbench p{margin:2px 0 0;font-style:italic}
-@media (max-width:700px){.app-game .sheetbench{grid-template-columns:minmax(0,1fr)}.app-game .sheet{padding:22px 18px}}
-.app-game .sheetq{font-size:20px;line-height:1.5;font-weight:700;display:flex;flex-direction:column;gap:14px !important;padding-left:28px !important}
-.app-game .sheetq li::marker{color:#0F766E;font-weight:900}
-.app-game .sheetrem{display:flex;flex-direction:column;gap:6px;border-top:1px solid #CFC3A5;padding-top:14px}
-.app-game .sheetrem h3{margin:8px 0 0;font-size:16px;font-weight:900}
-@page{margin:0.75in}
-.app-game .sheet footer{font-size:13px;color:#5A5675;border-top:1px solid #CFC3A5;padding-top:10px}
-@media print{body{background:#fff !important}.lgbar,#meters,#left,#right,.noprint,.app-game .pager{display:none !important}.app-game .layout{display:block !important;padding:0 !important;max-width:none !important}.app-game .sheet{box-shadow:none !important;max-width:none;padding:0}}
+.app-game .sheet{background:#fff;color:#1E1B3A;max-width:760px;padding:28px 32px;box-shadow:var(--sheet);border-radius:6px;display:flex;flex-direction:column;gap:14px;font-size:16px;line-height:1.5}
+.app-game .shead{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.app-game .sstamp{display:inline-block;font:700 14px var(--paperfont);letter-spacing:.12em;text-transform:uppercase;background:#FFC93C;color:#1E1B3A;padding:3px 10px;transform:rotate(-2deg);box-shadow:1px 2px 0 rgba(30,27,58,.15)}
+.app-game .sname{font-size:13px;color:#5A5675}
+.app-game .sbox{border-radius:14px;padding:14px 18px 16px;display:flex;flex-direction:column;gap:8px}
+.app-game .sbox h2{margin:0;display:flex;align-items:center;gap:10px;font-size:19px;font-weight:900;color:#1E1B3A}
+.app-game .sicon{flex:none;display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;color:#fff;font-size:15px;font-weight:900}
+.app-game .sbox ul,.app-game .sbox ol{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:6px}
+.app-game .sq{background:#E6F7F3;border:2px solid #0F766E}.app-game .sq .sicon{background:#0F766E}
+.app-game .sq ol{gap:10px}.app-game .sq li{font-size:17px;font-weight:700}.app-game .sq li::marker{color:#0F766E;font-weight:900}
+.app-game .snote{display:block;height:18px;border-bottom:1.5px dashed #8FC9BD;margin-top:2px}
+.app-game .ss{background:#F1ECFF;border:2px solid #5B3DF5}.app-game .ss .sicon{background:#5B3DF5}
+.app-game .sr{background:#FFF8E6;border:2px solid #E0B84A}.app-game .sr .sicon{background:#C98A00}
+.app-game .sr h3{margin:0 0 2px;font-size:15px;font-weight:900}
+.app-game .scols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.app-game .sread{margin:0}
+.app-game .sbench{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;font-size:14px}.app-game .sbench p{margin:2px 0 0;font-style:italic}
+.app-game .sheet footer{font-size:12.5px;color:#5A5675}
+@media (max-width:700px){.app-game .scols,.app-game .sbench{grid-template-columns:minmax(0,1fr)}.app-game .sheet{padding:20px 16px}}
+@page{size:letter;margin:0.5in}
+@media print{body{background:#fff !important}.lgbar,#meters,#left,#right,.noprint,.app-game .pager{display:none !important}.app-game .layout{display:block !important;padding:0 !important;max-width:none !important}
+ .app-game .sheet{box-shadow:none !important;max-width:none;padding:0;gap:10px;font-size:14px}.app-game .sbox{padding:10px 14px 12px;-webkit-print-color-adjust:exact;print-color-adjust:exact}.app-game .sq li{font-size:15px}.app-game .sstamp,.app-game .sicon{-webkit-print-color-adjust:exact;print-color-adjust:exact}.app-game .sheet,.app-game .sbox{break-inside:avoid}}
 .app-game .cardsep{border:0;border-top:1px dashed var(--rule);margin:6px 0;width:100%}
 .app-game .pager{display:flex;justify-content:space-between;align-items:center;gap:12px}.app-game .pager .ghost{align-self:center}
 .app-game .checkscene{border-radius:2px !important;background:var(--paper-2) !important;border:0 !important;box-shadow:inset 4px 0 0 #0F766E}
@@ -1144,7 +1150,7 @@ function reviewScreen() {
   if (!needPost) steps.push(['Your record', '<details><summary style="cursor:pointer;font-weight:900;font-size:17px">Review your answers</summary>' + (A.length ? A.map(a => '<div style="display:flex;flex-direction:column;gap:4px;padding-top:10px;border-top:1px solid #E5DCC4;font-size:15px"><b>Decision ' + a.n + '</b><div><span class="lab">Plan</span> ' + esc(a.plan) + '</div>' + (a.trade ? '<div><span class="lab">Trade-off</span> ' + esc(a.trade) + '</div>' : '') + (a.opening ? '<div><span class="lab">First words</span> “' + esc(a.opening) + '”</div>' : '') + '<div class="muted">' + (a.conf ? 'You rated it: ' + esc(a.conf) + ' · ' : '') + METERS.map(m => m.label + ' ' + dw(a.moves[m.key] || 0).toLowerCase()).join(', ') + '</div></div>').join('') : '<p class="muted" style="margin:0">No answers recorded.</p>') + '</details>' +
     '<details><summary style="cursor:pointer;font-weight:900;font-size:17px">Read the full story</summary>' + (G.log || []).map(e => '<div style="padding-top:8px;border-top:1px solid #E5DCC4"><div class="lab">' + esc(e.label) + '</div><p style="margin:2px 0 0;white-space:pre-line">' + esc(e.text) + '</p></div>').join('') + '</details>' +
     '<h3 style="margin:0;font-size:17px">What next?</h3><div style="display:flex;flex-wrap:wrap;gap:10px"><button class="btn" data-act="playAgain">Play again</button><a class="btn2" href="#home">Home</a></div>' +
-    '<div class="oneone"><h3 style="margin:0;font-size:18px">Take this to your next 1:1</h3><p style="margin:0">A one-page sheet with three questions to ask your manager and a few reminders for you. It leaves out the game\u2019s story and names. Print it, save it as a PDF, or copy it as text.</p><button class="btn" data-act="openSheet" style="align-self:flex-start">Open my 1:1 sheet</button></div>']);
+    '<div class="oneone"><h3 style="margin:0;font-size:18px">Take this to your next 1:1</h3><p style="margin:0">One page to bring to your manager: three questions to ask, how they can support you, and a few reminders for you. The game can practice a skill; using it at work takes support from your manager. It leaves out the game\u2019s story and names.</p><button class="btn" data-act="openSheet" style="align-self:flex-start">Open my 1:1 sheet</button></div>']);
   /* Nov 27: five cards, each a group of things that go together (Giselle: eight was too many) */
   const GROUPS = [['What happened next', ['What happened next', 'Where you stand']], ['Noor\u2019s read', ['Noor\u2019s read', 'What others saw']], ['Your next steps', ['What to practice next']], ['Check your own read', ['How complete your answers were', 'One last check', 'Before and after']], ['Your record', ['Your record']]];
   const byTitle = {}; steps.forEach(x => { byTitle[x[0]] = x[1]; });
@@ -1169,34 +1175,39 @@ function sheetData() {
   const area = work.length ? PART_AREA[work[0]] : 'one of the three parts: the plan, the tradeoff, or how I tell someone';
   const r = calRead(), read = { over: 'I tend to rate my answers as more complete than they are. Before I send a plan, I check that it says what it protects, what it costs and who pays.', under: 'My answers are often more complete than I think. I can trust my read of my own work a bit more.', calibrated: 'My read of my own work is accurate.', mixed: 'My read of my own work is right some of the time. A second look before I send a plan helps.' }[r] || '';
   const pc = G.pc, bench = !pc.skipped && pc.pre.text.trim() ? { before: pc.pre.text.trim(), after: pc.post.text.trim() } : null;
+  /* Kirkpatrick Level 3: new habits stick at work when they are reinforced, encouraged, rewarded and given room (Kirkpatrick & Kirkpatrick, 2022). */
+  const support = ['Pick one real decision in the next two weeks where I can practice ' + area + ', and check in with me after.', 'Before I share a decision with the team, ask me what it protects, what it costs and who pays.', 'Tell me when you see me do it well, so I know what to keep doing.', 'Give me room to practice: hand me a call you would usually make yourself.'];
   return {
+    support,
     questions: ['When have you seen me name what a decision costs, and who pays for it? When did I miss it?', 'What decision coming up could I use to practice ' + area + '?', 'When there’s a tradeoff, do you want to hear it before I decide, or after?'],
     strong: strong.map(k => PART_LINE[k]), work: work.map(k => PART_LINE[k]), read, bench
   };
 }
 function sheetScreen() {
-  const d = sheetData(), ul = (a) => '<ul>' + a.map(x => '<li>' + esc(x.replace(/^./, ch => ch.toUpperCase())) + '</li>').join('') + '</ul>';
+  const d = sheetData(), cap = (x) => esc(x.replace(/^./, ch => ch.toUpperCase()));
+  const clip = (t) => t.length > 260 ? t.slice(0, 257).replace(/\s+\S*$/, '') + '…' : t; /* keeps the sheet to one page */
   return '<div class="noprint" style="display:flex;flex-wrap:wrap;gap:10px;align-items:center"><button class="btn" data-act="printSheet">Print or save as PDF</button><button class="btn2" data-act="copySheet">' + (G.sheetCopied ? 'Copied' : 'Copy as text') + '</button><button class="ghost" data-act="closeSheet">Back to your check-in</button></div>' +
     (G.sheetMsg ? '<p class="noprint muted" style="margin:0;font-size:15px">' + esc(G.sheetMsg) + '</p>' : '') +
     '<article class="sheet" aria-label="Your 1:1 sheet">' +
-    '<header><div class="sheetkicker">For my next 1:1</div><h1>Three questions for my manager</h1></header>' +
-    '<ol class="sheetq">' + d.questions.map(q => '<li>' + esc(q) + '</li>').join('') + '</ol>' +
-    '<section class="sheetrem"><h2>Reminders for me</h2>' +
-    (d.strong.length ? '<h3>I do this well</h3>' + ul(d.strong) : '') +
-    (d.work.length ? '<h3>I’m working on</h3>' + ul(d.work) : '') +
-    (d.read ? '<h3>How I judge my own work</h3><p>' + esc(d.read) + '</p>' : '') +
-    (d.bench ? '<h3>My answer to the same scenario, before and after</h3><div class="sheetbench"><div><b>Before</b><p>“' + esc(d.bench.before) + '”</p></div><div><b>After</b><p>“' + esc(d.bench.after || '(not answered)') + '”</p></div></div>' : '') +
-    '</section><footer>From a practice game. These are reminders, not a grade. They come from how AI marked my written answers.</footer></article>';
+    '<header class="shead"><span class="sstamp">For my next 1:1</span><div class="sname">Name ____________________ &nbsp;&nbsp; Date ____________</div></header>' +
+    '<section class="sbox sq"><h2><span class="sicon" aria-hidden="true">?</span>Three questions for your manager</h2><ol>' + d.questions.map(q => '<li><span>' + esc(q) + '</span><span class="snote" aria-hidden="true"></span></li>').join('') + '</ol></section>' +
+    '<section class="sbox ss"><h2><span class="sicon" aria-hidden="true">♥</span>How your manager can support you</h2><ul>' + d.support.map(x => '<li>' + esc(x) + '</li>').join('') + '</ul></section>' +
+    '<section class="sbox sr"><h2><span class="sicon" aria-hidden="true">★</span>Reminders for me</h2>' +
+    ((d.strong.length || d.work.length) ? '<div class="scols">' + (d.strong.length ? '<div><h3>I do this well</h3><ul>' + d.strong.map(x => '<li>' + cap(x) + '</li>').join('') + '</ul></div>' : '') + (d.work.length ? '<div><h3>I’m working on</h3><ul>' + d.work.map(x => '<li>' + cap(x) + '</li>').join('') + '</ul></div>' : '') + '</div>' : '') +
+    (d.read ? '<p class="sread"><b>How I judge my own work:</b> ' + esc(d.read) + '</p>' : '') +
+    (d.bench ? '<div class="sbench"><div><b>Before the game</b><p>“' + esc(clip(d.bench.before)) + '”</p></div><div><b>After the game</b><p>“' + esc(clip(d.bench.after || '(not answered)')) + '”</p></div></div>' : '') +
+    '</section><footer>From a practice game. These are reminders, not a grade. They come from how AI marked my written answers. A game can practice a skill; using it at work takes your support.</footer></article>';
 }
 function sheetText() {
   const d = sheetData(), cap = (x) => x.replace(/^./, ch => ch.toUpperCase());
-  return ['For my next 1:1', '', 'Three questions for my manager'].concat(d.questions.map((q, i) => (i + 1) + '. ' + q))
+  return ['For my next 1:1', '', 'Three questions for your manager'].concat(d.questions.map((q, i) => (i + 1) + '. ' + q))
+    .concat(['', 'How your manager can support you'].concat(d.support.map(x => '- ' + x)))
     .concat(['', 'Reminders for me'])
     .concat(d.strong.length ? ['I do this well:'].concat(d.strong.map(x => '- ' + cap(x))) : [])
     .concat(d.work.length ? ['I’m working on:'].concat(d.work.map(x => '- ' + cap(x))) : [])
     .concat(d.read ? ['How I judge my own work: ' + d.read] : [])
     .concat(d.bench ? ['My answer to the same scenario, before: "' + d.bench.before + '"', 'After: "' + (d.bench.after || '(not answered)') + '"'] : [])
-    .concat(['', 'From a practice game. These are reminders, not a grade. They come from how AI marked my written answers.']).join('\n');
+    .concat(['', 'From a practice game. These are reminders, not a grade. They come from how AI marked my written answers. A game can practice a skill; using it at work takes your support.']).join('\n');
 }
 const toTop = () => { try { window.scrollTo(0, 0); } catch (e) {} };
 
