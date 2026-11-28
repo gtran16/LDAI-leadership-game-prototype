@@ -1,4 +1,4 @@
-# How it's made page: updates for your review (Nov 27)
+# How it's made page: updates for your review (Nov 27) — SUPERSEDED by how-its-made-v2.md
 
 The How it's made page still describes the Nov 21 build. Below, every line that is out of date is shown as it is now and as proposed, word for word. Lines not listed stay as they are. Citations stay as they are; no new sources are added.
 
